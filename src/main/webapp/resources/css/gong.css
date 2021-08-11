@@ -55,12 +55,14 @@ input[id*="answer"] + label em{
 }
 /* 공지사항 내용 */
 input[id*="answer"] + label + div{
+	border-bottom:1px solid rgba(0, 0, 0, .5);
 	max-height:0;
 	transition: all .35s;
 	overflow:hidden;
 	background:#ebf8ff;
 	font-size:11px;
 	text-align:center;
+	
 }
 
 /* 공지사항 내용 글자 */
