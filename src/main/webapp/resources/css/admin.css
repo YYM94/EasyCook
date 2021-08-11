@@ -1,0 +1,173 @@
+@charset "UTF-8";
+
+#admin_body {
+	margin: 0%;
+}
+
+#admin_header {
+	text-align: center;
+	padding: 1%;
+/* 	background: peachpuff; */
+	width: 50%;
+	margin:0 5% 0 30%;
+}
+
+#admin_panel {
+	width: 50%;
+	background: lavender;
+	padding: 1%;
+	margin:0 5% 0 30%;
+}
+
+#admin_search {
+/* 	border: 1px solid red; */
+	text-align: center;
+	margin-bottom: 2%;
+}
+
+#admin_search b {
+	font-size: 150%;
+}
+
+#admin_list_table th{
+	border-bottom-style: solid;
+	border-bottom-width: 2px;	
+}
+
+#admin_no{
+	width: 10%;
+}
+
+#admin_id{
+	width: 25%;
+}
+
+#admin_name{
+	width: 15%;
+}
+
+#admin_check{
+	width: 15%;
+}
+
+#admin_date{
+	width: 30%;
+}
+
+/* #admin_button{
+	width: 20%;
+} */
+
+#admin_list_table td{
+	text-align: center; 
+	padding: 6px 0px;
+	border-bottom-width: 1px;
+	border-bottom-style: dotted;
+}
+
+#a_id{
+	text-align: center;
+	padding-left: 14px;
+	overflow: hidden; 
+	text-overflow: ellipsis;/*생략부호*/
+	white-space: nowrap;
+}
+
+#admin_cont {
+	margin-left: 4%;
+}
+
+#admin_cont_title {
+/* 	border: 2px solid yellow; */
+	margin-bottom: 2%;
+	font-size: 120%;
+	border-bottom-style: solid;
+	border-bottom-width: 2px;
+}
+
+#admin_cont_list {
+/* 	border: 2px solid purple; */
+}
+
+.a_title{
+	float: left;
+	width: 20%;	
+}
+.a_text{
+	float: left;
+	width: 20%;
+/* 	border-bottom-style: dotted; */
+}
+
+/* #admin_cont_list b {
+	margin-right: 10%;
+} */
+
+#admin_member {
+	width: 40%;
+	margin:0 5% 0 35%;
+	background: antiquewhite;
+	display: none;
+	padding: 1%;
+	margin-top: 2%;
+	border-radius: 20px;
+}
+
+#info_title{
+	font-size: 150%;
+	font-weight: bold;
+}
+
+#admin_member_header{
+	text-align: center;
+	margin-bottom: 5%;
+}
+
+#admin_member_cont{
+ 	margin-left: 15%; 
+}
+
+.member_text{
+	float: left;
+	width: 45%;
+}
+
+#admin_member_pwd{
+	text-align: center;	
+	margin-top: 7%;
+	margin-bottom: 2%;
+}
+
+.member_info{
+	width: 40%;
+	height: 5%;
+}
+
+#member_button{
+	text-align: center;
+}
+
+#admin_info_close{
+	margin-top: 2%;
+	text-align: center;
+}
+
+#admin_page_number {
+	margin: 10px 0 10px 0;
+	font-weight: bold;
+}
+
+#admin_page_number a:link {
+	color: black;
+	text-decoration: none;
+}
+
+#admin_page_number a:hover {
+	color: gray;
+	text-decoration: underline;
+}
+
+#admin_page_number a:active {
+	color: aqua;
+	text-decoration: none;
+}
