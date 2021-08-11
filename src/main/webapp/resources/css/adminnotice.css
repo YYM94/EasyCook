@@ -1,0 +1,52 @@
+@charset "UTF-8";
+body{
+	background-image:url('../images/picture/food_image.jpg');
+	background-repeat:no-repeat;
+	background-size:100% 100vh;
+}
+#noticeadmin{
+	margin:0 5% 0 30%;
+	
+}
+.search-form{
+	text-align:center;
+	padding:10px;
+	margin:0 0 0 0;
+}
+.search-form .hidden2{
+	font-size:200%;
+}
+/* 상단바 */
+.admintitle {
+	display:flex;
+	padding:20px;
+	background-color:#cccdd0;
+	flex-wrap:wrap;
+}
+/* 상단바 타이틀 */
+.admintitle [id*="title"]{
+	/*margin:0px 5% 0px 10%;*/
+	width:30%;
+	text-align:center;
+}
+
+/* 버튼 */
+.noticebutton{
+	margin:0px 0px 0px 0px;
+}
+
+/* 내용바 */
+#adminnoticecon{
+	display:flex;
+	padding:15px;
+	flex-wrap:wrap;
+	background-color:#f5f5f5;
+}
+/* 내용들 */
+#adminnoticecon [id*="con"]{
+	/*margin:0px 5% 0px 10%;*/
+	width:30%;
+	text-align:center;
+}
+
+

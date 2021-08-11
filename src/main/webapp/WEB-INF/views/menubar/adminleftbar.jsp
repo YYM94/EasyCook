@@ -43,8 +43,8 @@
 					<input type="checkbox" id="answer03"> 
 					<label for="answer03">열린마당 관리</label>
 					<div>
-							<a href="/EasyCook_Project/Home/FAQgong/adminnotice.jsp">공지사항 관리</a><br/><br/>
-							<a href="/EasyCook_Project/Home/FAQgong/adminfaq.jsp">FAQ 관리</a><br/><br/>
+							<a href="adminnotice">공지사항 관리</a><br/><br/>
+							<a href="adminfaq">FAQ 관리</a><br/><br/>
 							<a href="/EasyCook_Project/Home/hotNewsBoard/admin_hotnews_list.jsp">핫뉴스 관리</a>
 					</div>
 				</div>

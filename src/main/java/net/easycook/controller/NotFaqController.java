@@ -38,6 +38,46 @@ public class NotFaqController {
 		return "NoticeFaq/FAQ";
 	
 	}
+	@RequestMapping("/adminnotice")
+	public String adminnotice(HttpServletRequest request,Model wm) {
+		int page=1;
+		if(request.getParameter("page") != null) {
+			page=Integer.parseInt(request.getParameter("page"));
+		}
+		
+		wm.addAttribute("page",page);		
+		return "NoticeFaq/adminnotice";
 	
+	}
+	@RequestMapping("/adminfaq")
+	public String adminfaq(HttpServletRequest request,Model wm) {
+		int page=1;
+		if(request.getParameter("page") != null) {
+			page=Integer.parseInt(request.getParameter("page"));
+		}
+		
+		wm.addAttribute("page",page);		
+		return "NoticeFaq/adminfaq";
+		
+	}
+	@RequestMapping("/noticewrite")
+	public String noticewrite() throws Exception{
+		return "NoticeFaq/noticewrite";
+	}
+	
+	@RequestMapping("/faqwrite")
+	public String faqwrite() throws Exception{
+		return "NoticeFaq/faqwrite";
+	}
+	
+	@RequestMapping("/faqEdit")
+	public String faqEdit() throws Exception{
+		return "NoticeFaq/faqEdit";
+	}
+	
+	@RequestMapping("/noticeEdit")
+	public String noticeEdit() throws Exception{
+		return "NoticeFaq/noticeEdit";
+	}
 	
 }
