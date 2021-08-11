@@ -153,6 +153,7 @@ strong{
 
 #login_find_id_header a{
 	font-weight: bold;
+	color: black;	
 }
 
 #login_find_id_header a:link{
@@ -251,6 +252,7 @@ strong{
 
 #login_find_pwd_header a{
 	font-weight: bold;
+	color: black;	
 }
 
 #login_find_pwd_header a:link{
