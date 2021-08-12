@@ -1,8 +1,8 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <title>레시피 글쓰기</title>
-<link rel="stylesheet" type="text/css" href="../css/recipeBoard_Write.css"/>
-<script src="../js/jquery.js"></script>
+<link rel="stylesheet" type="text/css" href="./resources/css/recipeBoard_write.css"/>
+<script src="./resources/js/jquery.js"></script>
 
 <script>
 	//유튜브 링크를 입력하고 입력창을 빠져나오면 하단에 유튜브 영상 로드
@@ -69,12 +69,12 @@
 										+"		지우기"
 										+"	</div>"
 										+"	<div class='removeContBtn'>"
-										+"		<img src='../images/minusBtn.png' width=30px height=25px>"
+										+"		<img src='./resources/images/minusBtn.png' width=30px height=25px>"
 								  		+"	</div>"
 								  		+"</div>"
 								  		+"<div class='contWrap'>"
 								  		+"	<img id='contImg"+contIndex+"' class='contImg'"
-								  		+"		src='../images/recipeBoardContThumbnail.png' onclick='addImg(this);'>"
+								  		+"		src='./resources/images/recipeBoardContThumbnail.png' onclick='addImg(this);'>"
 								  		+"	<textarea class='contText'></textarea>"
 								  		+"</div>"
 								  +"</div>");
@@ -109,7 +109,7 @@
 				</div>
 				<div id="addContWrap" onclick="addCont();">
 					<div id="addContBtn">
-						<img src="../images/plusBtn.png" width=30px height=25px>
+						<img src="./resources/images/plusBtn.png" width=30px height=25px>
 					</div>
 					<div id="addContLabel">
 						추가하기
@@ -118,7 +118,7 @@
 			</div>
 			<div id="SendButtonWrap">
 				<input type="button" id="writeBtn" value="저장"/>
-				<input type="button" id="cancelBtn" value="취소" onclick="location.href='./recipeBoard_view.jsp'"/>
+				<input type="button" id="cancelBtn" value="취소" onclick="location.href='recipeBoard_view?page=${page}'"/>
 			</div>
 		</form>
 	</div>

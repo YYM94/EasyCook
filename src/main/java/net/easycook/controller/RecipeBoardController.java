@@ -12,7 +12,6 @@ public class RecipeBoardController {
 
 	@RequestMapping("/recipeBoard_view")
 	public ModelAndView recipeBoard_view(HttpServletRequest req) {
-
 		ModelAndView m = new ModelAndView();
 		
 		if(req.getParameter("page") != null) {
@@ -30,6 +29,20 @@ public class RecipeBoardController {
 		
 		m.setViewName("recipeBoard/recipeBoard_view");
 		
+		return m;
+	}
+	
+	@RequestMapping("/recipeBoard_write")
+	public ModelAndView recipeBoard_write(HttpServletRequest req) {
+		ModelAndView m = new ModelAndView();
+		
+		int pages = 1;
+		if(req.getParameter("page") != null) {
+			pages = Integer.parseInt(req.getParameter("page"));
+		}
+		m.addObject("page", pages);
+		
+		m.setViewName("recipeBoard/recipeBoard_write");
 		return m;
 	}
 	

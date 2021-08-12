@@ -339,5 +339,5 @@ String[] recipeSplit = recipeDes.split("-,-");
 </div>
 
 <div id="postWriteBtn">
-	<input type="button" value="글쓰기" onclick="location.href='./recipeBoard_Write.jsp'"/>
+	<input type="button" value="글쓰기" onclick="location.href='recipeBoard_write?page=<%=currentPage%>'"/>
 </div>
