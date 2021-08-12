@@ -143,7 +143,7 @@
 					<a href="recipeBoard_view">레시피 게시판</a>
 				</div>
 				<div id="left_news">
-					<a href="/EasyCook_Project/Home/hotNewsBoard/hotNewsBoard_view.jsp">핫뉴스</a>
+					<a href="hotNewsBoard_view">핫뉴스</a>
 				</div>
 				<div id="left_faq">
 					<a href="FAQ">FAQ</a>

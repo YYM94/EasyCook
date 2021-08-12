@@ -1,0 +1,97 @@
+@charset "UTF-8";
+
+/* ------------------------------------------------list------------------------------------------------ */
+body{ /*list, input, edit 공통 */
+	background: url("../images/recipeBoardBackground.jpg");
+	background-repeat: no-repeat;
+	background-size: cover;
+}
+
+#admin_header { /*list, input, edit 공통 */
+	text-align: center;
+	margin-left: 36%; 
+	padding: 1%; padding-top: 3%;
+	width: 50%; max-width: 786px;
+}
+
+#admin_panel { /*list, input, edit 공통 */
+	margin-left: 36%;
+	width: 50%; max-width: 786px;
+	background: lavender;
+	padding: 1%;
+}
+
+#admin_search{
+	margin: 20px 0 20px 0;
+	width: 70%; float: left;
+}
+#admin_hn_input{
+	float: right;
+	margin: 20px 20px 20px 0;
+	
+}
+
+
+#admin_list_no{
+	width: 7%;
+}
+#admin_list_title{
+	width: 50%;
+	letter-spacing: 0.5em;
+}
+#admin_list_writer{
+	width: 10%;
+}
+#admin_list_date{
+	width: 10%;
+}
+#admin_list_controller{
+	width: 25%;
+}
+
+#admin_list_hn th{
+	border-bottom-style: solid;
+	border-bottom-width: 2px;	
+}
+#admin_list_hn td{
+	text-align: center; padding: 6px 0px;
+	border-bottom-width: 1px;
+	border-bottom-style: dotted;
+}
+#left{
+	text-align: left;
+	padding-left: 14px;
+	width: 20em;
+	overflow: hidden; 
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+
+#admin_page_number {
+	margin: 10px 0 10px 0;
+	font-weight: bold;
+	text-align: center;
+}
+
+#admin_page_number a:link {
+	color: black;
+	text-decoration: none;
+}
+
+#admin_page_number a:hover {
+	color: gray;
+	text-decoration: underline;
+}
+
+#admin_page_number a:active {
+	color: aqua;
+	text-decoration: none;
+}
+
+/* -------------------------------------------- input, edit 공통 -------------------------------------------- */
+
+
+p {
+	float: left;
+}
