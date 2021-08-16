@@ -1,0 +1,315 @@
+@charset "UTF-8";
+
+body{
+	background-image:url('../images/picture/food_image.jpg');
+	background-size: cover;
+	background-position: center;
+}
+#info_update_body{/*화면 천천히 선명하게 나타내기*/
+	margin: 0px;
+	-webkit-animation: fadein 1000ms ease-out;
+}
+
+@-webkit-keyframes fadein {
+    from {
+        opacity:0;
+    }
+    to {
+        opacity:1;
+    }
+}
+
+#panel{
+	margin: auto;
+	width: 50%;
+}
+
+#panel-body{
+	background-image:url('../images/background_mypage.jpg');
+	border-radius: 20px;
+	width: 70%;
+	margin-left: 15%;
+	margin-top: 10%;
+}
+
+#panel-header{
+	padding-top: 1.5%;
+	font-size: 250%;
+	text-align: center;
+	margin-top: 3%;
+	border: 1px solid black;
+}
+
+#update_header_title_1{
+	font-weight: bold;
+}
+
+#update_header_title_1:link{
+	text-decoration: none;
+	color: black;
+}
+
+#update_header_title_1:visited{
+	text-decoration: none;
+	color: black;
+}
+
+#update_header_title_2:hover{
+	cursor: default;
+}
+
+#panel-table{
+	padding: 3%; 
+	border: 1px solid black;
+} /* 판 내용물 */
+
+.update_title{
+} /* 각 항목 글자와 입력박스 클래스 (한줄씩) */
+
+strong{
+	margin-top: 0.7%;
+	margin-left: 5%;
+	float: left;
+	width: 25%;
+} /* 각 항목 왼쪽 글자영역 */
+
+.form-control{
+	height: 2em;
+	border: 2px solid black;
+	border-radius: 5px;
+} /* 각 항목 입력 박스 */
+
+.error{
+	font-size: 0.8em;
+	margin-left: 30%;
+	color: black;
+	font-weight: bold;
+	visibility: hidden;
+}
+
+#update_id_box{
+	width: 25%;
+} /* 아이디 입력박스 */
+
+#update_email_1_box{
+	width: 25%;
+} /* 이메일 입력박스 첫번째 */
+
+#update_email_2_box{
+	width: 15%;
+	background:white;
+} /* 이메일 입력박스 두번째 */
+
+#update_email_3_box{
+	width: 17.5%;	
+} /* 이메일 선택박스 세번째 */
+
+#update_post_box_2, #update_post_box_3{
+	margin-left: 30%;
+} /* 도로명,나머지상세주소 입력 박스*/
+
+#update_post_box_1, #update_post_box_2{
+	margin-bottom: 3.5%;
+} /*우편번호, 도로명 주소 입력칸 사이 마진*/
+
+#update_name_box{
+	width: 25%;
+} /* 이름 입력박스 */
+
+#update_nickname_box{
+	width: 25%;
+} /* 닉네임 입력박스 */
+
+#update_post_box_1{
+	width: 15%;
+	background:white;
+} /* 우편번호 박스 */
+
+#update_post_box_2{
+	width: 40%;
+	background:white;
+} /* 도로명 주소 박스 */
+
+#update_post_box_3{
+	width: 40%;
+} /* 나머지 상세주소 입력박스 */
+
+#clear{
+	clear: both;
+}
+
+#update_post_btn{
+	width: 25%;
+	font-size: 1.1em;
+	border-radius: 10px;
+	background: salmon;
+	font-weight: bolder;
+	cursor: pointer;
+} /* 우편번호 찾기 버튼 */
+
+#update_post_btn:hover{
+	cursor: pointer;
+	color: white;
+}
+
+#update_post_btn:active{
+	color: lightgreen;
+}
+
+#update_footer{
+	text-align: center;
+} /* 판 제일 하단 가입,취소 버튼 영역*/
+
+#update_button, #delete_button{
+	width: 15%;
+	font-size: 1.2em;
+	border-radius: 10px;
+	background: salmon;
+	font-weight: bolder;
+} /* 가입하기,취소 버튼 */
+#update_pwd_btn{
+	width: 15%;
+	border: 2px solid black;
+	font-size: 1.2em;
+	border-radius: 10px;
+	background: salmon;
+	font-weight: bolder;
+}
+
+
+#update_button:hover, #delete_button:hover,#update_pwd_btn:hover{
+	color: white;
+	cursor: pointer;
+}
+
+#update_button:active, #delete_button:active,#update_pwd_btn:active{
+	color: lightgreen;
+	cursor: pointer;
+}
+
+
+/********** 비밀번호 찾기 영역 ************/
+ 
+ #info_update_pwd {
+	margin-bottom: 5%;
+	border-radius: 20px;
+	display: none;
+	width: 70%;
+	height:100%;
+	margin-top: 10%;
+	background: lavender;
+	margin-left: 15%;
+	
+}
+
+ #update_pwd_header{
+	font-size: 250%;
+	text-align: center;
+	border: 1px solid black;	
+	padding-top: 1.5%;
+}
+
+#update_pwd_header a{
+	font-weight: bold;
+}
+
+#update_pwd_table{
+	border: 2px solid black;
+	padding: 3%;
+}
+
+.update_pwd_control{
+	height: 2.5em;
+	border: 2px solid black;
+	border-radius: 5px;	
+}
+
+#update_pwd_id{
+	margin-bottom: 5%;
+}
+
+#update_pwd_id_title {
+	margin-top: 2%;
+	margin-left: 7%;
+	float: left;
+	width: 35%;
+	font-size: 100%;
+}
+
+#update_pwd_id_text {
+	margin-right: 7%;
+	width: 43%;
+}
+
+#info_update_pwd_q{
+	margin-bottom: 5%;
+}
+
+#update_pw_q {
+	margin-top: 1.5%;
+	margin-left: 7%;
+	float: left;
+	width: 30%;
+	font-size: 100%;
+	margin-right: 5%;
+}
+
+#update_pwd_q_a{
+	margin-right: 7%;
+	width: 43%;
+}
+
+#info_update_pwd_newpwd{
+	margin-bottom: 5%;
+}
+
+#update_pwd_newpwd{
+	margin-top: 1.5%;
+	margin-left: 7%;
+	float: left;
+	width: 30%;
+	font-size: 100%;
+	margin-right: 5%;	
+}
+
+#update_pwd_newpwd_box{
+	margin-right: 7%;
+	width: 43%;	
+}
+
+#info_update_pwd_newpwd_check{
+	margin-bottom: 5%;	
+}
+
+#update_pwd_newpwd_check{
+	margin-top: 2%;
+	margin-left: 7%;
+	float: left;
+	width: 35%;
+	font-size: 100%;	
+}
+
+#update_pwd_tel_box{
+	margin-right: 7%;
+	width: 43%;	
+}
+
+#update_button_pwd{
+	text-align: center;
+}
+#update_button_pwd_title{
+ 	width: 35%;
+	font-size: 1.2em;
+	border: 2px solid black;	
+	border-radius: 10px;
+	background: salmon;
+	font-weight: bolder;
+}
+#update_button_pwd_title:hover{
+	color: white;
+	cursor: pointer;
+}
+#update_button_pwd_title:active{
+	color: lightgreen;
+	cursor: pointer;
+}

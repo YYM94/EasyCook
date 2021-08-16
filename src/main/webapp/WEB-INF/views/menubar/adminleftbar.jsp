@@ -7,7 +7,7 @@
 		<div id="top_login_join_btn">
 			<a href="login">Login</a>&nbsp;&nbsp; <a
 				href="join">Join</a> <br> <a
-				href="/EasyCook_Project/Home/MyPage/mypage.jsp">마이페이지</a> <br>
+				href="/controller/mypage_view">마이페이지</a> <br>
 			<a href="admin">관리자 페이지</a>
 		</div>
 
@@ -25,6 +25,9 @@
 					<input type="checkbox" id="answer01"> 
 					<label for="answer01">레시피 관리</label>
 					<div>
+						<p>
+							<a href="admin_post_management">작성한 레시피 관리</a>
+						</p>
 						<p>
 							<a href="#">레시피 조회</a>
 						</p>
