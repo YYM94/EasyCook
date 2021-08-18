@@ -20,11 +20,7 @@ if (request.getParameter("page") == null) {
 %>
 
 <div id="FAQPage">
-
-   <div class="top_title">
-      <div class="h1">질문과 답변</div>
-      <hr/>
-   </div>
+    <div class="board_title">질문과 답변</div>
 	<div class="search-form2">
 		<form class="table-form">
 			<fieldset>

@@ -13,10 +13,7 @@
 <body>
 	<%@ include file="../menubar/top_left_menubar.jsp"%>
 	
-   <div class="top_title">
-      <div class="h1">핫뉴스</div>
-      <hr/>
-   </div>
+    <div class="board_title">핫뉴스</div>
 
 	<div class="example">
 		<ul class="ul_article">

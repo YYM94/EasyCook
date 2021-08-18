@@ -44,6 +44,7 @@
 						opacity: "1"
 					}, 200);
 					windowBlurByMask();
+					top_search_scrollLock();
 				}
 			});
 			$("#top_search_hide").mouseover(function(){
@@ -73,7 +74,7 @@
 	$(document).ready(function(){
 		$("#left_menubtn").click(function(){
 			$("#left_menu").animate({
-				width: "20%",
+				width: "300px",
 				opacity: "1",
 				left: "0px"
 			});
@@ -81,6 +82,7 @@
 				opacity: "0"
 			});
 			windowBlurByMask();
+			top_search_scrollLock();
 			$("#top_search_hide").unbind("mouseover");
 			$("#top_search_hide").unbind("mouseout");
 			$("#top_search_icon").unbind("mouseover");
@@ -99,6 +101,14 @@
 		});
 	});
 ////////////////////// 좌측 메뉴바 팝업 & close 이벤트 END /////////////////////////
+
+	//좌측 메뉴바 링크 마우스 오버시 이벤트
+	function iconActive(link){
+		$(link).find("img").attr("src", "./resources/images/leftmenu_Linkactiveimage.png")
+	}
+	function iconInactive(link){
+		$(link).find("img").attr("src", "./resources/images/leftmenu_Linkimage.png")
+	}
 
 </script>
 <div id="menubar_wrap">
@@ -133,21 +143,33 @@
 				<a href="/easycook"><img src="./resources/images/logo.png"/></a>
 			</div>
 			<div id="left_sessionInfo">
-				로그인 정보
+				[로그인 정보]
 			</div>
 			<div id="left_menulink">
-				<div id="left_notice">
-					<a href="Notice">공지사항</a>
-				</div>
-				<div id="left_board">
-					<a href="recipeBoard_view">레시피 게시판</a>
-				</div>
-				<div id="left_news">
-					<a href="hotNewsBoard_view">핫뉴스</a>
-				</div>
-				<div id="left_faq">
-					<a href="FAQ">FAQ</a>
-				</div>
+				<a href="Notice">
+					<div id="left_notice" onmouseover="iconActive(this);" onmouseout="iconInactive(this);">
+						공지사항
+						<img src="./resources/images/leftmenu_Linkimage.png" width="33px" height="33px"/>
+					</div>
+				</a>
+				<a href="recipeBoard_view">
+					<div id="left_board" onmouseover="iconActive(this);" onmouseout="iconInactive(this);">
+						레시피 게시판
+						<img src="./resources/images/leftmenu_Linkimage.png" width="33px" height="33px"/>
+					</div>
+				</a>
+				<a href="hotNewsBoard_view">
+					<div id="left_news" onmouseover="iconActive(this);" onmouseout="iconInactive(this);">
+						<img src="./resources/images/leftmenu_Linkimage.png" width="33px" height="33px"/>
+						핫뉴스
+					</div>
+				</a>
+				<a href="FAQ">
+					<div id="left_faq" onmouseover="iconActive(this);" onmouseout="iconInactive(this);">
+						FAQ
+						<img src="./resources/images/leftmenu_Linkimage.png" width="33px" height="33px"/>
+					</div>
+				</a>
 			</div>
 		</div>
 	</div>

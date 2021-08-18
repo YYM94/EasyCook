@@ -20,10 +20,7 @@ if (request.getParameter("page") == null) {
 %>
 
 <div id="GongPage">
-   <div class="top_title">
-      <div class="h1">공지사항</div>
-      <hr/>
-   </div>
+    <div class="board_title">공지사항</div>
 	<div class="search-form">
 		<form class="table-form">
 			<fieldset>
