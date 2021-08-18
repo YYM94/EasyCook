@@ -5,6 +5,21 @@ body{
 	padding: 0px;
 }
 
+/* 상단 제목 */
+.top_title .h1{
+   color: #ffa315;
+   font-size: 300%;
+   text-align:center;
+   text-shadow:2px 2px #000000;
+   background-color:#223246;
+   margin: 0;
+   padding: 15px;
+}
+.top_title hr{
+   border:2px solid orange;
+   margin: 0;
+}
+
 #page_blur{
 	display: none;
 	position: fixed; 

@@ -21,8 +21,11 @@ if (request.getParameter("page") == null) {
 
 <div id="FAQPage">
 
+   <div class="top_title">
+      <div class="h1">질문과 답변</div>
+      <hr/>
+   </div>
 	<div class="search-form2">
-		<h3 class="hidden2">질문과 답변</h3>
 		<form class="table-form">
 			<fieldset>
 				<legend class="hidden">검색</legend>

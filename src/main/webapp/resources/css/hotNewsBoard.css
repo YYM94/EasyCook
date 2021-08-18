@@ -1,8 +1,8 @@
 @charset "UTF-8";
 body{
-	background: url("./images/hnboardbackground.jpg");
-	background-repeat: no-repeat;
-	background-size: cover;
+	background-image: url("../images/recipeBoardBackground.jpg");
+	background-size: 100% 100vh;
+	background-repeat: repeat-y;
 }
 
 .img_wrap{
@@ -37,6 +37,7 @@ body{
   display: grid;
   grid-template-columns: repeat(auto-fill, 500px);  
   grid-gap: 50px;
+  margin-top: 0;
 
 }
 

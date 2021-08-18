@@ -1,6 +1,9 @@
 @charset "UTF-8";
 
 #admin_body {
+	background-image:url('../images/picture/food_image.jpg');
+	background-repeat:no-repeat;
+	background-size:100% 100vh;
 	margin: 0%;
 }
 
