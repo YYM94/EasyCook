@@ -71,6 +71,7 @@
 	}
 </script>
 </head>
+<%@ include file="./menubar/top_left_menubar.jsp"%>
 <body id="login_body" onLoad="$('#login_id_box').focus();">
 	<div id="container_login">
 		<div id="panel_login">
@@ -81,8 +82,8 @@
 					<!-- 로그인 폼  -->
 					<div id="panel_header_login">
 						<!-- 로그인폼 타이틀 -->
-						<a href="./index.jsp"><span>EasyCook!</span></a><span
-							id="login_header_title"> 로그인</span>
+						<a href="/easycook"><span>EasyCook!</span></a>
+						<span id="login_header_title"> 로그인</span>
 					</div>
 					<div id="panel_table_login">
 						<!-- 로그인폼 입력 판 -->
@@ -123,8 +124,8 @@
 			<!-- 아이디 찾기 영역 -->
 			<div id="login_find_id">
 				<div id="login_find_id_header">
-					<a href="./index.jsp"><span>EasyCook!</span></a><span
-							id="login_find_id_title"> 아이디 찾기</span>
+					<a href="/easycook"><span>EasyCook!</span></a>
+					<span id="login_find_id_title"> 아이디 찾기</span>
 				</div>	
 					
 				<div id="login_find_id_table">	
@@ -165,8 +166,8 @@
 			<!-- 비밀번호 찾기 영역 -->
 			<div id="login_find_pwd">
 				<div id="login_find_pwd_header">
-					<a href="./index.jsp"><span>EasyCook!</span></a><span
-						id="login_find_pwd_title"> 비밀번호 재설정</span>
+					<a href="/easycook"><span>EasyCook!</span></a>
+					<span id="login_find_pwd_title"> 비밀번호 재설정</span>
 				</div>
 
 				<div id="login_find_pwd_table">

@@ -104,7 +104,7 @@
 			<div id="panel-body">
 				<form method="post" name="reg_form" onsubmit="return checks();" onreset="return joinreset();" style="margin-bottom: 0;">
 					<div id="panel-header">
-						<a href="./index.jsp" id="join_header_title_1"><span>EasyCook!</span></a><span id="join_header_title_2"> 회원가입</span>
+						<a href="/easycook" id="join_header_title_1"><span>EasyCook!</span></a><span id="join_header_title_2"> 회원가입</span>
 					</div>
 					<div id="panel-table">
 						<div id="join_id" class="join_title">
