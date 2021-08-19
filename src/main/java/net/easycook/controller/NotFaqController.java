@@ -61,23 +61,31 @@ public class NotFaqController {
 		
 	}
 	@RequestMapping("/noticewrite")
-	public String noticewrite() throws Exception{
-		return "NoticeFaq/noticewrite";
+	public ModelAndView noticewrite() throws Exception{
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("NoticeFaq/noticewrite");
+		return mv;
 	}
 	
 	@RequestMapping("/faqwrite")
-	public String faqwrite() throws Exception{
-		return "NoticeFaq/faqwrite";
+	public ModelAndView faqwrite() throws Exception{
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("NoticeFaq/faqwrite");
+		return mv;
 	}
 	
 	@RequestMapping("/faqEdit")
-	public String faqEdit() throws Exception{
-		return "NoticeFaq/faqEdit";
+	public ModelAndView faqEdit() throws Exception{
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("NoticeFaq/faqEdit");
+		return mv;
 	}
 	
 	@RequestMapping("/noticeEdit")
-	public String noticeEdit() throws Exception{
-		return "NoticeFaq/noticeEdit";
+	public ModelAndView noticeEdit() throws Exception{
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("NoticeFaq/noticeEdit");
+		return mv;
 	}
 	
 }
