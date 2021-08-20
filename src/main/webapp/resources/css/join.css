@@ -21,11 +21,11 @@
 } /* 폼 전체 판 껍데기 */
 
 #panel-body{
+	position: absolute;
 	background: rgba(234, 255, 234, 0.95);
 	border-radius: 20px;
-	width: 70%;
-	margin-left: 15%;
-	margin-top: 10%;
+ 	margin-left: 10%;
+	margin-top: 3%;
 /* 	box-shadow: 5px 5px 5px 5px black; */
 } /* 폼 전체 판 */
 
