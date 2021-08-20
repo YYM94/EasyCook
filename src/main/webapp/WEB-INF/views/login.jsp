@@ -11,9 +11,6 @@
 
 /* 아이디 찾기  클릭시 아이디찾기 화면 띄우기 */
 	function LoginFindID() {
-/* 			var up;
-			up=$('#login_find_id');
-			up.offset().top; */ /*아이디 찾기 클릭시 로그인영역 페이지 상단으로 위치 옮기기.. 예정..*/
 		$('#login_find_id_text').off('click').click(function() {
   			$('#login_find_pwd').hide();
 			$('#login_find_id').fadeToggle();

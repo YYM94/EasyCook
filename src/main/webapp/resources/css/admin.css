@@ -28,39 +28,12 @@
 	margin-bottom: 2%;
 }
 
-#admin_search b {
-	font-size: 150%;
-}
-
-
 #admin_list_table th{
 	border-bottom-style: solid;
 	border-bottom-width: 2px;	
 }
 
-#admin_no{
-	width: 10%;
-}
 
-#admin_id{
-	width: 25%;
-}
-
-#admin_name{
-	width: 15%;
-}
-
-#admin_check{
-	width: 15%;
-}
-
-#admin_date{
-	width: 30%;
-}
-
-/* #admin_button{
-	width: 20%;
-} */
 
 #admin_list_table td{
 	text-align: center; 
@@ -90,6 +63,7 @@
 	padding:20px;
 	background-color:#cccdd0;
 	flex-wrap:wrap;
+	font-weight: bold;
 }
 
 .admintitle [id*="title"]{
@@ -137,7 +111,7 @@
 }
 
 #con5{
-	margin-right: 6.5%;
+	margin-right: 5.5%;
 } 
 
 .a_title{

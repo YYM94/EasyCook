@@ -6,7 +6,6 @@
 <title>EasyCook! 회원가입</title>
 
 <link rel="stylesheet" type="text/css" href="./resources/css/join.css"/>
-<%@ include file="./menubar/top_left_menubar.jsp"%>
 <script src="./resources/js/jquery.js"></script>
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script>
@@ -43,32 +42,7 @@
 		}
 	}
 	
-/* 	// 아이디,비밀번호 유효성 검증 후 에러멘트 발생 */
-	function checks(){
-		
-		$('#join_button').click(function(event){
-			
-			var join_id_box = $('#join_id_box').val(); //id
 
-			//*아이디 유효성 검사
-			if(chkValId(join_id_box)){
-				$('#idError').hide();
-			}else{
-				$('#idError').show();
-				$('#idError').text("아이디는 오직 문자와 숫자,_기호만 입력 가능합니다.");
-				event.preventDefault();
-			}
-			
-		});
-		
-		var chkValId = function(id){
-
-			var patt = new RegExp(/^[a-z0-9_]+$/);
-
-			return patt.test(id);
-
-		}
-	} */
 	
 	//이메일 입력방식 선택 
 	function emailselect() {
@@ -99,6 +73,7 @@
 </script>
 </head>
 <body onLoad="$('#join_id_box').focus();" id="join_body">
+<%@ include file="./menubar/top_left_menubar.jsp"%>
 	<div id="container">
 		<div id="panel">
 			<div id="panel-body">

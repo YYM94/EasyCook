@@ -76,9 +76,10 @@ strong:hover{
 }
 
 .form-control{
-	height: 2em;
+	height: 1.8em;
 	border: 1px solid #d9d9de;
 	border-radius: 5px;
+	font-size: 1em;
 } /* 각 항목 입력 박스 */
 
 .error{
@@ -90,11 +91,11 @@ strong:hover{
 }
 
 #join_id_box{
-	width: 25%;
+	width: 28%;
 } /* 아이디 입력박스 */
 
 #join_email_1_box{
-	width: 25%;
+	width: 28%;
 } /* 이메일 입력박스 첫번째 */
 
 #join_email_2_box{
@@ -115,20 +116,20 @@ strong:hover{
 
 #join_pw_box{
 	ime-mode: inactive; 
-	width: 40%;
+	width: 45%;
 } /* 비밀번호 입력박스 */
 
 #join_pw_check_box{
 	ime-mode: inactive;
-	width: 40%;
+	width: 45%;
 } /* 비밀번호 확인 입력박스 */
 
 #join_name_box{
-	width: 25%;
+	width: 28%;
 } /* 이름 입력박스 */
 
 #join_nickname_box{
-	width: 25%;
+	width: 28%;
 } /* 닉네임 입력박스 */
 
 #join_pw_q_box{
