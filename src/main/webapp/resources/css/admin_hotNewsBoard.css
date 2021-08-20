@@ -2,36 +2,42 @@
 
 /* ------------------------------------------------list------------------------------------------------ */
 body{ /*list, input, edit 공통 */
-	background: url("../images/recipeBoardBackground.jpg");
+	background-image:url('../images/picture/food_image.jpg');
 	background-repeat: no-repeat;
-	background-size: cover;
+	background-size:100% 100vh;
+	margin: 0%;
 }
 
-#admin_header { /*list, input, edit 공통 */
+#admin_header {
 	text-align: center;
-	margin-left: 36%; 
-	padding: 1%; padding-top: 3%;
-	width: 50%; max-width: 786px;
+	padding: 1%;
+/* 	background: peachpuff; */
+	width: 50%;
+	margin:0 5% 0 30%;
 }
 
 #admin_panel { /*list, input, edit 공통 */
-	margin-left: 36%;
-	width: 50%; 
-	max-width: 786px; min-width: 502px;
-	background: lavender;
+	width: 50%;
 	padding: 1%;
+	margin:0 5% 0 30%;
+	min-width: 691px;
 }
 
-#admin_search {
-/* 	border: 1px solid red; */
+#admin_search{
 	text-align: center;
-	margin-bottom: 2%;
-	
+	margin-bottom: 2%;	text-align: center;	
 }
 #admin_hn_input{
 	float: right;	
 }
 
+table{
+	height: 632px;
+	margin-bottom: -1px
+}
+#admin_list_hn{
+	width: 100%;
+}
 
 #admin_list_no{
 	width: 7%;
@@ -55,7 +61,8 @@ body{ /*list, input, edit 공통 */
 	border-bottom-width: 2px;	
 }
 #admin_list_hn td{
-	text-align: center; padding: 6px 0px;
+/* 	padding: 6px 0px; */
+	text-align: center; 
 	border-bottom-width: 1px;
 	border-bottom-style: dotted;
 }
@@ -70,7 +77,8 @@ body{ /*list, input, edit 공통 */
 
 
 #admin_page_number {
-	margin: 10px 0 10px 0;
+	padding: 10px 0 0 0;
+	height: 50px;
 	font-weight: bold;
 	text-align: center;
 }

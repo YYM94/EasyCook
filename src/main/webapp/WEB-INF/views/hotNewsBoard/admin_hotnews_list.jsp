@@ -11,7 +11,7 @@
 <body >
 	<%@ include file="../menubar/adminleftbar.jsp"%>
 	<div id="admin_header">
-		<b style="font-size: 200%;">핫뉴스 관리</b>
+		<h3 style="font-size: 200%; text-align: center; padding: 10px; margin: 0 0 0 0;">핫뉴스 관리</h3>
 	</div>
 	
 	<div id="admin_panel">
@@ -34,29 +34,29 @@
 			
 		</div>
 				
-		<table id="admin_list_hn">
-			<tr>
+		<table id="admin_list_hn" style="border-collapse:collapse" >
+			<tr style="	background-color:#cccdd0;">
 				<th id="admin_list_no">번호</th>
 				<th id="admin_list_title">제목</th>
 				<th id="admin_list_writer">작성자</th>
 				<th id="admin_list_date">등록날짜</th>
 				<th id="admin_list_controller">조회/수정/삭제</th>
 			</tr>
-			<%for(int i=15; i>=1; i--){ %>
-			<tr>
+			<%for(int i=10; i>=1; i--){ %>
+			<tr style="background-color:#f5f5f5;">
 				<td><%=i %></td>
 				<td><div id="left">[오피셜] “슈퍼리그 계속된다”...유럽사법재판소, ‘UEFA 징계’ 철회 명령</div></td>
 				<td>관리자</td>
 				<td>2021.12.11</td>
-				<td><input type="button" value="조회"/>&nbsp;
-					<input type="button" value="수정" onclick="location.href='/EasyCook/admin_hotnews_edit';"/>&nbsp;
+				<td><input type="button" value="조회"/>
+					<input type="button" value="수정" onclick="location.href='/EasyCook/admin_hotnews_edit';"/>
 					<input type="button" value="삭제" /></td>
 			</tr>
-			<%} %>
-			
+			<%} %>			
 		</table>
 		
-		<div id="admin_page_number">
+		
+		<div id="admin_page_number" style="background-color:#f5f5f5;">
 			<%
 			int currentPage;
 			if(request.getParameter("page") == null){
