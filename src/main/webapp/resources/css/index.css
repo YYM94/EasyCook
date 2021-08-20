@@ -5,6 +5,7 @@ body{
 	padding: 0px;
 }
 
+
 #main_Movebtn{
 	padding: 0;
 	width: 15px;
@@ -41,24 +42,29 @@ body{
 }
 #main_logo #main_logoimg{
 	position: absolute;
-	top: 28%;
-	left: 22%;
-	width: 60%;
-	height: 40%;
+    top: 50px;
+    left: 200px;
+    width: 400px;
+    height: 240px;
 	filter: drop-shadow(0 0 2px #FFFFFF);
 }
 
 /* 임시 페이지 */
 #temp_top5{
-	background-color: #FFA07A;
+	background-image: url("../images/vegetable.jpg");
+	background-size: 100% 100vh;
+	background-repeat: no-repeat;
 	overflow: hidden;
 }
 #temp_news{
-	background-color: #FAFAD2;
+	background-image: url("../images/vegetable.jpg");
+	background-size: 100% 100vh;
+	background-repeat: no-repeat;
 	overflow: hidden;
 }
 #temp_ingr{
 	background-image: url("../images/vegetable.jpg");
+	background-size: 100% 100vh;
 	background-repeat: no-repeat;
 	overflow: hidden;
 }
@@ -74,7 +80,7 @@ body{
    /*max-width:1200px;*/
    /*width:100%;*/
    /*margin:0 auto;*/
-   background-color: beige;
+   /*background-color: beige*/;
    display:flex;
    flex-direction:row;
    margin: 0;
@@ -82,7 +88,7 @@ body{
 }
 ul {font-size:0; max-height: 50%;}
 
-header ul > li {
+#top3_cont ul > li {
    display:inline-block;
    vertical-align:top;
    width: 28%;
@@ -342,18 +348,6 @@ ul > li > a:hover .screen4::after {
 ul > li > a:hover .screen5::after {
    opacity:1;
 }
-header .h1{
-   color: #ffa315;
-   font-size: 300%;
-   text-align:center;
-   text-shadow:2px 2px #000000;
-   background-color:#223246;
-   margin: 0;
-}
-header hr{
-   border:2px solid orange;
-   margin: 0;
-}
 
 
 
@@ -363,12 +357,14 @@ header hr{
      border: black dotted 2px;   
    width: 80%; background: center center #e8e6df; color:#04523e; 
 }*/
+/*
 .hn_title{
      
    position:relative; display:inline-block; font-size:48px; font-weight: bold;
    width: 100%; height: 15%;
    margin: 30px 0 30px 150px;
 }
+*/
 
 /** 첫번째 기사 **/
 
@@ -563,9 +559,10 @@ header hr{
 	margin: auto;
 	border-radius: 20px;
 	width: 60%;
-	background: rgba(24, 26, 27, 0.5);
+	background: rgba(150, 75, 0, 0.5);
 	padding: 10px;
 	height: 70%;
+	margin-top: 5%;
 } /* 추천페이지 내용물 껍데기 */
 
 #main_cucheon_cont{

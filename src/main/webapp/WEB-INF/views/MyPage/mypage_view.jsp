@@ -10,9 +10,10 @@
 
 </head> 
 <body>
-	<div id="mypage_heading">
-		<strong id="mypage_heading_title">마이 페이지</strong>
-	</div>
+   <div class="top_title">
+      <div class="h1">마이페이지</div>
+      <hr/>
+   </div>
 	
 	
 		<div id="mypage_post">

@@ -16,7 +16,7 @@
 	<div id="left_menubar">
 		<div id="left_menu">
 			<div id="left_logo">
-				<a href="/EasyCook_Project/Home/index.jsp"><img
+				<a href="/easycook"><img
 					src="./resources/images/logo.png" /></a>
 			</div>
 			<div id="left_sessionInfo">로그인 정보</div>
@@ -38,7 +38,7 @@
 					<label for="answer02">이용자 관리</label>
 					<div class="open">
 						<p>
-							<a href="/EasyCook_Project/Home/admin.jsp">이용자 조회</a>
+							<a href="admin">이용자 조회</a>
 						</p>
 					</div>
 				</div>

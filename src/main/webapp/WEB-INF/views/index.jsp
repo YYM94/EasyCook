@@ -103,9 +103,11 @@
 </div>
 
 <div id="temp_top5" class="content">
-   <header>
+   <div class="top_title">
       <div class="h1">조회수 TOP3 게시판</div>
       <hr/>
+   </div>
+   <div id="top3_cont">
       <div class="gallerylist">
          <ul>
             <li><a href="">
@@ -140,12 +142,15 @@
             </a></li>
          </ul>
       </div>
-   </header>
+   </div>
 </div>
 
 <%--핫뉴스 시작 --%>
 <div id="temp_news" class="content">
-   <span class="hn_title">핫뉴스 제목</span>
+   <div class="top_title">
+      <div class="h1">핫뉴스</div>
+      <hr/>
+   </div>
    <div class="one_wrap" onclick="window.open('http://www.google.co.kr')">
       <div class="one_img_div">
          <img class="one_img" src="./resources/images/left.jpg" alt="첫번째 이미지" />
@@ -203,9 +208,10 @@
 </div> <%--핫뉴스 끝 --%>
 
 <div id="temp_ingr" class="content">
-	<div id="main_cucheon_heading">
-		<strong id="cucheon_title">이달의 추천 재료!</strong>
-	</div>
+   <div class="top_title">
+      <div class="h1">이달의 추천 재료!</div>
+      <hr/>
+   </div>
 
 	<div id="main_cucheon">
 		<div id="main_cucheon_cont">

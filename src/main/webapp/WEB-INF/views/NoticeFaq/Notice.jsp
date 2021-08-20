@@ -20,8 +20,8 @@ if (request.getParameter("page") == null) {
 %>
 
 <div id="GongPage">
+    <div class="board_title">공지사항</div>
 	<div class="search-form">
-		<h3 class="hidden2">공지사항</h3>
 		<form class="table-form">
 			<fieldset>
 				<legend class="hidden">검색</legend>

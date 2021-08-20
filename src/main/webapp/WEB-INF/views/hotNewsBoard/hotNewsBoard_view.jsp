@@ -12,6 +12,8 @@
 </head>
 <body>
 	<%@ include file="../menubar/top_left_menubar.jsp"%>
+	
+    <div class="board_title">핫뉴스</div>
 
 	<div class="example">
 		<ul class="ul_article">

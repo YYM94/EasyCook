@@ -69,6 +69,9 @@ String[] recipeSplit = recipeDes.split("-,-");
 
 <%@ include file="../menubar/top_left_menubar.jsp"%>
 
+
+<div class="board_title">레시피 게시판</div>
+
 <%-- 게시글 조회 영역, currentPost가 0일 경우 표시하지 않음 --%>
 <%if(currentPosting != 0){ %>
 	<div id="PostingViewPage">
