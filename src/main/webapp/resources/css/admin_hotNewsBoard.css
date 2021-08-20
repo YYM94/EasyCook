@@ -16,19 +16,20 @@ body{ /*list, input, edit 공통 */
 
 #admin_panel { /*list, input, edit 공통 */
 	margin-left: 36%;
-	width: 50%; max-width: 786px;
+	width: 50%; 
+	max-width: 786px; min-width: 502px;
 	background: lavender;
 	padding: 1%;
 }
 
-#admin_search{
-	margin: 20px 0 20px 0;
-	width: 70%; float: left;
+#admin_search {
+/* 	border: 1px solid red; */
+	text-align: center;
+	margin-bottom: 2%;
+	
 }
 #admin_hn_input{
-	float: right;
-	margin: 20px 20px 20px 0;
-	
+	float: right;	
 }
 
 

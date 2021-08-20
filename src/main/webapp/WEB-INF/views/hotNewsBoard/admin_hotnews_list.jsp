@@ -15,12 +15,25 @@
 	</div>
 	
 	<div id="admin_panel">
-		<form action="#" method="get" id="admin_search" >
-			<input type="text" /> 
-			<input type="submit" value="검색" />  
-		</form>
-		<input type="button" id="admin_hn_input" onclick="location.href='/EasyCook/admin_hotnews_input';" value="등록" />
-		
+		<div id="admin_search">
+			<form class="table-form">
+				<fieldset>
+					<legend class="hidden">검색</legend>
+					<!-- <label class="hidden">검색분류</label> 
+					<select name="f">
+					<option value="search_id">회원아이디</option>
+					<option value="search_name">회원이름</option>
+					<option value="search_join">회원상태</option>
+					</select> --> 
+					<label class="hidden">검색어</label> 
+					<input type="text" name="q"	value="" placeholder="검색어를 입력해주세요." /> 
+					<input class="btn btn-search" type="submit" value="검색" />
+					<input type="button" id="admin_hn_input" onclick="location.href='/EasyCook/admin_hotnews_input';" value="등록" />
+				</fieldset>				
+			</form>
+			
+		</div>
+				
 		<table id="admin_list_hn">
 			<tr>
 				<th id="admin_list_no">번호</th>

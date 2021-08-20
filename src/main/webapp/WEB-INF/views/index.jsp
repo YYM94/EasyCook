@@ -145,69 +145,85 @@
    </div>
 </div>
 
-<%--핫뉴스 시작 --%>
-<div id="temp_news" class="content">
-   <div class="top_title">
-      <div class="h1">핫뉴스</div>
-      <hr/>
-   </div>
-   <div class="one_wrap" onclick="window.open('http://www.google.co.kr')">
-      <div class="one_img_div">
-         <img class="one_img" src="./resources/images/left.jpg" alt="첫번째 이미지" />
-      </div>
-      <span class="newsRight pxn">&lt;EASYCOOK'S NEWS&gt;</span>
-      <span class="one_title">아주긴문장인대어디까지표시되는지테스트하는제목입니다</span>
-      <span class="news_source">&lt;이지쿡일보 2021-07-12 월요일&gt;</span>
-      <span class="one_cont">22일 '재밍'은 공식 SNS 채널을 통해 신개념 아이돌 콘텐츠 '마P아'의 화보를 공개했다.
-                         이번 화보는 시크릿 파티 콘셉트로 파티장에 가는 설렘을 몽환적이게 그려냈다.
-                         공개된 사진 속 프로미스나인은 평소 그룹 활동과는 다른 성숙한 매력을 발산해 눈길을 끌었다.
-                         이어진 개인 컷에서는 멤버 모두 이전에 보여주던 발랄한 이미지와 상반되는 섹시한 듯 강렬한 스타일을 저마다의 매력으로 표현하며 화보의 완성도를 더했다.
-                         이번 화보를 통해 프로미스나인은 빛나는 미모에 아홉 소녀들의 개성 넘치는 매력까지 선보였다. 
-                         뿐만 아니라 촬영 내내 멤버들은 특유의 밝은 에너지를 한껏 뽐냈다.수다를 떨다가도 카메라가 켜지면 강렬한 눈빛으로 분위기를 압도, 매 컷을 완벽하게 소화하며 프로페셔널한 면모로 스태프들의 감탄을 자아냈다.
-                         한편, '마P아' 프로미스나인편의 비하인드는 오는 25일 유튜브 채널 '재밍'을 통해 공개되며, 본 편은 매주 목요일 오후 5시 7분에 업로드 된다.</span>
-   </div>
-   <div class="one_wrap2"></div>
-   <div class="clear"></div>
-      
-   <div class="two_wrap" onclick="window.open('http://www.google.co.kr')">
-      <div class="one_img_div">
-         <img class="two_img" src="./resources/images/right2.jpg" alt="두번쨰 이미지" />
-      </div>      
-      <span class="newsRight pxn">&lt;EASYCOOK'S NEWS&gt;</span>
-      <span class="two_title">제목도 ...처리해야함너무짧으면안돼 </span>
-      <span class="news_source">&lt;이지쿡일보 2021-07-12 월요일&gt;</span>
-      <span class="two_cont">22일 '재밍'은 공식 SNS 채널을 통해 신개념 아이돌 콘텐츠 '마P아'의 화보를 공개했다.
-                         이번 화보는 시크릿 파티 콘셉트로 파티장에 가는 설렘을 몽환적이게 그려냈다.
-                         공개된 사진 속 프로미스나인은 평소 그룹 활동과는 다른 성숙한 매력을 발산해 눈길을 끌었다.
-                         이어진 개인 컷에서는 멤버 모두 이전에 보여주던 발랄한 이미지와 상반되는 섹시한 듯 강렬한 스타일을 저마다의 매력으로 표현하며 화보의 완성도를 더했다.
-                         이번 화보를 통해 프로미스나인은 빛나는 미모에 아홉 소녀들의 개성 넘치는 매력까지 선보였다. 
-                         뿐만 아니라 촬영 내내 멤버들은 특유의 밝은 에너지를 한껏 뽐냈다.수다를 떨다가도 카메라가 켜지면 강렬한 눈빛으로 분위기를 압도, 매 컷을 완벽하게 소화하며 프로페셔널한 면모로 스태프들의 감탄을 자아냈다.
-                         한편, '마P아' 프로미스나인편의 비하인드는 오는 25일 유튜브 채널 '재밍'을 통해 공개되며, 본 편은 매주 목요일 오후 5시 7분에 업로드 된다.</span>
-   </div>
-   <div class="two_wrap2"></div>
-   <div class="clear"></div>
-   
-   <div class="three_wrap" onclick="window.open('http://www.google.co.kr')">
-      <div class="one_img_div">
-         <img class="three_img" src="./resources/images/right3.jpg" alt="세번째 이미지" />
-      </div>   
-      
-      <span class="newsRight pxn">&lt;EASYCOOK'S NEWS&gt;</span>
-      <span class="three_title">창줄이면 태그뒤섞임 태그정리</span>
-      <span class="news_source">&lt;이지쿡일보 2021-07-12 월요일&gt;</span>
-      <span class="three_cont">22일 '재밍'은 공식 SNS 채널을 통해 신개념 아이돌 콘텐츠 '마P아'의 화보를 공개했다.
-                         이번 화보는 시크릿 파티 콘셉트로 파티장에 가는 설렘을 몽환적이게 그려냈다.
-                         공개된 사진 속 프로미스나인은 평소 그룹 활동과는 다른 성숙한 매력을 발산해 눈길을 끌었다.
-                         이어진 개인 컷에서는 멤버 모두 이전에 보여주던 발랄한 이미지와 상반되는 섹시한 듯 강렬한 스타일을 저마다의 매력으로 표현하며 화보의 완성도를 더했다.
-                         이번 화보를 통해 프로미스나인은 빛나는 미모에 아홉 소녀들의 개성 넘치는 매력까지 선보였다. 
-                         뿐만 아니라 촬영 내내 멤버들은 특유의 밝은 에너지를 한껏 뽐냈다.수다를 떨다가도 카메라가 켜지면 강렬한 눈빛으로 분위기를 압도, 매 컷을 완벽하게 소화하며 프로페셔널한 면모로 스태프들의 감탄을 자아냈다.
-                         한편, '마P아' 프로미스나인편의 비하인드는 오는 25일 유튜브 채널 '재밍'을 통해 공개되며, 본 편은 매주 목요일 오후 5시 7분에 업로드 된다.</span>
-   </div>
-   <div class="three_wrap2"></div>
-   <div class="clear"></div>
-</div> <%--핫뉴스 끝 --%>
+	<%--핫뉴스 시작 --%>
+	<div id="temp_news" class="content">
+		<div class="top_title">
+			<div class="h1">핫뉴스</div>
+			<hr />
+		</div>
+		<div id="index_hotnews_wrap">
+			<div class="one_wrap" onclick="window.open('http://www.google.co.kr')">
+				<div class="one_img_div">
+					<img class="one_img" src="./resources/images/left.jpg" alt="첫번째 이미지" />
+				</div>
+				<span class="newsRight pxn">&lt;EASYCOOK'S NEWS&gt;</span> 
+				<span class="one_title">제목도 ...처리해야함너무짧으면안돼제목도 ...처리해야함너무짧으면안돼처리해야함너무짧으면안돼제목도처리해야함너무짧으면안돼제목도 </span> 
+				<span class="news_source">&lt;이지쿡일보 2021-07-12 월요일&gt;</span> 
+				<span class="one_cont">22일 '재밍'은 공식 SNS 채널을 통해 신개념 아이돌 콘텐츠 '마P아'의
+					화보를 공개했다. 이번 화보는 시크릿 파티 콘셉트로 파티장에 가는 설렘을 몽환적이게 그려냈다. 공개된 사진 속
+					프로미스나인은 평소 그룹 활동과는 다른 성숙한 매력을 발산해 눈길을 끌었다. 이어진 개인 컷에서는 멤버 모두 이전에
+					보여주던 발랄한 이미지와 상반되는 섹시한 듯 강렬한 스타일을 저마다의 매력으로 표현하며 화보의 완성도를 더했다. 이번
+					화보를 통해 프로미스나인은 빛나는 미모에 아홉 소녀들의 개성 넘치는 매력까지 선보였다. 뿐만 아니라 촬영 내내 멤버들은
+					특유의 밝은 에너지를 한껏 뽐냈다.수다를 떨다가도 카메라가 켜지면 강렬한 눈빛으로 분위기를 압도, 매 컷을 완벽하게
+					소화하며 프로페셔널한 면모로 스태프들의 감탄을 자아냈다. 한편, '마P아' 프로미스나인편의 비하인드는 오는 25일 유튜브
+					채널 '재밍'을 통해 공개되며, 본 편은 매주 목요일 오후 5시 7분에 업로드 된다.뿐만 아니라 촬영 내내 멤버들은
+					특유의 밝은 에너지를 한껏 뽐냈다.수다를 떨다가도 카메라가 켜지면 강렬한 눈빛으로 분위기를 압도, 매 컷을 완벽하게
+					소화하며 프로페셔널한 면모로 스태프들의 감탄을 자아냈다. 한편, '마P아' 프로미스나인편의 비하인드는 오는 25일 유튜브
+					채널 '재밍'을 통해 공개되며, 본 편은 매주 목요일 오후 5시 7분에 업로드 된다.</span>
+					
+			</div>			
 
-<div id="temp_ingr" class="content">
+
+			<div class="two_wrap" onclick="window.open('http://www.google.co.kr')">
+				<div class="two_img_div">
+					<img class="two_img" src="./resources/images/right2.jpg" alt="두번쨰 이미지" />
+				</div>
+				<span class="newsRight pxn">&lt;EASYCOOK'S NEWS&gt;</span> 
+				<span class="two_title">제목도 ...처리해야함너무짧으면안돼 </span> 
+				<span class="news_source">&lt;이지쿡일보 2021-07-12 월요일&gt;</span> 
+				<span class="two_cont">22일 '재밍'은 공식 SNS 채널을 통해 신개념 아이돌 콘텐츠 '마P아'의
+					화보를 공개했다. 이번 화보는 시크릿 파티 콘셉트로 파티장에 가는 설렘을 몽환적이게 그려냈다. 공개된 사진 속
+					프로미스나인은 평소 그룹 활동과는 다른 성숙한 매력을 발산해 눈길을 끌었다. 이어진 개인 컷에서는 멤버 모두 이전에
+					보여주던 발랄한 이미지와 상반되는 섹시한 듯 강렬한 스타일을 저마다의 매력으로 표현하며 화보의 완성도를 더했다. 이번
+					화보를 통해 프로미스나인은 빛나는 미모에 아홉 소녀들의 개성 넘치는 매력까지 선보였다. 뿐만 아니라 촬영 내내 멤버들은
+					특유의 밝은 에너지를 한껏 뽐냈다.수다를 떨다가도 카메라가 켜지면 강렬한 눈빛으로 분위기를 압도, 매 컷을 완벽하게
+					소화하며 프로페셔널한 면모로 스태프들의 감탄을 자아냈다. 한편, '마P아' 프로미스나인편의 비하인드는 오는 25일 유튜브
+					채널 '재밍'을 통해 공개되며, 본 편은 매주 목요일 오후 5시 7분에 업로드 된다.뿐만 아니라 촬영 내내 멤버들은
+					특유의 밝은 에너지를 한껏 뽐냈다.수다를 떨다가도 카메라가 켜지면 강렬한 눈빛으로 분위기를 압도, 매 컷을 완벽하게
+					소화하며 프로페셔널한 면모로 스태프들의 감탄을 자아냈다. 한편, '마P아' 프로미스나인편의 비하인드는 오는 25일 유튜브
+					채널 '재밍'을 통해 공개되며, 본 편은 매주 목요일 오후 5시 7분에 업로드 된다.</span>
+			</div>
+
+
+			<div class="three_wrap"
+				onclick="window.open('http://www.google.co.kr')">
+				<div class="three_img_div">
+					<img class="three_img" src="./resources/images/right3.jpg"
+						alt="세번째 이미지" />
+				</div>
+
+				<span class="newsRight pxn">&lt;EASYCOOK'S NEWS&gt;</span> 
+				<span class="three_title">창줄이면 태그뒤섞임 태그정리</span> 
+				<span class="news_source">&lt;이지쿡일보 2021-07-12 월요일&gt;</span> 
+				<span class="three_cont">22일 '재밍'은 공식 SNS 채널을 통해 신개념 아이돌 콘텐츠
+					'마P아'의 화보를 공개했다. 이번 화보는 시크릿 파티 콘셉트로 파티장에 가는 설렘을 몽환적이게 그려냈다. 공개된 사진
+					속 프로미스나인은 평소 그룹 활동과는 다른 성숙한 매력을 발산해 눈길을 끌었다. 이어진 개인 컷에서는 멤버 모두 이전에
+					보여주던 발랄한 이미지와 상반되는 섹시한 듯 강렬한 스타일을 저마다의 매력으로 표현하며 화보의 완성도를 더했다. 이번
+					화보를 통해 프로미스나인은 빛나는 미모에 아홉 소녀들의 개성 넘치는 매력까지 선보였다. 뿐만 아니라 촬영 내내 멤버들은
+					특유의 밝은 에너지를 한껏 뽐냈다.수다를 떨다가도 카메라가 켜지면 강렬한 눈빛으로 분위기를 압도, 매 컷을 완벽하게
+					소화하며 프로페셔널한 면모로 스태프들의 감탄을 자아냈다. 한편, '마P아' 프로미스나인편의 비하인드는 오는 25일 유튜브
+					채널 '재밍'을 통해 공개되며, 본 편은 매주 목요일 오후 5시 7분에 업로드 된다.뿐만 아니라 촬영 내내 멤버들은
+					특유의 밝은 에너지를 한껏 뽐냈다.수다를 떨다가도 카메라가 켜지면 강렬한 눈빛으로 분위기를 압도, 매 컷을 완벽하게
+					소화하며 프로페셔널한 면모로 스태프들의 감탄을 자아냈다. 한편, '마P아' 프로미스나인편의 비하인드는 오는 25일 유튜브
+					채널 '재밍'을 통해 공개되며, 본 편은 매주 목요일 오후 5시 7분에 업로드 된다.</span>
+			</div>
+		</div>
+	</div>
+	
+
+	<%--핫뉴스 끝 --%>
+
+	<div id="temp_ingr" class="content">
    <div class="top_title">
       <div class="h1">이달의 추천 재료!</div>
       <hr/>
