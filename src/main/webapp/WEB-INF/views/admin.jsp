@@ -9,10 +9,7 @@
 <script src="./resources/js/jquery.js"></script>
 <script>
 
-	function member() {
-		$('#admin_panel').hide();
-		$('#admin_member').show();
-	}
+
 
 
 </script>
@@ -61,11 +58,13 @@
 				<div id="con3">홍길동</div>
 				<div id="con4">가입</div>
 				<div id="con5">2021.08.20</div>
-				<div id="admin_button"><input type="button" value="관리" onclick="member()" /></div>
+				<div id="admin_button">
+				<input type="button" value="관리" onclick="location='admin_member_edit'" />
+				</div>
 			</div>
 			<%} %>
 
-			<%-- 			<table id="admin_list_table">
+<%-- 		<table id="admin_list_table">
 				<% for(int i=15; i>=1; i--){ %>
 				<tr>
 					<td><%=i %></td>
@@ -77,7 +76,7 @@
 				</tr>
 				<%} %>
 			
-		</table> --%>
+			</table> --%>
 				
 				<div id="admin_page" style="text-align: center;">
 
@@ -117,13 +116,13 @@
 
 						if (currentPage > 4) {
 						%>
-						<a href="/admin?page=<%=1%>">[FIRST]</a>
+						<a href="admin?page=<%=1%>">[FIRST]</a>
 						<% }
 						if (currentPage > 1) { %>
-						<a href="/admin?page=<%=currentPage - 1%>">[PREV]</a>
+						<a href="admin?page=<%=currentPage - 1%>">[PREV]</a>
 						<% }
 						for (int iCount = startPage; iCount <= endPage; iCount++) { %>
-						<a href="/admin?page=<%=iCount%>"> 
+						<a href="admin?page=<%=iCount%>"> 
 						<% if (iCount == currentPage) { %>
 						<span class="CurrentPageNumber">&nbsp;<%=iCount%>&nbsp; </span> 
 						<% } else {
@@ -131,81 +130,14 @@
  							<% } %> </a>
 						<% }
 						if (currentPage < totalPage) {%>
-						<a href="/admin?page=<%=currentPage+1%>">[NEXT]</a>
+						<a href="admin?page=<%=currentPage+1%>">[NEXT]</a>
 						<%}
 						if (endPage < totalPage) {%>
-						<a href="/admin?page=<%=totalPage%>">[LAST]</a>
+						<a href="admin?page=<%=totalPage%>">[LAST]</a>
 						<%} %>
-
 					</div>
 				</div>
-				
-
-				
 			</div>
 		</div>
-	
-
-	<div id="admin_member"> <!-- 회원정보 조회 및 수정 영역 -->
-		<div id="admin_member_table">
-			<div id="admin_member_header">
-				<span id="info_title">회원 정보 관리</span>
-			</div>
-			<div id="admin_member_cont">
-				<div id="admin_member_id">
-					<strong id="member_id" class="member_text">아이디</strong> 
-					<input type="text" id="member_id_info" class="member_info" value="abc123" disabled />
-					<p />
-				</div>
-				<div id="admin_member_email">
-					<strong id="member_email" class="member_text">이메일</strong> 
-					<input type="text" id="member_email_info" class="member_info" value="abc123@naver.com"/>
-					<p />
-				</div>
-				<div id="admin_member_nickname">
-					<strong id="member_nickname" class="member_text">닉네임</strong> 
-					<input type="text" id="member_nickname_info" class="member_info" value="이지쿡"/>
-					<p />
-				</div>
-				<div id="admin_member_tel">
-					<strong id="member_tel" class="member_text">핸드폰 번호</strong> 
-					<input type="text" id="member_tel_info" class="member_info" value="010-2323-4545"/>
-					<p />
-				</div>
-				<div id="admin_member_pwd_q">
-					<strong id="member_pwd_q" class="member_text">가입시 선택한 질문</strong> 
-					<input type="text" id="member_pwd_q_info" class="member_info" value="나의 출신 초등학교는?" disabled />
-					<p />
-					<strong id="member_pwd_q_a" class="member_text">가입시 선택한 질문의 답</strong> 
-					<input type="text" id="member_pwd_q_a_info" class="member_info" value="KG초등학교" disabled />
-					<p />
-				</div>
-				<div id="admin_member_post">
-					<strong id="member_post" class="member_text">우편번호</strong> 
-					<input type="text" id="member_post_info" class="member_info" value="07741 "/>
-					<p />
-					<strong id="member_addr1" class="member_text">주소</strong> 
-					<input type="text" id="member_addr1_info" class="member_info" value="서울시 동작구 장승배기로 171" />
-					<p />
-					<strong id="member_addr2" class="member_text">상세주소</strong> 
-					<input type="text" id="member_addr2_info" class="member_info" value="노량진 아이비빌딩 303호" />
-					<p />
-				</div>
-			</div>
-				<div id="admin_member_pwd">
-					<strong id="member_pwd_reset" class="admin_infoBtn">비밀번호 초기화</strong>
-					<input type="checkbox" id="member_pwd_reset_info" />
-				</div>
-				<div id="member_button">
-					<button id="admin_member_edit" class="admin_infoBtn">수정</button>
-					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-					<button id="admin_member_set" class="admin_infoBtn">탈퇴</button>
-				</div>
-				<div id="admin_info_close">
-					<button id="close" class="admin_infoBtn" onclick="location='admin';" >X</button>
-				</div>	
-		</div>
-	</div>
-
 </body>
 </html>

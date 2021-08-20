@@ -6,13 +6,13 @@
 <title>EasyCook! 회원가입</title>
 
 <link rel="stylesheet" type="text/css" href="./resources/css/join.css"/>
+<%@ include file="./menubar/top_left_menubar.jsp"%>
 <script src="./resources/js/jquery.js"></script>
-<script src="http://dmaps.daum.net/map_js_init/postcode.v2.js?autoload=false"></script>
-<script type="text/javascript" src="http://jzaefferer.github.com/jquery-validation/jquery.validate.js"></script>
+<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script>
 
 	/* 우편번호 찾기 */
-	function execDaumPostcode() {
+	function Postcode() {
 		daum.postcode.load(function() {
 			new daum.Postcode({
 				oncomplete : function(data) {
@@ -201,7 +201,7 @@
 							<strong>주소</strong>
 							<input type="text" name="join_post_box_1" id="join_post_box_1" class="form-control" 
 							placeholder="우편번호" disabled />&nbsp;&nbsp;
-							<input type="button" id="join_post_btn" value="우편번호찾기" onclick="execDaumPostcode()" /><br/>
+							<input type="button" id="join_post_btn" value="우편번호찾기" onclick="Postcode()" />
 						</div>
 						
 						<div id="join_post_2" class="join_title">
