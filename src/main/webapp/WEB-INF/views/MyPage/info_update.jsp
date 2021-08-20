@@ -187,7 +187,7 @@
 					<div id="info_update_pwd_newpwd_check">
 						<b id="update_pwd_newpwd_check"><label for="update_pwd_tel_box">비밀번호 확인</label></b>
 						<input type="text" name="update_pwd_tel_box"
-							id="lupdate_pwd_tel_box" class="update_pwd_control" autocomplete="new-password" />
+							id="update_pwd_tel_box" class="update_pwd_control" autocomplete="new-password" />
 					</div>
 										
 					<div id="update_button_pwd">
