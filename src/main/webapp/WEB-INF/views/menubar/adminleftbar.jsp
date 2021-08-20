@@ -26,11 +26,9 @@
 					<label for="answer01">레시피 관리</label>
 					<div>
 						<p>
-							<a href="admin_post_management">작성한 레시피 관리</a>
+							<a href="admin_post_list">작성한 레시피 관리</a>
 						</p>
-						<p>
-							<a href="admin_post_list">작성한 레시피 조회</a>
-						</p>
+						
 					</div>
 				</div>
 				<div id="left_board">
