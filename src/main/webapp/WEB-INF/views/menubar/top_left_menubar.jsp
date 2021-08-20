@@ -43,6 +43,7 @@
 						width: "60%",
 						opacity: "1"
 					}, 200);
+					$("#top_search_input").focus();
 					windowBlurByMask();
 					top_search_scrollLock();
 				}
@@ -54,6 +55,7 @@
 						opacity: "0"
 					}, 200);
 				}
+				$("#top_search_input").val('');
 				windowBlurHide();
 			});
 			$("#top_search_hide").mouseout(function(){
@@ -63,6 +65,7 @@
 						opacity: "0"
 					}, 200);
 				}
+				$("#top_search_input").val('');
 				windowBlurHide();
 			});
 		});

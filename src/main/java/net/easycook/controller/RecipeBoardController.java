@@ -1,11 +1,20 @@
 package net.easycook.controller;
 
+import java.io.PrintWriter;
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
+
+import net.easycook.vo.RecipeBoardVO;
 
 @Controller
 public class RecipeBoardController {
@@ -44,6 +53,25 @@ public class RecipeBoardController {
 		
 		m.setViewName("recipeBoard/recipeBoard_write");
 		return m;
+	}
+	
+	@RequestMapping(value = "/recipe_write", method = RequestMethod.POST)
+	public String recipe_write(
+			@RequestParam("imgFiles") List<MultipartFile> list, @RequestParam("imgFileIndex") String imgIndex,
+			HttpServletResponse res, HttpServletRequest req) throws Exception{
+		
+		res.setContentType("text/html;charset=UTF-8");
+		PrintWriter out = res.getWriter();
+
+		System.out.println(list.isEmpty());
+		
+		for(MultipartFile f:list) {
+			System.out.println("ok");
+		}
+		
+		System.out.println(imgIndex);
+		
+		return "recipeBoard/recipeBoard_view";
 	}
 	
 }

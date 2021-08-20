@@ -58,4 +58,5 @@
 	
 	<!-- aop 설정 -> AOP를 XML방식으로 설정 -->
 	<aop:config></aop:config>
+
 </beans> 

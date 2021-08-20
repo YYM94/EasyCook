@@ -7,6 +7,6 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 <configuration>
    <typeAliases>
       <!-- 빈 클래스 객체 생성 -->
-      
+       <typeAlias type="net.easycook.vo.RecipeBoardVO" alias="rb"/>
    </typeAliases>
 </configuration>
