@@ -43,16 +43,29 @@
 			</form>
 		</div>
 
+		<div class="admintitle">
+			<!-- <b>제목</b> <b>작성자</b> <b>날짜</b> -->
+			<div id=title1>번호</div>
+			<div id=title2>아이디</div>
+			<div id=title3>회원이름</div>
+			<div id=title4>회원상태</div>
+			<div id=title5>가입날짜</div>
+			<div id=title6>관리</div>
+		</div>
+
 		<div id="admin_cont">
-			<table id="admin_list_table">
-				<tr>
-					<th id="admin_no">번호</th>
-					<th id="admin_id">아이디</th>
-					<th id="admin_name">이름</th>
-					<th id="admin_check">회원상태</th>
-					<th id="admin_date">등록날짜</th>
-					<th id="admin_button">관리</th>
-				</tr>
+			<% for(int i=10; i>=1; i--){ %>
+			<div id="admin_cont_list">
+				<div id="con1"><%=i %></div>
+				<div id="con2">abc123</div>
+				<div id="con3">홍길동</div>
+				<div id="con4">가입</div>
+				<div id="con5">2021.08.20</div>
+				<div id="admin_button"><input type="button" value="관리" onclick="member()" /></div>
+			</div>
+			<%} %>
+
+			<%-- 			<table id="admin_list_table">
 				<% for(int i=15; i>=1; i--){ %>
 				<tr>
 					<td><%=i %></td>
@@ -64,7 +77,7 @@
 				</tr>
 				<%} %>
 			
-		</table>
+		</table> --%>
 				
 				<div id="admin_page" style="text-align: center;">
 
@@ -104,13 +117,13 @@
 
 						if (currentPage > 4) {
 						%>
-						<a href="admin.jsp?page=<%=1%>">[FIRST]</a>
+						<a href="/admin?page=<%=1%>">[FIRST]</a>
 						<% }
 						if (currentPage > 1) { %>
-						<a href="admin.jsp?page=<%=currentPage - 1%>">[PREV]</a>
+						<a href="/admin?page=<%=currentPage - 1%>">[PREV]</a>
 						<% }
 						for (int iCount = startPage; iCount <= endPage; iCount++) { %>
-						<a href="admin.jsp?page=<%=iCount%>"> 
+						<a href="/admin?page=<%=iCount%>"> 
 						<% if (iCount == currentPage) { %>
 						<span class="CurrentPageNumber">&nbsp;<%=iCount%>&nbsp; </span> 
 						<% } else {
@@ -118,10 +131,10 @@
  							<% } %> </a>
 						<% }
 						if (currentPage < totalPage) {%>
-						<a href="admin.jsp?page=<%=currentPage+1%>">[NEXT]</a>
+						<a href="/admin?page=<%=currentPage+1%>">[NEXT]</a>
 						<%}
 						if (endPage < totalPage) {%>
-						<a href="admin.jsp?page=<%=totalPage%>">[LAST]</a>
+						<a href="/admin?page=<%=totalPage%>">[LAST]</a>
 						<%} %>
 
 					</div>
@@ -189,7 +202,7 @@
 					<button id="admin_member_set" class="admin_infoBtn">탈퇴</button>
 				</div>
 				<div id="admin_info_close">
-					<button id="close" class="admin_infoBtn" onclick="location='admin.jsp'">X</button>
+					<button id="close" class="admin_infoBtn" onclick="location='admin';" >X</button>
 				</div>	
 		</div>
 	</div>

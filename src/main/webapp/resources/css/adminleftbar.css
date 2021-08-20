@@ -75,6 +75,7 @@ body{
 	padding: 15px 0 0 0;
 	filter: drop-shadow(0 0 1px #505050);
 }
+
 #left_notice, #left_board{
 	margin-top:20px;
 	width: 100%;
@@ -82,6 +83,7 @@ body{
 	text-align: center;
 	filter: drop-shadow(0 0 1px #505050);
 }
+
 #left_news{
 	width: 100%;
 	height: 25%;
