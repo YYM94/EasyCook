@@ -157,8 +157,6 @@
 #admin_member {
 	width: 40%;
 	margin:0 5% 0 35%;
-	background: antiquewhite;
-	display: none;
 	padding: 1%;
 	margin-top: 2%;
 	border-radius: 20px;
@@ -171,36 +169,44 @@
 
 #admin_member_header{
 	text-align: center;
-	margin-bottom: 5%;
+	padding: 15px;
+	background: #cccdd0;
 }
 
 #admin_member_cont{
- 	margin-left: 15%; 
+ 	padding: 30px;
+ 	background-color:#f5f5f5;
+ 	padding-left: 50px;
 }
 
 .member_text{
 	float: left;
 	width: 45%;
+	font-size: 120%;
 }
 
 #admin_member_pwd{
 	text-align: center;	
-	margin-top: 7%;
-	margin-bottom: 2%;
+	padding-bottom: 25px;
+ 	background-color:#f5f5f5;
 }
 
 .member_info{
-	width: 40%;
-	height: 5%;
+	width: 50%;
+	font-size: 120%;
 }
 
 #member_button{
 	text-align: center;
+ 	background-color:#f5f5f5;
+  	padding-bottom: 20px;
 }
 
 #admin_info_close{
-	margin-top: 2%;
+	padding-top: 10px;
 	text-align: center;
+ 	background-color:#f5f5f5;
+ 	padding-bottom: 20px;
 }
 
 #admin_page_number {

@@ -33,7 +33,7 @@ SimpleDateFormat sf = new SimpleDateFormat("yy.MM.dd. a. hh.mm");
 					<label class="hidden">검색어</label> 
 					<input type="text" name="q"	value="" placeholder="검색어를 입력해주세요." /> 
 					<input class="btn btn-search" type="submit" value="검색" />
-					<input class="write" type="button" value="공지사항등록" onclick="location.href='faqwrite'" />
+					<input class="write" type="button" value="FAQ등록" onclick="location.href='faqwrite'" />
 				</fieldset>
 			</form>
 		</div>
