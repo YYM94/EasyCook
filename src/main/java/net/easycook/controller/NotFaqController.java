@@ -1,7 +1,10 @@
 package net.easycook.controller;
 
+import java.io.PrintWriter;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -44,7 +47,6 @@ public class NotFaqController {
 		if(request.getParameter("page") != null) {
 			page=Integer.parseInt(request.getParameter("page"));
 		}
-		
 		wm.addAttribute("page",page);		
 		return "NoticeFaq/adminnotice";
 	
@@ -61,12 +63,28 @@ public class NotFaqController {
 		
 	}
 	@RequestMapping("/noticewrite")
-	public ModelAndView noticewrite() throws Exception{
-		ModelAndView mv = new ModelAndView();
-		mv.setViewName("NoticeFaq/noticewrite");
-		return mv;
+	public ModelAndView noticewrite(Model m, HttpServletResponse response, HttpServletRequest request) 
+		throws Exception{
+		response.setContentType("text/html;charset=UTF-8");
+		PrintWriter out=response.getWriter();
+		HttpSession session=request.getSession();
+		String /=(String)session.getAttribute("/");
+		if(/==null) {
+			out.println("<script>");
+			out.println("alert('다시 로그인하세요');");
+			out.println("location='/'");
+			out.println("</script>");
+		}else {
+			int page=1;
+			if(request.getParameter("page") != null) {
+				page=Integer.parseInt(request.getParameter("page"));
+			}
+			m.addAttribute("page", page);
+			ModelAndView mv = new ModelAndView("NoticeFaq/noticewrite");
+			return mv;
+		}
+		return null;
 	}
-	
 	@RequestMapping("/faqwrite")
 	public ModelAndView faqwrite() throws Exception{
 		ModelAndView mv = new ModelAndView();
