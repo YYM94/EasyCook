@@ -1,55 +1,59 @@
-<%@ page contentType="text/html; charset=UTF-8"%>
+<%@page import="java.text.SimpleDateFormat"%>
 <%@page import="java.util.Date"%>
-<%@ page import="java.text.SimpleDateFormat" %>
+<%@ page contentType="text/html; charset=UTF-8" %>
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<title>게시물 리스트</title>
-<link rel="stylesheet" type="text/css" href="./resources/css/admin_post.css" />
-
-</head>
 <%
 Date nowTime = new Date();
 SimpleDateFormat sf = new SimpleDateFormat("yy.MM.dd. a. hh.mm");
 %>
-
-
-<body>
+<meta charset="UTF-8">
+<title>레시피 관리자 페이지</title>
+<link rel="stylesheet" type="text/css" href="./resources/css/admin_post.css" />
+<body >
 	<%@ include file="../menubar/adminleftbar.jsp"%>
-	<div id="admin_header">
-		<b style="font-size: 200%;">게시글 리스트</b>
+	<div id="ap_header">
+		<b style="font-size: 200%;">레시피 리스트</b>
 	</div>
 	
-	<div id="admin_panel">
-		<div id="admin_search" >
-			<input type="text" /> 
-			<input type="submit" value="검색" onclick="location.href='#';">  
+	<div id="ap_panel">
+		<div id="ap_search">
+			<form class="table-form">
+				<fieldset>
+					<legend class="hidden">검색</legend>
+					<label class="hidden">검색어</label> 
+					<input type="text" name="q"	value="" placeholder="검색어를 입력해주세요." /> 
+					<input class="btn btn-search" type="submit" value="검색" />
+					<input type="button" id="ap_input" value="레시피 등록" onclick="location.href='/controller/recipeBoard_write';"/>
+				</fieldset>				
+			</form>
+			
 		</div>
 				
-		<table id="admin_list_table">
-			<tr>
-				<th id="admin_list_no">번호</th>
-				<th id="admin_list_title">제목</th>
-				<th id="admin_list_writer">작성자</th>
-				<th id="admin_list_date">등록날짜</th>
-				<th id="admin_list_controller">조회/수정/삭제</th>
+		<table id="ap_list" style="border-collapse:collapse" >
+			<tr style="	background-color:#cccdd0;">
+				<th id="ap_list_no">번호</th>
+				<th id="ap_list_title">제목</th>
+				<th id="ap_list_writer">작성자</th>
+				<th id="ap_list_date">등록날짜</th>
+				<th id="ap_list_management">관리</th>
 			</tr>
 			<%for(int i=10; i>=1; i--){ %>
-			<tr>
+			<tr style="background-color:#f5f5f5;">
 				<td><%=i %></td>
-				<td><div id="post_contents">게시물 예시 가나다라마바사아자차</div></td>
+				<td><div id="contents">백종원의 만능 간장 소스 조회수 1위!</div></td>
 				<td>관리자</td>
 				<td><%= sf.format(nowTime) %></td>
-				<td><input type="button" value="조회"/>&nbsp;
-					<input type="button" value="수정" onclick="location.href='admin_post_management';"/>&nbsp;
+				<td><input type="button" value="조회" onclick="location.href='recipeBoard_view';"/>
+					<input type="button" value="수정" onclick="location.href='admin_post_management';"/>
 					<input type="button" value="삭제" /></td>
 			</tr>
-			<%} %>
-			
+			<%} %>			
 		</table>
 		
-		<div id="admin_page_number">
+		
+		<div id="admin_page_number" style="background-color:#f5f5f5;">
 			<%
 			int currentPage;
 			if(request.getParameter("page") == null){
@@ -110,5 +114,6 @@ SimpleDateFormat sf = new SimpleDateFormat("yy.MM.dd. a. hh.mm");
 			<%} %>			
 		</div>
 	</div>
+
 </body>
 </html>
