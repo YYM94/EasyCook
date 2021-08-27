@@ -80,3 +80,21 @@ body{
 	color: orange;
 	text-decoration: none;
 }
+
+/*admin_post_management*/
+
+#admin_title_box{
+	width:60%;
+	height:20px;
+}
+
+#admin_contents_box{
+	width:60%;
+	height:200px;
+}
+
+
+
+
+
+

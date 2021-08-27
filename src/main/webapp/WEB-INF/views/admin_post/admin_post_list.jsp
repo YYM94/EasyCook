@@ -6,7 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>게시물 리스트</title>
-<link rel="stylesheet" type="text/css" href="./resources/css/admin_post_list.css" />
+<link rel="stylesheet" type="text/css" href="./resources/css/admin_post.css" />
 
 </head>
 <%
@@ -26,9 +26,7 @@ SimpleDateFormat sf = new SimpleDateFormat("yy.MM.dd. a. hh.mm");
 			<input type="text" /> 
 			<input type="submit" value="검색" onclick="location.href='#';">  
 		</div>
-		
-		<input type="button" id="admin_post_submit" value="등록" onclick="location.href='admin_post_management';">
-		
+				
 		<table id="admin_list_table">
 			<tr>
 				<th id="admin_list_no">번호</th>
