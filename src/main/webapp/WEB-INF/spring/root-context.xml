@@ -29,8 +29,8 @@
 		<property name="dataSource" ref="dataSource"/><!-- setter()를 통한 DI의존성 주입 -->
 		<property name="configLocation" value="classpath:/mybatis-config.xml"/>
 		<!-- mybatis-config.xml파일을 읽어옴. 이 파일은 데이터 저장 bean클래스의 객체 별칭을 관리 -->
-		<!--<property name="mapperLocations" value="classpath:net/easycook/mappers/*/*.xml"/>
-		 쿼리문을 다루는 매퍼 태그를 포함한 xml위치 -->
+		<property name="mapperLocations" value="classpath:net/easycook/mappers/*/*.xml"/>
+		 <!--쿼리문을 다루는 매퍼 태그를 포함한 xml위치 -->
 	</bean>
 	
 	<!-- 트랜젝션 적용 -->
