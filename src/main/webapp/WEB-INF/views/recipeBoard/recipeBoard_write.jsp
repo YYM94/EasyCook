@@ -132,8 +132,7 @@
 				}
 				formData.append("imgIndex",imgIndex);
 				formData.append("link", link);
-				
-				$('input[name=textPack]').val(textString);
+				formData.append("textPack", textString)
 				
 				$.ajax({
 					type: 'POST',
@@ -159,7 +158,6 @@
 <div id="writeFormWrap">
 	<div id="recipeInsertForm">
 		<form name="dataForm" method="post" onsubmit="return sendData(this);" enctype="multipart/form-data">
-			<input type="hidden" name="textPack"/>
 			<div id="title">
 				게시글 제목<br>
 				<input type="text" name="title"/>
