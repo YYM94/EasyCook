@@ -4,6 +4,6 @@ import net.easycook.vo.RecipeBoardVO;
 
 public interface RecipeBoardDAO {
 
-	int writeRec(RecipeBoardVO rb);
+	void writeRec(RecipeBoardVO rb);
 
 }

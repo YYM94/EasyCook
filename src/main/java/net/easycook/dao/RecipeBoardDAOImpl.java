@@ -13,8 +13,8 @@ public class RecipeBoardDAOImpl implements RecipeBoardDAO {
 	private SqlSession sqlSession;
 
 	@Override
-	public int writeRec(RecipeBoardVO rb) {
-		return sqlSession.insert("ins_rb", rb);
+	public void writeRec(RecipeBoardVO rb) {
+		sqlSession.insert("ins_rb", rb);
 	}
 	
 }

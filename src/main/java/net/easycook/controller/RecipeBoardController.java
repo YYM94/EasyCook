@@ -1,5 +1,6 @@
 package net.easycook.controller;
 
+import java.io.File;
 import java.io.PrintWriter;
 import java.util.Calendar;
 import java.util.List;
@@ -9,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -72,33 +74,45 @@ public class RecipeBoardController {
 			System.out.println("[성공:/recipe_write] 전송된 이미지 파일 없음");
 		}else {
 			System.out.println("[성공:/recipe_write] 전송된 이미지 INDEX : ["+imgIndex+"]");
-			
-			RecipeBoardVO rb = new RecipeBoardVO();
-			rb.setWriterid("imsi");
-			rb.setTitle(req.getParameter("title"));
-			rb.setVideoLink(req.getParameter("link"));
-			rb.setTextPack(req.getParameter("textPack"));
+		}
+		RecipeBoardVO rb = new RecipeBoardVO();
+		rb.setWriterid("imsi");
+		rb.setTitle(req.getParameter("title"));
+		rb.setVideoLink(req.getParameter("link"));
+		rb.setTextPack(req.getParameter("textPack")); if(rb.getTextPack().equals("")) rb.setTextPack("[NoData]");
+		rb.setImgIndex(imgIndex);
 
-			//이미지 저장 폴더 지정
-			Calendar c = Calendar.getInstance();
-			int year = c.get(Calendar.YEAR);
-			int month = c.get(Calendar.MONTH)+1;
-			int date = c.get(Calendar.DATE);
-			int hour = c.get(Calendar.HOUR_OF_DAY);
-			int minute = c.get(Calendar.MINUTE);
-			int second = c.get(Calendar.SECOND);
-			
-			String folderName = ""+year+month+date+hour+minute+second;
-			rb.setImgFolder(folderName);
-			
-			//이미지 폴더명을 지정하기 위해 insert후 no값을 return
-			int recordNo = recipeBoardService.writeRec(rb);
-			folderName = folderName+recordNo;
-			
-			
-			for(MultipartFile f:list) {
-				System.out.println(folderName + "/" + f.getOriginalFilename());
-			}
+		//이미지 저장 폴더 지정
+		Calendar c = Calendar.getInstance();
+		int year = c.get(Calendar.YEAR);
+		int month = c.get(Calendar.MONTH)+1; if(month < 10) year *= 10; // 자릿수를 맞춰주기 위해 0추가
+		int date = c.get(Calendar.DATE); if(date < 10) month *= 10;
+		int hour = c.get(Calendar.HOUR_OF_DAY); if(hour < 10) date *= 10;
+		int minute = c.get(Calendar.MINUTE); if(minute < 10) hour *= 10;
+		int second = c.get(Calendar.SECOND); if(second < 10) minute *= 10;
+		
+		String folderName = ""+year+month+date+hour+minute+second;
+		rb.setImgFolder(folderName);
+		
+		//이미지 폴더명을 지정하기 위해 insert후 no값을 return
+		recipeBoardService.writeRec(rb);
+		folderName = folderName+rb.getNo();
+		
+		//이미지 폴더 경로 지정
+		String saveFolder=req.getRealPath("upload");
+		String homeDir = saveFolder + "\\" + folderName;
+		File path = new File(homeDir);
+		if(!path.exists()) {
+			path.mkdirs();
+		}
+		//파일 이름을 1.jpg, 2.png...등으로 저장
+		int fileNameIndex = 1;
+		for(MultipartFile f:list) {
+			int exIndex = f.getOriginalFilename().lastIndexOf(".");
+			String fileEx = f.getOriginalFilename().substring(exIndex+1);
+			File target = new File(path, fileNameIndex + "." + fileEx);
+			FileCopyUtils.copy(f.getBytes(), target);
+			fileNameIndex++;
 		}
 		
 		return "recipeBoard/recipeBoard_view";

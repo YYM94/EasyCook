@@ -6,13 +6,13 @@
  
 <mapper namespace="RecipeBoard">
  
-	<insert id="ins_rb" parameterType="rb">
+	<insert id="ins_rb" parameterType="rb" keyProperty="no">
 		insert into recipeBoard 
 		(no, writerid, title, videoLink, imgIndex, imgFolder, textPack, regdate, moddate)
 		values
-		(rb_seq.nextval, #{writerid}, #{title}, #{videoLink}, #{imgIndex}, CONCAT(#{imgFolder}, CAST(rb.seq.currval as char)), #{textPack}, sysdate, syadate)
-		<selectKey keyProperty="no" resultType="int">
-			select rb_seq.currval from dual;
+		(rb_seq.nextval, #{writerid}, #{title}, #{videoLink}, #{imgIndex}, CONCAT(#{imgFolder}, TO_CHAR(rb_seq.currval)), #{textPack}, sysdate, sysdate)
+		<selectKey keyProperty="no" resultType="integer" order="AFTER">
+			select rb_seq.currval from dual
 		</selectKey>
 	</insert>
  

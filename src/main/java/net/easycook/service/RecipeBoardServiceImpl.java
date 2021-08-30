@@ -13,8 +13,8 @@ public class RecipeBoardServiceImpl implements RecipeBoardService {
 	private RecipeBoardDAO recipeBoardDao;
 
 	@Override
-	public int writeRec(RecipeBoardVO rb) {
-		return recipeBoardDao.writeRec(rb);
+	public void writeRec(RecipeBoardVO rb) {
+		recipeBoardDao.writeRec(rb);
 	}
 	
 }
