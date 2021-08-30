@@ -6,8 +6,9 @@
 
 <script>
 	//유튜브 링크를 입력하고 입력창을 빠져나오면 하단에 유튜브 영상 로드
+	var link="";
 	function LoadThumbnail(){
-		var link = $("#videoLink").val();
+		link = $("#videoLink").val();
 		var linkSplit = link.split("/");
 		link = linkSplit[linkSplit.length-1];
 		//링크의 watch?v= 제거
@@ -112,15 +113,15 @@
 				var contCount = 0;
 
 				var formData = new FormData(form);
-				var imgFileIndex = "";
+				var imgIndex = "";
 				
 				for(var i = 1; i <= contExist.length; i++){
 					if(contExist[i] == 1){
 						if(contImgArr[i] == -1){
-							imgFileIndex += "0";
+							imgIndex += "0";
 						}else {
 							formData.append("imgFiles",contImgArr[i]);
-							imgFileIndex += "1";
+							imgIndex += "1";
 						}
 						textString += $('#contText'+i).val();
 						contCount++;
@@ -129,20 +130,20 @@
 						textString += "[SplitPoint]";
 					}
 				}
-				formData.append("imgFileIndex",imgFileIndex);
+				formData.append("imgIndex",imgIndex);
+				formData.append("link", link);
 				
 				$('input[name=textPack]').val(textString);
-				$('input[name=recipeProcess]').val(contAmount);
 				
 				$.ajax({
 					type: 'POST',
-					url: 'recipe_write',
+					url: 'recipe_write_ok',
 					enctype: 'multipart/form-data',
 					data: formData,
 		            processData: false,
 		            contentType: false,
 					success: function(data){
-						alert('success');
+						alert('게시글이 등록되었습니다.');
 					}
 				});
 				
@@ -159,14 +160,13 @@
 	<div id="recipeInsertForm">
 		<form name="dataForm" method="post" onsubmit="return sendData(this);" enctype="multipart/form-data">
 			<input type="hidden" name="textPack"/>
-			<input type="hidden" name="recipeProcess"/>
 			<div id="title">
 				게시글 제목<br>
 				<input type="text" name="title"/>
 			</div>
 			<div id="video">
 				유튜브 링크<br>
-				<input type="text" name="videoLink" id="videoLink" onblur="LoadThumbnail();"/><br>
+				<input type="text" id="videoLink" onblur="LoadThumbnail();"/><br>
 				<div id="thumbnail">
 					미리보기
 				</div>

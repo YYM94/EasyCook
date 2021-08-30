@@ -9,7 +9,8 @@ public class RecipeBoardVO {
 	private String writerid;
 	private String title;
 	private String videoLink;
-	private int recipeProcess;
+	private String imgIndex;
+	private String imgFolder;
 	private String textPack;
 	private int visiter;
 	private String regdate;
