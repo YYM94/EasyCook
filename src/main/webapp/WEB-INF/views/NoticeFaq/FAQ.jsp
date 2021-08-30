@@ -1,4 +1,6 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <meta charset="UTF-8">
 <title>FAQ</title>
 <link rel="stylesheet" type="text/css" href="./resources/css/FAQ.css" />
@@ -6,7 +8,7 @@
 <%@ include file="../menubar/top_left_menubar.jsp"%>
 
 
-<%
+<%--
 	//하단 페이지 번호 생성을 위한 전체 게시글 수 검색
 int totalPages = 3;
 
@@ -17,7 +19,7 @@ if (request.getParameter("page") == null) {
 } else {
 	currentPage = Integer.parseInt(request.getParameter("page"));
 }
-%>
+--%>
 
 <div id="FAQPage">
     <div class="board_title">질문과 답변</div>
@@ -35,48 +37,111 @@ if (request.getParameter("page") == null) {
 		</form>
 	</div>
 	<div>
-		<%
+		<%--
 			int startPosting = currentPage;
 		int lastPosting = currentPage;
 		if (currentPage > totalPages) {
 			lastPosting = totalPages;
 		}
 		for (int i = startPosting; i <= lastPosting; i++) {
-		%>
-			<div class="FAQ">
-				<input type="checkbox" id="FAQ01"> <label for="FAQ01">요리
-					레시피 등록은 어떻게 하나요?<em></em>
-				</label>
-				<div>
-					<p>우리는 프로젝트 중입니다.</p>
+		--%>
+		<c:if test="${!empty flist}">
+			<c:forEach var="f" items="${flist}">
+				<div class="FAQ">
+					<input type="checkbox" id="FAQ01"> <label for="FAQ01">
+					${f.faq.title}<em></em>
+					</label>
+					<div>
+						<p>${f.faq.cont}</p>
+					</div>
+					<input type="checkbox" id="FAQ02"> <label for="FAQ02">회원가입은
+						어떻게 하나요?<em></em>
+					</label>
+					<div>
+						<p>우리는 프로젝트 중입니다.</p>
+					</div>
+					<input type="checkbox" id="FAQ03"> <label for="FAQ03">회원
+						탈퇴를 하고싶습니다 어떻게 할수있나요?<em></em>
+					</label>
+					<div>
+						<p>우리는 프로젝트 중입니다.</p>
+					</div>
+					<input type="checkbox" id="FAQ04"> <label for="FAQ04">추천재료가
+						바뀌는 날은 언제인가요?<em></em>
+					</label>
+					<div>
+						<p>우리는 프로젝트 중입니다.</p>
+					</div>
 				</div>
-				<input type="checkbox" id="FAQ02"> <label for="FAQ02">회원가입은
-					어떻게 하나요?<em></em>
-				</label>
-				<div>
-					<p>우리는 프로젝트 중입니다.</p>
-				</div>
-				<input type="checkbox" id="FAQ03"> <label for="FAQ03">회원
-					탈퇴를 하고싶습니다 어떻게 할수있나요?<em></em>
-				</label>
-				<div>
-					<p>우리는 프로젝트 중입니다.</p>
-				</div>
-				<input type="checkbox" id="FAQ04"> <label for="FAQ04">추천재료가
-					바뀌는 날은 언제인가요?<em></em>
-				</label>
-				<div>
-					<p>우리는 프로젝트 중입니다.</p>
-				</div>
+			</c:forEach>
+		</c:if>
+			
+		<c:if test="${empty flist}">
+			<input type="checkbox" id="emptyfaq"> <label
+			 	for="emptyfaq">FAQ가 등록되지 않았습니다.<em></em></label>
+			<div>
+				<p>FAQ가 없습니다.</p>
 			</div>
-			<%
+		</c:if>
+			<%--
 		}
-	%>
+	--%>
 
 		</div>
 
 		<div id="bottomPage">
-			<%
+		<div id="bList_paging">
+   <%-- 검색 전 페이징(쪽나누기) --%>
+  	 	<c:if test="${(empty find_field) && (empty find_name)}">
+    	<c:if test="${page <= 1}">
+     [이전]&nbsp;
+    </c:if>
+    <c:if test="${page >1}">
+     <a href="FAQ?page=${page-1}">[이전]</a>&nbsp;
+    </c:if>
+    
+    <%-- 쪽번호 출력부분 --%>
+    <c:forEach var="a" begin="${startpage}" end="${endpage}" step="1">
+     <c:if test="${a==page}"><${a}></c:if>
+     
+     <c:if test="${a != page}">
+      <a href="FAQ?page=${a}">[${a}]</a>&nbsp;
+     </c:if>
+    </c:forEach>
+    
+    <c:if test="${page >= maxpage}">[다음]</c:if>
+    
+    <c:if test="${page < maxpage}">
+       <a href="FAQ?page=${page+1}">[다음]</a>
+    </c:if>
+   </c:if>
+   
+   <%-- 검색 후 페이징  --%>
+    <c:if test="${(!empty find_field) && (!empty find_name)}">
+    <c:if test="${page <= 1}">
+     [이전]&nbsp;
+    </c:if>
+    <c:if test="${page >1}">
+     <a href="FAQ?page=${page-1}&find_field=${find_field}&find_name=${find_name}">[이전]</a>&nbsp;
+    </c:if>
+    
+    <%-- 쪽번호 출력부분 --%>
+    <c:forEach var="a" begin="${startpage}" end="${endpage}" step="1">
+     <c:if test="${a==page}"><${a}></c:if>
+     
+     <c:if test="${a != page}">
+      <a href="FAQ?page=${a}&find_field=${find_field}&find_name=${find_name}">[${a}]</a>&nbsp;
+     </c:if>
+    </c:forEach>
+    
+    <c:if test="${page >= maxpage}">[다음]</c:if>
+    
+    <c:if test="${page < maxpage}">
+       <a href="FAQ?page=${page+1}&find_field=${find_field}&find_name=${find_name}">[다음]</a>
+    </c:if>
+   </c:if>
+  </div>
+			<%--
 		int pages = totalPages;
 	if ((totalPages) > 0) {
 		pages++;
@@ -91,8 +156,8 @@ if (request.getParameter("page") == null) {
 		firstPage = pages;
 		lastPage = pages;
 	}
-	%>
-
+	--%>
+<%--
 			<%
 		for (int i = firstPage; i <= lastPage; i++) {
 	%>
@@ -108,5 +173,6 @@ if (request.getParameter("page") == null) {
 			<%
 			}
 		%>
+		 --%>
 		</div>
 </div>

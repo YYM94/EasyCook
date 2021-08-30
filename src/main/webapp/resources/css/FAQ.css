@@ -71,6 +71,66 @@ input[id*="FAQ"]:checked + label + div {
 input[id*="FAQ"]:checked + label em {
 	background-position:0 -30px;
 }
+
+/* faq 없을떄*/
+input[id*="emptyfaq"]{
+	display:none;
+}
+/* 공지사항 메뉴바 */
+input[id*="emptyfaq"] + label{
+	display:block;
+	padding:20px;
+	border-top:1px solid #000000;
+	border-bottom:1px solid #000000;
+	color:#000000;
+	font-weight:900;
+	background:#ffffff;
+	cursor:pointer;
+	position:relative;
+	text-align:center;
+	margin:0px 10% 0px 10%;
+	
+}
+input[id*="emptyfaq"] + label :hover{
+	text-decoration: underline; font-weight:bold; color:#F90;
+}
+
+/* 화살표 이미지 */
+input[id*="emptyfaq"] + label em{
+	position:absolute;
+	top:50%;
+	right:10px;
+	width:30px;
+	height:30px;
+	margin-top:-15px;
+	display:inline-block;
+	background:url('../images/picture/arrow.png') 0 0 no-repeat;
+}
+/* 공지사항 내용 */
+input[id*="emptyfaq"] + label + div{
+	border-bottom:1px solid rgba(0, 0, 0, .5);
+	max-height:0;
+	transition: all .35s;
+	overflow:hidden;
+	background:#ebf8ff;
+	font-size:11px;
+	text-align:center;
+	margin:0px 10% 0px 10%;
+}
+
+/* 공지사항 내용 글자 */
+input[id*="emptyfaq"] + label + div p{
+	display:inline-block;
+	padding:20px;
+	text-align:center;
+}
+input[id*="emptyfaq"]:checked + label + div {
+	max-height:100px;
+}
+
+input[id*="emptyfaq"]:checked + label em {
+	background-position:0 -30px;
+}
 #bottomPage{
 	position: relative;
 	width: 520px;
