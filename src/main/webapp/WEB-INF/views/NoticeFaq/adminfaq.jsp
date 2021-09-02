@@ -1,23 +1,28 @@
 <%@page import="java.text.SimpleDateFormat"%>
 <%@page import="java.util.Date"%>
-<%@ page contentType="text/html; charset=UTF-8" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<%@ page contentType="text/html; charset=UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>공지사항 관리</title>
+<title>질문과답변 관리</title>
 
-<link rel="stylesheet" type="text/css" href="./resources/css/adminfaq.css" />
+<link rel="stylesheet" type="text/css"
+	href="./resources/css/adminfaq.css" />
 
 </head>
 <%
-Date nowTime = new Date();
+	Date nowTime = new Date();
 SimpleDateFormat sf = new SimpleDateFormat("yy.MM.dd. a. hh.mm");
 %>
 <body id="faqbody">
 	<%@ include file="../menubar/adminleftbar.jsp"%>
 	<div id="faqheader">
-		<h3 style="font-size: 200%; text-align: center; padding: 10px; margin: 0 0 0 0;">질문과답변 관리</h3>
+		<h3
+			style="font-size: 200%; text-align: center; padding: 10px; margin: 0 0 0 0;">질문과답변
+			관리</h3>
 	</div>
 
 	<div id="faq_panel">
@@ -25,15 +30,14 @@ SimpleDateFormat sf = new SimpleDateFormat("yy.MM.dd. a. hh.mm");
 			<form class="table-form">
 				<fieldset>
 					<legend class="hidden">검색</legend>
-					<label class="hidden">검색분류</label> 
-					<select name="f">
-					<option value="titie">제목</option>
+					<label class="hidden">검색분류</label> <select name="f">
+						<option value="titie">제목</option>
 
-					</select> 
-					<label class="hidden">검색어</label> 
-					<input type="text" name="q"	value="" placeholder="검색어를 입력해주세요." /> 
-					<input class="btn btn-search" type="submit" value="검색" />
-					<input class="write" type="button" value="FAQ등록" onclick="location.href='faqwrite'" />
+					</select> <label class="hidden">검색어</label> <input type="text" name="q"
+						value="" placeholder="검색어를 입력해주세요." /> <input
+						class="btn btn-search" type="submit" value="검색" /> <input
+						class="write" type="button" value="FAQ등록"
+						onclick="location.href='faqwrite'" />
 				</fieldset>
 			</form>
 		</div>
@@ -47,21 +51,83 @@ SimpleDateFormat sf = new SimpleDateFormat("yy.MM.dd. a. hh.mm");
 		</div>
 
 		<div id="faq_cont">
-			<% for(int i=10; i>=1; i--){ %>
+			<%
+				for (int i = 10; i >= 1; i--) {
+			%>
 			<div id="faq_cont_list">
-				<div id="con1"><%=i %></div>
+				<div id="con1"><%=i%></div>
 				<div id="con2">관리자</div>
-				<div id="con3"><%= sf.format(nowTime) %></div>
+				<div id="con3"><%=sf.format(nowTime)%></div>
 				<div id="admin_button">
 					<div id="button">
 						<input type="button" value="수정" onclick="location.href='faqEdit'" />
-						<input type="button" value="삭제"/>
+						<input type="button" value="삭제" />
 					</div>
 				</div>
 			</div>
-			<%} %>
+			<%
+				}
+			%>
+			<div id="bList_paging" style="text-align: center;">
+    <%-- 검색전 페이징 --%>
+<c:if test="${(empty find_field) && (empty find_name)}">    
+    <c:if test="${page<=1}">
+     [이전]&nbsp;
+    </c:if>
+    <c:if test="${page>1}">
+     <a href="adminfaq?page=${page-1}">[이전]</a>&nbsp;
+    </c:if>
+    
+    <%--현재 쪽번호 출력--%>
+    <c:forEach var="a" begin="${startpage}" end="${endpage}"
+    step="1">
+     <c:if test="${a == page}"><%--현재 페이지가 선택되었다면--%>
+      <${a}>
+     </c:if>
+     <c:if test="${a != page}"><%--현재 페이지가 선택되지 않았
+     다면 --%>
+     <a href="adminfaq?page=${a}">[${a}]</a>&nbsp;
+     </c:if>
+    </c:forEach>
+    
+    <c:if test="${page >= maxpage}">
+    [다음]
+    </c:if>
+    <c:if test="${page<maxpage}">
+    <a href="adminfaq?page=${page+1}">[다음]</a>
+    </c:if>
+</c:if>
 
-				
+<%-- 검색후 페이징 --%>
+ <c:if test="${(!empty find_field) || (!empty find_name)}">    
+    <c:if test="${page<=1}">
+     [이전]&nbsp;
+    </c:if>
+    <c:if test="${page>1}">
+     <a href="adminfaq?page=${page-1}&find_field=${find_field}&find_name=${find_name}">[이전]</a>&nbsp;
+    </c:if>
+    
+    <%--현재 쪽번호 출력--%>
+    <c:forEach var="a" begin="${startpage}" end="${endpage}"
+    step="1">
+     <c:if test="${a == page}"><%--현재 페이지가 선택되었다면--%>
+      <${a}>
+     </c:if>
+     <c:if test="${a != page}"><%--현재 페이지가 선택되지 않았
+     다면 --%>
+     <a href="adminfaq?page=${a}&find_field=${find_field}&find_name=${find_name}">[${a}]</a>&nbsp;
+     </c:if>
+    </c:forEach>
+    
+    <c:if test="${page >= maxpage}">
+    [다음]
+    </c:if>
+    <c:if test="${page<maxpage}">
+    <a href="adminfaq?page=${page+1}&find_field=${find_field}&find_name=${find_name}">[다음]</a>
+    </c:if>
+</c:if>   
+  </div>
+			<%--
 				<div id="admin_page" style="text-align: center;">
 
 					<div id="admin_page_number">
@@ -122,11 +188,11 @@ SimpleDateFormat sf = new SimpleDateFormat("yy.MM.dd. a. hh.mm");
 
 					</div>
 				</div>
-				
+				 --%>
 
-				
-			</div>
+
 		</div>
+	</div>
 
 </body>
 </html>
