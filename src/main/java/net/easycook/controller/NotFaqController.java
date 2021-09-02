@@ -1,15 +1,11 @@
 package net.easycook.controller;
 
-import java.io.PrintWriter;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
@@ -67,36 +63,7 @@ public class NotFaqController {
 		return wm;
 	
 	}
-	
-	@RequestMapping("/noticewrite")
-	public ModelAndView noticewrite(Model m, HttpServletResponse response, HttpServletRequest request) 
-		throws Exception{
-		response.setContentType("text/html;charset=UTF-8");
-		PrintWriter out=response.getWriter();
-		HttpSession session=request.getSession();
-		String admin_id2 =(String)session.getAttribute("admin_id2");
-		if(admin_id2==null) {
-			out.println("<script>");
-			out.println("alert('다시 로그인하세요');");
-			out.println("location='/'");
-			out.println("</script>");
-		}else {
-			int page=1;
-			if(request.getParameter("page") != null) {
-				page=Integer.parseInt(request.getParameter("page"));
-			}
-			m.addAttribute("page", page);
-			ModelAndView mv = new ModelAndView("NoticeFaq/noticewrite");
-			return mv;
-		}
-		return null;
-	}
-	@RequestMapping("/faqwrite")
-	public ModelAndView faqwrite() throws Exception{
-		ModelAndView mv = new ModelAndView();
-		mv.setViewName("NoticeFaq/faqwrite");
-		return mv;
-	}
+
 	
 	@RequestMapping("/faqEdit")
 	public ModelAndView faqEdit() throws Exception{
