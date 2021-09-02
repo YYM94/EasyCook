@@ -16,4 +16,6 @@ public class RecipeBoardVO {
 	private String regdate;
 	private String moddate;
 	
+	private int startNum;
+	private int endNum;
 }

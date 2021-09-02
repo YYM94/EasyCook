@@ -62,20 +62,21 @@ body{
 
 .recipeDescriptionBox{
     width: 1140px;
-    height: 300px;
     position: relative;
     top: 100px;
     margin: 20px 0px 0px 0px;
     border-bottom: 1px solid black;
+    display: -webkit-inline-box;
 }
 .recipeDescriptionBox img{
 	float: left;
 	width: 450px;
+	height: 300px;
 }
 .recipeDescription{
 	float: right;
-	width: 580px;
-	margin-right: 10px;
+	width: 650px;
+	margin-left: 40px;
     font-size: 1.1em;
 }
 
