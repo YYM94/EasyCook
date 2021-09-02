@@ -14,6 +14,7 @@ import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -30,8 +31,13 @@ public class RecipeBoardController {
 	public ModelAndView recipeBoard_view(HttpServletRequest req) {
 		ModelAndView m = new ModelAndView();
 		
+		//전체 게시글 수 검색
+		int totalPostings = recipeBoardService.getTotalPostings();
+		m.addObject("totalPostingsObj", totalPostings);
+		
+		int page = 1;
 		if(req.getParameter("page") != null) {
-			int page = Integer.parseInt(req.getParameter("page"));
+			page = Integer.parseInt(req.getParameter("page"));
 			m.addObject("page", page);
 		}
 		if(req.getParameter("post") != null) {
@@ -43,37 +49,36 @@ public class RecipeBoardController {
 			m.addObject("cpage", cpage);
 		}
 		
+		RecipeBoardVO rb = new RecipeBoardVO();
+		//현재 페이지를 기준으로 8개의 게시글 조회
+		rb.setStartNum(page*8-7);
+		rb.setEndNum(page*8);
+		List<RecipeBoardVO> rbList = recipeBoardService.getPostingList(rb);
+		
+		m.addObject("rbList", rbList);
+		
 		m.setViewName("recipeBoard/recipeBoard_view");
 		
 		return m;
-	}
+	}//recipeBoard_view()
 	
 	@RequestMapping("/recipeBoard_write")
 	public ModelAndView recipeBoard_write(HttpServletRequest req) {
 		ModelAndView m = new ModelAndView();
-		
-		int pages = 1;
-		if(req.getParameter("page") != null) {
-			pages = Integer.parseInt(req.getParameter("page"));
-		}
-		m.addObject("page", pages);
-		
 		m.setViewName("recipeBoard/recipeBoard_write");
 		return m;
-	}
+	}//recipeBoard_write()
 	
+	@ResponseBody
 	@RequestMapping(value = "/recipe_write_ok", method = RequestMethod.POST)
-	public String recipe_write(
-			@RequestParam("imgFiles") List<MultipartFile> list, @RequestParam("imgIndex") String imgIndex,
-			HttpServletResponse res, HttpServletRequest req) throws Exception{
-		
-		res.setContentType("text/html;charset=UTF-8");
-		PrintWriter out = res.getWriter();
+	public String recipe_write_ok(
+			@RequestParam("imgFiles") List<MultipartFile> list, @RequestParam("imgIndex") String imgIndex, 
+			HttpServletRequest req) throws Exception{
 		
 		if(list.isEmpty()) {
-			System.out.println("[성공:/recipe_write] 전송된 이미지 파일 없음");
+			//System.out.println("[성공:/recipe_write] 전송된 이미지 파일 없음");
 		}else {
-			System.out.println("[성공:/recipe_write] 전송된 이미지 INDEX : ["+imgIndex+"]");
+			//System.out.println("[성공:/recipe_write] 전송된 이미지 INDEX : ["+imgIndex+"]");
 		}
 		RecipeBoardVO rb = new RecipeBoardVO();
 		rb.setWriterid("imsi");
@@ -82,6 +87,7 @@ public class RecipeBoardController {
 		rb.setTextPack(req.getParameter("textPack")); if(rb.getTextPack().equals("")) rb.setTextPack("[NoData]");
 		rb.setImgIndex(imgIndex);
 
+		//for(int i=0; i<=212; i++) { //테스트 데이터 입력을 위한 반복문 *꼭 주석처리 할 것
 		//이미지 저장 폴더 지정
 		Calendar c = Calendar.getInstance();
 		int year = c.get(Calendar.YEAR);
@@ -96,6 +102,7 @@ public class RecipeBoardController {
 		
 		//이미지 폴더명을 지정하기 위해 insert후 no값을 return
 		recipeBoardService.writeRec(rb);
+		//System.out.println("[성공:/recipe_write] 저장된 레코드 NO : "+ rb.getNo());
 		folderName = folderName+rb.getNo();
 		
 		//이미지 폴더 경로 지정
@@ -105,17 +112,20 @@ public class RecipeBoardController {
 		if(!path.exists()) {
 			path.mkdirs();
 		}
-		//파일 이름을 1.jpg, 2.png...등으로 저장
+		//파일 이름을 1.jpg, 2.jpg...등으로 저장
 		int fileNameIndex = 1;
 		for(MultipartFile f:list) {
 			int exIndex = f.getOriginalFilename().lastIndexOf(".");
-			String fileEx = f.getOriginalFilename().substring(exIndex+1);
-			File target = new File(path, fileNameIndex + "." + fileEx);
+			//String fileEx = f.getOriginalFilename().substring(exIndex+1); //일단 jpg로만 저장함
+			File target = new File(path, fileNameIndex + ".jpg");
 			FileCopyUtils.copy(f.getBytes(), target);
+			//System.out.println("[성공:/recipe_write] 저장된 파일명 : "+ path + "\\" + f.getOriginalFilename());
 			fileNameIndex++;
 		}
+		//} //테스트 데이터 입력용 반복문 종료
 		
-		return "recipeBoard/recipeBoard_view";
-	}
+		return "OK";
+
+	}//recipe_write_ok()
 	
 }

@@ -1,5 +1,7 @@
 package net.easycook.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,6 +17,16 @@ public class RecipeBoardServiceImpl implements RecipeBoardService {
 	@Override
 	public void writeRec(RecipeBoardVO rb) {
 		recipeBoardDao.writeRec(rb);
+	}
+
+	@Override
+	public int getTotalPostings() {
+		return recipeBoardDao.getTotalPostings();
+	}
+
+	@Override
+	public List<RecipeBoardVO> getPostingList(RecipeBoardVO rb) {
+		return recipeBoardDao.getPostingList(rb);
 	}
 	
 }

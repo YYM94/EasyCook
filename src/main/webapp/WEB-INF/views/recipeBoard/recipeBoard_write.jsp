@@ -100,53 +100,59 @@
 	
 	
 	/// 폼 전송버튼 클릭 이벤트 ////
-	/// 이미지 소스와 textarea 문자열을 하나씩 묶고 각 문자열의 경계를 [SplitPoint]로 나눈다.
+	/// 이미지 소스와 textarea 문자열을 하나씩 묶고 각 문자열의 경계를 Æ로 나눈다.
 	/// 요리 과정의 전체 개수를 전달한다.
 	function sendData(form){
 		if(confirm("새 글을 등록하시겠습니까?") == true){
 			if(contAmount < 1){
 				alert("최소한 하나 이상의 요리 과정을 추가해야 합니다.");
 				return false;
-			}else{
-				var imgString = "";
-				var textString = "";
-				var contCount = 0;
-
-				var formData = new FormData(form);
-				var imgIndex = "";
-				
-				for(var i = 1; i <= contExist.length; i++){
-					if(contExist[i] == 1){
-						if(contImgArr[i] == -1){
-							imgIndex += "0";
-						}else {
-							formData.append("imgFiles",contImgArr[i]);
-							imgIndex += "1";
-						}
-						textString += $('#contText'+i).val();
-						contCount++;
-					}
-					if(contCount < contAmount){
-						textString += "[SplitPoint]";
-					}
-				}
-				formData.append("imgIndex",imgIndex);
-				formData.append("link", link);
-				formData.append("textPack", textString)
-				
-				$.ajax({
-					type: 'POST',
-					url: 'recipe_write_ok',
-					enctype: 'multipart/form-data',
-					data: formData,
-		            processData: false,
-		            contentType: false,
-					success: function(data){
-						alert('게시글이 등록되었습니다.');
-					}
-				});
-				
 			}
+			var imgString = "";
+			var textString = "";
+			var contCount = 0;
+
+			var formData = new FormData(form);
+			var imgIndex = "";
+			
+			for(var i = 1; i <= contExist.length; i++){
+				if(contExist[i] == 1){
+					if(contImgArr[i] == -1){
+						imgIndex += "0";
+					}else {
+						formData.append("imgFiles",contImgArr[i]);
+						imgIndex += "1";
+					}
+					if($('#contText'+i).val() != ""){
+						textString += $('#contText'+i).val();
+					}else{
+						textString += "*요리 과정에 대한 설명이 없습니다.";
+					}
+					contCount++;
+				}
+				if(contCount < contAmount){
+					textString += "Æ";
+				}
+			}
+			formData.append("imgIndex",imgIndex);
+			formData.append("link", link);
+			formData.append("textPack", textString);			          
+            		    
+			$.ajax({
+				type: 'POST',
+				url: 'recipe_write_ok',
+				enctype: 'multipart/form-data',
+				data: formData,
+	            processData: false,
+	            contentType: false,
+	            async: false,
+	            success:function(data){
+	            	if(data == "OK"){
+	                    alert("게시글 작성에 성공했습니다.");
+	            	}
+	            }
+			});
+			
 		}else{
 			return false;
 		}
@@ -157,7 +163,7 @@
 
 <div id="writeFormWrap">
 	<div id="recipeInsertForm">
-		<form name="dataForm" method="post" onsubmit="return sendData(this);" enctype="multipart/form-data">
+		<form name="dataForm" method="post" action="recipeBoard_view" onsubmit="return sendData(this);" enctype="multipart/form-data">
 			<div id="title">
 				게시글 제목<br>
 				<input type="text" name="title"/>
@@ -188,7 +194,7 @@
 			</div>
 			<div id="SendButtonWrap">
 				<input type="submit" id="writeBtn" value="저장"/>
-				<input type="button" id="cancelBtn" value="취소" onclick="location.href='recipeBoard_view?page=${page}'"/>
+				<input type="button" id="cancelBtn" value="취소" onclick="location.href='recipeBoard_view'"/>
 			</div>
 		</form>
 	</div>

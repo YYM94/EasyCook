@@ -15,5 +15,17 @@
 			select rb_seq.currval from dual
 		</selectKey>
 	</insert>
+	
+	<select id="get_total" resultType="int">
+		select count(*) from recipeBoard
+	</select>
+	
+	<select id="get_rb_list" resultType="rb">
+		select * from
+			(select rowNum rNum, no, writerid, title, videoLink, imgIndex, imgFolder, textPack, visiter, regdate, moddate 
+			from 
+				(select * from RECIPEBOARD order by no desc))
+		where rNum &gt;= #{startNum} and rNum &lt;= #{endNum}
+	</select>
  
 </mapper>

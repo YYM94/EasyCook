@@ -32,3 +32,9 @@ create sequence rb_seq
 start with 1
 increment by 1
 nocache;
+
+
+select * from
+(select rowNum rNum, no, writerid, title, videoLink, imgIndex, imgFolder, textPack, visiter, regdate, moddate 
+from (select * from RECIPEBOARD order by no desc))
+where rNum >= 9 and rNum <= 16
