@@ -296,7 +296,7 @@ body{
 }
 .BoardPostCont{
 	position: absolute;
-	margin: 80px 15px 0px 15px;
+	margin: 70px 15px 0px 15px;
 	width: 240px;
 	height: 130px;
     color: #252525;
@@ -307,6 +307,12 @@ body{
     -webkit-box-orient: vertical;
 	overflow: hidden;
 	z-index: 300;
+}
+.BoardVisiter{
+    position: absolute;
+    margin: 210px 0px 0px 15px;
+    color: #252525;
+    font-size: 0.9em;
 }
 
 /*하단 페이지 번호*/

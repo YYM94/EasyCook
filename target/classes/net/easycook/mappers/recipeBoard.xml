@@ -27,5 +27,17 @@
 				(select * from RECIPEBOARD order by no desc))
 		where rNum &gt;= #{startNum} and rNum &lt;= #{endNum}
 	</select>
+	
+	<update id="upVis">
+		update RECIPEBOARD set visiter = visiter+1 where no=#{post}
+	</update>
+	
+	<select id="get_Post" resultType="rb">
+		select * from RECIPEBOARD where no=#{post}
+	</select>
+	
+	<delete id="del_post">
+		delete from RECIPEBOARD where no=#{post}
+	</delete>
  
 </mapper>

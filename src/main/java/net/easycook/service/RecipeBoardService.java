@@ -10,6 +10,10 @@ public interface RecipeBoardService {
 
 	int getTotalPostings();
 
-	List<RecipeBoardVO> getPostingList(RecipeBoardVO rb);
+	List<RecipeBoardVO> getPostingList(RecipeBoardVO rb, int post);
+
+	RecipeBoardVO getPost(int post);
+
+	void deletePost(int post);
 
 }

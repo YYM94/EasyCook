@@ -1,6 +1,7 @@
 package net.easycook.controller;
 
 import java.io.File;
+import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Calendar;
 import java.util.List;
@@ -40,8 +41,9 @@ public class RecipeBoardController {
 			page = Integer.parseInt(req.getParameter("page"));
 			m.addObject("page", page);
 		}
+		int post = 0;
 		if(req.getParameter("post") != null) {
-			int post = Integer.parseInt(req.getParameter("post"));
+			post = Integer.parseInt(req.getParameter("post"));
 			m.addObject("post", post);
 		}
 		if(req.getParameter("cpage") != null) {
@@ -53,7 +55,7 @@ public class RecipeBoardController {
 		//현재 페이지를 기준으로 8개의 게시글 조회
 		rb.setStartNum(page*8-7);
 		rb.setEndNum(page*8);
-		List<RecipeBoardVO> rbList = recipeBoardService.getPostingList(rb);
+		List<RecipeBoardVO> rbList = recipeBoardService.getPostingList(rb, post);
 		
 		m.addObject("rbList", rbList);
 		
@@ -76,9 +78,9 @@ public class RecipeBoardController {
 			HttpServletRequest req) throws Exception{
 		
 		if(list.isEmpty()) {
-			//System.out.println("[성공:/recipe_write] 전송된 이미지 파일 없음");
+			System.out.println("[성공:/recipe_write_ok] 전송된 이미지 파일 없음");
 		}else {
-			//System.out.println("[성공:/recipe_write] 전송된 이미지 INDEX : ["+imgIndex+"]");
+			System.out.println("[성공:/recipe_write_ok] 전송된 이미지 INDEX : ["+imgIndex+"]");
 		}
 		RecipeBoardVO rb = new RecipeBoardVO();
 		rb.setWriterid("imsi");
@@ -102,7 +104,7 @@ public class RecipeBoardController {
 		
 		//이미지 폴더명을 지정하기 위해 insert후 no값을 return
 		recipeBoardService.writeRec(rb);
-		//System.out.println("[성공:/recipe_write] 저장된 레코드 NO : "+ rb.getNo());
+		System.out.println("[성공:/recipe_write_ok] 저장된 레코드 NO : "+ rb.getNo());
 		folderName = folderName+rb.getNo();
 		
 		//이미지 폴더 경로 지정
@@ -119,7 +121,7 @@ public class RecipeBoardController {
 			//String fileEx = f.getOriginalFilename().substring(exIndex+1); //일단 jpg로만 저장함
 			File target = new File(path, fileNameIndex + ".jpg");
 			FileCopyUtils.copy(f.getBytes(), target);
-			//System.out.println("[성공:/recipe_write] 저장된 파일명 : "+ path + "\\" + f.getOriginalFilename());
+			System.out.println("[성공:/recipe_write_ok] 저장된 파일명 : "+ path + "\\" + f.getOriginalFilename());
 			fileNameIndex++;
 		}
 		//} //테스트 데이터 입력용 반복문 종료
@@ -127,5 +129,29 @@ public class RecipeBoardController {
 		return "OK";
 
 	}//recipe_write_ok()
+	
+	@RequestMapping("recipeBoard_delete")
+	public String recipeBoard_remove(HttpServletRequest req, HttpServletResponse res) throws IOException {
+		res.setContentType("text/html;charset=UTF-8");
+		PrintWriter out = res.getWriter();
+		
+		int post = Integer.parseInt(req.getParameter("post"));
+		RecipeBoardVO rb = recipeBoardService.getPost(post);
+		
+		recipeBoardService.deletePost(post);
+		System.out.println("[성공:/recipeBoard_delete] 삭제된 레코드 NO : "+ rb.getNo());
+		String folderPath = req.getRealPath("upload")+"\\"+rb.getImgFolder();
+		File targetFolder = new File(folderPath);
+		if(targetFolder.exists()) {
+			File[] targetFileArr = new File(folderPath).listFiles();
+			for(File f:targetFileArr) {
+				System.out.println("[성공:/recipeBoard_delete] 삭제된 파일명 : "+ folderPath + "\\" + f.getName());
+				f.delete();
+			}
+			targetFolder.delete();
+		}
+		
+		return "redirect:recipeBoard_view?page=1";
+	}
 	
 }

@@ -12,4 +12,10 @@ public interface RecipeBoardDAO {
 
 	List<RecipeBoardVO> getPostingList(RecipeBoardVO rb);
 
+	void upVisiter(int post);
+
+	RecipeBoardVO getPost(int post);
+
+	void deletePost(int post);
+
 }

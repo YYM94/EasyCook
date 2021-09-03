@@ -28,5 +28,20 @@ public class RecipeBoardDAOImpl implements RecipeBoardDAO {
 	public List<RecipeBoardVO> getPostingList(RecipeBoardVO rb) {
 		return sqlSession.selectList("get_rb_list", rb);
 	}
+
+	@Override
+	public void upVisiter(int post) {
+		sqlSession.update("upVis", post);
+	}
+
+	@Override
+	public RecipeBoardVO getPost(int post) {
+		return sqlSession.selectOne("get_Post", post);
+	}
+
+	@Override
+	public void deletePost(int post) {
+		sqlSession.delete("del_post", post);
+	}
 	
 }

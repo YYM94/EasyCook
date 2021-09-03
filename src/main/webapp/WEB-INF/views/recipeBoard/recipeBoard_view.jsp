@@ -14,7 +14,12 @@
 </script>
 
 <%-- 하단 페이지 번호 생성을 위한 전체 게시글 수 검색 결과 --%>
-<c:set var="totalPostings" value="${ totalPostingsObj }"/>
+<c:if test="${empty totalPostingsObj }">
+	<c:set var="totalPostings" value="0"/>
+</c:if>
+<c:if test="${not empty totalPostingsObj }">
+	<c:set var="totalPostings" value="${ totalPostingsObj }"/>
+</c:if>
 
 <%-- 현재 페이지 --%>
 <c:if test="${empty page}">
@@ -71,6 +76,16 @@ String recipeDes = "불맛 달걀볶음밥 <br>[재료]<br>밥 1공기(200g)<br>
 <c:set var="cPage" value="${ param.cpage }"/><!-- 현재 댓글 페이지 -->
 
 
+<script>
+	function removeCont(){
+		if(confirm("게시글을 삭제하시겠습니까?")){
+			location.href="recipeBoard_delete?post=${post}";
+		}else{
+			return false;
+		}
+	}
+</script>
+
 
 <%@ include file="../menubar/top_left_menubar.jsp"%>
 
@@ -125,7 +140,7 @@ String recipeDes = "불맛 달걀볶음밥 <br>[재료]<br>밥 1공기(200g)<br>
 			<c:if test="${ Writer == '작성자' }">
 				<div id="postingEditRmBtn">
 					<input type="button" value="수정"/>
-					<input type="button" value="삭제"/>
+					<input type="button" value="삭제" onclick="return removeCont();"/>
 				</div>
 			</c:if>
 			
@@ -264,43 +279,50 @@ String recipeDes = "불맛 달걀볶음밥 <br>[재료]<br>밥 1공기(200g)<br>
 	<div id="Board_blur"></div>
 
 	<div id="Board_Recipies">
-		<%-- 현재 페이지를 기준으로 8개의 게시글을 로드 --%>
-		<c:forEach var="rl" items="${ rbList }">
-			<a href="recipeBoard_view?page=${ currentPage }&post=${ rl.no }&cpage=1">
-			
-				<%-- 레시피 과정 중 텍스트가 존재하는 첫번째 내용을 가져옴 --%>
-				<c:set var="recipeContSplit" value="${fn:split(rl.textPack, 'Æ')}"/>
-					<%-- 반복문 실행 중단을 위한 플래그 --%>
-					<c:set var="loopFlag" value="true"/> 
-				<c:forEach var="txt" items="${ recipeContSplit }">
-					<c:if test="${ txt != '' && loopFlag }">
-						<c:set var="listDes" value="${fn:replace(txt, newLine,'<br/>')}"/>
-						<c:set var="loopFlag" value="false"/>
-					</c:if>
-				</c:forEach>
+		<c:if test="${ totalPostings > 0 }">
+			<%-- 현재 페이지를 기준으로 8개의 게시글을 로드 --%>
+			<c:forEach var="rl" items="${ rbList }">
+				<a href="recipeBoard_view?page=${ currentPage }&post=${ rl.no }&cpage=1">
 				
-				<span class="BoardPostings">
-					<%-- 업로드된 이미지가 있다면 섬네일을 첫번째 이미지로 변경함 --%>
-					<c:if test="${fn:contains(rl.imgIndex, '1')}">
-						<span class="BoardPostThumbnail" style="background-image:url('./upload/${rl.imgFolder}/1.jpg')"></span>
-					</c:if>
-					<c:if test="${not fn:contains(rl.imgIndex, '1')}">
-						<span class="BoardPostThumbnail"></span>
-					</c:if>
-					<span class="BoardPostTitle">${ rl.title }</span>
-					<span class="BoardPostCont">${ listDes }</span>
-				</span>
-				
-			</a>
-		</c:forEach>
-	
+					<%-- 레시피 과정 중 텍스트가 존재하는 첫번째 내용을 가져옴 --%>
+					<c:set var="recipeContSplit" value="${fn:split(rl.textPack, 'Æ')}"/>
+						<%-- 반복문 실행 중단을 위한 플래그 --%>
+						<c:set var="loopFlag" value="true"/> 
+					<c:forEach var="txt" items="${ recipeContSplit }">
+						<c:if test="${ txt != '' && loopFlag }">
+							<c:set var="listDes" value="${fn:replace(txt, newLine,'<br/>')}"/>
+							<c:set var="loopFlag" value="false"/>
+						</c:if>
+					</c:forEach>
+					
+					<span class="BoardPostings">
+						<%-- 업로드된 이미지가 있다면 섬네일을 첫번째 이미지로 변경함 --%>
+						<c:if test="${fn:contains(rl.imgIndex, '1')}">
+							<span class="BoardPostThumbnail" style="background-image:url('./upload/${rl.imgFolder}/1.jpg')"></span>
+						</c:if>
+						<c:if test="${not fn:contains(rl.imgIndex, '1')}">
+							<span class="BoardPostThumbnail"></span>
+						</c:if>
+						<span class="BoardPostTitle">${ rl.title }</span>
+						<span class="BoardPostCont">${ listDes }</span>
+						<span class="BoardVisiter">조회수 : ${ rl.visiter }</span>
+					</span>
+					
+				</a>
+			</c:forEach>
+		</c:if>
 	</div>
 	
 	<div id="bottomPageNumber">
 		<%-- 전체 게시글 수를 이용한 하단 페이지 번호 생성 --%>
-		<fmt:parseNumber var="pages" integerOnly="true" value="${ totalPostings/8 }"/>
-		<c:if test="${ totalPostings%8 > 0 }">
-			<c:set var="pages" value="${ pages+1 }"/>
+		<c:if test="${ totalPostings == 0 }">
+			<c:set var="pages" value="1"/>
+		</c:if>
+		<c:if test="${ totalPostings != 0 }">
+			<fmt:parseNumber var="pages" integerOnly="true" value="${ totalPostings/8 }"/>
+			<c:if test="${ totalPostings%8 > 0 }">
+				<c:set var="pages" value="${ pages+1 }"/>
+			</c:if>
 		</c:if>
 		<%-- 페이지 첫번째, 마지막 번호 지정 --%>
 		<c:set var="firstPage" value="${ currentPage-4 }"/>
@@ -314,6 +336,9 @@ String recipeDes = "불맛 달걀볶음밥 <br>[재료]<br>밥 1공기(200g)<br>
 		</c:if>
 		<c:if test="${ currentPage+5 > pages }">
 			<c:set var="firstPage" value="${ pages-9 }"/>
+			<c:if test="${ pages-9 < 1 }">
+				<c:set var="firstPage" value="1"/>
+			</c:if>
 			<c:set var="lastPage" value="${ pages }"/>
 		</c:if>
 		
