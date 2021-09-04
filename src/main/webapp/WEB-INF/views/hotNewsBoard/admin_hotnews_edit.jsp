@@ -34,7 +34,7 @@
 			링크 : <input type="text" size="80"/> <br><br>
 			<input type="submit" value="수정" /> 
 			<input type="reset" value="취소" />
-			<input type="button" value="목록보기" onclick="location.href='/EasyCook/admin_hotnews_list';">			
+			<input type="button" value="목록보기" onclick="location.href='/easycook/admin_hotnews_list';">			
 		</form>
 	</div>
 </body>
