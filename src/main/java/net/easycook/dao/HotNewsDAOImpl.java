@@ -39,4 +39,9 @@ public class HotNewsDAOImpl implements HotNewsDAO {
 	public void updateHit(int hno) {
 		this.sqlSession.update("hit_hn", hno);
 	}
+
+	@Override
+	public List<HotNewsBoardVO> getBoardListView(HotNewsBoardVO hvov) {
+		return this.sqlSession.selectList("list_hnv", hvov);
+	}
 }

@@ -25,7 +25,7 @@ public class HotNewsBoardController { //일반게시판 관리자게시판 합�
 	private HotNewsService hotNewsService;
 	
 	@RequestMapping("/hotNewsBoard_view")
-	public String hotNewsBoard_view(Model listM, HttpServletRequest req, @ModelAttribute HotNewsBoardVO hvo) throws Exception{
+	public String hotNewsBoard_view(Model listM, HttpServletRequest req, @ModelAttribute HotNewsBoardVO hvo, @ModelAttribute HotNewsBoardVO hvov) throws Exception{
 		int page=1;
 		int limit=10;
 		if(req.getParameter("page") != null) {
@@ -43,8 +43,9 @@ public class HotNewsBoardController { //일반게시판 관리자게시판 합�
 		hvo.setStartrow((page-1)*10+1); //시작 행번호
 		hvo.setEndrow(hvo.getStartrow()+limit-1); //끝행번호
 		
+		List<HotNewsBoardVO> hlistv=this.hotNewsService.getBoardListView(hvov);
 		List<HotNewsBoardVO> hlist=this.hotNewsService.getBoardList(hvo);
-		System.out.println("목록 개수 : " + hlist.size() + " 개");
+		
 
 		int maxpage=(int)((double)totalCount/limit+0.95); //총페이지수
 		int startpage=(((int)((double)page/10+0.9))-1)*10+1; //현재 페이지에 보여질 시작 페이지
@@ -52,6 +53,8 @@ public class HotNewsBoardController { //일반게시판 관리자게시판 합�
 		
 		if(endpage>startpage+10-1) endpage=startpage+10-1;
 		
+		
+		listM.addAttribute("hlistv", hlistv);
 		listM.addAttribute("hlist", hlist);
 		listM.addAttribute("page", page);
 		listM.addAttribute("startpage", startpage);
@@ -71,6 +74,7 @@ public class HotNewsBoardController { //일반게시판 관리자게시판 합�
 		
 		return "hotNewsBoard/hotNewsBoard_view";
 	}//admin_hotNewsBoard_list()
+	
 	
 	@RequestMapping("/admin_hotnews_write")
 	public String admin_hotnews_write(HttpServletRequest req, Model m) {

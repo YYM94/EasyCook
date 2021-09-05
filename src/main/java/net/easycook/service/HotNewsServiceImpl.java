@@ -42,4 +42,9 @@ public class HotNewsServiceImpl implements HotNewsService {
 	public HotNewsBoardVO getBoardCont2(int hno) {
 		return this.hotNewsDAO.getBoardCont(hno);
 	}//조회수증가 뺴고 내용만 보기
+
+	@Override
+	public List<HotNewsBoardVO> getBoardListView(HotNewsBoardVO hvov) {
+		return this.hotNewsDAO.getBoardListView(hvov);
+	}
 }

@@ -30,4 +30,9 @@
  	<select id="cont_hn" parameterType="int" resultType="hb">
  		select * from hotNewsBoard where hno=#{hno}
  	</select>
+ 	
+ 	<!-- 조회수순 목록 -->
+ 	<select id="list_hnv" resultType="hb">
+ 		select * from hotNewsBoard order by viewcnt desc
+ 	</select>
  </mapper>

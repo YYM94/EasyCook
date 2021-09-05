@@ -122,26 +122,30 @@ $("li:eq(3)").css("border","1px solid #ff0000")
     
     <div id="hotnews_view_wrap">
     	<section>
-    		<c:if test="${!empty hlist }">    	
-    		<div id="hotnews_rank">
+    	  	<div id="hotnews_rank">    	
+    		<c:if test="${!empty hlistv }">    	
     			<ul class="hotnews_rank_one">
-   					<c:forEach var="h" items="${hlist}" begin="0" end="1">
+   					<c:forEach var="hv" items="${hlistv}" begin="0" end="1">
    						<li style="list-style-type : decimal;">   					
-   							<a href="${h.hlink}" target="_blank">${h.htitle }</a>
+   							<a href="${hv.hlink}" target="_blank">${hv.htitle }</a>
    						</li>  
    					</c:forEach>    				
     			</ul>
     			
     			<ol class="hotnews_rank_two" start="3">
-    				<c:forEach var="h" items="${hlist}" begin="2" end="6">
+    				<c:forEach var="hv" items="${hlistv}" begin="2" end="6">
    						
    						<li style="list-style-type : decimal;">   					
-   							<a href="">${h.htitle }</a>
+   							<a href="">${hv.htitle }</a>
    						</li>
    					</c:forEach>  
     			</ol>
-    		</div>
     		</c:if>
+    		<c:if test="${empty hlistv }"> 
+    		<span >자료가 없습니다.</span>
+    		</c:if>   	
+    		</div>
+    		
     	</section>
     	
     	<section>    	
@@ -195,22 +199,22 @@ $("li:eq(3)").css("border","1px solid #ff0000")
 					<c:if test="${page<=1 }">[PREV]&nbsp;</c:if>					
 					-->
 					<c:if test="${page>1 }">
-						<a href="admin_hotnews_list?page=1">[FIRST]</a>&nbsp;
-						<a href="admin_hotnews_list?page=${page-1 }">[PREV]</a>&nbsp;
+						<a href="hotNewsBoard_view?page=1">[FIRST]</a>&nbsp;
+						<a href="hotNewsBoard_view?page=${page-1 }">[PREV]</a>&nbsp;
 					</c:if>
 					
 					<!-- 쪽번호 출력 -->
 					<c:forEach var="p" begin="${startpage }" end="${endpage }" step="1">
 						<c:if test="${p == page }">${p }&nbsp;</c:if>
-						<c:if test="${p != page }"><a href="admin_hotnews_list?page=${p }">${p }</a>&nbsp;</c:if>				
+						<c:if test="${p != page }"><a href="hotNewsBoard_view?page=${p }">${p }</a>&nbsp;</c:if>				
 					</c:forEach>
 					
 					<!--
 					<c:if test="${page >= maxpage }">[NEXT]</c:if>
 					-->
 					<c:if test="${page < maxpage }">
-						<a href="admin_hotnews_list?page=${page+1 }">[NEXT]</a>&nbsp;
-						<a href="admin_hotnews_list?page=${maxpage }">[LAST]</a>&nbsp;
+						<a href="hotNewsBoard_view?page=${page+1 }">[NEXT]</a>&nbsp;
+						<a href="hotNewsBoard_view?page=${maxpage }">[LAST]</a>&nbsp;
 					</c:if>					
 			</div>   	
     	</div>
