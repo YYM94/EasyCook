@@ -27,30 +27,35 @@
 					</select> -->
 					<label class="hidden">검색어</label> <input type="text" name="q" value="" placeholder="검색어를 입력해주세요." /> 
 					<input class="btn btn-search" type="submit" value="검색" /> 
-					<input type="button" id="admin_hn_write" value="등록" onclick="location='/easycook/admin_hotnews_write';" />
+					<c:if test="${(!empty find_field) && (!empty find_name)}"> <%-- 검색필드와 검색어가 있는 경우 즉 검색하고 난 이후 실행 --%>
+						<input type="button" value="전체목록" onclick="location='/easycook/admin_hotnews_list?page=${page}';" />
+					</c:if>
+					<input type="button" id="admin_hn_write" value="등록" onclick="location='/easycook/admin_hotnews_write?page=${page}';" />
+					
 				</fieldset>
 			</div>
 
 
 			<table id="admin_hn" style="border-collapse: collapse">
 				<tr id="admin_hn_title">
-					<th id="admin_list_no" width="6%">번호</th>
-					<th id="admin_list_title" width="50%">제목</th>
-					<th id="admin_list_writer" width="14%">작성자</th>
-					<th id="admin_list_date" width="20%">등록날짜</th>
-					<th id="admin_list_viewcnt" width="12%">조회수</th>					
-					<th id="admin_list_controller" width="50%">조회/수정/삭제</th>
+					<th id="admin_list_no" >번호</th>
+					<th id="admin_list_title" >제목</th>
+					<th id="admin_list_writer" >작성자</th>
+					<th id="admin_list_date" >등록날짜</th>
+					<th id="admin_list_viewcnt" >조회수</th>					
+					<th id="admin_list_controller" >조회/수정/삭제</th>
 				</tr>
 				
 				<c:if test="${!empty hlist }">
 					<c:forEach var="h" items="${hlist }">
 						<tr id="admin_hn_list">
-							<td>${h.hno }</td>
-							<td id="left"><a href="admin_hotnews_cont?hno=${h.hno}&page=${page}">${h.htitle }</a></td>
-							<td>${h.hwriter }</td>
-							<td>${h.regdate }</td>							
-							<td>${h.viewcnt }</td>
-							<td>
+							<td align="center">${h.hno }</td>
+							<td align="left"><a href="${h.hlink }" target="_blank">${h.htitle}</a></td>
+<%-- 							<td id="left"><a href="admin_hotnews_cont?hno=${h.hno}&page=${page}">${h.htitle }</a></td> --%>
+							<td align="center">${h.hwriter }</td>
+							<td align="center">${h.regdate }</td>							
+							<td align="center">${h.viewcnt }</td>
+							<td align="center">
 								<input type="button" value="조회" /> 
 								<input type="button" value="수정" onclick="location.href='/easycook/admin_hotnews_edit';" /> 
 								<input type="button" value="삭제" />
@@ -66,30 +71,89 @@
 				</c:if>
 			</table>			 
 
-			<!-- 페이징 쪽나누기 -->
-			<div colspan="5" style="text-align:center;">
-					<!--	
-					<c:if test="${page<=1 }">[PREV]&nbsp;</c:if>					
-					-->
-					<c:if test="${page>1 }">
+		<div id="bList_paging" align="center" style="background-color: #f5f5f5;">
+
+		<%-- 검색전 페이징(쪽나누기) --%>
+		
+			<c:if test="${(empty find_field) && (empty find_name)}">
+				<!-- 
+				<c:if test="${page <= 1}">
+					[이전]&nbsp;
+				</c:if>
+				 -->
+				<c:if test="${page>1 }">
 						<a href="admin_hotnews_list?page=1">[FIRST]</a>&nbsp;
 						<a href="admin_hotnews_list?page=${page-1 }">[PREV]</a>&nbsp;
+				</c:if>
+				
+				<%-- 쪽번호 출력부분 --%>
+				<c:forEach var="a" begin="${startpage }" end="${endpage }" step="1">
+					<c:if test="${a==page }">${a }&nbsp;</c:if>
+					
+					<c:if test="${a != page }">
+						<a href="admin_hotnews_list?page=${a }">${a }</a>&nbsp;
 					</c:if>
+				</c:forEach>
+				
+<%-- 				<c:if test="${page >= maxpage }">[다음]</c:if> --%>
+				
+				<c:if test="${page < maxpage }">
+					<a href="admin_hotnews_list?page=${page+1 }">[NEXT]</a>&nbsp;
+					<a href="admin_hotnews_list?page=${maxpage }">[LAST]</a>&nbsp;
+				</c:if>
+			</c:if>
+			
+			<%-- 검색이후 페이징 --%>
+			
+			<c:if test="${(!empty find_field) && (!empty find_name)}">
+				<!-- 
+				<c:if test="${page <= 1}">
+					[이전]&nbsp;
+				</c:if>
+				 -->
+				<c:if test="${page>1 }">
+						<a href="admin_hotnews_list?page=1&find_field=${find_field}&find_name=${find_name}">[FIRST]</a>&nbsp;
+						<a href="admin_hotnews_list?page=${page-1 }&find_field=${find_field}&find_name=${find_name}">[PREV]</a>&nbsp;
+				</c:if>
+				
+				<%-- 쪽번호 출력부분 --%>
+				<c:forEach var="a" begin="${startpage }" end="${endpage }" step="1">
+					<c:if test="${a==page }"><${a }></c:if>
 					
-					<!-- 쪽번호 출력 -->
-					<c:forEach var="p" begin="${startpage }" end="${endpage }" step="1">
-						<c:if test="${p == page }">${p }&nbsp;</c:if>
-						<c:if test="${p != page }"><a href="admin_hotnews_list?page=${p }">${p }</a>&nbsp;</c:if>				
-					</c:forEach>
-					
-					<!--
-					<c:if test="${page >= maxpage }">[NEXT]</c:if>
-					-->
-					<c:if test="${page < maxpage }">
-						<a href="admin_hotnews_list?page=${page+1 }">[NEXT]</a>&nbsp;
-						<a href="admin_hotnews_list?page=${maxpage }">[LAST]</a>&nbsp;
-					</c:if>					
-			</div>
+					<c:if test="${a != page }">
+						<a href="admin_hotnews_list?page=${a }&find_field=${find_field}&find_name=${find_name}">${a }</a>&nbsp;
+					</c:if>
+				</c:forEach>
+				
+<%-- 				<c:if test="${page >= maxpage }">[다음]</c:if> --%>
+				
+				<c:if test="${page < maxpage }">
+					<a href="admin_hotnews_list?page=${page+1 }&find_field=${find_field}&find_name=${find_name}">[NEXT]</a>&nbsp;
+					<a href="admin_hotnews_list?page=${maxpage }&find_field=${find_field}&find_name=${find_name}">[LAST]</a>&nbsp;
+				</c:if>
+			</c:if>		
+			
+		</div>
+		
+		<div id="bList_menu">
+			
+		</div>
+		
+		
+		
+		<%-- 검색기능 
+		<div id="bFind_wrap">
+			<select name="find_field">
+				<option value="bbs_title" <c:if test="${find_field == 'bbs_title' }"> ${'selected' }</c:if>>제목</option>
+				<option value="bbs_cont" <c:if test="${find_field == 'bbs_cont' }"> ${'selected' }</c:if>>내용</option>
+			</select>
+			<input name="find_name" id="find_name" size="14" value="${find_name }" />
+			<input type="submit" value="검색" />
+		</div>
+		--%>
+
+
+
 			
 			<%--
 			

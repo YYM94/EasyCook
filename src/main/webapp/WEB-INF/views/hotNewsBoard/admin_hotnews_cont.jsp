@@ -24,7 +24,7 @@
 	제목 : <c:out value="${h.htitle }" /> <br>
 	글쓴이 : ${h.hwriter } <br>
 	내용 : ${h.hcont }<br>
-	링크 : ${h.hlink }<br>
+	링크 : <a href="${h.hlink }" target="_blank">${h.hlink }</a><br>
 	조회수 : ${h.viewcnt }<br>
 	날짜 : ${h.regdate }<br>
 	</div>

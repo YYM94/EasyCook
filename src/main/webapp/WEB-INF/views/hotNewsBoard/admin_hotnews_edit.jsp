@@ -5,17 +5,38 @@
 <meta charset="UTF-8">
 <title>핫뉴스 수정</title>
 <link rel="stylesheet" type="text/css" href="./resources/css/admin_hotNewsBoard.css" />
-
+<script src="./resources/js/jquery.js"></script>
 <script type="text/javascript">
-	function thumbnail(event) {
-		var reader = new FileReader();
-		reader.onload = function(event) {
-			var img = document.createElement("img");
-			img.setAttribute("src", event.target.result);
-			document.querySelector("div#image_container").appendChild(img);
-		};
-		reader.readAsDataURL(event.target.files[0]);
-	}
+function write_check(){
+	 	
+ 	if($.trim($('#htitle').val()) == ''){
+ 		alert('글제목을 입력하세요!');
+ 		$('#htitle').val('').focus();
+ 		return false;
+ 	}
+ 	
+ 	if($.trim($('#hlink').val()) == ''){
+ 		alert('링크를 입력하세요!');
+ 		$('#hlink').val('').focus();
+ 		return false;
+ 	}
+ 	
+ 	if($.trim($('#hcont').val()) == ''){
+ 		alert('글내용을 입력하세요!');
+ 		$('#hcont').val('').focus();
+ 		return false;
+ 	} 	
+ }
+ 
+// 	function thumbnail(event) {
+// 		var reader = new FileReader();
+// 		reader.onload = function(event) {
+// 			var img = document.createElement("img");
+// 			img.setAttribute("src", event.target.result);
+// 			document.querySelector("div#image_container").appendChild(img);
+// 		};
+// 		reader.readAsDataURL(event.target.files[0]);
+// 	}
 </script>
 </head>
 
@@ -26,12 +47,12 @@
 	</div>
 
 	<div id="admin_panel">
-		<form action="#">
-			핫뉴스 제목 : <input type="text" placeholder="제목을 입력하세요" id="title" name="title" size="40"/> <br> <br>
-			<p>핫뉴스 내용 :&nbsp;</p><textarea rows="10" cols="40" style="resize: none;" ></textarea> <br><br>
-			썸네일(미리보기) : <input type="file" id="image" accept="image/*" onchange="thumbnail(event);" />
-			<div id="image_container" ></div><br><br> 
-			링크 : <input type="text" size="80"/> <br><br>
+		<form method="post" action="admin_hotnews_edit_ok" onsubmit="return write_check();" enctype="multipart/form-data">
+			핫뉴스 제목 : <input type="text" id="title" name="title" size="40" value="${ehvo.htitle }"/> <br> <br>
+			<p>핫뉴스 내용 :&nbsp;</p><textarea rows="10" cols="40" style="resize: none;" >${ehvo.hcont }</textarea> <br><br>
+<!-- 			썸네일(미리보기) : <input type="file" id="image" accept="image/*" onchange="thumbnail(event);" /> -->
+<!-- 			<div id="image_container" ></div><br><br>  -->
+			링크 : <input type="text" size="80" value="${ehvo.hlink }"/> <br><br>
 			<input type="submit" value="수정" /> 
 			<input type="reset" value="취소" />
 			<input type="button" value="목록보기" onclick="location.href='/easycook/admin_hotnews_list';">			

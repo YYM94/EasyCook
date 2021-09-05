@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -22,6 +23,54 @@ public class HotNewsBoardController { //일반게시판 관리자게시판 합�
 
 	@Autowired 
 	private HotNewsService hotNewsService;
+	
+	@RequestMapping("/hotNewsBoard_view")
+	public String hotNewsBoard_view(Model listM, HttpServletRequest req, @ModelAttribute HotNewsBoardVO hvo) throws Exception{
+		int page=1;
+		int limit=10;
+		if(req.getParameter("page") != null) {
+			page=Integer.parseInt(req.getParameter("page"));
+		}
+		
+		//검색필드와 검색어
+		String find_field=req.getParameter("find_field");
+		String find_name=req.getParameter("find_name");
+		hvo.setFind_field(find_field);
+		hvo.setFind_name("%"+find_name+"%"); //%는 검색에서 하나이상의 임의의 모르는 문자와 매핑 대응한다.
+		
+		int totalCount=this.hotNewsService.getTotalCount(); //총 게시물 수
+
+		hvo.setStartrow((page-1)*10+1); //시작 행번호
+		hvo.setEndrow(hvo.getStartrow()+limit-1); //끝행번호
+		
+		List<HotNewsBoardVO> hlist=this.hotNewsService.getBoardList(hvo);
+		System.out.println("목록 개수 : " + hlist.size() + " 개");
+
+		int maxpage=(int)((double)totalCount/limit+0.95); //총페이지수
+		int startpage=(((int)((double)page/10+0.9))-1)*10+1; //현재 페이지에 보여질 시작 페이지
+		int endpage=maxpage; //현재 페이지에 보여질 마지막 페이지
+		
+		if(endpage>startpage+10-1) endpage=startpage+10-1;
+		
+		listM.addAttribute("hlist", hlist);
+		listM.addAttribute("page", page);
+		listM.addAttribute("startpage", startpage);
+		listM.addAttribute("endpage", endpage);
+		listM.addAttribute("maxpage", maxpage);
+		listM.addAttribute("totalCount", totalCount);
+		listM.addAttribute("find_field", find_field);
+		listM.addAttribute("find_name", find_name);
+
+//		ModelAndView mav=new ModelAndView(); mav.setViewName("hotNewsBoard/admin_hotnews_list");
+//		mav.addObject("totalCount",totalCount);
+//		mav.addObject("hlist", hlist);
+//		mav.addObject("startpage", startpage);
+//		mav.addObject("endpage",endpage);
+//		mav.addObject("maxpage", maxpage);
+//		mav.addObject("page", page);
+		
+		return "hotNewsBoard/hotNewsBoard_view";
+	}//admin_hotNewsBoard_list()
 	
 	@RequestMapping("/admin_hotnews_write")
 	public String admin_hotnews_write(HttpServletRequest req, Model m) {
@@ -122,6 +171,7 @@ public class HotNewsBoardController { //일반게시판 관리자게시판 합�
 		
 		if(endpage>startpage+10-1) endpage=startpage+10-1;
 		
+		listM.addAttribute("hvo",hvo);
 		listM.addAttribute("hlist", hlist);
 		listM.addAttribute("page", page);
 		listM.addAttribute("startpage", startpage);
@@ -142,10 +192,9 @@ public class HotNewsBoardController { //일반게시판 관리자게시판 합�
 		return "hotNewsBoard/admin_hotnews_list";
 	}//admin_hotNewsBoard_list()
 	
-	
-	
+		
 	@RequestMapping("/admin_hotnews_cont")
-	public String hotNewsBoard_cont(Model m, @RequestParam("hno") int hno, int page) {
+	public String admin_hotnews_cont(Model m, @RequestParam("hno") int hno, int page) {
 		HotNewsBoardVO hvo=this.hotNewsService.getBoardCont(hno);
 		
 		m.addAttribute("hvo",hvo);	
@@ -154,14 +203,15 @@ public class HotNewsBoardController { //일반게시판 관리자게시판 합�
 	}//hotNewsBoard_view
 	
 	
-	
-
-	
-	@RequestMapping("/admin_hotnews_edit")
-	public ModelAndView admin_hotnews_edit() {
-		ModelAndView am=new ModelAndView();
-		am.setViewName("hotNewsBoard/admin_hotnews_edit");
-		return am;
+	@GetMapping("/admin_hotnews_edit")
+	public ModelAndView admin_hotnews_edit(int hno, int page) {
+		HotNewsBoardVO hvo=this.hotNewsService.getBoardCont2(hno);
+		
+		ModelAndView mav=new ModelAndView();
+		mav.setViewName("hotNewsBoard/admin_hotnews_edit");
+		mav.addObject("ehvo", hvo);
+		mav.addObject("page", page);
+		return mav;
 	}//admin_hotNewsBoard_edit()
 
 }

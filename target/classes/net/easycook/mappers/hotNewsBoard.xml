@@ -17,7 +17,7 @@
 	<!-- 페이징이 적용된 게시판 목록 -->
 	<select id="list_hn" resultType="hb" parameterType="hb">
 		select * from
-		(select rowNum rNum, hno, hwriter, htitle, viewcnt, regdate from (select * from hotNewsBoard order by hno desc))
+		(select rowNum rNum, hno, hwriter, hlink, hcont, htitle, viewcnt, regdate from (select * from hotNewsBoard order by hno desc))
  		where rNum &gt;= #{startrow} and rNum &lt;= #{endrow} <!-- &gt;= 은 >=, &lt;= 은 <= -->
 	</select>
 	

@@ -14,4 +14,6 @@ public interface HotNewsService {
 
 	HotNewsBoardVO getBoardCont(int hno);
 
+	HotNewsBoardVO getBoardCont2(int hno);
+
 }

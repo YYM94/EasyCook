@@ -1,20 +1,234 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title></title>
 <link rel="stylesheet" type="text/css" href="./resources/css/hotNewsBoard.css" />
+<style>
+#hotnews_view_wrap{
+ 	padding: 10% 10% 0 10%; 	
+ }
+#hotnews_rank{
+ 	border: 3px solid #ffa315; border-radius: 1em;
+ 	background-color: #f5f5f5;
+ 	height: 250px;
+}
+.hotnews_rank_one{
+	float: left;
+	width: 45%;
+}
+.hotnews_rank_two{
+	float: left;
+	width: 45%;
+}
+ul>li:first-child {color: red;}
+
+
+#admin_panel { /*list, input, edit 공통 */
+	padding-top: 5%;
+	margin-bottom: 15%;
+/* 	min-width: 691px; */
+}
+
+#admin_search{
+	text-align: center;
+	margin-bottom: 2%;	text-align: center;	
+}
+#admin_hn_input{
+	float: right;	
+}
+
+table{
+	height: 632px;
+	margin-bottom: -1px
+}
+#admin_list_hn{
+	width: 100%;
+}
+
+#admin_list_no{
+	width: 6%;
+}
+#admin_list_title{
+	width: 41%;
+	letter-spacing: 0.5em;
+}
+#admin_list_writer{
+	width: 9%;
+}
+#admin_list_date{
+	width: 9%;
+}
+#admin_list_viewcnt{
+	width: 4%;
+}
+
+
+#admin_hn_title > th{
+	background-color: #cccdd0;	
+}
+#admin_hn_list > td{
+	background-color:#f5f5f5;	
+	border-bottom-style: dotted;
+	border-bottom-width: 1px;	
+}
+
+#admin_hn_list > td > #left{
+	text-align: left;
+	padding-left: 14px;
+	width: 20em;
+	overflow: hidden; 
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+
+#bList_paging {
+	padding: 10px 0 0 0;
+	height: 50px;
+	font-weight: bold;
+	text-align: center;
+}
+
+#admin_page_number a:link {
+	color: black;
+	text-decoration: none;
+}
+
+#admin_page_number a:hover {
+	color: gray;
+	text-decoration: underline;
+}
+
+#admin_page_number a:active {
+	color: aqua;
+	text-decoration: none;
+}
+
+</style>
 <script src="./resources/js/jquery.js"></script>
 <script type="text/javascript">
-	
+
+$("li:eq(3)").css("border","1px solid #ff0000")
+
 </script>
 </head>
 <body>
-	<%@ include file="../menubar/top_left_menubar.jsp"%>
+<%@ include file="../menubar/top_left_menubar.jsp"%>
 	
-    <div class="board_title">핫뉴스</div>
+<div class="board_title">핫뉴스</div>
+    
+    <div id="hotnews_view_wrap">
+    	<section>
+    		<c:if test="${!empty hlist }">    	
+    		<div id="hotnews_rank">
+    			<ul class="hotnews_rank_one">
+   					<c:forEach var="h" items="${hlist}" begin="0" end="1">
+   						<li style="list-style-type : decimal;">   					
+   							<a href="${h.hlink}" target="_blank">${h.htitle }</a>
+   						</li>  
+   					</c:forEach>    				
+    			</ul>
+    			
+    			<ol class="hotnews_rank_two" start="3">
+    				<c:forEach var="h" items="${hlist}" begin="2" end="6">
+   						
+   						<li style="list-style-type : decimal;">   					
+   							<a href="">${h.htitle }</a>
+   						</li>
+   					</c:forEach>  
+    			</ol>
+    		</div>
+    		</c:if>
+    	</section>
+    	
+    	<section>    	
+    		<div id="admin_panel">
+			<div id="admin_search">
+				<fieldset>
+					<legend class="hidden">검색</legend>
+					<!-- <label class="hidden">검색분류</label> 
+					<select name="f">
+					<option value="search_id">회원아이디</option>
+					<option value="search_name">회원이름</option>
+					<option value="search_join">회원상태</option>
+					</select> -->
+					<label class="hidden">검색어</label> <input type="text" name="q" value="" placeholder="검색어를 입력해주세요." /> 
+					<input class="btn btn-search" type="submit" value="검색" /> 
+				</fieldset>
+			</div>
 
+			<table id="admin_hn" style="border-collapse: collapse">
+				<tr id="admin_hn_title">
+					<th id="admin_list_no" >번호</th>
+					<th id="admin_list_title" >제목</th>
+					<th id="admin_list_writer" >작성자</th>
+					<th id="admin_list_date" >등록날짜</th>
+					<th id="admin_list_viewcnt" >조회수</th>					
+				</tr>
+				
+				<c:if test="${!empty hlist }">
+					<c:forEach var="h" items="${hlist }">
+						<tr id="admin_hn_list">
+							<td align="center">${h.hno }</td>
+							<td align="left"><a href="${h.hlink }" target="_blank">${h.htitle}</a></td>
+<%-- 							<td id="left"><a href="admin_hotnews_cont?hno=${h.hno}&page=${page}">${h.htitle }</a></td> --%>
+							<td align="center">${h.hwriter }</td>
+							<td align="center">${h.regdate }</td>							
+							<td align="center">${h.viewcnt }</td>							
+						</tr>
+					</c:forEach>
+				</c:if>
+				
+				<c:if test="${empty hlist }">
+					<tr>
+						<th colspan="6">자료실 목록이 없습니다.</th>
+					</tr>
+				</c:if>
+			</table> 
+			
+			<!-- 페이징 쪽나누기 -->
+			<div id="bList_paging" align="center" style="background-color: #f5f5f5;">
+					<!--	
+					<c:if test="${page<=1 }">[PREV]&nbsp;</c:if>					
+					-->
+					<c:if test="${page>1 }">
+						<a href="admin_hotnews_list?page=1">[FIRST]</a>&nbsp;
+						<a href="admin_hotnews_list?page=${page-1 }">[PREV]</a>&nbsp;
+					</c:if>
+					
+					<!-- 쪽번호 출력 -->
+					<c:forEach var="p" begin="${startpage }" end="${endpage }" step="1">
+						<c:if test="${p == page }">${p }&nbsp;</c:if>
+						<c:if test="${p != page }"><a href="admin_hotnews_list?page=${p }">${p }</a>&nbsp;</c:if>				
+					</c:forEach>
+					
+					<!--
+					<c:if test="${page >= maxpage }">[NEXT]</c:if>
+					-->
+					<c:if test="${page < maxpage }">
+						<a href="admin_hotnews_list?page=${page+1 }">[NEXT]</a>&nbsp;
+						<a href="admin_hotnews_list?page=${maxpage }">[LAST]</a>&nbsp;
+					</c:if>					
+			</div>   	
+    	</div>
+    </div>    
+    </section>
+    
+
+
+
+
+
+
+
+
+
+
+
+<!-- 
 	<div class="example">
 		<ul class="ul_article">
 			<%
@@ -39,7 +253,7 @@
 			<input name="" type="text" class="input_box"> 
 			<input type="button" value="Search" class="btn">
 		</div>
-
+		
 		<div class="page_number">
 			<%
 			int currentPage;
@@ -99,9 +313,9 @@
 			if (endPage < totalPage) {%>
 				<a href="hotNewsBoard_view?page=<%=totalPage%>">[LAST]</a>
 			<%} %>
-			
+ 		
 		</div>
 	</div>
-
+-->
 </body>
 </html>

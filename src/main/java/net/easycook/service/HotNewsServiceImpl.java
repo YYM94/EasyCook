@@ -37,4 +37,9 @@ public class HotNewsServiceImpl implements HotNewsService {
 		this.hotNewsDAO.updateHit(hno);
 		return this.hotNewsDAO.getBoardCont(hno); 
 	}
+
+	@Override
+	public HotNewsBoardVO getBoardCont2(int hno) {
+		return this.hotNewsDAO.getBoardCont(hno);
+	}//조회수증가 뺴고 내용만 보기
 }
