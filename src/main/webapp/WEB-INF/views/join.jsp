@@ -1,4 +1,5 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -46,18 +47,18 @@
 	
 	//이메일 입력방식 선택 
 	function emailselect() {
-		$('#join_email_3_box').change(function(){ 
-			$('#join_email_3_box option:selected').each(function () { 
-				if($(this).val()== '1'){ //직접입력일 경우 
-					$('#join_email_2_box').val(''); //값 초기화 
-					$('#join_email_2_box').attr('disabled',false); //활성화 
-					$('#join_email_2_box').focus(); //메일주소 입력창으로 포커스 이동
-				}else{ //직접입력이 아닐경우 
-					$('#join_email_2_box').val($(this).text()); //선택값 입력 
-					$('#join_email_2_box').attr('disabled',true); //비활성화 
-				} 
-			}); 
-		});
+		var num=m.join_email_3_box.selectedIndex;
+		if(num == -1){
+			return true;
+		}
+		if(m.join_email_3_box.value == "직접입력"){
+			m.join_email_2_box.value = "";
+			m.join_email_2_box.readOlny=false;
+			m.join_email_2_box.focus();
+		}else{
+			m.join_email_2_box.value=m.join_email_3_box.options[num].value;
+			m.join_email_2_box.readOnly=true;
+		}
 	}
 	
 	
@@ -93,17 +94,12 @@
 						<div id="join_email" class="join_title">
 							<strong><label for="join_email_1_box">이메일</label></strong>
 							<input type="text" name="join_email_1_box" id="join_email_1_box" class="form-control"
-							placeholder="이메일을 입력해주세요." required />&nbsp;@
-							<input type="email" name="join_email_2_box" id="join_email_2_box" class="form-control"
-							autocomplete="email" disabled />&nbsp;
-							<select name="join_email_3_box" id="join_email_3_box" class="form-control" onclick="emailselect();">
-								<option value="" selected>선택하세요.</option>
-								<option value="naver.com">naver.com</option>
-								<option value="hanmail.net">hanmail.net</option>
-								<option value="nate.com">nate.com</option>
-								<option value="hotmail.com">hotmail.com</option>
-								<option value="gmail.com">gmail.com</option>
-								<option value="1">직접입력</option>
+							placeholder="이메일을 입력해주세요." />&nbsp;@
+							<input type="text" name="join_email_2_box" id="join_email_2_box" class="form-control" readonly />&nbsp;
+							<select name="join_email_3_box" class="form-control" onchange="emailselect();">
+								<c:forEach var="mail" items="${email}">
+									<option value="${mail}">${mail}</option>
+								</c:forEach>
 							</select>
 							<br/>
 							<span class="error">8글자 이상 입력하세요!</span>
@@ -156,10 +152,9 @@
 						<div id="join_pw_q" class="join_title">
 							<strong><label for="join_pw_q_box">비밀번호 확인 질문</label></strong>
 							<select name="join_pw_q_box" id="join_pw_q_box" class="form-control" onclick="joinQ();">
-								<option value="">선택하세요.</option>
-								<option value="1">어머니의 성함은?</option>
-								<option value="2">아버지의 성함은?</option>
-								<option value="3">나의 출신 초등학교는?</option>
+								<c:forEach var="pwdQ" items="${qwdQ}">
+									<option value="${qwdQ}">${qwdQ}</option>
+								</c:forEach>
 							</select>
 							<br/>
 							<span class="error">8글자 이상 입력하세요!</span>

@@ -1,4 +1,5 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -75,7 +76,7 @@
 			<!-- 로그인폼 전체 판 껍데기 -->
 			<div id="panle_body_login">
 				<!-- 로그인폼 전체 판 -->
-				<form action="login_ok.jsp" method="post" name="login_form">
+				<form action="member_login_ok" method="post" name="login_form" onsubmit="return login_check();">
 					<!-- 로그인 폼  -->
 					<div id="panel_header_login">
 						<!-- 로그인폼 타이틀 -->
@@ -95,7 +96,7 @@
 							<!-- 로그인 폼 비밀번호 입력 라인 -->
 							<strong><label for="login_pwd_box">비밀번호</label></strong> 
 							<input name="login_pwd_box" id="login_pwd_box" class="login_control"
-								maxlength="20" placeholder="비밀번호를 입력하세요." />
+								maxlength="20" placeholder="비밀번호를 입력하세요." autocomplete="new-password"/>
 						</div>
 
 						<div id="login_footer">
@@ -207,6 +208,7 @@
 
 		</div>
 	</div>
+
 </body>
 </html>
 
