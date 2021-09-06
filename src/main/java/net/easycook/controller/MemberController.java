@@ -77,6 +77,22 @@ public class MemberController {
 		return null;
 	} //index()
 	
+	//로그아웃
+	@RequestMapping("/member_logout")
+	public String member_logout(HttpServletResponse response, HttpSession session) throws Exception{
+		response.setContentType("text/html;charset=UTF-8");
+		PrintWriter out=response.getWriter();
+		
+		session.invalidate(); //세션만료 => 로그아웃
+		
+		out.println("<script>");
+		out.println("alert('로그아웃 되었습니다!');");
+		out.println("location='login';");
+		out.println("</script>");
+		
+		return null;
+	}
+	
 	//사용자 회원가입
 	@RequestMapping("/join")
 	public String join(Model m) {
