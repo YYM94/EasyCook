@@ -21,5 +21,10 @@ public class adminNotServiceImpl implements adminNotService {
 	public List<adminNoticeVO> getNotList(adminNoticeVO an) {
 		return this.adminnotDAO.getNotList(an);
 	}
+	@Override
+	public void insertNot(adminNoticeVO an) {
+		this.adminnotDAO.insertNot(an);
+		
+	}
 
 }

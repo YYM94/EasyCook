@@ -21,5 +21,10 @@ public class adminFaqServiceImpl implements adminFaqService {
 	public List<adminFaqVO> getFaqList(adminFaqVO af) {
 		return this.adminfaqDAO.getFaqList(af);
 	}
+	@Override
+	public void insertFaq(adminFaqVO af) {
+		this.adminfaqDAO.insertFaq(af);
+		
+	}
 
 }

@@ -10,4 +10,6 @@ public interface adminNotService {
 
 	List<adminNoticeVO> getNotList(adminNoticeVO an);
 
+	void insertNot(adminNoticeVO an);
+
 }
