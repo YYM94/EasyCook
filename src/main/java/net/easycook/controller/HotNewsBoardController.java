@@ -25,7 +25,7 @@ public class HotNewsBoardController { //일반게시판 관리자게시판 합�
 	private HotNewsService hotNewsService;
 	
 	@RequestMapping("/hotNewsBoard_view")
-	public String hotNewsBoard_view(Model listM, HttpServletRequest req, @ModelAttribute HotNewsBoardVO hvo, @ModelAttribute HotNewsBoardVO hvov) throws Exception{
+	public String hotNewsBoard_view(Model listM, HttpServletRequest req, @ModelAttribute HotNewsBoardVO hvo) throws Exception{
 		int page=1;
 		int limit=10;
 		if(req.getParameter("page") != null) {
@@ -43,7 +43,7 @@ public class HotNewsBoardController { //일반게시판 관리자게시판 합�
 		hvo.setStartrow((page-1)*10+1); //시작 행번호
 		hvo.setEndrow(hvo.getStartrow()+limit-1); //끝행번호
 		
-		List<HotNewsBoardVO> hlistv=this.hotNewsService.getBoardListView(hvov);
+		List<HotNewsBoardVO> hlistv=this.hotNewsService.getBoardListView(hvo);
 		List<HotNewsBoardVO> hlist=this.hotNewsService.getBoardList(hvo);
 		
 
@@ -197,6 +197,17 @@ public class HotNewsBoardController { //일반게시판 관리자게시판 합�
 	}//admin_hotNewsBoard_list()
 	
 		
+	
+	@RequestMapping("/hotNewsBoard_cont")
+	public String hotNewsBoard_cont(Model m, @RequestParam("hno") int hno, int page) {
+		HotNewsBoardVO hvo=this.hotNewsService.getBoardCont(hno);
+		
+		m.addAttribute("hvo",hvo);	
+		m.addAttribute("page", page);
+		return "hotNewsBoard/hotNewsBoard_cont";
+	}//hotNewsBoard_view
+	
+	
 	@RequestMapping("/admin_hotnews_cont")
 	public String admin_hotnews_cont(Model m, @RequestParam("hno") int hno, int page) {
 		HotNewsBoardVO hvo=this.hotNewsService.getBoardCont(hno);

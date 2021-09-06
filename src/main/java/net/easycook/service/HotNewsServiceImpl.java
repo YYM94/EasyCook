@@ -44,7 +44,7 @@ public class HotNewsServiceImpl implements HotNewsService {
 	}//조회수증가 뺴고 내용만 보기
 
 	@Override
-	public List<HotNewsBoardVO> getBoardListView(HotNewsBoardVO hvov) {
-		return this.hotNewsDAO.getBoardListView(hvov);
+	public List<HotNewsBoardVO> getBoardListView(HotNewsBoardVO hvo) {
+		return this.hotNewsDAO.getBoardListView(hvo);
 	}
 }

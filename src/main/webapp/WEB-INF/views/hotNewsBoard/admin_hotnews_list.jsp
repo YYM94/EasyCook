@@ -50,7 +50,7 @@
 					<c:forEach var="h" items="${hlist }">
 						<tr id="admin_hn_list">
 							<td align="center">${h.hno }</td>
-							<td align="left"><a href="${h.hlink }" target="_blank">${h.htitle}</a></td>
+							<td align="left"><a href="/easycook/admin_hotnews_cont?hno=${h.hno }&page=${page}">${h.htitle}</a></td>
 <%-- 							<td id="left"><a href="admin_hotnews_cont?hno=${h.hno}&page=${page}">${h.htitle }</a></td> --%>
 							<td align="center">${h.hwriter }</td>
 							<td align="center">${h.regdate }</td>							

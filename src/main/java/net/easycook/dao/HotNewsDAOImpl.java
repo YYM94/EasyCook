@@ -41,7 +41,7 @@ public class HotNewsDAOImpl implements HotNewsDAO {
 	}
 
 	@Override
-	public List<HotNewsBoardVO> getBoardListView(HotNewsBoardVO hvov) {
-		return this.sqlSession.selectList("list_hnv", hvov);
+	public List<HotNewsBoardVO> getBoardListView(HotNewsBoardVO hvo) {
+		return this.sqlSession.selectList("list_hnv", hvo);
 	}
 }

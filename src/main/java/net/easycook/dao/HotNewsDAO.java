@@ -17,6 +17,6 @@ public interface HotNewsDAO {
 
 	void updateHit(int hno);
 
-	List<HotNewsBoardVO> getBoardListView(HotNewsBoardVO hvov);
+	List<HotNewsBoardVO> getBoardListView(HotNewsBoardVO hvo);
 
 }
