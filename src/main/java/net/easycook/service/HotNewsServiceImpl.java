@@ -22,8 +22,8 @@ public class HotNewsServiceImpl implements HotNewsService {
 	}
 
 	@Override
-	public int getTotalCount() {
-		return this.hotNewsDAO.getTotalCount();
+	public int getTotalCount(HotNewsBoardVO hvo) {
+		return this.hotNewsDAO.getTotalCount(hvo);
 	}
 
 	@Override
@@ -31,11 +31,11 @@ public class HotNewsServiceImpl implements HotNewsService {
 		return this.hotNewsDAO.getBoardList(hvo);
 	}
 
-	@Transactional(isolation = Isolation.READ_COMMITTED) //트랜잭션 격리 => 트랜잭션이 처리되는 중간에 외부 간섭을 없앰.
+//	@Transactional(isolation = Isolation.READ_COMMITTED) //트랜잭션 격리 => 트랜잭션이 처리되는 중간에 외부 간섭을 없앰.
 	@Override
-	public HotNewsBoardVO getBoardCont(int hno) {
+	public void getBoardCont(int hno) {
 		this.hotNewsDAO.updateHit(hno);
-		return this.hotNewsDAO.getBoardCont(hno); 
+//		return this.hotNewsDAO.getBoardCont(hno); 
 	}
 
 	@Override

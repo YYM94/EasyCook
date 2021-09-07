@@ -15,11 +15,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
-
-import com.oreilly.servlet.MultipartRequest;
 
 import net.easycook.service.HotNewsService;
 import net.easycook.vo.HotNewsBoardVO;
@@ -43,7 +40,7 @@ public class HotNewsBoardController { //일반게시판 관리자게시판 합�
 		hvo.setFind_field(find_field);
 		hvo.setFind_name("%"+find_name+"%"); //%는 검색에서 하나이상의 임의의 모르는 문자와 매핑 대응한다.
 		
-		int totalCount=this.hotNewsService.getTotalCount(); //총 게시물 수
+		int totalCount=this.hotNewsService.getTotalCount(hvo); //검색전은 총레코드 개수, 검색이후에는 검색된 레코드 개수
 
 		hvo.setStartrow((page-1)*10+1); //시작 행번호
 		hvo.setEndrow(hvo.getStartrow()+limit-1); //끝행번호
@@ -156,7 +153,7 @@ public class HotNewsBoardController { //일반게시판 관리자게시판 합�
 		hvo.setFind_field(find_field);
 		hvo.setFind_name("%"+find_name+"%"); //%는 검색에서 하나이상의 임의의 모르는 문자와 매핑 대응한다.
 		
-		int totalCount=this.hotNewsService.getTotalCount(); //총 게시물 수
+		int totalCount=this.hotNewsService.getTotalCount(hvo); //총 게시물 수
 
 		hvo.setStartrow((page-1)*10+1); //시작 행번호
 		hvo.setEndrow(hvo.getStartrow()+limit-1); //끝행번호
@@ -192,36 +189,46 @@ public class HotNewsBoardController { //일반게시판 관리자게시판 합�
 	}//admin_hotNewsBoard_list()
 	
 		
-	
+	//핫뉴스페이지에서 게시물클릭 (조회수 증가O)
 	@RequestMapping("/hotNewsBoard_cont")
-	public String hotNewsBoard_cont(Model m, @RequestParam("hno") int hno, int page) {
-		HotNewsBoardVO hvo=this.hotNewsService.getBoardCont(hno);
+	public String hotNewsBoard_cont(Model m, HttpServletRequest req, @RequestParam("hno") int hno, int page) {
+		this.hotNewsService.getBoardCont(hno);
 		
-		m.addAttribute("hvo",hvo);	
+		//검색필드와 검색어
+		String find_field=req.getParameter("find_field");
+		String find_name=req.getParameter("find_name");
+		
 		m.addAttribute("page", page);
-		return "hotNewsBoard/hotNewsBoard_cont";
-	}//hotNewsBoard_view
+		m.addAttribute("find_field", find_field);
+		m.addAttribute("find_name", find_name);
+		return "redirect:/hotNewsBoard_view";
+	}//hotNewsBoard_cont
 	
 	
+	//관리자페이지에서 게시물클릭 (조회수 증가X)
 	@RequestMapping("/admin_hotnews_cont")
-	public String admin_hotnews_cont(Model m, @RequestParam("hno") int hno, int page) {
-		HotNewsBoardVO hvo=this.hotNewsService.getBoardCont(hno);
+	public String admin_hotnews_cont(Model m, HttpServletRequest req, @RequestParam("hno") int hno, int page) {
 		
-		m.addAttribute("hvo",hvo);	
+		//검색필드와 검색어
+		String find_field=req.getParameter("find_field");
+		String find_name=req.getParameter("find_name");
+		
 		m.addAttribute("page", page);
-		return "hotNewsBoard/admin_hotnews_cont";
-	}//hotNewsBoard_view
-	
-	
-	@GetMapping("/admin_hotnews_edit")
-	public ModelAndView admin_hotnews_edit(int hno, int page) {
-		HotNewsBoardVO hvo=this.hotNewsService.getBoardCont2(hno);
-		
-		ModelAndView mav=new ModelAndView();
-		mav.setViewName("hotNewsBoard/admin_hotnews_edit");
-		mav.addObject("ehvo", hvo);
-		mav.addObject("page", page);
-		return mav;
-	}//admin_hotNewsBoard_edit()
+		m.addAttribute("find_field", find_field);
+		m.addAttribute("find_name", find_name);		
+		return "redirect:/admin_hotnews_list";
+	}//admin_hotnews_cont
+//	
+//	
+//	@GetMapping("/admin_hotnews_edit")
+//	public ModelAndView admin_hotnews_edit(int hno, int page) {
+//		HotNewsBoardVO hvo=this.hotNewsService.getBoardCont2(hno);
+//		
+//		ModelAndView mav=new ModelAndView();
+//		mav.setViewName("hotNewsBoard/admin_hotnews_edit");
+//		mav.addObject("ehvo", hvo);
+//		mav.addObject("page", page);
+//		return mav;
+//	}//admin_hotNewsBoard_edit()
 
 }

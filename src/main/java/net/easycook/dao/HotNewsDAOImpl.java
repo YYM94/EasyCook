@@ -20,8 +20,8 @@ public class HotNewsDAOImpl implements HotNewsDAO {
 	}
 
 	@Override
-	public int getTotalCount() {
-		return this.sqlSession.selectOne("count");
+	public int getTotalCount(HotNewsBoardVO hvo) {
+		return this.sqlSession.selectOne("count",hvo);
 	}
 
 	@Override

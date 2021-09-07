@@ -119,7 +119,7 @@ $("li:eq(3)").css("border","1px solid #ff0000")
 <%@ include file="../menubar/top_left_menubar.jsp"%>
 	
 <div class="board_title">핫뉴스</div>
-    
+	<form method="get" action="hotNewsBoard_view">
     <div id="hotnews_view_wrap">
     	<section>
     	  	<div id="hotnews_rank">    	
@@ -127,7 +127,7 @@ $("li:eq(3)").css("border","1px solid #ff0000")
     			<ul class="hotnews_rank_one">
    					<c:forEach var="hv" items="${hlistv}" begin="0" end="1">
    						<li style="list-style-type : decimal;">   					
-   							<a href="${hv.hlink}" target="_blank">${hv.htitle }</a>
+   							<a href="/easycook/hotNewsBoard_cont?hno=${hv.hno }&page=${page}" onclick="window.open('${hv.hlink}')">${hv.htitle }</a>
    						</li>  
    					</c:forEach>    				
     			</ul>
@@ -136,7 +136,7 @@ $("li:eq(3)").css("border","1px solid #ff0000")
     				<c:forEach var="hv" items="${hlistv}" begin="2" end="6">
    						
    						<li style="list-style-type : decimal;">   					
-   							<a href="">${hv.htitle }</a>
+   							<a href="/easycook/hotNewsBoard_cont?hno=${hv.hno }&page=${page}" onclick="window.open('${hv.hlink}')">${hv.htitle }</a>
    						</li>
    					</c:forEach>  
     			</ol>
@@ -158,13 +158,19 @@ $("li:eq(3)").css("border","1px solid #ff0000")
 					<option value="search_id">회원아이디</option>
 					<option value="search_name">회원이름</option>
 					<option value="search_join">회원상태</option>
-					</select> -->
-					<select name="find_field">
-						<option value="htitle" <c:if test="${find_field == 'htitle' }"> ${'selected' }</c:if>>제목</option>
-						<option value="hcont" <c:if test="${find_field == 'hcont' }"> ${'selected' }</c:if>>내용</option>
-					</select>
-					<label class="hidden">검색어</label> <input type="text" name="find_name" id="find_name" value="${find_name }" placeholder="검색어를 입력해주세요." /> 
-					<input class="btn btn-search" type="submit" value="검색" /> 
+					</select> -->					
+					
+					<!-- 검색기능 -->
+						<select name="find_field">
+							<option value="htitle" <c:if test="${find_field == 'htitle' }"> ${'selected' }</c:if>>제목</option>
+							<option value="hcont" <c:if test="${find_field == 'hcont' }"> ${'selected' }</c:if>>내용</option>
+						</select>
+						<label class="hidden">검색어</label> 
+						<input type="text" name="find_name" id="find_name" value="${find_name }" placeholder="검색어를 입력해주세요." /> 
+						<input class="btn btn-search" type="submit" value="검색" /> 
+						<c:if test="${(!empty find_field) && (!empty find_name)}"> <%-- 검색필드와 검색어가 있는 경우 즉 검색하고 난 이후 실행 --%>
+							<input type="button" value="전체목록" onclick="location='hotNewsBoard_view?page=${page}';" />						
+						</c:if>
 				</fieldset>
 			</div>
 
@@ -181,7 +187,7 @@ $("li:eq(3)").css("border","1px solid #ff0000")
 					<c:forEach var="h" items="${hlist }">
 						<tr id="admin_hn_list">
 							<td align="center">${h.hno }</td>
-							<td align="left"><a href="/easycook/hotNewsBoard_cont?hno=${h.hno }&page=${page}">${h.htitle}</a></td>
+							<td align="left"><a href="/easycook/hotNewsBoard_cont?hno=${h.hno }&page=${page}&find_field=${find_field}&find_name=${find_name}" onclick="window.open('${h.hlink}')">${h.htitle}</a></td>
 <%-- 							<td id="left"><a href="admin_hotnews_cont?hno=${h.hno}&page=${page}">${h.htitle }</a></td> --%>
 							<td align="center">${h.hwriter }</td>
 							<td align="center">${h.regdate }</td>							
@@ -197,11 +203,13 @@ $("li:eq(3)").css("border","1px solid #ff0000")
 				</c:if>
 			</table> 
 			
-			<!-- 페이징 쪽나누기 -->
+			<!-- 페이징 쪾나누기 -->
 			<div id="bList_paging" align="center" style="background-color: #f5f5f5;">
-					<!--	
-					<c:if test="${page<=1 }">[PREV]&nbsp;</c:if>					
-					-->
+				<!--	
+				<c:if test="${page<=1 }">[PREV]&nbsp;</c:if>					
+				-->
+				<!-- 검색전 페이징 쪽나누기 -->				
+				<c:if test="${(empty find_field) && (empty find_name)}">
 					<c:if test="${page>1 }">
 						<a href="hotNewsBoard_view?page=1">[FIRST]</a>&nbsp;
 						<a href="hotNewsBoard_view?page=${page-1 }">[PREV]</a>&nbsp;
@@ -219,26 +227,40 @@ $("li:eq(3)").css("border","1px solid #ff0000")
 					<c:if test="${page < maxpage }">
 						<a href="hotNewsBoard_view?page=${page+1 }">[NEXT]</a>&nbsp;
 						<a href="hotNewsBoard_view?page=${maxpage }">[LAST]</a>&nbsp;
-					</c:if>					
+					</c:if>	
+				</c:if>		
+				
+				<!-- 검색후 페이징 -->		
+				<c:if test="${!(empty find_field) && !(empty find_name)}">
+					<c:if test="${page>1 }">
+						<a href="hotNewsBoard_view?page=1&find_field=${find_field}&find_name=${find_name}">[FIRST]</a>&nbsp;
+						<a href="hotNewsBoard_view?page=${page-1 }&find_field=${find_field}&find_name=${find_name}">[PREV]</a>&nbsp;
+					</c:if>
+					
+					<!-- 쪽번호 출력 -->
+					<c:forEach var="p" begin="${startpage }" end="${endpage }" step="1">
+						<c:if test="${p == page }">${p }&nbsp;</c:if>
+						<c:if test="${p != page }"><a href="hotNewsBoard_view?page=${p }&find_field=${find_field}&find_name=${find_name}">${p }</a>&nbsp;</c:if>				
+					</c:forEach>
+					
+					<!--
+					<c:if test="${page >= maxpage }">[NEXT]</c:if>
+					-->
+					<c:if test="${page < maxpage }">
+						<a href="hotNewsBoard_view?page=${page+1 }&find_field=${find_field}&find_name=${find_name}">[NEXT]</a>&nbsp;
+						<a href="hotNewsBoard_view?page=${maxpage }&find_field=${find_field}&find_name=${find_name}">[LAST]</a>&nbsp;
+					</c:if>	
+				</c:if>		
 			</div>   	
     	</div>
-    	</section>
-    	
+    	</section>    	
     </div>    
-    
-    
+    </form> 
+ </body>
+</html>
 
 
-
-
-
-
-
-
-
-
-
-<!-- 
+<%-- 
 	<div class="example">
 		<ul class="ul_article">
 			<%
@@ -326,6 +348,4 @@ $("li:eq(3)").css("border","1px solid #ff0000")
  		
 		</div>
 	</div>
--->
-</body>
-</html>
+ --%>

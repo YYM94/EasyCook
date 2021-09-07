@@ -8,10 +8,9 @@ public interface HotNewsDAO {
 
 	void insertBoard(HotNewsBoardVO hvo);
 
-	int getTotalCount();
+	int getTotalCount(HotNewsBoardVO hvo);
 
 	List<HotNewsBoardVO> getBoardList(HotNewsBoardVO hvo);
-
 
 	HotNewsBoardVO getBoardCont(int hno);
 

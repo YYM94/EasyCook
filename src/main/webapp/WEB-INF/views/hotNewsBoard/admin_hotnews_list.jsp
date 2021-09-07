@@ -10,7 +10,7 @@
 </head>
 <body>
 	<%@ include file="../menubar/adminleftbar.jsp"%>
-	<form class="table-form">
+	<form method="get" action="admin_hotnews_list" class="table-form">
 		<div id="admin_header">
 			<h3 style="font-size: 200%; text-align: center; padding: 10px; margin: 0 0 0 0;">핫뉴스 관리</h3>
 		</div>
@@ -25,16 +25,22 @@
 					<option value="search_name">회원이름</option>
 					<option value="search_join">회원상태</option>
 					</select> -->
-					<label class="hidden">검색어</label> <input type="text" name="q" value="" placeholder="검색어를 입력해주세요." /> 
-					<input class="btn btn-search" type="submit" value="검색" /> 
-					<c:if test="${(!empty find_field) && (!empty find_name)}"> <%-- 검색필드와 검색어가 있는 경우 즉 검색하고 난 이후 실행 --%>
-						<input type="button" value="전체목록" onclick="location='/easycook/admin_hotnews_list?page=${page}';" />
-					</c:if>
+					
+					<!-- 검색기능 -->
+						<select name="find_field">
+							<option value="htitle" <c:if test="${find_field == 'htitle' }"> ${'selected' }</c:if>>제목</option>
+							<option value="hcont" <c:if test="${find_field == 'hcont' }"> ${'selected' }</c:if>>내용</option>
+						</select>
+						<label class="hidden">검색어</label> 
+						<input type="text" name="find_name" id="find_name" value="${find_name }" placeholder="검색어를 입력해주세요." /> 
+						<input class="btn btn-search" type="submit" value="검색" /> 
+						<c:if test="${(!empty find_field) && (!empty find_name)}"> <%-- 검색필드와 검색어가 있는 경우 즉 검색하고 난 이후 실행 --%>
+							<input type="button" value="전체목록" onclick="location='/easycook/admin_hotnews_list?page=${page}';" />
+						</c:if>
 					<input type="button" id="admin_hn_write" value="등록" onclick="location='/easycook/admin_hotnews_write?page=${page}';" />
 					
 				</fieldset>
 			</div>
-
 
 			<table id="admin_hn" style="border-collapse: collapse">
 				<tr id="admin_hn_title">
@@ -50,8 +56,7 @@
 					<c:forEach var="h" items="${hlist }">
 						<tr id="admin_hn_list">
 							<td align="center">${h.hno }</td>
-							<td align="left"><a href="/easycook/admin_hotnews_cont?hno=${h.hno }&page=${page}">${h.htitle}</a></td>
-<%-- 							<td id="left"><a href="admin_hotnews_cont?hno=${h.hno}&page=${page}">${h.htitle }</a></td> --%>
+							<td align="left"><a href="/easycook/admin_hotnews_cont?hno=${h.hno }&page=${page}&find_field=${find_field}&find_name=${find_name}" onclick="window.open('${h.hlink}')">${h.htitle}</a></td>
 							<td align="center">${h.hwriter }</td>
 							<td align="center">${h.regdate }</td>							
 							<td align="center">${h.viewcnt }</td>
@@ -117,11 +122,10 @@
 				</c:if>
 				
 				<%-- 쪽번호 출력부분 --%>
-				<c:forEach var="a" begin="${startpage }" end="${endpage }" step="1">
-					<c:if test="${a==page }"><${a }></c:if>
-					
-					<c:if test="${a != page }">
-						<a href="admin_hotnews_list?page=${a }&find_field=${find_field}&find_name=${find_name}">${a }</a>&nbsp;
+				<c:forEach var="p" begin="${startpage }" end="${endpage }" step="1">
+					<c:if test="${p == page }"><${p }></c:if>					
+					<c:if test="${p != page }">
+						<a href="admin_hotnews_list?page=${p }&find_field=${find_field}&find_name=${find_name}">${p }</a>&nbsp;
 					</c:if>
 				</c:forEach>
 				
@@ -132,29 +136,12 @@
 					<a href="admin_hotnews_list?page=${maxpage }&find_field=${find_field}&find_name=${find_name}">[LAST]</a>&nbsp;
 				</c:if>
 			</c:if>		
-			
 		</div>
-		
-		<div id="bList_menu">
-			
-		</div>
-		
-		
-		
-		<%-- 검색기능 
-		<div id="bFind_wrap">
-			<select name="find_field">
-				<option value="bbs_title" <c:if test="${find_field == 'bbs_title' }"> ${'selected' }</c:if>>제목</option>
-				<option value="bbs_cont" <c:if test="${find_field == 'bbs_cont' }"> ${'selected' }</c:if>>내용</option>
-			</select>
-			<input name="find_name" id="find_name" size="14" value="${find_name }" />
-			<input type="submit" value="검색" />
-		</div>
-		--%>
+	</form>
 
+</body>
+</html>	
 
-
-			
 			<%--
 			
 			<div id="admin_page_number" style="background-color: #f5f5f5;">
@@ -231,8 +218,3 @@
 			</div>
 			
 			 --%>
-		</div>
-	</form>
-
-</body>
-</html>

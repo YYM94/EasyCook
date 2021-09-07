@@ -10,14 +10,36 @@
 		values(hno_seq.nextval, 'admin', #{htitle}, #{hcont}, #{hlink}, #{hfile}, sysdate)
 	</insert>
 	
+	<!-- 검색전 총레코드개수, 검색 이후는 검색한 레코드 개수 -->
 	<select id="count" resultType="int">
-		select count(*) from hotNewsBoard
+		select count(hno) from hotNewsBoard
+		<where>
+			<if test="find_field==''"></if> <!-- 검색조건이 없는경우 -->
+			<if test="find_field=='htitle'"> <!-- 검색조건이 제목인 경우 -->	
+				htitle like #{find_name}	
+			</if>
+			<if test="find_field=='hcont'"> <!-- 검색조건이 제목인 경우 -->	
+				htitle like #{find_name}	
+			</if>
+		</where>
 	</select>
 	
 	<!-- 페이징이 적용된 게시판 목록 -->
 	<select id="list_hn" resultType="hb" parameterType="hb">
 		select * from
-		(select rowNum rNum, hno, hwriter, hlink, hcont, htitle, viewcnt, regdate from (select * from hotNewsBoard order by hno desc))
+		(select rowNum rNum, hno, hwriter, hlink, hcont, htitle, viewcnt, regdate from (select * from hotNewsBoard 
+		
+		<where>
+			<if test="find_field==''"></if> <!-- 검색조건이 없는경우 -->
+			<if test="find_field=='htitle'"> <!-- 검색조건이 제목인 경우 -->	
+				htitle like #{find_name}	
+			</if>
+			<if test="find_field=='hcont'"> <!-- 검색조건이 제목인 경우 -->	
+				htitle like #{find_name}	
+			</if>
+		</where>
+		
+		order by hno desc))
  		where rNum &gt;= #{startrow} and rNum &lt;= #{endrow} <!-- &gt;= 은 >=, &lt;= 은 <= -->
 	</select>
 	
