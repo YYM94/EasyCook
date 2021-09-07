@@ -38,32 +38,6 @@
 	<c:set var="currentPosting" value="${ post }"/>
 </c:if>
 
-<%-- 게시글 제목 --%>
-<c:set var="Title" value="번째 게시글 제목"/>
-<%-- 게시글 작성자 --%>
-<c:set var="Writer" value="작성자"/>
-<%-- 게시글 조회수 --%>
-<c:set var="Visiter" value="10"/>
-<%-- 게시글 작성날짜 --%>
-<c:set var="Date" value="2021-07-21"/>
-<%-- 게시글 영상 링크 --%>
-<c:set var="videoID" value="kR77WlHRZrs"/>
-<%-- 게시글 레시피 설명 폼 갯수 --%>
-<c:set var="Recipes" value="4"/>
-<%-- 게시글 레시피 설명 텍스트 : Æ로 구분 --%>
-<%
-String recipeDes = "불맛 달걀볶음밥 <br>[재료]<br>밥 1공기(200g)<br>대파 1/2컵(40g)<br>달걀 2개(120g)<br>식용유 4큰술(40g)"
-+"<br>진간장 1/2큰술(5g)<br>MSG 1/4큰술(2g)<br>맛소금 1g" + "Æ"
-+"[만드는 법]<br>1. 대파는 송송 썰어 준비한다.<br>2. 프라이팬에 식용유, 대파를 넣어 파 기름을 내고 노릇해지면 한쪽으로 몰아둔다."
-+"<br>3. 다른 한쪽에 달걀을 넣어 스크램블 한다." + "Æ"
-+"4. 재료가 없는 쪽에 간장을 넣어 눌어붙도록 끓여주고 스크램블 한 달걀, 볶은 대파와 섞어준다." + "Æ"
-+"5. 달걀, 대파가 골고루 섞이면 맛소금, 밥을 넣고 불을 끈 후 국자를 이용하여 섞어준다."
-+"<br>6. 밥이 골고루 섞이면 센 불에 올려 볶는다. "
-+"<br>7. 기호에 따라 MSG를 넣어 볶은 후 완성한다.";
-%>
-<c:set var="recipeDes" value="<%= recipeDes %>"/>
-<c:set var="recipeSplit" value="${fn:split(recipeDes, 'Æ')}"/>
-
 <%-- 개행문자 줄바꿈을 위한 속성 지정 --%>
 <% pageContext.setAttribute("newLine", "\n"); %>
 
@@ -80,6 +54,14 @@ String recipeDes = "불맛 달걀볶음밥 <br>[재료]<br>밥 1공기(200g)<br>
 	function removeCont(){
 		if(confirm("게시글을 삭제하시겠습니까?")){
 			location.href="recipeBoard_delete?post=${post}";
+		}else{
+			return false;
+		}
+	}
+	
+	function editCont(){
+		if(confirm("게시글을 수정하시겠습니까?")){
+			location.href="recipeBoard_edit?post=${post}";
 		}else{
 			return false;
 		}
@@ -137,9 +119,9 @@ String recipeDes = "불맛 달걀볶음밥 <br>[재료]<br>밥 1공기(200g)<br>
 				</c:forEach>
 			</div>
 			
-			<c:if test="${ Writer == '작성자' }">
+			<c:if test="${ rb.writerid == id }">
 				<div id="postingEditRmBtn">
-					<input type="button" value="수정"/>
+					<input type="button" value="수정" onclick="return editCont();"/>
 					<input type="button" value="삭제" onclick="return removeCont();"/>
 				</div>
 			</c:if>
@@ -394,5 +376,7 @@ String recipeDes = "불맛 달걀볶음밥 <br>[재료]<br>밥 1공기(200g)<br>
 </div>
 
 <div id="postWriteBtn">
-	<input type="button" value="글쓰기" onclick="location.href='recipeBoard_write'"/>
+	<c:if test="${not empty id }">
+		<input type="button" value="글쓰기" onclick="location.href='recipeBoard_write'"/>
+	</c:if>
 </div>

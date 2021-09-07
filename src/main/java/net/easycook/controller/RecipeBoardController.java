@@ -8,6 +8,7 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -18,6 +19,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
+
+import com.oreilly.servlet.MultipartRequest;
 
 import net.easycook.service.RecipeBoardService;
 import net.easycook.vo.RecipeBoardVO;
@@ -75,7 +78,7 @@ public class RecipeBoardController {
 	@RequestMapping(value = "/recipe_write_ok", method = RequestMethod.POST)
 	public String recipe_write_ok(
 			@RequestParam("imgFiles") List<MultipartFile> list, @RequestParam("imgIndex") String imgIndex, 
-			HttpServletRequest req) throws Exception{
+			HttpServletRequest req, HttpSession session) throws Exception{
 		
 		if(list.isEmpty()) {
 			System.out.println("[성공:/recipe_write_ok] 전송된 이미지 파일 없음");
@@ -83,7 +86,7 @@ public class RecipeBoardController {
 			System.out.println("[성공:/recipe_write_ok] 전송된 이미지 INDEX : ["+imgIndex+"]");
 		}
 		RecipeBoardVO rb = new RecipeBoardVO();
-		rb.setWriterid("imsi");
+		rb.setWriterid((String)session.getAttribute("id"));
 		rb.setTitle(req.getParameter("title"));
 		rb.setVideoLink(req.getParameter("link"));
 		rb.setTextPack(req.getParameter("textPack")); if(rb.getTextPack().equals("")) rb.setTextPack("[NoData]");
@@ -116,7 +119,7 @@ public class RecipeBoardController {
 		}
 		//파일 이름을 1.jpg, 2.jpg...등으로 저장
 		int fileNameIndex = 1;
-		for(MultipartFile f:list) {
+		for(MultipartRequest f:list) {
 			int exIndex = f.getOriginalFilename().lastIndexOf(".");
 			//String fileEx = f.getOriginalFilename().substring(exIndex+1); //일단 jpg로만 저장함
 			File target = new File(path, fileNameIndex + ".jpg");
@@ -131,27 +134,62 @@ public class RecipeBoardController {
 	}//recipe_write_ok()
 	
 	@RequestMapping("recipeBoard_delete")
-	public String recipeBoard_remove(HttpServletRequest req, HttpServletResponse res) throws IOException {
+	public String recipeBoard_remove(HttpServletRequest req, HttpServletResponse res, HttpSession session) throws IOException {
 		res.setContentType("text/html;charset=UTF-8");
 		PrintWriter out = res.getWriter();
 		
 		int post = Integer.parseInt(req.getParameter("post"));
 		RecipeBoardVO rb = recipeBoardService.getPost(post);
 		
-		recipeBoardService.deletePost(post);
-		System.out.println("[성공:/recipeBoard_delete] 삭제된 레코드 NO : "+ rb.getNo());
-		String folderPath = req.getRealPath("upload")+"\\"+rb.getImgFolder();
-		File targetFolder = new File(folderPath);
-		if(targetFolder.exists()) {
-			File[] targetFileArr = new File(folderPath).listFiles();
-			for(File f:targetFileArr) {
-				System.out.println("[성공:/recipeBoard_delete] 삭제된 파일명 : "+ folderPath + "\\" + f.getName());
-				f.delete();
+		if(session.getAttribute("id").equals(rb.getWriterid())) {
+			recipeBoardService.deletePost(post);
+			System.out.println("[성공:/recipeBoard_delete] 삭제된 레코드 NO : "+ rb.getNo());
+			String folderPath = req.getRealPath("upload")+"\\"+rb.getImgFolder();
+			File targetFolder = new File(folderPath);
+			if(targetFolder.exists()) {
+				File[] targetFileArr = new File(folderPath).listFiles();
+				for(File f:targetFileArr) {
+					System.out.println("[성공:/recipeBoard_delete] 삭제된 파일명 : "+ folderPath + "\\" + f.getName());
+					f.delete();
+				}
+				targetFolder.delete();
 			}
-			targetFolder.delete();
+		}else {
+			out.println("<script>");
+			out.println("alert('비정상적인 접근입니다.');");
+			out.println("history.go(-1);");
+			out.println("</script>");
 		}
 		
 		return "redirect:recipeBoard_view?page=1";
+	}
+	
+	@RequestMapping("recipeBoard_edit")
+	public ModelAndView recipeBoard_edit(HttpServletRequest req, HttpServletResponse res, HttpSession session) throws IOException {
+		res.setContentType("text/html;charset=UTF-8");
+		PrintWriter out = res.getWriter();
+		
+		int post = Integer.parseInt(req.getParameter("post"));
+		RecipeBoardVO rb = recipeBoardService.getPost(post);
+		
+		if(session.getAttribute("id").equals(rb.getWriterid())) {
+			
+			ModelAndView m = new ModelAndView();
+			m.addObject("title", rb.getTitle());
+			m.addObject("videoLink", rb.getVideoLink());
+			m.addObject("imgIndex", rb.getImgIndex());
+			m.addObject("textPack", rb.getTextPack());
+			
+			m.setViewName("recipeBoard/recipeBoard_edit");
+			return m;
+		}else {
+			out.println("<script>");
+			out.println("alert('비정상적인 접근입니다.');");
+			out.println("history.go(-1);");
+			out.println("</script>");
+		}
+		
+		return null;
 	}
 	
 }

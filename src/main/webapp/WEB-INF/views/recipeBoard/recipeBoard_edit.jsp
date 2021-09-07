@@ -163,16 +163,21 @@
 
 <div id="writeFormWrap">
 	<div id="recipeInsertForm">
-		<form name="dataForm" method="post" action="recipeBoard_view" onsubmit="return sendData(this);">
+		<form name="dataForm" method="post" action="recipeBoard_view" onsubmit="return sendData(this);" enctype="multipart/form-data">
 			<div id="title">
 				게시글 제목<br>
-				<input type="text" name="title"/>
+				<input type="text" name="title" value="${ title }"/>
 			</div>
 			<div id="video">
 				유튜브 링크<br>
-				<input type="text" id="videoLink" onblur="LoadThumbnail();"/><br>
+				<input type="text" id="videoLink" 
+					value="https://www.youtube.com/embed/${ videoLink }" onblur="LoadThumbnail();"/><br>
 				<div id="thumbnail">
-					미리보기
+					<iframe width='740' height='500' src='https://www.youtube.com/embed/${ videoLink }'
+						title='YouTube video player' frameborder='0'
+						allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture'
+						allowfullscreen>
+					</iframe>
 				</div>
 			</div>
 			<div id="recipeContWrap">
