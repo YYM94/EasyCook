@@ -8,6 +8,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
 import net.easycook.vo.FaqBoardVO;
+import net.easycook.vo.adminFaqVO;
 
 @Repository
 public class FaqDAOImpl implements FaqDAO {
@@ -16,13 +17,13 @@ public class FaqDAOImpl implements FaqDAO {
 	private SqlSession sqlSession;
 
 	@Override
-	public int getListCount(FaqBoardVO fb) {
-		return this.sqlSession.selectOne("Faq_co",fb);
+	public int getListCount(adminFaqVO af) {
+		return this.sqlSession.selectOne("adfaq_count",af);
 	}
 
 	@Override
-	public List<FaqBoardVO> getFaqList(FaqBoardVO fb) {
-		return this.sqlSession.selectList("Faq_li",fb);
+	public List<adminFaqVO> getFaqList(adminFaqVO af) {
+		return this.sqlSession.selectList("adfaq_list",af);
 	}
 
 

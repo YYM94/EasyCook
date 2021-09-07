@@ -45,38 +45,20 @@ if (request.getParameter("page") == null) {
 		}
 		for (int i = startPosting; i <= lastPosting; i++) {
 		--%>
-		<c:if test="${!empty flist}">
-			<c:forEach var="f" items="${flist}">
+		<c:if test="${!empty aflist}">
+			<c:forEach var="af" items="${aflist}">
 				<div class="FAQ">
 					<input type="checkbox" id="FAQ01"> <label for="FAQ01">
-					${f.faq.title}<em></em>
+					${af.adminfaq_title}<em></em>
 					</label>
 					<div>
-						<p>${f.faq.cont}</p>
-					</div>
-					<input type="checkbox" id="FAQ02"> <label for="FAQ02">회원가입은
-						어떻게 하나요?<em></em>
-					</label>
-					<div>
-						<p>우리는 프로젝트 중입니다.</p>
-					</div>
-					<input type="checkbox" id="FAQ03"> <label for="FAQ03">회원
-						탈퇴를 하고싶습니다 어떻게 할수있나요?<em></em>
-					</label>
-					<div>
-						<p>우리는 프로젝트 중입니다.</p>
-					</div>
-					<input type="checkbox" id="FAQ04"> <label for="FAQ04">추천재료가
-						바뀌는 날은 언제인가요?<em></em>
-					</label>
-					<div>
-						<p>우리는 프로젝트 중입니다.</p>
+						<p>${af.adminfaq_cont}</p>
 					</div>
 				</div>
 			</c:forEach>
 		</c:if>
 			
-		<c:if test="${empty flist}">
+		<c:if test="${empty aflist}">
 			<input type="checkbox" id="emptyfaq"> <label
 			 	for="emptyfaq">FAQ가 등록되지 않았습니다.<em></em></label>
 			<div>

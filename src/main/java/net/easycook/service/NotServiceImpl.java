@@ -6,24 +6,26 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import net.easycook.dao.NotDAO;
+import net.easycook.dao.adminNotDAO;
 import net.easycook.vo.NoticeBoardVO;
+import net.easycook.vo.adminNoticeVO;
 
 @Service
 public class NotServiceImpl implements NotService {
 
 	@Autowired
-	private NotDAO notDAO;
+	private adminNotDAO adminnotDAO;
 	
 
 	@Override
-	public List<NoticeBoardVO> getNotList(NoticeBoardVO nb) {
-		return this.notDAO.getNotList(nb);
+	public List<adminNoticeVO> getNotList(adminNoticeVO an) {
+		return this.adminnotDAO.getNotList(an);
 	}
 
 
 	@Override
-	public int getListCount(NoticeBoardVO nb) {
-		return this.notDAO.getListCount(nb);
+	public int getListCount(adminNoticeVO an) {
+		return this.adminnotDAO.getListCount(an);
 	}
 
 

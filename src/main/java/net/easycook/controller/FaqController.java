@@ -12,6 +12,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import net.easycook.service.FaqService;
 import net.easycook.vo.FaqBoardVO;
+import net.easycook.vo.adminFaqVO;
 
 @Controller
 public class FaqController {
@@ -19,7 +20,7 @@ public class FaqController {
 	@Autowired
 	private FaqService faqService;
 	@RequestMapping("/FAQ")
-	public ModelAndView FAQ(HttpServletRequest request,@ModelAttribute FaqBoardVO fb) {
+	public ModelAndView FAQ(HttpServletRequest request,@ModelAttribute adminFaqVO af) {
 		int page=1;
 		int limit=10;
 		if(request.getParameter("page") != null) {
@@ -28,15 +29,15 @@ public class FaqController {
 		String find_field=request.getParameter("find_field");
 		String find_name=request.getParameter("find_name");
 		
-		fb.setFind_field(find_field);
-		fb.setFind_name("%"+find_name+"%");
+		af.setFind_field(find_field);
+		af.setFind_name("%"+find_name+"%");
 		
-		int listcount2=this.faqService.getListCount(fb);
+		int listcount2=this.faqService.getListCount(af);
 		
-		fb.setStartrow((page-1)*10+1);
-		fb.setEndrow(fb.getStartrow()+limit-1);
+		af.setStartrow((page-1)*10+1);
+		af.setEndrow(af.getStartrow()+limit-1);
 		
-		List<FaqBoardVO> flist = this.faqService.getFaqList(fb);
+		List<adminFaqVO> aflist = this.faqService.getFaqList(af);
 		
 		//총페이지
 		int maxpage=(int)((double)listcount2/limit+0.95);
@@ -47,7 +48,7 @@ public class FaqController {
 		if(endpage > startpage+10-1) endpage=startpage+10-1;
 		
 		ModelAndView ma=new ModelAndView();
-		ma.addObject("flist",flist);//blist키이름에 목록저장
+		ma.addObject("aflist",aflist);//blist키이름에 목록저장
 		ma.addObject("page",page);//page키이름에 쪽번호 저장
 		ma.addObject("startpage",startpage);
 		ma.addObject("endpage",endpage);

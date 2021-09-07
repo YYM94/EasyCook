@@ -3,12 +3,13 @@ package net.easycook.service;
 import java.util.List;
 
 import net.easycook.vo.FaqBoardVO;
+import net.easycook.vo.adminFaqVO;
 
 public interface FaqService {
 
-	int getListCount(FaqBoardVO fb);
+	int getListCount(adminFaqVO af);
 
-	List<FaqBoardVO> getFaqList(FaqBoardVO fb);
+	List<adminFaqVO> getFaqList(adminFaqVO af);
 
 
 }

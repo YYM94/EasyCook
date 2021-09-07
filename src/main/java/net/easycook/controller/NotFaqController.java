@@ -10,17 +10,17 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
-import net.easycook.service.NotService;
-import net.easycook.vo.NoticeBoardVO;
+import net.easycook.service.adminNotService;
+import net.easycook.vo.adminNoticeVO;
 
 @Controller
 public class NotFaqController {
 	
 	@Autowired
-	private NotService notService;
+	private adminNotService adminnotService;
 	//공지사항 목록
 	@RequestMapping("/Notice")
-	public ModelAndView Notice(HttpServletRequest request, @ModelAttribute NoticeBoardVO nb) {
+	public ModelAndView Notice(HttpServletRequest request, @ModelAttribute adminNoticeVO an) {
 		int page=1;
 		int limit=10;
 		if(request.getParameter("page") != null) {
@@ -30,15 +30,15 @@ public class NotFaqController {
 		String find_field=request.getParameter("find_field");
 		String find_name=request.getParameter("find_name");
 		
-		nb.setFind_field(find_field);
-		nb.setFind_name("%"+find_name+"%");
+		an.setFind_field(find_field);
+		an.setFind_name("%"+find_name+"%");
 		
-		int listcount=this.notService.getListCount(nb);
+		int listcount=this.adminnotService.getListCount(an);
 		
-		nb.setStartrow((page-1)*10+1);
-		nb.setEndrow(nb.getStartrow()+limit-1);
+		an.setStartrow((page-1)*10+1);
+		an.setEndrow(an.getStartrow()+limit-1);
 		
-		List<NoticeBoardVO> nlist = this.notService.getNotList(nb);
+		List<adminNoticeVO> anlist = this.adminnotService.getNotList(an);
 		
 		//총페이지
 		int maxpage=(int)((double)listcount/limit+0.95);
@@ -49,7 +49,7 @@ public class NotFaqController {
 		if(endpage > startpage+10-1) endpage=startpage+10-1;
 		
 		ModelAndView wm=new ModelAndView();
-		wm.addObject("nlist",nlist);//blist키이름에 목록저장
+		wm.addObject("anlist",anlist);//blist키이름에 목록저장
 		wm.addObject("page",page);//page키이름에 쪽번호 저장
 		wm.addObject("startpage",startpage);
 		wm.addObject("endpage",endpage);

@@ -29,8 +29,8 @@ if (request.getParameter("page") == null) {
 			<fieldset>
 				<legend class="hidden">검색</legend>
 				<label class="hidden">검색분류</label> <select name="f">
-					<option value="title" <c:if test="${find_field == 'title'}"> ${'selected'}</c:if>>제목</option>
-					<option value="cont" <c:if test="${find_field == 'cont'}"> ${'selected'}</c:if>>내용</option>
+					<option value="title" <c:if test="${find_field == 'adminnotice_title'}"> ${'selected'}</c:if>>제목</option>
+					<option value="cont" <c:if test="${find_field == 'adminnotice_cont'}"> ${'selected'}</c:if>>내용</option>
 				</select> <label class="hidden">검색어</label> 
 				<input type="text" name="find_name" value="${find_name}" placeholder="검색어를 입력해주세요." />
 				<input type="submit" value="검색" />
@@ -46,64 +46,19 @@ if (request.getParameter("page") == null) {
 		}
 		for (int i = startPosting; i <= lastPosting; i++) {
 		%> --%>
-		<c:if test="${!empty nlist}">
-			<c:forEach var="n" items="${nlist}">
+		<c:if test="${!empty anlist}">
+			<c:forEach var="an" items="${anlist}">
 				<div class="gong">
 					<input type="checkbox" id="answer01"> <label
-						for="answer01">${n.no_title}<em></em></label>
+						for="answer01">${an.adminnotice_title}<em></em></label>
 					<div>
-						<p>${n.no.cont}</p>
-					</div>
-					<input type="checkbox" id="answer02"> <label
-						for="answer02">공지사항<em></em></label>
-					<div>
-						<p>우리는 프로젝트 중입니다.</p>
-					</div>
-					<input type="checkbox" id="answer03"> <label
-						for="answer03">공지사항<em></em></label>
-					<div>
-						<p>우리는 프로젝트 중입니다.</p>
-					</div>
-					<input type="checkbox" id="answer04"> <label
-						for="answer04">공지사항<em></em></label>
-					<div>
-						<p>우리는 프로젝트 중입니다.</p>
-					</div>
-					<input type="checkbox" id="answer05"> <label
-						for="answer05">공지사항<em></em></label>
-					<div>
-						<p>우리는 프로젝트 중입니다.</p>
-					</div>
-					<input type="checkbox" id="answer06"> <label
-						for="answer06">공지사항<em></em></label>
-					<div>
-						<p>우리는 프로젝트 중입니다.</p>
-					</div>
-					<input type="checkbox" id="answer07"> <label
-						for="answer07">공지사항<em></em></label>
-					<div>
-						<p>우리는 프로젝트 중입니다.</p>
-					</div>
-					<input type="checkbox" id="answer08"> <label
-						for="answer08">공지사항<em></em></label>
-					<div>
-						<p>우리는 프로젝트 중입니다.</p>
-					</div>
-					<input type="checkbox" id="answer09"> <label
-						for="answer09">공지사항<em></em></label>
-					<div>
-						<p>우리는 프로젝트 중입니다.</p>
-					</div>
-					<input type="checkbox" id="answer10"> <label
-						for="answer10">공지사항<em></em></label>
-					<div>
-						<p>우리는 프로젝트 중입니다.</p>
+						<p>${an.adminnotice_cont}</p>
 					</div>
 				</div>
 			</c:forEach>
 		</c:if>
 			
-		<c:if test="${empty nlist}">
+		<c:if test="${empty anlist}">
 			<input type="checkbox" id="emptynotice"> <label
 				for="emptynotice">공지사항이 없습니다.<em></em></label>
 			<div>

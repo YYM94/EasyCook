@@ -31,7 +31,7 @@ SimpleDateFormat sf = new SimpleDateFormat("yy.MM.dd. a. hh.mm");
 				<fieldset>
 					<legend class="hidden">검색</legend>
 					<label class="hidden">검색분류</label> <select name="f">
-						<option value="titie" <c:if test="${find_field == 'title'}"> ${'selected'}</c:if>>제목</option>
+						<option value="titie" <c:if test="${find_field == 'adminnnotice_title'}"> ${'selected'}</c:if>>제목</option>
 
 					</select> <label class="hidden">검색어</label> 
 				<input type="text" name="find_name" value="${find_name}" placeholder="검색어를 입력해주세요." /> 
