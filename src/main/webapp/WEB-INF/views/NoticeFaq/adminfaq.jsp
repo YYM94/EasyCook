@@ -31,12 +31,12 @@ SimpleDateFormat sf = new SimpleDateFormat("yy.MM.dd. a. hh.mm");
 				<fieldset>
 					<legend class="hidden">검색</legend>
 					<label class="hidden">검색분류</label> <select name="f">
-						<option value="titie">제목</option>
+						<option value="titie" <c:if test="${find_field == 'title'}"> ${'selected'}</c:if>>제목</option>
 
-					</select> <label class="hidden">검색어</label> <input type="text" name="q"
-						value="" placeholder="검색어를 입력해주세요." /> <input
-						class="btn btn-search" type="submit" value="검색" /> <input
-						class="write" type="button" value="FAQ등록"
+					</select> <label class="hidden">검색어</label> 
+				<input type="text" name="find_name" value="${find_name}" placeholder="검색어를 입력해주세요." /> 
+				 <input type="submit" value="검색" /> 
+				 <input class="write" type="button" value="FAQ등록"
 						onclick="location.href='faqwrite'" />
 				</fieldset>
 			</form>
@@ -44,20 +44,28 @@ SimpleDateFormat sf = new SimpleDateFormat("yy.MM.dd. a. hh.mm");
 
 		<div class="faqtitle">
 			<!-- <b>제목</b> <b>작성자</b> <b>날짜</b> -->
-			<div id=title1>번호</div>
-			<div id=title2>작성자</div>
-			<div id=title3>등록날짜</div>
-			<div id=title4>관리</div>
+				<div id=title1>번호</div>
+				<div id=title2>제목</div>
+				<div id=title3>작성자</div>
+				<div id=title4>등록날짜</div>
+				<div id=title5>관리</div>
 		</div>
 
 		<div id="faq_cont">
-			<%
-				for (int i = 10; i >= 1; i--) {
-			%>
+		<c:if test="${!empty aflist}">
+			<c:forEach var="af" items="${aflist}">
 			<div id="faq_cont_list">
-				<div id="con1"><%=i%></div>
-				<div id="con2">관리자</div>
-				<div id="con3"><%=sf.format(nowTime)%></div>
+				<div id="con1">${af.adminfaq_no}</div>
+				<div id="con2">
+				<c:if test="${fn:length(af.adminfaq_title)>9}">
+ 				${fn:substring(af.adminfaq_title,0,16)}...
+				</c:if>
+				<c:if test="${fn:length(af.adminfaq_title)<9}">
+				${af.adminfaq_title}
+				</c:if>
+				</div>
+				<div id="con3">관리자</div>
+				<div id="con4">${af.adminfaq_date}</div>
 				<div id="admin_button">
 					<div id="button">
 						<input type="button" value="수정" onclick="location.href='faqEdit'" />
@@ -65,9 +73,12 @@ SimpleDateFormat sf = new SimpleDateFormat("yy.MM.dd. a. hh.mm");
 					</div>
 				</div>
 			</div>
-			<%
-				}
-			%>
+			</c:forEach>
+		</c:if>
+		
+		<c:if test="${empty aflist}">
+				<div id="con5" style="text-align:center;margin-bottom: 100px;">FAQ가 없습니다.</div>
+			</c:if>
 			<div id="bList_paging" style="text-align: center;">
     <%-- 검색전 페이징 --%>
 <c:if test="${(empty find_field) && (empty find_name)}">    

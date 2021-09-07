@@ -22,5 +22,10 @@ public class adminFaqDAOImpl implements adminFaqDAO {
 	public List<adminFaqVO> getFaqList(adminFaqVO af) {
 		return this.sqlSession.selectList("adfaq_list",af);
 	}
+	@Override
+	public void insertFaq(adminFaqVO af) {
+		this.sqlSession.insert("adfaq_in",af);
+		
+	}
 
 }

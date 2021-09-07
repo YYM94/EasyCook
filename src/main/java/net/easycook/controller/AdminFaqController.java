@@ -12,9 +12,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import net.easycook.service.adminFaqService;
+import net.easycook.vo.FaqBoardVO;
 import net.easycook.vo.adminFaqVO;
 
 
@@ -68,14 +70,14 @@ public class AdminFaqController {
 		return amw;
 	}
 	
-	@RequestMapping("/faqwrite")
+	@RequestMapping(value="/faqwrite",method=RequestMethod.GET)
 	public ModelAndView faqwrite(Model m, HttpServletResponse response, HttpServletRequest request) 
 		throws Exception{
 		response.setContentType("text/html;charset=UTF-8");
 		PrintWriter out=response.getWriter();
 		HttpSession session=request.getSession();
-		String admin_id2 =(String)session.getAttribute("admin_id2");
-		if(admin_id2==null) {
+		String easycook_admin =(String)session.getAttribute("easycook_admin");
+		if(easycook_admin !=null) {
 			out.println("<script>");
 			out.println("alert('다시 로그인하세요');");
 			out.println("location='/'");
@@ -90,5 +92,12 @@ public class AdminFaqController {
 			return mvf;
 		}
 		return null;
+	}
+	
+	@RequestMapping(value="/faqwrite_ok", method=RequestMethod.POST)
+	public ModelAndView faqwrite_ok(@ModelAttribute adminFaqVO af ,HttpServletRequest request)throws Exception{
+		this.adminfaqService.insertFaq(af);
+		
+		return new ModelAndView("redirect:/adminfaq");
 	}
 }

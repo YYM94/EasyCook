@@ -10,4 +10,6 @@ public interface adminFaqDAO {
 
 	List<adminFaqVO> getFaqList(adminFaqVO af);
 
+	void insertFaq(adminFaqVO af);
+
 }
