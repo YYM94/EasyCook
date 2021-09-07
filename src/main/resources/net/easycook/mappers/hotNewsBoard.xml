@@ -6,8 +6,8 @@
  
 <mapper namespace="HotNewsBoard">
 	<insert id="insert_hn" parameterType="hb">
-		insert into hotNewsBoard (hno, hwriter, htitle, hcont, hlink, regdate) 
-		values(hno_seq.nextval, 'admin', #{htitle}, #{hcont}, #{hlink}, sysdate)
+		insert into hotNewsBoard (hno, hwriter, htitle, hcont, hlink, hfile, regdate) 
+		values(hno_seq.nextval, 'admin', #{htitle}, #{hcont}, #{hlink}, #{hfile}, sysdate)
 	</insert>
 	
 	<select id="count" resultType="int">

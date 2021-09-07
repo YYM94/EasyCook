@@ -119,7 +119,7 @@ public class RecipeBoardController {
 		}
 		//파일 이름을 1.jpg, 2.jpg...등으로 저장
 		int fileNameIndex = 1;
-		for(MultipartRequest f:list) {
+		for(MultipartFile f:list) {
 			int exIndex = f.getOriginalFilename().lastIndexOf(".");
 			//String fileEx = f.getOriginalFilename().substring(exIndex+1); //일단 jpg로만 저장함
 			File target = new File(path, fileNameIndex + ".jpg");
