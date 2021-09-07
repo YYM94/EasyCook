@@ -1,9 +1,15 @@
 package net.easycook.dao;
 
-import net.easycook.vo.AdminVO;
+import java.util.List;
+
+import net.easycook.vo.MemberVO;
 
 public interface AdminDAO {
 
-	AdminVO adminloginCheck(String admin_id);
+	int getListCount(MemberVO m);
+
+	List<MemberVO> getMemberList(MemberVO m);
+
+	void editM(MemberVO m);
 
 }

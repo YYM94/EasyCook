@@ -1,11 +1,13 @@
 package net.easycook.service;
 
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import net.easycook.dao.AdminDAO;
-import net.easycook.vo.AdminVO;
+import net.easycook.vo.MemberVO;
 
 @Service
 public class AdminServiceImpl implements AdminService {
@@ -14,8 +16,18 @@ public class AdminServiceImpl implements AdminService {
 	private AdminDAO adminDAO;
 
 	@Override
-	public AdminVO adminloginCheck(String admin_id) {
-		return this.adminDAO.adminloginCheck(admin_id);
+	public int getListCount(MemberVO m) {
+		return this.adminDAO.getListCount(m);
+	}
+
+	@Override
+	public List<MemberVO> getMemberList(MemberVO m) {
+		return this.adminDAO.getMemberList(m);
+	}
+
+	@Override
+	public void editM(MemberVO m) {
+		this.adminDAO.editM(m);
 	}
 
 

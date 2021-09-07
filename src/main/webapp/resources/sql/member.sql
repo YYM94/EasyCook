@@ -46,4 +46,3 @@ values('admin01', 'admin01', 'hanmail.net', 'admin01', 'admin01', '관리자', '
 
 
 
-
