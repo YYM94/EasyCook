@@ -186,10 +186,13 @@
 			<div id="top_login_join_btn">
 				<form method="post" action="member_logout">
 					<a href="mypage_view">마이페이지</a> 
-					<br> 
-					<a href="admin">관리자 페이지</a>
-					<br>
+					<br> 			
+						<c:if test="${state == 3}">
+							<a href="admin">관리자 페이지</a>
+							<br>
+						</c:if>
 					<input type="submit" value="logout" />
+					
 				</form>
 			</div>
 			

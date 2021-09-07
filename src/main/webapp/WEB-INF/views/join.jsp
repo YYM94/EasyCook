@@ -152,8 +152,8 @@
 						<div id="join_pw_q" class="join_title">
 							<strong><label for="join_pw_q_box">비밀번호 확인 질문</label></strong>
 							<select name="join_pw_q_box" id="join_pw_q_box" class="form-control" onclick="joinQ();">
-								<c:forEach var="pwdQ" items="${qwdQ}">
-									<option value="${qwdQ}">${qwdQ}</option>
+								<c:forEach var="pwdQ" items="${pwdQ}">
+									<option value="${pwdQ}">${pwdQ}</option>
 								</c:forEach>
 							</select>
 							<br/>

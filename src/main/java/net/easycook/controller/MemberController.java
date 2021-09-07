@@ -41,7 +41,7 @@ public class MemberController {
 		
 		if(dm == null) {
 			out.println("<script>");
-			out.println("alert('가입 안된 회원입니다!');");
+			out.println("alert('확인되지 않은 회원입니다!');");
 			out.println("history.back();");
 			out.println("</script>");
 		}else {
@@ -52,11 +52,13 @@ public class MemberController {
 				out.println("</script>");
 			}else {
 				session.setAttribute("id", login_id_box);
+				session.setAttribute("state", dm.getJoin_state());
 				return "index"; //로그인 인증 후 메인화면으로 이동
 			}
 		}
 		return null;
 	}
+
 	
 	//로그인 인증후 메인화면
 	@GetMapping("/index")

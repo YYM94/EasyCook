@@ -8,5 +8,5 @@ create table easycook_admin(
 
 select * from easycook_admin;
 
-drop table easycook_admin;
+insert into easycook_admin values(1, 'admin01', 'admin01', '관리자01', '2021-09-06');
 

@@ -14,6 +14,6 @@
  
  <!-- 로그인 인증 -->
  <select id="login_ck" resultType="m">
- 	select * from easycook_member where join_id_box=#{join_id_box} and join_state=1 <!-- 가입회원만 -->
+ 	select * from easycook_member where join_id_box=#{join_id_box} and (join_state=1 or join_state=3) <!-- 가입회원만 -->
  </select>
  </mapper>

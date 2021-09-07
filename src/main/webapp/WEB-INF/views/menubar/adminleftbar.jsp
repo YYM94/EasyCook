@@ -1,14 +1,17 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
-<link rel="stylesheet" type="text/css"
-	href="./resources/css/adminleftbar.css" />
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<link rel="stylesheet" type="text/css" href="./resources/css/adminleftbar.css" />
 <div id="menubar_wrap">
 
 	<div id="top_menubar">
 		<div id="top_login_join_btn">
-			<a href="login">Login</a>&nbsp;&nbsp; <a
-				href="join">Join</a> <br> <a
-				href="/controller/mypage_view">마이페이지</a> <br>
-			<a href="admin">관리자 페이지</a>
+			<form method="post" action="member_logout">
+				<a href="login">Login</a>&nbsp;&nbsp; 
+				<a href="join">Join</a> <br> 
+				<a href="/controller/mypage_view">마이페이지</a> <br>
+				<a href="admin">관리자 페이지</a><br>
+				<input type="submit" value="logout" />
+			</form>
 		</div>
 
 	</div>
@@ -19,7 +22,7 @@
 				<a href="/easycook"><img
 					src="./resources/images/logo.png" /></a>
 			</div>
-			<div id="left_sessionInfo">로그인 정보</div>
+			<div id="left_sessionInfo">${id}님 로그인 되었습니다.</div>
 			<div id="left_menulink">
 				<div id="left_notice">
 					<input type="checkbox" id="answer01"> 
