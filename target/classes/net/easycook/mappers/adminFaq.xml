@@ -3,14 +3,16 @@
 <!DOCTYPE mapper
  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
- 
- <mapper namespace="adminFaq">
- 	<!-- 게시판 목록 -->
+
+<mapper namespace="adminFaq">
+	<!-- 게시판 목록 -->
 	<select id="adfaq_list" resultType="af" parameterType="af">
 		<!-- resultType은 반환 타입,parameterType은 전달인자 타입 (생략가능) -->
 		select * from
-		(select rowNum rNum,adminfaq_no,adminfaq_name,adminfaq_title,adminfaq_date
-		from adminFaq)
+		(select rowNum
+		rNum,adminfaq_no,adminfaq_name,adminfaq_title,adminfaq_date
+		from
+		adminFaq)
 		where rNum &gt;= #{startrow} and rNum &lt;= #{endrow}
 		<!-- &gt;은 ~보다 크다(>), &lt;은 ~보다 작다(<) -->
 	</select>
@@ -31,6 +33,13 @@
 			</if>
 		</where>
 	</select>
-	
- </mapper>
+
+	<insert id="adfaq_in" parameterType="af">
+		insert into adminFaq (adminfaq_no,adminfaq_name,adminfaq_title,
+		adminfaq_cont,adminfaq_date)
+		values(adminfaq_no_seq.nextval,#{adminfaq_name,jdbcType=VARCHAR},#{adminfaq_title,jdbcType=VARCHAR},
+		#{adminfaq_cont},sysdate)
+	</insert>
+
+</mapper>
  

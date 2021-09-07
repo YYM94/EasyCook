@@ -12,9 +12,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import net.easycook.service.adminNotService;
+import net.easycook.vo.adminFaqVO;
 import net.easycook.vo.adminNoticeVO;
 
 @Controller
@@ -66,14 +68,14 @@ public class AdminNoticeController {
 		return awm;
 	}
 	
-	@RequestMapping("/noticewrite")
+	@RequestMapping(value="/noticewrite",method=RequestMethod.GET)
 	public ModelAndView noticewrite(Model m, HttpServletResponse response, HttpServletRequest request) 
 		throws Exception{
 		response.setContentType("text/html;charset=UTF-8");
 		PrintWriter out=response.getWriter();
 		HttpSession session=request.getSession();
-		String admin_id2 =(String)session.getAttribute("admin_id2");
-		if(admin_id2==null) {
+		String easycook_admin =(String)session.getAttribute("easycook_admin");
+		if(easycook_admin!=null) {
 			out.println("<script>");
 			out.println("alert('다시 로그인하세요');");
 			out.println("location='/'");
@@ -88,5 +90,12 @@ public class AdminNoticeController {
 			return mv;
 		}
 		return null;
+	}
+	
+	@RequestMapping(value="/noticewrite_ok", method=RequestMethod.POST)
+	public ModelAndView noticewrite_ok(@ModelAttribute adminNoticeVO an ,HttpServletRequest request)throws Exception{
+		this.adminnotService.insertNot(an);
+		
+		return new ModelAndView("redirect:/adminnotice");
 	}
 }

@@ -22,5 +22,10 @@ public class adminNotDAOImpl implements adminNotDAO {
 	public List<adminNoticeVO> getNotList(adminNoticeVO an) {
 		return this.sqlSession.selectList("adnot_list",an);
 	}
+	@Override
+	public void insertNot(adminNoticeVO an) {
+		this.sqlSession.insert("adnot_in",an);
+		
+	}
 
 }

@@ -159,7 +159,11 @@ $("li:eq(3)").css("border","1px solid #ff0000")
 					<option value="search_name">회원이름</option>
 					<option value="search_join">회원상태</option>
 					</select> -->
-					<label class="hidden">검색어</label> <input type="text" name="q" value="" placeholder="검색어를 입력해주세요." /> 
+					<select name="find_field">
+						<option value="htitle" <c:if test="${find_field == 'htitle' }"> ${'selected' }</c:if>>제목</option>
+						<option value="hcont" <c:if test="${find_field == 'hcont' }"> ${'selected' }</c:if>>내용</option>
+					</select>
+					<label class="hidden">검색어</label> <input type="text" name="find_name" id="find_name" value="${find_name }" placeholder="검색어를 입력해주세요." /> 
 					<input class="btn btn-search" type="submit" value="검색" /> 
 				</fieldset>
 			</div>
@@ -218,8 +222,10 @@ $("li:eq(3)").css("border","1px solid #ff0000")
 					</c:if>					
 			</div>   	
     	</div>
+    	</section>
+    	
     </div>    
-    </section>
+    
     
 
 
