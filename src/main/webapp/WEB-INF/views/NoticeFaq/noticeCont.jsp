@@ -30,7 +30,7 @@
 <form method="post" action="noticeEdit_ok" onsubmit="return notice_check();">
 	<div class="board_wrap">
 		<div class="board_title">
-			<strong>공지사항 수정</strong>
+			<strong>공지사항 내용</strong>
 		</div>
 		<div class="board_write_wrap">
 			<div class="board_write">

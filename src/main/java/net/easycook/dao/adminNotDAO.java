@@ -12,4 +12,6 @@ public interface adminNotDAO {
 
 	void insertNot(adminNoticeVO an);
 
+	void updateNot(adminNoticeVO an);
+
 }

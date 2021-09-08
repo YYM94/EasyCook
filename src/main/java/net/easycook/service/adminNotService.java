@@ -12,4 +12,6 @@ public interface adminNotService {
 
 	void insertNot(adminNoticeVO an);
 
+	void updateNot(adminNoticeVO an);
+
 }

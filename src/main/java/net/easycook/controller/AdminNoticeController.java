@@ -98,6 +98,14 @@ public class AdminNoticeController {
 		
 		return new ModelAndView("redirect:/adminnotice");
 	}
-	
-	@RequestMapping(value="/noticeEdit_ok", method=RequestMethod.POST)
+
+	@RequestMapping(value="/noticeEdit", method=RequestMethod.GET)
+	public String noticeEdit(adminNoticeVO an, Model m, HttpServletRequest request) throws Exception{
+		String adminnotice_title = request.getParameter("adminnotice_title");
+		String adminnotice_cont = request.getParameter("adminnotice_cont");
+		adminnotService.updateNot(an);
+		
+		return null;
+		
+	}
 }
