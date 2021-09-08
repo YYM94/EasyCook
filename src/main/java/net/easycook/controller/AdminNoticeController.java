@@ -98,4 +98,6 @@ public class AdminNoticeController {
 		
 		return new ModelAndView("redirect:/adminnotice");
 	}
+	
+	@RequestMapping(value="/noticeEdit_ok", method=RequestMethod.POST)
 }

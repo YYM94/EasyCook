@@ -10,7 +10,7 @@
 		<!-- resultType은 반환 타입,parameterType은 전달인자 타입 (생략가능) -->
 		select * from
 		(select rowNum
-		rNum,adminnotice_no,adminnotice_name,adminnotice_title,adminnotice_date
+		rNum,adminnotice_no,adminnotice_name,adminnotice_title,adminnotice_date,adminnotice_cont
 		from adminNotice)
 		where rNum &gt;= #{startrow} and rNum &lt;= #{endrow}
 		<!-- &gt;은 ~보다 크다(>), &lt;은 ~보다 작다(<) -->
@@ -36,7 +36,7 @@
 	<insert id="adnot_in" parameterType="an">
 		insert into adminNotice (adminnotice_no,adminnotice_name,adminnotice_title,
 		adminnotice_cont,adminnotice_date)
-		values(adminnotice_no_seq.nextval,#{adminnotice_name,jdbcType=VARCHAR},#{adminnotice_title,jdbcType=VARCHAR},
+		values(adminnotice_no_seq.nextval,#{adminnotice_name,jdbcType=VARCHAR},#{adminnotice_title},
 		#{adminnotice_cont},sysdate)
 	</insert>
 

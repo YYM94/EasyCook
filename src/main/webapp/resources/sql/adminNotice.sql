@@ -6,8 +6,13 @@ create table adminNotice(
  ,adminnotice_date date --공지등록날짜
 );
 
+select * from adminNotice
+
 --g_no_seq 시퀀스 생성
 create sequence adminnotice_no_seq
 start with 1
 increment by 1
 nocache;
+
+update ADMINNOTICE set adminnotice_title='수정이요' where adminnotice_no=3;
+

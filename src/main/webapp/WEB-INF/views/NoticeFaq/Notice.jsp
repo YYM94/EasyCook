@@ -5,7 +5,19 @@
 <title>공지사항</title>
 <link rel="stylesheet" type="text/css" href="./resources/css/gong.css" />
 <script src="./resources/js/jquery.js"></script>
-
+<script>
+$(function(){
+	$("dd").hide();
+	
+	$("dt").click(function(){
+		if( $(this).next().css("display")=="none"){
+			
+			$(this).next().slideDown("fast");
+		}else
+			$(this).next().slideUp("fast");
+	});
+});
+</script>
 
 <%@ include file="../menubar/top_left_menubar.jsp"%>
 <%--
@@ -23,7 +35,6 @@ if (request.getParameter("page") == null) {
 
 <div id="GongPage">
     <div class="board_title">공지사항</div>
-    <div id="nList">글개수:${listcount}개</div>
 	<div class="search-form">
 		<form class="table-form">
 			<fieldset>
@@ -49,11 +60,12 @@ if (request.getParameter("page") == null) {
 		<c:if test="${!empty anlist}">
 			<c:forEach var="an" items="${anlist}">
 				<div class="gong">
-					<input type="checkbox" id="answer01"> <label
-						for="answer01">${an.adminnotice_title}<em></em></label>
-					<div>
-						<p>${an.adminnotice_cont}</p>
-					</div>
+					<dl>
+						<dt><p class="title">${an.adminnotice_title}</p><p class="iconDiv"><img src="https://happyjung.diskn.com/data/lecture/icon_jquery_faq2_icon_arrow.png"></p></dt>
+						<dd>
+							<p>${an.adminnotice_cont}</p>
+						</dd>
+					</dl>
 				</div>
 			</c:forEach>
 		</c:if>

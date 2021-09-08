@@ -19,7 +19,34 @@ body{
 }
 .gong{
 	width:50%;
-	margin: 5% 0px 0px 25%;
+	margin: 0px 0px 0px 25%;
+}
+
+div dl dt{
+	background:white; padding:5px 12px; cursor:pointer;
+	border-top:1px solid #000000;
+	border-bottom:1px solid #000000;	
+}
+div dl dt p.title{
+	margin:0;
+	font-size:1.2em;
+}
+div dl dt:hover{
+	background:lightgray;
+}
+.iconDiv { 
+	margin:0;
+	position:relative; right:-95%; top:50%; 
+-webkit-transform:translateY(-50%); 
+-moz-transform:translateY(-50%); -o-transform:translateY(-50%); -ms-transform:translateY(-50%); 
+transform:translateY(-50%); }
+div dl dd{
+	margin:0;
+	padding:10px;
+	text-align:center;	
+	background:#ebf8ff;
+	font-size:11px;
+	border-bottom:1px solid rgba(0, 0, 0, .5);
 }
 /* 체크박스 표시 */
 input[id*="answer"]{
