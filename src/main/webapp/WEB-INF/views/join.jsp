@@ -78,7 +78,7 @@
 	<div id="container">
 		<div id="panel">
 			<div id="panel-body">
-				<form method="post" name="reg_form" onsubmit="return checks();" onreset="return joinreset();" style="margin-bottom: 0;">
+				<form method="post" name="m" action="join_ok" onreset="return joinreset();" style="margin-bottom: 0;">
 					<div id="panel-header">
 						<a href="/easycook" id="join_header_title_1"><span>EasyCook!</span></a><span id="join_header_title_2"> 회원가입</span>
 					</div>
@@ -170,13 +170,13 @@
 						<div id="join_post_1" class="join_title">
 							<strong>주소</strong>
 							<input type="text" name="join_post_box_1" id="join_post_box_1" class="form-control" 
-							placeholder="우편번호" disabled />&nbsp;&nbsp;
+							placeholder="우편번호" readonly />&nbsp;&nbsp;
 							<input type="button" id="join_post_btn" value="우편번호찾기" onclick="Postcode()" />
 						</div>
 						
 						<div id="join_post_2" class="join_title">
 							<input type="text" name="join_post_box_2" id="join_post_box_2" class="form-control" 
-							placeholder="도로명 주소" disabled />
+							placeholder="도로명 주소" readonly />
 						</div>
 						
 						<div id="clear"></div>

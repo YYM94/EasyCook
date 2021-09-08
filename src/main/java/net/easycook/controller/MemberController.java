@@ -45,7 +45,7 @@ public class MemberController {
 			out.println("history.back();");
 			out.println("</script>");
 		}else {
-			if(!dm.getJoin_pw_box().equals(login_pwd_box)) {
+			if(!dm.getJoin_pw_box().equals(PwdChange.getPassWordToXEMD5String(login_pwd_box))) {
 				out.println("<script>");
 				out.println("alert('비번이 다릅니다!');");
 				out.println("history.go(-1);");
@@ -111,11 +111,16 @@ public class MemberController {
 	//아이디 중복검색
 	
 	//회원가입 저장
-	@PostMapping("join_ok")
+	@PostMapping("/join_ok")
 	public String join_ok(MemberVO m) {
 		m.setJoin_pw_box(PwdChange.getPassWordToXEMD5String(m.getJoin_pw_box()));
 		this.memberService.insertMember(m); //회원저장
 		return "redirect:/login";
 	}
+	
+	//아이디찾기
+	
+	//비밀번호재설정
+	
 	
 }

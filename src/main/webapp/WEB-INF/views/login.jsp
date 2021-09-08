@@ -95,7 +95,7 @@
 						<div id="login_pwd" class="login_title">
 							<!-- 로그인 폼 비밀번호 입력 라인 -->
 							<strong><label for="login_pwd_box">비밀번호</label></strong> 
-							<input name="login_pwd_box" id="login_pwd_box" class="login_control"
+							<input type="password" name="login_pwd_box" id="login_pwd_box" class="login_control"
 								maxlength="20" placeholder="비밀번호를 입력하세요." autocomplete="new-password"/>
 						</div>
 
@@ -129,10 +129,9 @@
 				<div id="login_find_id_table">	
 					<div id="login_find_id_q">
 						<select name="find_q" id="find_q" onclick="loginQ();">
-								<option value="">질문을 선택하세요.</option>
-								<option value="1">어머니의 성함은?</option>
-								<option value="2">아버지의 성함은?</option>
-								<option value="3">나의 출신 초등학교는?</option>
+								<c:forEach var="pwdQ" items="${pwdQ}">
+									<option value="${pwdQ}">${pwdQ}</option>
+								</c:forEach>
 							</select>
 						<input type="text" name="login_find_id_q_a" id="login_find_id_q_a" class="login_find_id_control" />
 					</div>
@@ -178,10 +177,9 @@
 					<div id="login_find_pwd_q">
 						<!-- <b id="find_tel_pwd"><label for="login_find_pwd_tel_box">가입시 선택한 질문</label></b> -->
 						<select name="find_pw_q" id="find_pw_q" onclick="loginQ_pw();">
-								<option value="">질문을 선택하세요.</option>
-								<option value="1">어머니의 성함은?</option>
-								<option value="2">아버지의 성함은?</option>
-								<option value="3">나의 출신 초등학교는?</option>
+								<c:forEach var="pwdQ" items="${pwdQ}">
+									<option value="${pwdQ}">${pwdQ}</option>
+								</c:forEach>
 							</select>
 						<input type="text" name="login_find_pwd_q_a"
 							id="login_find_pwd_q_a" class="login_find_pwd_control" />

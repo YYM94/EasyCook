@@ -100,8 +100,7 @@ public class AdminController {
 			out.println("location='login';");
 			out.println("</script>");
 		}else {
-			m.setJoin_pw_box(PwdChange.getPassWordToXEMD5String(
-					m.getJoin_pw_box()));//비번을 암호화
+			m.setJoin_pw_box(PwdChange.getPassWordToXEMD5String(m.getJoin_pw_box()));//비번을 암호화
 			this.adminService.editM(m);//회원정보수정
 
 			out.println("<script>");

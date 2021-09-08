@@ -63,7 +63,7 @@
 						<div id="con3">${m.join_name_box}</div>
 						<div id="con4"><c:if test="${m.join_state == 1}">가입</c:if><c:if test="${m.join_state == 3}">관리자</c:if></div>
 						<div id="con5">${fn:substring(m.join_date,0,10)}</div>
-						<input type="button" value="관리" onclick="location='admin_member_edit'" />
+						<input type="button" value="관리" onclick="location='admin_member_edit?join_id_box=${m.join_id_box}&page=${page}&state=edit';" />
 						<br>
 					</div>
 					</c:forEach>
