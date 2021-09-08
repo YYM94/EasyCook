@@ -20,7 +20,7 @@ add imgFolder varchar2(58);
 alter table recipeboard
 rename column recipeProcess to imgIndex;
 
-select * from recipeboard where no=405;
+select * from recipeboard order by no desc;
 
 delete from recipeboard;
 

@@ -43,5 +43,10 @@ public class RecipeBoardDAOImpl implements RecipeBoardDAO {
 	public void deletePost(int post) {
 		sqlSession.delete("del_post", post);
 	}
+
+	@Override
+	public void editPost(RecipeBoardVO rbv) {
+		sqlSession.update("edit_post", rbv);
+	}
 	
 }

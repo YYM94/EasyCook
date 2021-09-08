@@ -18,4 +18,6 @@ public interface RecipeBoardDAO {
 
 	void deletePost(int post);
 
+	void editPost(RecipeBoardVO rbv);
+
 }

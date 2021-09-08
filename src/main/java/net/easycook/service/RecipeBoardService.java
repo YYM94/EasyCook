@@ -16,4 +16,6 @@ public interface RecipeBoardService {
 
 	void deletePost(int post);
 
+	void editPost(RecipeBoardVO rbv);
+
 }

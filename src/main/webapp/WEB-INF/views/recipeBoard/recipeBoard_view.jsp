@@ -47,7 +47,13 @@
 <c:set var="cContent" value="댓글 내용입니다."/><!-- 댓글 내용 -->
 <c:set var="cDate" value="2021-07-22"/><!-- 댓글 작성날짜 -->
 
-<c:set var="cPage" value="${ param.cpage }"/><!-- 현재 댓글 페이지 -->
+<!-- 현재 댓글 페이지 -->
+<c:if test="${empty cpage}">
+	<c:set var="cPage" value="1"/>
+</c:if>
+<c:if test="${not empty cpage}">
+	<c:set var="cPage" value="${ param.cpage }"/>
+</c:if>
 
 
 <script>
@@ -178,6 +184,9 @@
 					</c:if>
 					<c:if test="${ lastcPage > cPages }">
 						<c:set var="startcPage" value="${ cPages - 4 }"/>
+						<c:if test="${ cPages-4 < 1 }">
+							<c:set var="startcPage" value="1"/>
+						</c:if>
 						<c:set var="lastcPage" value="${ cPages }"/>
 					</c:if>
 					

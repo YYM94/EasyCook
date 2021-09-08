@@ -43,5 +43,10 @@ public class RecipeBoardServiceImpl implements RecipeBoardService {
 	public void deletePost(int post) {
 		recipeBoardDao.deletePost(post);
 	}
+
+	@Override
+	public void editPost(RecipeBoardVO rbv) {
+		recipeBoardDao.editPost(rbv);
+	}
 	
 }
