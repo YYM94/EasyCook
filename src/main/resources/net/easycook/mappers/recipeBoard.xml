@@ -40,4 +40,9 @@
 		delete from RECIPEBOARD where no=#{post}
 	</delete>
  
+ 	<update id="edit_post" parameterType="rb">
+ 		update recipeBoard set title=#{title}, videoLink=#{videoLink}, imgIndex=#{imgIndex}, textPack=#{textPack}, moddate=sysdate
+ 		where no=#{no}
+ 	</update>
+ 
 </mapper>
