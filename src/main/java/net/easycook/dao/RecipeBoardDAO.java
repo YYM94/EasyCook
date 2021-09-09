@@ -27,4 +27,6 @@ public interface RecipeBoardDAO {
 
 	List<RecipeBoardCommentVO> getCommentList(RecipeBoardCommentVO rbc);
 
+	void deleteComment(int cno);
+
 }

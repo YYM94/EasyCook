@@ -73,9 +73,13 @@
  
  	<select id="get_rbc_list" resultType="rbc">
 		select * 
-		from (select rowNum rNum, cwriterid, cont, regdate 
+		from (select rowNum rNum, cno, cwriterid, cont, regdate 
 				from(select * from RECIPEBOARDCOMMENT where rno=#{rno} order by cno desc))
 		where rNum &gt;= #{startNum} and rNum &lt;= #{endNum}
  	</select>
+ 	
+ 	<delete id="del_comment">
+ 		delete from recipeBoardComment where cno=#{cno}
+ 	</delete>
  
 </mapper>

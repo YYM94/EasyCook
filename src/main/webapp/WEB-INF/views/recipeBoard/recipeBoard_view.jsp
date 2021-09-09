@@ -86,6 +86,13 @@
 			return false;
 		}
 	}
+	
+	function removeComment(t){
+		if(!confirm("댓글을 삭제하시겠습니까?")){
+			return false;
+		}
+		
+	}
 </script>
 
 
@@ -153,13 +160,21 @@
 					<c:forEach var="rbc" items="${ rbcList }">
 						<div class="commentBox">
 							<div class="commentWriter">${ rbc.cwriterid }</div>
-							<div class="commentContent">${ rbc.cont }</div>
+								<c:set var="commentDes" value="${fn:replace(rbc.cont, newLine,'<br/>')}"/>
+							<div class="commentContent">${ commentDes }</div>
 							<div class="commentDate">
 								${ rbc.regdate }
-								<c:if test="${ rbc.cwriterid == id || state == 3  }">
-									<input type="button" value="삭제"/>
-								</c:if>
 							</div>
+							<c:if test="${ rbc.cwriterid == id || state == 3  }">
+								<form class="commentRemoveBtn" method="post" action="commentDelete" onsubmit="return removeComment();">
+									<input type="hidden" name="page" value="${ page }"/>
+									<input type="hidden" name="post" value="${ rb.no }"/>
+									<input type="hidden" name="cno" value="${ rbc.cno }"/>
+									<input type="hidden" name="searchText" value="${ searchText }"/>
+									<input type="submit" value="삭제"/>
+								</form>
+							</c:if>
+							
 						</div>
 					</c:forEach>
 				</div>

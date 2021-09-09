@@ -363,4 +363,22 @@ public class RecipeBoardController {
 		return m;
 	}
 	
+	@RequestMapping("commentDelete")
+	public ModelAndView commentDelete(HttpServletRequest req) {
+		ModelAndView m = new ModelAndView();
+
+		int cno = Integer.parseInt(req.getParameter("cno"));
+		recipeBoardService.deleteComment(cno);
+
+		int page = Integer.parseInt(req.getParameter("page"));
+		int post = Integer.parseInt(req.getParameter("post"));
+		String searchText = req.getParameter("searchText");
+		m.addObject("page", page);
+		m.addObject("post", post);
+		m.addObject("cpage", 1);
+		m.addObject("searchText", searchText);
+		m.setViewName("redirect:/recipeBoard_view");
+		return m;
+	}
+	
 }

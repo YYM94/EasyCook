@@ -119,12 +119,13 @@ body{
 .commentWriter{
 	float: left;
 	position: relative;
-	top:10px;
 	width: 130px;
     text-overflow: ellipsis;
     white-space: nowrap;
 	overflow: hidden;
 	margin-right: 20px;
+    margin-top: auto;
+    margin-bottom: auto;
 }
 .commentContent{
 	float: left;
@@ -137,7 +138,13 @@ body{
 .commentDate{
 	float: right;
 	position: relative;
-	top:10px;
+    margin-top: auto;
+    margin-bottom: auto;
+}
+.commentRemoveBtn{
+    margin-left: auto;
+    margin-top: auto;
+    margin-bottom: auto;
 }
 
 #commentPage{

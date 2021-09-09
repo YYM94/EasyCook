@@ -25,4 +25,6 @@ public interface RecipeBoardService {
 
 	List<RecipeBoardCommentVO> getCommentList(RecipeBoardCommentVO rbc);
 
+	void deleteComment(int cno);
+
 }

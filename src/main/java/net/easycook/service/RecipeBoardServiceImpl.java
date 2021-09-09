@@ -64,5 +64,10 @@ public class RecipeBoardServiceImpl implements RecipeBoardService {
 	public List<RecipeBoardCommentVO> getCommentList(RecipeBoardCommentVO rbc) {
 		return recipeBoardDao.getCommentList(rbc);
 	}
+
+	@Override
+	public void deleteComment(int cno) {
+		recipeBoardDao.deleteComment(cno);
+	}
 	
 }
