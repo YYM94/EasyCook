@@ -16,3 +16,4 @@ nocache;
 
 update ADMINNOTICE set adminnotice_title='수정이요' where adminnotice_no=3;
 
+delete from adminNotice where adminnotice_no = '3'

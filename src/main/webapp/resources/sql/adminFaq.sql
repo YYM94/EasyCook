@@ -6,6 +6,7 @@ create table adminFaq(
  ,adminfaq_date date --공지등록날짜
 );
 
+select * from adminFaq
 drop table adminFaq;
 
 select * from adminFaq

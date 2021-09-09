@@ -6,23 +6,23 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import net.easycook.dao.FaqDAO;
-import net.easycook.dao.adminFaqDAO;
+import net.easycook.dao.AdminFaqDAO;
 import net.easycook.vo.FaqBoardVO;
-import net.easycook.vo.adminFaqVO;
+import net.easycook.vo.AdminFaqVO;
 
 @Service
 public class FaqServiceImpl implements FaqService {
 	
 	@Autowired
-	private adminFaqDAO adminfaqDAO;
+	private AdminFaqDAO adminfaqDAO;
 
 	@Override
-	public int getListCount(adminFaqVO fb) {
+	public int getListCount(AdminFaqVO fb) {
 		return this.adminfaqDAO.getListCount(fb);
 	}
 
 	@Override
-	public List<adminFaqVO> getFaqList(adminFaqVO fb) {
+	public List<AdminFaqVO> getFaqList(AdminFaqVO fb) {
 		return this.adminfaqDAO.getFaqList(fb);
 	}
 
