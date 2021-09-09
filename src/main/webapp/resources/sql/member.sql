@@ -21,6 +21,7 @@ create table easycook_member(
 );
 
 select * from EASYCOOK_MEMBER;
+drop table EASYCOOK_MEMBER
 
 insert into EASYCOOK_MEMBER (join_id_box, join_email_1_box, join_email_2_box, join_pw_box, join_pw_check_box, join_name_box, join_nickname_box, join_tel_1_box, join_tel_2_box, join_tel_3_box, join_pw_q_box, join_pw_q_a_box, join_post_box_1, join_post_box_2, join_post_box_3, join_date, join_state) 
 values('test', 'test', 'naver.com', 'test', 'test', '테스트', '닉넴', '010', '1111', '2222', '어머니의 성함은?', '신사임당', '07741', '서울시 강남구 역삼동', '이지쿡빌라 202호', '2021-09-04', 1);

@@ -18,4 +18,8 @@ public interface HotNewsService {
 
 	List<HotNewsBoardVO> getBoardListView(HotNewsBoardVO hvo);
 
+	void editBoard(HotNewsBoardVO hvo);
+
+	void delBoard(int hno);
+
 }

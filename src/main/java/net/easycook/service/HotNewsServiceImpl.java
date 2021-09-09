@@ -47,4 +47,14 @@ public class HotNewsServiceImpl implements HotNewsService {
 	public List<HotNewsBoardVO> getBoardListView(HotNewsBoardVO hvo) {
 		return this.hotNewsDAO.getBoardListView(hvo);
 	}
+
+	@Override
+	public void editBoard(HotNewsBoardVO hvo) {
+		this.hotNewsDAO.editBoard(hvo);
+	}
+
+	@Override
+	public void delBoard(int hno) {
+		this.hotNewsDAO.delBoard(hno);
+	}
 }

@@ -56,14 +56,14 @@
 					<c:forEach var="h" items="${hlist }">
 						<tr id="admin_hn_list">
 							<td align="center">${h.hno }</td>
-							<td align="left"><a href="/easycook/admin_hotnews_cont?hno=${h.hno }&page=${page}&find_field=${find_field}&find_name=${find_name}" onclick="window.open('${h.hlink}')">${h.htitle}</a></td>
+							<td align="left"><a href="/easycook/admin_hotnews_cont?hno=${h.hno }&page=${page}&find_field=${find_field}&find_name=${find_name}&state=cont" onclick="window.open('${h.hlink}')">${h.htitle}</a></td>
 							<td align="center">${h.hwriter }</td>
 							<td align="center">${h.regdate }</td>							
 							<td align="center">${h.viewcnt }</td>
 							<td align="center">
 								<input type="button" value="조회" /> 
-								<input type="button" value="수정" onclick="location.href='/easycook/admin_hotnews_edit';" /> 
-								<input type="button" value="삭제" />
+								<input type="button" value="수정" onclick="location='/easycook/admin_hotnews_edit?page=${page }&hno=${h.hno}&find_field=${find_field }&find_name=${find_name }';" /> 
+								<input type="button" value="삭제" onclick="location='/easycook/admin_hotnews_del?page=${page }&hno=${h.hno}&find_field=${find_field }&find_name=${find_name }';" />
 							</td>
 						</tr>
 					</c:forEach>
@@ -123,7 +123,7 @@
 				
 				<%-- 쪽번호 출력부분 --%>
 				<c:forEach var="p" begin="${startpage }" end="${endpage }" step="1">
-					<c:if test="${p == page }"><${p }></c:if>					
+					<c:if test="${p == page }">${p }</c:if>					
 					<c:if test="${p != page }">
 						<a href="admin_hotnews_list?page=${p }&find_field=${find_field}&find_name=${find_name}">${p }</a>&nbsp;
 					</c:if>
@@ -137,8 +137,8 @@
 				</c:if>
 			</c:if>		
 		</div>
+		</div>
 	</form>
-
 </body>
 </html>	
 

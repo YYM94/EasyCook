@@ -44,4 +44,14 @@ public class HotNewsDAOImpl implements HotNewsDAO {
 	public List<HotNewsBoardVO> getBoardListView(HotNewsBoardVO hvo) {
 		return this.sqlSession.selectList("list_hnv", hvo);
 	}
+
+	@Override
+	public void editBoard(HotNewsBoardVO hvo) {
+		this.sqlSession.update("edit_hn", hvo);
+	}
+
+	@Override
+	public void delBoard(int hno) {
+		this.sqlSession.delete("del_hn", hno);
+	}
 }

@@ -48,14 +48,16 @@ function write_check(){
 
 	<div id="admin_panel">
 		<form method="post" action="admin_hotnews_edit_ok" onsubmit="return write_check();" enctype="multipart/form-data">
-			핫뉴스 제목 : <input type="text" id="title" name="title" size="40" value="${ehvo.htitle }"/> <br> <br>
-			<p>핫뉴스 내용 :&nbsp;</p><textarea rows="10" cols="40" style="resize: none;" >${ehvo.hcont }</textarea> <br><br>
-<!-- 			썸네일(미리보기) : <input type="file" id="image" accept="image/*" onchange="thumbnail(event);" /> -->
+			핫뉴스 번호 : <input type="hidden" id="hno" name="hno" size="40" value="${hvo.hno }"/> <br> <br>
+			핫뉴스 제목 : <input type="text" id="htitle" name="htitle" size="40" value="${hvo.htitle }"/> <br> <br>
+			<p>핫뉴스 내용 :&nbsp;</p><textarea rows="10" id="hcont" name="hcont" cols="40" style="resize: none;" >${hvo.hcont }</textarea> <br><br>
+			썸네일(미리보기) : <input type="file" id="hfile" name="hfile" />${hvo.hfile } <br><br>
+<%-- 			썸네일(미리보기) : <input type="file" id="image" accept="image/*" value="${hvo.hfile }" onchange="thumbnail(event);" /> <br><br> --%>
 <!-- 			<div id="image_container" ></div><br><br>  -->
-			링크 : <input type="text" size="80" value="${ehvo.hlink }"/> <br><br>
+			링크 : <input type="text" id="hlink" name="hlink" size="80" value="${hvo.hlink }"/> <br><br>
 			<input type="submit" value="수정" /> 
-			<input type="reset" value="취소" />
-			<input type="button" value="목록보기" onclick="location.href='/easycook/admin_hotnews_list';">			
+			<input type="reset" value="취소" onclick="$('#htitle').focus();" />
+			<input type="button" value="목록보기" onclick="location.href='/easycook/admin_hotnews_list?page=${page}&find_field=${find_field }&find_name=${find_name }';">			
 		</form>
 	</div>
 </body>

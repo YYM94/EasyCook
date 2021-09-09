@@ -18,4 +18,9 @@ public interface HotNewsDAO {
 
 	List<HotNewsBoardVO> getBoardListView(HotNewsBoardVO hvo);
 
+	void editBoard(HotNewsBoardVO hvo);
+
+	void delBoard(int hno);
+
+
 }

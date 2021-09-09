@@ -57,4 +57,33 @@
  	<select id="list_hnv" resultType="hb">
  		select * from hotNewsBoard order by viewcnt desc
  	</select>
+ 	
+ 	<update id="edit_hn">
+ 		update hotNewsBoard set htitle=#{htitle}, hcont=#{hcont}, hlink=#{hlink}, hfile=#{hfile} where hno=#{hvo.hno}
+ 	</update>
+ 	
+ 	<delete id="del_hn">
+ 		delete from hotNewsBoard where hno=#{hno}
+ 	</delete>
  </mapper>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
