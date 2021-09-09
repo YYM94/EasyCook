@@ -36,13 +36,19 @@
 	}
 
 //////////////////////// 상단 메뉴바 검색아이콘 마우스 이벤트 //////////////////////////
+	var topSearchFlag = 0;
 	function topSearchbarEvent(){
 		$(document).ready(function(){
-			$("#top_search_icon").mouseover(function(){
-				if($("#top_search_input").width() == 0){
-					$("#top_search_hide").animate({
-						width: "100%"
-					}, 50);
+			$("#top_search_icon").click(function(){
+				if(topSearchFlag == 1){
+					$("#top_search_input").animate({
+						width: "0",
+						opacity: "0"
+					}, 200);
+					$("#top_search_input").val('');
+					windowBlurHide();
+					topSearchFlag = 0;
+				}else if(topSearchFlag == 0){
 					$("#top_search_input").animate({
 						width: "60%",
 						opacity: "1"
@@ -50,33 +56,8 @@
 					$("#top_search_input").focus();
 					windowBlurByMask();
 					top_search_scrollLock();
+					topSearchFlag = 1;
 				}
-			});
-			$("#top_search_hide").mouseover(function(){
-				if($("#top_search_input").width() > 0){
-					$("#top_search_hide").animate({
-						width: "0"
-					}, 50);
-					$("#top_search_input").animate({
-						width: "0",
-						opacity: "0"
-					}, 200);
-				}
-				$("#top_search_input").val('');
-				windowBlurHide();
-			});
-			$("#top_search_hide").mouseout(function(){
-				if($("#top_search_input").width() > 0){
-					$("#top_search_hide").animate({
-						width: "0"
-					}, 50);
-					$("#top_search_input").animate({
-						width: "0",
-						opacity: "0"
-					}, 200);
-				}
-				$("#top_search_input").val('');
-				windowBlurHide();
 			});
 		});
 	}
@@ -124,10 +105,13 @@
 	}
 	
 	//상단 메뉴바 검색 이벤트
-	function top_search(t){
-		var text = t.value;
-		location.href = 'recipeBoard_view?page=1&post=0&cpage=1&searchText='+text;
-	}
+	$(document).ready(function(){
+		$('#top_search_input').keydown(function(key){
+			if(key.keyCode == 13){
+				location.href = 'recipeBoard_view?page=1&post=0&cpage=1&searchText='+$('#top_search_input').val();
+			}
+		});
+	});
 
 </script>
 <c:if test="${empty id}">
@@ -142,7 +126,7 @@
 			</div>
 			<div id="top_search">
 				<img id="top_search_icon" src="./resources/images/top_search.png" width="30" height="30"/>
-				<input id="top_search_input" type="text" onkeyup="if(window.event.keyCode==13){top_search(this)}"/>
+				<input id="top_search_input" type="text"/>
 			</div>
 			<div id="top_search_hide"></div>
 			
@@ -231,7 +215,7 @@
 					<a href="/easycook"><img src="./resources/images/logo.png"/></a>
 				</div>
 				<div id="left_sessionInfo">
-					[${id}님 로그인을 환영합니다!]
+					[${id}님]<br>[로그인을 환영합니다!]
 				</div>
 				<div id="left_menulink">
 					<a href="Notice">

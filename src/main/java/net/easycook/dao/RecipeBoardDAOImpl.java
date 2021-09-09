@@ -6,6 +6,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import net.easycook.vo.RecipeBoardCommentVO;
 import net.easycook.vo.RecipeBoardVO;
 
 @Repository
@@ -20,8 +21,8 @@ public class RecipeBoardDAOImpl implements RecipeBoardDAO {
 	}
 
 	@Override
-	public int getTotalPostings(String searchText) {
-		return sqlSession.selectOne("get_total", searchText);
+	public int getTotalPostings(RecipeBoardVO rb) {
+		return sqlSession.selectOne("get_total", rb);
 	}
 
 	@Override
@@ -47,6 +48,21 @@ public class RecipeBoardDAOImpl implements RecipeBoardDAO {
 	@Override
 	public void editPost(RecipeBoardVO rbv) {
 		sqlSession.update("edit_post", rbv);
+	}
+
+	@Override
+	public void writeComment(RecipeBoardCommentVO rbc) {
+		sqlSession.insert("ins_comment", rbc);
+	}
+
+	@Override
+	public int getTotalComments(int post) {
+		return sqlSession.selectOne("get_totalComments", post);
+	}
+
+	@Override
+	public List<RecipeBoardCommentVO> getCommentList(RecipeBoardCommentVO rbc) {
+		return sqlSession.selectList("get_rbc_list", rbc);
 	}
 	
 }

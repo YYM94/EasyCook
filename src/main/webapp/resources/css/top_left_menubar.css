@@ -66,9 +66,16 @@ body{
 #top_search_icon{
 	float: right;
 	margin: 5px 10px 0 0;
-}
-#top_search_icon img{
 	filter: drop-shadow(0 0 2px white);
+	z-index: 2000; 
+}
+#top_search_icon:hover{
+	cursor: pointer;
+	filter: drop-shadow(0 0 2px #F90);
+}
+#top_search_icon:active{
+	cursor: pointer;
+	filter: drop-shadow(0 0 2px #FF6347);
 }
 #top_search_hide{
 	width: 0;
