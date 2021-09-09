@@ -40,6 +40,9 @@
 		$(document).ready(function(){
 			$("#top_search_icon").mouseover(function(){
 				if($("#top_search_input").width() == 0){
+					$("#top_search_hide").animate({
+						width: "100%"
+					}, 50);
 					$("#top_search_input").animate({
 						width: "60%",
 						opacity: "1"
@@ -51,6 +54,9 @@
 			});
 			$("#top_search_hide").mouseover(function(){
 				if($("#top_search_input").width() > 0){
+					$("#top_search_hide").animate({
+						width: "0"
+					}, 50);
 					$("#top_search_input").animate({
 						width: "0",
 						opacity: "0"
@@ -61,6 +67,9 @@
 			});
 			$("#top_search_hide").mouseout(function(){
 				if($("#top_search_input").width() > 0){
+					$("#top_search_hide").animate({
+						width: "0"
+					}, 50);
 					$("#top_search_input").animate({
 						width: "0",
 						opacity: "0"
@@ -113,6 +122,12 @@
 	function iconInactive(link){
 		$(link).find("img").attr("src", "./resources/images/leftmenu_Linkimage.png")
 	}
+	
+	//상단 메뉴바 검색 이벤트
+	function top_search(t){
+		var text = t.value;
+		location.href = 'recipeBoard_view?page=1&post=0&cpage=1&searchText='+text;
+	}
 
 </script>
 <c:if test="${empty id}">
@@ -127,7 +142,7 @@
 			</div>
 			<div id="top_search">
 				<img id="top_search_icon" src="./resources/images/top_search.png" width="30" height="30"/>
-				<input id="top_search_input" type="text"/>
+				<input id="top_search_input" type="text" onkeyup="if(window.event.keyCode==13){top_search(this)}"/>
 			</div>
 			<div id="top_search_hide"></div>
 			
