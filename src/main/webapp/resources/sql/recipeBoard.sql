@@ -33,8 +33,9 @@ start with 1
 increment by 1
 nocache;
 
+select count(*) from recipeBoard where title like '%업로드%'
 
 select * from
 (select rowNum rNum, no, writerid, title, videoLink, imgIndex, imgFolder, textPack, visiter, regdate, moddate 
-from (select * from RECIPEBOARD order by no desc))
-where rNum >= 9 and rNum <= 16
+from (select * from RECIPEBOARD where title like '%업로드%' order by no desc))
+where rNum >= 1 and rNum <= 8

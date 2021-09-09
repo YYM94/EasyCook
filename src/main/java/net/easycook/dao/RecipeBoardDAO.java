@@ -8,7 +8,7 @@ public interface RecipeBoardDAO {
 
 	void writeRec(RecipeBoardVO rb);
 
-	int getTotalPostings();
+	int getTotalPostings(String searchText);
 
 	List<RecipeBoardVO> getPostingList(RecipeBoardVO rb);
 

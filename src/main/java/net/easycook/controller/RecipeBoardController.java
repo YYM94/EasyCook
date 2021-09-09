@@ -34,10 +34,16 @@ public class RecipeBoardController {
 	@RequestMapping("/recipeBoard_view")
 	public ModelAndView recipeBoard_view(HttpServletRequest req) {
 		ModelAndView m = new ModelAndView();
+
+		String searchText = "";
+		if(req.getParameter("searchText") != null) {
+			searchText = req.getParameter("searchText");
+		}
 		
 		//전체 게시글 수 검색
-		int totalPostings = recipeBoardService.getTotalPostings();
+		int totalPostings = recipeBoardService.getTotalPostings(searchText);
 		m.addObject("totalPostingsObj", totalPostings);
+		System.out.println(totalPostings);
 		
 		int page = 1;
 		if(req.getParameter("page") != null) {

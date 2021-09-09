@@ -20,8 +20,8 @@ public class RecipeBoardDAOImpl implements RecipeBoardDAO {
 	}
 
 	@Override
-	public int getTotalPostings() {
-		return sqlSession.selectOne("get_total");
+	public int getTotalPostings(String searchText) {
+		return sqlSession.selectOne("get_total", searchText);
 	}
 
 	@Override

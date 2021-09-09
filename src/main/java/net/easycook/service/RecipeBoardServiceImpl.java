@@ -21,8 +21,8 @@ public class RecipeBoardServiceImpl implements RecipeBoardService {
 	}
 
 	@Override
-	public int getTotalPostings() {
-		return recipeBoardDao.getTotalPostings();
+	public int getTotalPostings(String searchText) {
+		return recipeBoardDao.getTotalPostings(searchText);
 	}
 
 	@Override
