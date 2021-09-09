@@ -6,7 +6,19 @@
 <link rel="stylesheet" type="text/css" href="./resources/css/FAQ.css" />
 <script src="./resources/js/jquery.js"></script>
 <%@ include file="../menubar/top_left_menubar.jsp"%>
-
+<script>
+$(function(){
+	$("dd").hide();
+	
+	$("dt").click(function(){
+		if( $(this).next().css("display")=="none"){
+			
+			$(this).next().slideDown("fast");
+		}else
+			$(this).next().slideUp("fast");
+	});
+});
+</script>
 
 <%--
 	//하단 페이지 번호 생성을 위한 전체 게시글 수 검색
@@ -48,12 +60,12 @@ if (request.getParameter("page") == null) {
 		<c:if test="${!empty aflist}">
 			<c:forEach var="af" items="${aflist}">
 				<div class="FAQ">
-					<input type="checkbox" id="FAQ01"> <label for="FAQ01">
-					${af.adminfaq_title}<em></em>
-					</label>
-					<div>
-						<p>${af.adminfaq_cont}</p>
-					</div>
+					<dl>
+						<dt><p class="title">${af.adminfaq_title}</p><p class="iconDiv"><img src="https://happyjung.diskn.com/data/lecture/icon_jquery_faq2_icon_arrow.png"></p></dt>
+						<dd>
+							<p>${af.adminfaq_cont}</p>
+						</dd>
+					</dl>
 				</div>
 			</c:forEach>
 		</c:if>

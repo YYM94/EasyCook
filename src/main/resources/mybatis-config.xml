@@ -15,9 +15,9 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
        
        <typeAlias type="net.easycook.vo.FaqBoardVO" alias="fb"/>
        
-       <typeAlias type="net.easycook.vo.adminNoticeVO" alias="an"/>
+       <typeAlias type="net.easycook.vo.AdminNoticeVO" alias="an"/>
        
-       <typeAlias type="net.easycook.vo.adminFaqVO" alias="af"/>
+       <typeAlias type="net.easycook.vo.AdminFaqVO" alias="af"/>
        
        <typeAlias type="net.easycook.vo.HotNewsBoardVO" alias="hb"/>      
        

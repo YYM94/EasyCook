@@ -31,113 +31,123 @@ SimpleDateFormat sf = new SimpleDateFormat("yy.MM.dd. a. hh.mm");
 				<fieldset>
 					<legend class="hidden">검색</legend>
 					<label class="hidden">검색분류</label> <select name="f">
-						<option value="titie" <c:if test="${find_field == 'title'}"> ${'selected'}</c:if>>제목</option>
+						<option value="titie"
+							<c:if test="${find_field == 'title'}"> ${'selected'}</c:if>>제목</option>
 
-					</select> <label class="hidden">검색어</label> 
-				<input type="text" name="find_name" value="${find_name}" placeholder="검색어를 입력해주세요." /> 
-				 <input type="submit" value="검색" /> 
-				 <input class="write" type="button" value="FAQ등록"
-						onclick="location.href='faqwrite'" />
+					</select> <label class="hidden">검색어</label> <input type="text"
+						name="find_name" value="${find_name}" placeholder="검색어를 입력해주세요." />
+					<input type="submit" value="검색" /> <input class="write"
+						type="button" value="FAQ등록" onclick="location.href='faqwrite'" />
 				</fieldset>
 			</form>
 		</div>
 
 		<div class="faqtitle">
 			<!-- <b>제목</b> <b>작성자</b> <b>날짜</b> -->
-				<div id=title1>번호</div>
-				<div id=title2>제목</div>
-				<div id=title3>작성자</div>
-				<div id=title4>등록날짜</div>
-				<div id=title5>관리</div>
+			<div id=title1>번호</div>
+			<div id=title2>제목</div>
+			<div id=title3>작성자</div>
+			<div id=title4>등록날짜</div>
+			<div id=title5>관리</div>
 		</div>
 
 		<div id="faq_cont">
-		<c:if test="${!empty aflist}">
-			<c:forEach var="af" items="${aflist}">
-			<div id="faq_cont_list">
-				<div id="con1">${af.adminfaq_no}</div>
-				<div id="con2">
-				<c:if test="${fn:length(af.adminfaq_title)>9}">
+			<c:if test="${!empty aflist}">
+				<c:forEach var="af" items="${aflist}">
+					<div id="faq_cont_list">
+						<div id="con1">${af.adminfaq_no}</div>
+						<div id="con2">
+							<c:if test="${fn:length(af.adminfaq_title)>9}">
  				${fn:substring(af.adminfaq_title,0,16)}...
 				</c:if>
-				<c:if test="${fn:length(af.adminfaq_title)<9}">
+							<c:if test="${fn:length(af.adminfaq_title)<9}">
 				${af.adminfaq_title}
 				</c:if>
-				</div>
-				<div id="con3">관리자</div>
-				<div id="con4">${af.adminfaq_date}</div>
-				<div id="admin_button">
-					<div id="button">
-						<input type="button" value="수정" onclick="location.href='faqEdit'" />
-						<input type="button" value="삭제" />
+						</div>
+						<div id="con3">관리자</div>
+						<div id="con4">${af.adminfaq_date}</div>
+						<div id="admin_button">
+							<div id="button">
+								<input type="button" value="수정"
+									onclick="location.href='faqEdit?adminfaq_no=${af.adminfaq_no}&page=${page}';" />
+								<input type="button" value="삭제"
+									onclick="if(confirm('정말로 삭제할까요?') == true){
+							location='faqDelete?adminfaq_no=${af.adminfaq_no}&page=${page}';	
+							}else{ return ;}" />
+							</div>
+						</div>
 					</div>
-				</div>
-			</div>
-			</c:forEach>
-		</c:if>
-		
-		<c:if test="${empty aflist}">
-				<div id="con5" style="text-align:center;margin-bottom: 100px;">FAQ가 없습니다.</div>
+				</c:forEach>
+			</c:if>
+
+			<c:if test="${empty aflist}">
+				<div id="con5" style="text-align: center; margin-bottom: 100px;">FAQ가
+					없습니다.</div>
 			</c:if>
 			<div id="bList_paging" style="text-align: center;">
-    <%-- 검색전 페이징 --%>
-<c:if test="${(empty find_field) && (empty find_name)}">    
-    <c:if test="${page<=1}">
+				<%-- 검색전 페이징 --%>
+				<c:if test="${(empty find_field) && (empty find_name)}">
+					<c:if test="${page<=1}">
      [이전]&nbsp;
     </c:if>
-    <c:if test="${page>1}">
-     <a href="adminfaq?page=${page-1}">[이전]</a>&nbsp;
+					<c:if test="${page>1}">
+						<a href="adminfaq?page=${page-1}">[이전]</a>&nbsp;
     </c:if>
-    
-    <%--현재 쪽번호 출력--%>
-    <c:forEach var="a" begin="${startpage}" end="${endpage}"
-    step="1">
-     <c:if test="${a == page}"><%--현재 페이지가 선택되었다면--%>
-      <${a}>
-     </c:if>
-     <c:if test="${a != page}"><%--현재 페이지가 선택되지 않았
-     다면 --%>
-     <a href="adminfaq?page=${a}">[${a}]</a>&nbsp;
-     </c:if>
-    </c:forEach>
-    
-    <c:if test="${page >= maxpage}">
-    [다음]
-    </c:if>
-    <c:if test="${page<maxpage}">
-    <a href="adminfaq?page=${page+1}">[다음]</a>
-    </c:if>
-</c:if>
 
-<%-- 검색후 페이징 --%>
- <c:if test="${(!empty find_field) || (!empty find_name)}">    
-    <c:if test="${page<=1}">
-     [이전]&nbsp;
-    </c:if>
-    <c:if test="${page>1}">
-     <a href="adminfaq?page=${page-1}&find_field=${find_field}&find_name=${find_name}">[이전]</a>&nbsp;
-    </c:if>
-    
-    <%--현재 쪽번호 출력--%>
-    <c:forEach var="a" begin="${startpage}" end="${endpage}"
-    step="1">
-     <c:if test="${a == page}"><%--현재 페이지가 선택되었다면--%>
+					<%--현재 쪽번호 출력--%>
+					<c:forEach var="a" begin="${startpage}" end="${endpage}" step="1">
+						<c:if test="${a == page}">
+							<%--현재 페이지가 선택되었다면--%>
       <${a}>
      </c:if>
-     <c:if test="${a != page}"><%--현재 페이지가 선택되지 않았
+						<c:if test="${a != page}">
+							<%--현재 페이지가 선택되지 않았
      다면 --%>
-     <a href="adminfaq?page=${a}&find_field=${find_field}&find_name=${find_name}">[${a}]</a>&nbsp;
+							<a href="adminfaq?page=${a}">[${a}]</a>&nbsp;
      </c:if>
-    </c:forEach>
-    
-    <c:if test="${page >= maxpage}">
+					</c:forEach>
+
+					<c:if test="${page >= maxpage}">
     [다음]
     </c:if>
-    <c:if test="${page<maxpage}">
-    <a href="adminfaq?page=${page+1}&find_field=${find_field}&find_name=${find_name}">[다음]</a>
+					<c:if test="${page<maxpage}">
+						<a href="adminfaq?page=${page+1}">[다음]</a>
+					</c:if>
+				</c:if>
+
+				<%-- 검색후 페이징 --%>
+				<c:if test="${(!empty find_field) || (!empty find_name)}">
+					<c:if test="${page<=1}">
+     [이전]&nbsp;
     </c:if>
-</c:if>   
-  </div>
+					<c:if test="${page>1}">
+						<a
+							href="adminfaq?page=${page-1}&find_field=${find_field}&find_name=${find_name}">[이전]</a>&nbsp;
+    </c:if>
+
+					<%--현재 쪽번호 출력--%>
+					<c:forEach var="a" begin="${startpage}" end="${endpage}" step="1">
+						<c:if test="${a == page}">
+							<%--현재 페이지가 선택되었다면--%>
+      <${a}>
+     </c:if>
+						<c:if test="${a != page}">
+							<%--현재 페이지가 선택되지 않았
+     다면 --%>
+							<a
+								href="adminfaq?page=${a}&find_field=${find_field}&find_name=${find_name}">[${a}]</a>&nbsp;
+     </c:if>
+					</c:forEach>
+
+					<c:if test="${page >= maxpage}">
+    [다음]
+    </c:if>
+					<c:if test="${page<maxpage}">
+						<a
+							href="adminfaq?page=${page+1}&find_field=${find_field}&find_name=${find_name}">[다음]</a>
+					</c:if>
+				</c:if>
+			</div>
 			<%--
 				<div id="admin_page" style="text-align: center;">
 

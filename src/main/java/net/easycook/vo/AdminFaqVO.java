@@ -3,9 +3,9 @@ package net.easycook.vo;
 import lombok.Data;
 
 @Data
-public class adminFaqVO {
+public class AdminFaqVO {
 
-	private String adminfaq_no;
+	private int adminfaq_no;
 	private String adminfaq_name;
 	private String adminfaq_title;
 	private String adminfaq_cont;
