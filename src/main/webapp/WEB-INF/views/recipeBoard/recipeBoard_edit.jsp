@@ -180,6 +180,8 @@
 			}
 			formData.append("imgIndex", imgIndex);
 			formData.append("imgConvIndex", imgConvIndex);
+			
+			LoadThumbnail();
 			formData.append("link", link);
 			formData.append("textPack", textString);
 			

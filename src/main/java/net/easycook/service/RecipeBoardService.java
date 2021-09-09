@@ -8,7 +8,7 @@ public interface RecipeBoardService {
 
 	void writeRec(RecipeBoardVO rb);
 
-	int getTotalPostings();
+	int getTotalPostings(String searchText);
 
 	List<RecipeBoardVO> getPostingList(RecipeBoardVO rb, int post);
 
