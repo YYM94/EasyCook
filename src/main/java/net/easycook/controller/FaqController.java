@@ -10,17 +10,16 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
-import net.easycook.service.FaqService;
-import net.easycook.vo.FaqBoardVO;
-import net.easycook.vo.adminFaqVO;
+import net.easycook.service.AdminFaqService;
+import net.easycook.vo.AdminFaqVO;
 
 @Controller
 public class FaqController {
 	
 	@Autowired
-	private FaqService faqService;
+	private AdminFaqService adminfaqService;
 	@RequestMapping("/FAQ")
-	public ModelAndView FAQ(HttpServletRequest request,@ModelAttribute adminFaqVO af) {
+	public ModelAndView FAQ(HttpServletRequest request,@ModelAttribute AdminFaqVO af) {
 		int page=1;
 		int limit=10;
 		if(request.getParameter("page") != null) {
@@ -32,12 +31,12 @@ public class FaqController {
 		af.setFind_field(find_field);
 		af.setFind_name("%"+find_name+"%");
 		
-		int listcount2=this.faqService.getListCount(af);
+		int listcount2=this.adminfaqService.getListCount(af);
 		
 		af.setStartrow((page-1)*10+1);
 		af.setEndrow(af.getStartrow()+limit-1);
 		
-		List<adminFaqVO> aflist = this.faqService.getFaqList(af);
+		List<AdminFaqVO> aflist = this.adminfaqService.getFaqList(af);
 		
 		//총페이지
 		int maxpage=(int)((double)listcount2/limit+0.95);

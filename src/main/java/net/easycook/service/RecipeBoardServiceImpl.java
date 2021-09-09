@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import net.easycook.dao.RecipeBoardDAO;
+import net.easycook.vo.RecipeBoardCommentVO;
 import net.easycook.vo.RecipeBoardVO;
 
 @Service
@@ -21,8 +22,8 @@ public class RecipeBoardServiceImpl implements RecipeBoardService {
 	}
 
 	@Override
-	public int getTotalPostings() {
-		return recipeBoardDao.getTotalPostings();
+	public int getTotalPostings(RecipeBoardVO rb) {
+		return recipeBoardDao.getTotalPostings(rb);
 	}
 
 	@Override
@@ -47,6 +48,26 @@ public class RecipeBoardServiceImpl implements RecipeBoardService {
 	@Override
 	public void editPost(RecipeBoardVO rbv) {
 		recipeBoardDao.editPost(rbv);
+	}
+
+	@Override
+	public void writeComment(RecipeBoardCommentVO rbc) {
+		recipeBoardDao.writeComment(rbc);
+	}
+
+	@Override
+	public int getTotalComments(int post) {
+		return recipeBoardDao.getTotalComments(post);
+	}
+
+	@Override
+	public List<RecipeBoardCommentVO> getCommentList(RecipeBoardCommentVO rbc) {
+		return recipeBoardDao.getCommentList(rbc);
+	}
+
+	@Override
+	public void deleteComment(int cno) {
+		recipeBoardDao.deleteComment(cno);
 	}
 	
 }

@@ -2,13 +2,12 @@ package net.easycook.service;
 
 import java.util.List;
 
-import net.easycook.vo.NoticeBoardVO;
-import net.easycook.vo.adminNoticeVO;
+import net.easycook.vo.AdminNoticeVO;
 
 public interface NotService {
 
-	List<adminNoticeVO> getNotList(adminNoticeVO an);
+	List<AdminNoticeVO> getNotList(AdminNoticeVO an);
 
-	int getListCount(adminNoticeVO an);
+	int getListCount(AdminNoticeVO an);
 
 }

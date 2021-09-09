@@ -5,6 +5,7 @@
 <meta charset="UTF-8">
 <title>공지사항</title>
 <link rel="stylesheet" type="text/css" href="./resources/css/writenotice.css" />
+<script src="./resources/js/jquery.js"></script>
 <script type="text/javascript">
 	function notice_check(){
 		if($.trim($('#adminnotice_title').val()) == ''){
@@ -28,6 +29,8 @@
 	</div>
 
 <form method="post" action="noticeEdit_ok" onsubmit="return notice_check();">
+	<input type="hidden" name="adminnotice_no" value="${anotice.adminnotice_no}" />
+	<input type="hidden" name="page" value="${page}" />
 	<div class="board_wrap">
 		<div class="board_title">
 			<strong>공지사항 수정</strong>
@@ -38,16 +41,16 @@
 					<dl>
 						<dt>제목</dt>
 						<dd>
-							<input type="text" placeholder="제목을 입력하세요">
+							<input name="adminnotice_title" id="adminnotice_title" value="${anotice.adminnotice_title}" />
 						</dd>
 					</dl>
 				</div>
 				<div class="cont">
-					<textarea placeholder="내용을 입력하세요."></textarea>
+					<textarea name="adminnotice_cont" id="adminnotice_cont" >${anotice.adminnotice_cont}</textarea>
 				</div>
 				<div class="buttonwrite">
-					<input type="button" id="save" value="수정" style="color:white" />
-					<input type="button" id="cancel" value="취소" onclick="location.href='adminnotice'" />
+					<input type="submit" id="save" value="수정" style="color:white" />
+					<input type="reset" id="cancel" value="취소" onclick="location.href='adminnotice'" />
 				</div>
 			</div>
 		</div>

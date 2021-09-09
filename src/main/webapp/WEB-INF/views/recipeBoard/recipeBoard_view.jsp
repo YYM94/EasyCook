@@ -13,6 +13,10 @@
 	}
 </script>
 
+<c:if test="${empty searchText}">
+	<c:set var="searchText" value=""/>
+</c:if>
+
 <%-- 하단 페이지 번호 생성을 위한 전체 게시글 수 검색 결과 --%>
 <c:if test="${empty totalPostingsObj }">
 	<c:set var="totalPostings" value="0"/>
@@ -41,11 +45,7 @@
 <%-- 개행문자 줄바꿈을 위한 속성 지정 --%>
 <% pageContext.setAttribute("newLine", "\n"); %>
 
-<!-- 댓글 관련 -->
-<c:set var="totalComments" value="124"/><!-- 현재 게시글의 댓글 갯수 -->
-<c:set var="cWriter" value="댓글"/><!-- 댓글 작성자 -->
-<c:set var="cContent" value="댓글 내용입니다."/><!-- 댓글 내용 -->
-<c:set var="cDate" value="2021-07-22"/><!-- 댓글 작성날짜 -->
+
 
 <!-- 현재 댓글 페이지 -->
 <c:if test="${empty cpage}">
@@ -71,6 +71,27 @@
 		}else{
 			return false;
 		}
+	}
+	
+	function commentCheck(){
+		if($('#commentCont').val() == ''){
+			alert('입력된 내용이 없습니다.');
+			$('#commentCont').focus();
+			return false;
+		}
+		if(confirm("댓글을 작성하시겠습니까?")){
+			
+		}else{
+			$('#commentCont').focus();
+			return false;
+		}
+	}
+	
+	function removeComment(t){
+		if(!confirm("댓글을 삭제하시겠습니까?")){
+			return false;
+		}
+		
 	}
 </script>
 
@@ -125,7 +146,7 @@
 				</c:forEach>
 			</div>
 			
-			<c:if test="${ rb.writerid == id }">
+			<c:if test="${ rb.writerid == id || state == 3}">
 				<div id="postingEditRmBtn">
 					<input type="button" value="수정" onclick="return editCont();"/>
 					<input type="button" value="삭제" onclick="return removeCont();"/>
@@ -136,22 +157,24 @@
 				<div id="commentWrap">
 				
 					<!-- 한 페이지에 10개의 댓글을 출력 -->
-					<c:set var="startComment" value="${ 1 + ((cPage-1)*10) }"/>
-					<c:set var="endComment" value="${ cPage * 10 }"/>
-					<c:if test="${ endComment > totalComments }">
-						<c:set var="endComment" value="${ totalComments }"/>
-					</c:if>
-					
-					<c:forEach var="i" begin="${ startComment }" end="${ endComment }">
+					<c:forEach var="rbc" items="${ rbcList }">
 						<div class="commentBox">
-							<div class="commentWriter">${ cWriter }</div>
-							<div class="commentContent">${ i } ${ cContent }</div>
+							<div class="commentWriter">${ rbc.cwriterid }</div>
+								<c:set var="commentDes" value="${fn:replace(rbc.cont, newLine,'<br/>')}"/>
+							<div class="commentContent">${ commentDes }</div>
 							<div class="commentDate">
-								${ cDate }
-								<c:if test="${ cWriter == '댓글'  }">
-									<input type="button" value="삭제"/>
-								</c:if>
+								${ rbc.regdate }
 							</div>
+							<c:if test="${ rbc.cwriterid == id || state == 3  }">
+								<form class="commentRemoveBtn" method="post" action="commentDelete" onsubmit="return removeComment();">
+									<input type="hidden" name="page" value="${ page }"/>
+									<input type="hidden" name="post" value="${ rb.no }"/>
+									<input type="hidden" name="cno" value="${ rbc.cno }"/>
+									<input type="hidden" name="searchText" value="${ searchText }"/>
+									<input type="submit" value="삭제"/>
+								</form>
+							</c:if>
+							
 						</div>
 					</c:forEach>
 				</div>
@@ -163,7 +186,7 @@
 					<%-- 전체 페이지 수 --%>
 					<%-- 페이지 소숫점 버림 --%>
 					<fmt:parseNumber var="cPages" integerOnly="true" value="${ totalComments / 10 }"/>
-					<c:if test="${ cPages % 10 > 0 }">
+					<c:if test="${ totalComments % 10 > 0}">
 						<c:set var="cPages" value="${ cPages + 1 }"/>
 					</c:if>
 					
@@ -191,7 +214,7 @@
 					</c:if>
 					
 					<%-- 페이지 버튼 출력 --%>
-					<a href="recipeBoard_view?page=${ currentPage }&post=${ currentPosting }&cpage=1#commentWrap">
+					<a href="recipeBoard_view?page=${ currentPage }&post=${ currentPosting }&cpage=1&searchText=${searchText}#postingEditRmBtn">
 						<span class="cPageNumber">
 							<img src="./resources/images/PageMoveLeftEnd.png"/>
 						</span>
@@ -202,7 +225,7 @@
 						</span>
 					</c:if>
 					<c:if test="${ cPage != 1 }">
-						<a href="recipeBoard_view?page=${ currentPage }&post=${ currentPosting }&cpage=${ cPage-1 }#commentWrap">
+						<a href="recipeBoard_view?page=${ currentPage }&post=${ currentPosting }&cpage=${ cPage-1 }&searchText=${searchText}#postingEditRmBtn">
 							<span class="cPageNumber">
 								<img src="./resources/images/PageMoveLeft.png"/>
 							</span>
@@ -210,7 +233,7 @@
 					</c:if>
 					
 					<c:forEach var="i" begin="${ startcPage }" end="${ lastcPage }">
-						<a href="recipeBoard_view?page=${ currentPage }&post=${ currentPosting }&cpage=${ i }#commentWrap">
+						<a href="recipeBoard_view?page=${ currentPage }&post=${ currentPosting }&cpage=${ i }&searchText=${searchText}#postingEditRmBtn">
 							<c:if test="${ i == cPage }">
 								<div class="cPageNumber" style="color: #FF6347; font-weight: bold">
 									${ i }
@@ -230,32 +253,38 @@
 						</span>
 					</c:if>
 					<c:if test="${ cPage != cPages }">
-						<a href="recipeBoard_view?page=${ currentPage }&post=${ currentPosting }&cpage=${ cPage+1 }#commentWrap">
+						<a href="recipeBoard_view?page=${ currentPage }&post=${ currentPosting }&cpage=${ cPage+1 }&searchText=${searchText}#postingEditRmBtn">
 							<span class="cPageNumber">
 								<img src="./resources/images/PageMoveRight.png"/>
 							</span>
 						</a>
 					</c:if>
-					<a href="recipeBoard_view?page=${ currentPage }&post=${ currentPosting }&cpage=${ cPages }#commentWrap">
+					<a href="recipeBoard_view?page=${ currentPage }&post=${ currentPosting }&cpage=${ cPages }&searchText=${searchText}#postingEditRmBtn">
 						<span class="cPageNumber">
 							<img src="./resources/images/PageMoveRightEnd.png"/>
 						</span>
 					</a>
 				</div>
-				
-				<div id="commentWrite">
-					<div id="commentWrtier">댓글 아이디</div>
-					<div id="commentContWrite">
-						<textarea></textarea>
-					</div>
-					<div id="commentWriteBtn">
-						<input type="button" value="등록"/>
-					</div>
-				</div>
-				
 			</c:if>
 			<c:if test="${ totalComments == 0 }">
 				
+			</c:if>
+			<c:if test="${not empty id}">
+				<div id="commentWrite">
+					<form method="post" name="commentWriteForm" action="commentWrite" onsubmit="return commentCheck();">
+						<input type="hidden" name="rno" value="${ rb.no }"/>
+						<input type="hidden" name="cwriterid" value="${ id }"/>
+						<input type="hidden" name="page" value="${ page }"/>
+						<input type="hidden" name="searchText" value="${ searchText }"/>
+						<div id="commentWrtier">${ id }</div>
+						<div id="commentContWrite">
+							<textarea id="commentCont" name="Cont"></textarea>
+						</div>
+						<div id="commentWriteBtn">
+							<input type="submit" value="등록"/>
+						</div>
+					</form>
+				</div>
 			</c:if>
 			<div id="moveTopBtn">
 				<input type="button" value="▲" onclick="ScrollTop();"/>
@@ -273,7 +302,7 @@
 		<c:if test="${ totalPostings > 0 }">
 			<%-- 현재 페이지를 기준으로 8개의 게시글을 로드 --%>
 			<c:forEach var="rl" items="${ rbList }">
-				<a href="recipeBoard_view?page=${ currentPage }&post=${ rl.no }&cpage=1">
+				<a href="recipeBoard_view?page=${ currentPage }&post=${ rl.no }&cpage=1&searchText=${searchText}">
 				
 					<%-- 레시피 과정 중 텍스트가 존재하는 첫번째 내용을 가져옴 --%>
 					<c:set var="recipeContSplit" value="${fn:split(rl.textPack, 'Æ')}"/>
@@ -295,6 +324,7 @@
 							<span class="BoardPostThumbnail"></span>
 						</c:if>
 						<span class="BoardPostTitle">${ rl.title }</span>
+						<span class="BoardPostWriter">작성자 : ${ rl.writerid }</span>
 						<span class="BoardPostCont">${ listDes }</span>
 						<span class="BoardVisiter">조회수 : ${ rl.visiter }</span>
 					</span>
@@ -333,7 +363,7 @@
 			<c:set var="lastPage" value="${ pages }"/>
 		</c:if>
 		
-		<a href="recipeBoard_view?page=1&post=0&cpage=1">
+		<a href="recipeBoard_view?page=1&post=0&cpage=1&searchText=${searchText}">
 			<span class="PageNumber">
 				<img src="./resources/images/PageMoveLeftEnd.png"/>
 			</span>
@@ -344,14 +374,14 @@
 			</span>
 		</c:if>
 		<c:if test="${ currentPage != 1 }">
-			<a href="recipeBoard_view?page=${ currentPage-1 }&post=0&cpage=1">
+			<a href="recipeBoard_view?page=${ currentPage-1 }&post=0&cpage=1&searchText=${searchText}">
 				<span class="PageNumber">
 					<img src="./resources/images/PageMoveLeft.png"/>
 				</span>
 			</a>
 		</c:if>
 		<c:forEach var="i" begin="${ firstPage }" end="${ lastPage }">
-			<a href="recipeBoard_view?page=${ i }&post=0&cpage=1">
+			<a href="recipeBoard_view?page=${ i }&post=0&cpage=1&searchText=${searchText}">
 				<c:if test="${ i == currentPage }">
 					<span class="PageNumber" style="color: #FF6347; font-weight: bold">
 						${ i }
@@ -370,13 +400,13 @@
 			</span>
 		</c:if>
 		<c:if test="${ currentPage != pages }">
-			<a href="recipeBoard_view?page=${ currentPage+1 }&post=0&cpage=1">
+			<a href="recipeBoard_view?page=${ currentPage+1 }&post=0&cpage=1&searchText=${searchText}">
 				<span class="PageNumber">
 					<img src="./resources/images/PageMoveRight.png"/>
 				</span>
 			</a>
 		</c:if>
-		<a href="recipeBoard_view?page=${ pages }&post=0&cpage=1">
+		<a href="recipeBoard_view?page=${ pages }&post=0&cpage=1&searchText=${searchText}">
 			<span class="PageNumber">
 				<img src="./resources/images/PageMoveRightEnd.png"/>
 			</span>
@@ -385,6 +415,7 @@
 </div>
 
 <div id="postWriteBtn">
+	<input type="button" value="전체보기" onclick="location.href='recipeBoard_view?page=1&post=0&cpage=1'"/>
 	<c:if test="${not empty id }">
 		<input type="button" value="글쓰기" onclick="location.href='recipeBoard_write'"/>
 	</c:if>

@@ -30,11 +30,12 @@ SimpleDateFormat sf = new SimpleDateFormat("yy.MM.dd. a. hh.mm");
 			<form class="table-form">
 				<fieldset>
 					<legend class="hidden">검색</legend>
-					<label class="hidden">검색분류</label> <select name="f">
-						<option value="titie" <c:if test="${find_field == 'adminnnotice_title'}"> ${'selected'}</c:if>>제목</option>
-
+					<label class="hidden">검색분류</label> 
+					<select name="find_field">
+						<option value="adminnotice_title" 
+						<c:if test="${find_field=='adminnotice_title'}">${'selected'}</c:if>>제목</option>
 					</select> <label class="hidden">검색어</label> 
-				<input type="text" name="find_name" value="${find_name}" placeholder="검색어를 입력해주세요." /> 
+				<input name="find_name" id="find_name" value="${find_name}" placeholder="검색어를 입력해주세요." /> 
 				<input type="submit" value="검색" /> 
 				<input class="write" type="button" value="공지사항등록"
 						onclick="location.href='noticewrite'" />
@@ -67,9 +68,10 @@ SimpleDateFormat sf = new SimpleDateFormat("yy.MM.dd. a. hh.mm");
 					<div id="con4">${an.adminnotice_date}</div>
 					<div id="admin_button">
 						<div id="button">
-							<input type="button" value="수정"
-								onclick="location.href='noticeEdit'" /> <input type="button"
-								value="삭제" />
+							<input type="button" value="수정" onclick="location.href='noticeEdit?adminnotice_no=${an.adminnotice_no}&page=${page}';" /> 
+							<input type="button" value="삭제" onclick="if(confirm('정말로 삭제할까요?') == true){
+							location='noticeDelete?adminnotice_no=${an.adminnotice_no}&page=${page}';	
+							}else{ return ;}" />
 						</div>
 					</div>
 				</div>

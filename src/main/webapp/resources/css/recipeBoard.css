@@ -82,6 +82,7 @@ body{
 
 #postingEditRmBtn{
     position: relative;
+    margin-bottom: 50px;
     top: 20px;
 }
 #postingEditRmbtn input{
@@ -103,8 +104,8 @@ body{
 #commentWrap{
 	width: 1140px;
     position: relative;
-    top: 100px;
-    margin-bottom: 120px;
+    top: 18px;
+    margin-bottom: 25px;
     border-top: 2px solid black;
     border-bottom: 2px solid black;
 }
@@ -118,12 +119,13 @@ body{
 .commentWriter{
 	float: left;
 	position: relative;
-	top:10px;
 	width: 130px;
     text-overflow: ellipsis;
     white-space: nowrap;
 	overflow: hidden;
 	margin-right: 20px;
+    margin-top: auto;
+    margin-bottom: auto;
 }
 .commentContent{
 	float: left;
@@ -136,12 +138,18 @@ body{
 .commentDate{
 	float: right;
 	position: relative;
-	top:10px;
+    margin-top: auto;
+    margin-bottom: auto;
+}
+.commentRemoveBtn{
+    margin-left: auto;
+    margin-top: auto;
+    margin-bottom: auto;
 }
 
 #commentPage{
 	position: relative;
-	width: 340px;
+	width: fit-content;
 	height: 25px;
 	margin-left: auto;
 	margin-right: auto;
@@ -284,7 +292,7 @@ body{
 }
 .BoardPostTitle{
 	position: absolute;
-	margin: 25px 15px 0px 15px;
+	margin: 30px 15px 0px 15px;
 	width: 240px;
     height: 29px;
     color: #252525;
@@ -293,6 +301,18 @@ body{
     white-space: nowrap;
     overflow: hidden;
 	z-index: 300;
+}
+.BOardPostWriter{
+    position: absolute;
+    margin: 4px 15px 0px 15px;
+    width: 240px;
+    height: 29px;
+    color: #252525;
+    font-size: 0.9em;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    z-index: 300;
 }
 .BoardPostCont{
 	position: absolute;
@@ -313,13 +333,17 @@ body{
     margin: 210px 0px 0px 15px;
     color: #252525;
     font-size: 0.9em;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    z-index: 300;
 }
 
 /*하단 페이지 번호*/
 
 #bottomPageNumber{
 	position: relative;
-	width: 520px;
+	width: fit-content;
 	height: 25px;
 	margin-top: 10px;
 	margin-left: auto;
@@ -349,7 +373,7 @@ body{
 
 /*글쓰기 버튼*/
 #postWriteBtn{
-    width: 100px;
+    width: 300px;
     position: relative;
     margin-left: auto;
     margin-right: auto;

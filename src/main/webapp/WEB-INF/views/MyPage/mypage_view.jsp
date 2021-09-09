@@ -36,7 +36,8 @@
 				<input type="button" id="mp_btn_hotnews" value="핫뉴스 바로가기" onclick="location.href='hotNewsBoard_view';"/>				
 			</div>
 			<div id="mp_contents">
-			<img id="mp_cont_img" src="./resources/images/logo_B.png" width="250" height="250"/><br/>
+			<img id="mp_cont_img" src="./resources/images/human.png" width="250" height="250"/>
+			<img id="mp_cont_img" src="./resources/images/camera.png" width="100" height="100"/><br/>
 			레시피를 직접 올려보세요!<br/>
 			자랑하고 싶은 나만의  레시피! 공유하고 싶은 멋진 레시피를 올려 주세요!
 			<input type="button" id="mp_write_recipe" value="레시피 등록하기" onclick="location.href='recipeBoard_write';"/>				

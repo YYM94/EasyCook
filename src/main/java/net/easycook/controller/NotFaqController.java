@@ -10,17 +10,17 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
-import net.easycook.service.adminNotService;
-import net.easycook.vo.adminNoticeVO;
+import net.easycook.service.AdminNotService;
+import net.easycook.vo.AdminNoticeVO;
 
 @Controller
 public class NotFaqController {
 	
 	@Autowired
-	private adminNotService adminnotService;
+	private AdminNotService adminnotService;
 	//공지사항 목록
 	@RequestMapping("/Notice")
-	public ModelAndView Notice(HttpServletRequest request, @ModelAttribute adminNoticeVO an) {
+	public ModelAndView Notice(HttpServletRequest request, @ModelAttribute AdminNoticeVO an) {
 		int page=1;
 		int limit=10;
 		if(request.getParameter("page") != null) {
@@ -38,7 +38,7 @@ public class NotFaqController {
 		an.setStartrow((page-1)*10+1);
 		an.setEndrow(an.getStartrow()+limit-1);
 		
-		List<adminNoticeVO> anlist = this.adminnotService.getNotList(an);
+		List<AdminNoticeVO> anlist = this.adminnotService.getNotList(an);
 		
 		//총페이지
 		int maxpage=(int)((double)listcount/limit+0.95);
@@ -63,20 +63,4 @@ public class NotFaqController {
 		return wm;
 	
 	}
-
-	
-	@RequestMapping("/faqEdit")
-	public ModelAndView faqEdit() throws Exception{
-		ModelAndView mv = new ModelAndView();
-		mv.setViewName("NoticeFaq/faqEdit");
-		return mv;
-	}
-	
-	@RequestMapping("/noticeEdit")
-	public ModelAndView noticeEdit() throws Exception{
-		ModelAndView mv = new ModelAndView();
-		mv.setViewName("NoticeFaq/noticeEdit");
-		return mv;
-	}
-	
 }

@@ -23,6 +23,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.oreilly.servlet.MultipartRequest;
 
 import net.easycook.service.RecipeBoardService;
+import net.easycook.vo.RecipeBoardCommentVO;
 import net.easycook.vo.RecipeBoardVO;
 
 @Controller
@@ -34,9 +35,17 @@ public class RecipeBoardController {
 	@RequestMapping("/recipeBoard_view")
 	public ModelAndView recipeBoard_view(HttpServletRequest req) {
 		ModelAndView m = new ModelAndView();
+		RecipeBoardVO rb = new RecipeBoardVO();
+
+		String searchText = "";
+		if(req.getParameter("searchText") != null) {
+			searchText = req.getParameter("searchText");
+		}
+		searchText = "%"+searchText+"%";
+		rb.setSearchText(searchText);
 		
 		//전체 게시글 수 검색
-		int totalPostings = recipeBoardService.getTotalPostings();
+		int totalPostings = recipeBoardService.getTotalPostings(rb);
 		m.addObject("totalPostingsObj", totalPostings);
 		
 		int page = 1;
@@ -49,18 +58,34 @@ public class RecipeBoardController {
 			post = Integer.parseInt(req.getParameter("post"));
 			m.addObject("post", post);
 		}
+		int cpage = 1;
 		if(req.getParameter("cpage") != null) {
-			int cpage = Integer.parseInt(req.getParameter("cpage"));
+			cpage = Integer.parseInt(req.getParameter("cpage"));
 			m.addObject("cpage", cpage);
 		}
 		
-		RecipeBoardVO rb = new RecipeBoardVO();
 		//현재 페이지를 기준으로 8개의 게시글 조회
 		rb.setStartNum(page*8-7);
 		rb.setEndNum(page*8);
 		List<RecipeBoardVO> rbList = recipeBoardService.getPostingList(rb, post);
 		
+		//선택된 게시글이 있을 경우 해당 게시글의 댓글 조회
+		if(post != 0) {
+			//전체 댓글 수 조회
+			int totalComments = recipeBoardService.getTotalComments(post);
+			m.addObject("totalComments", totalComments);
+			//현재 댓글 페이지를 기준으로 10개의 댓글 조회
+			RecipeBoardCommentVO rbc = new RecipeBoardCommentVO();
+			rbc.setRno(post);
+			rbc.setStartNum(cpage*10-9);
+			rbc.setEndNum(cpage*10);
+			List<RecipeBoardCommentVO> rbcList = recipeBoardService.getCommentList(rbc);
+			m.addObject("rbcList", rbcList);
+		}
+		
 		m.addObject("rbList", rbList);
+		searchText = searchText.replace("%", "");
+		m.addObject("searchText", searchText);
 		
 		m.setViewName("recipeBoard/recipeBoard_view");
 		
@@ -320,6 +345,40 @@ public class RecipeBoardController {
 		}
 		
 		return "OK";
+	}
+	
+	@RequestMapping("commentWrite")
+	public ModelAndView commentWrite(RecipeBoardCommentVO rbc, HttpServletRequest req) {
+		ModelAndView m = new ModelAndView();
+		
+		recipeBoardService.writeComment(rbc);
+		
+		int page = Integer.parseInt(req.getParameter("page"));
+		String searchText = req.getParameter("searchText");
+		m.addObject("page", page);
+		m.addObject("post", rbc.getRno());
+		m.addObject("cpage", 1);
+		m.addObject("searchText", searchText);
+		m.setViewName("redirect:/recipeBoard_view");
+		return m;
+	}
+	
+	@RequestMapping("commentDelete")
+	public ModelAndView commentDelete(HttpServletRequest req) {
+		ModelAndView m = new ModelAndView();
+
+		int cno = Integer.parseInt(req.getParameter("cno"));
+		recipeBoardService.deleteComment(cno);
+
+		int page = Integer.parseInt(req.getParameter("page"));
+		int post = Integer.parseInt(req.getParameter("post"));
+		String searchText = req.getParameter("searchText");
+		m.addObject("page", page);
+		m.addObject("post", post);
+		m.addObject("cpage", 1);
+		m.addObject("searchText", searchText);
+		m.setViewName("redirect:/recipeBoard_view");
+		return m;
 	}
 	
 }

@@ -11,7 +11,7 @@
 		select * from
 		(select rowNum
 		rNum,adminnotice_no,adminnotice_name,adminnotice_title,adminnotice_date,adminnotice_cont
-		from adminNotice)
+		from adminNotice order by adminnotice_no desc)
 		where rNum &gt;= #{startrow} and rNum &lt;= #{endrow}
 		<!-- &gt;은 ~보다 크다(>), &lt;은 ~보다 작다(<) -->
 	</select>
@@ -34,11 +34,27 @@
 	</select>
 
 	<insert id="adnot_in" parameterType="an">
-		insert into adminNotice (adminnotice_no,adminnotice_name,adminnotice_title,
+		insert into adminNotice
+		(adminnotice_no,adminnotice_name,adminnotice_title,
 		adminnotice_cont,adminnotice_date)
 		values(adminnotice_no_seq.nextval,#{adminnotice_name,jdbcType=VARCHAR},#{adminnotice_title},
 		#{adminnotice_cont},sysdate)
 	</insert>
+
+	<update id="adnot_up">
+		update adminNotice set
+		adminnotice_title=#{adminnotice_title},
+		adminnotice_cont=#{adminnotice_cont} where
+		adminnotice_no=#{adminnotice_no}
+	</update>
+
+	<delete id="adnot_del" >
+    	 delete from adminNotice where adminnotice_no=#{no}
+    </delete>
+    
+    <select id="adnot_cont" resultType="an">
+    	select * from adminNotice where adminnotice_no=#{adminnotice_no}
+    </select>
 
 </mapper>
  

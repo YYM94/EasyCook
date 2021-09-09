@@ -2,13 +2,14 @@ package net.easycook.dao;
 
 import java.util.List;
 
+import net.easycook.vo.RecipeBoardCommentVO;
 import net.easycook.vo.RecipeBoardVO;
 
 public interface RecipeBoardDAO {
 
 	void writeRec(RecipeBoardVO rb);
 
-	int getTotalPostings();
+	int getTotalPostings(RecipeBoardVO rb);
 
 	List<RecipeBoardVO> getPostingList(RecipeBoardVO rb);
 
@@ -19,5 +20,13 @@ public interface RecipeBoardDAO {
 	void deletePost(int post);
 
 	void editPost(RecipeBoardVO rbv);
+
+	void writeComment(RecipeBoardCommentVO rbc);
+
+	int getTotalComments(int post);
+
+	List<RecipeBoardCommentVO> getCommentList(RecipeBoardCommentVO rbc);
+
+	void deleteComment(int cno);
 
 }
