@@ -261,25 +261,7 @@ $("li:eq(3)").css("border","1px solid #ff0000")
 
 
 <%-- 
-	<div class="example">
-		<ul class="ul_article">
-			<%
-				for (int i = 0; i < 12; i++) {
-			%>
-			<div class="hotNews_hyper" onclick="window.open('http://www.google.co.kr');">
-				<li>
-					<div class="img_wrap">
-						<img class="hotNews_img" src="./resources/images/hnboardtemp.jpg" />
-					</div>
-					<p>기사제목 : 0~74세 등 6월 예약자 중 예약취소·접종연기자0~74세 등 6월 예약자 중 예약취소·접종연기자</p>
-				</li>
-			</div>
-			<%
-				}
-			%>
-		</ul>
-	</div>
-
+	
 	<div class="bottom_page">
 		<div class="page_search">
 			<input name="" type="text" class="input_box"> 

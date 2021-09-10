@@ -48,7 +48,7 @@ function write_check(){
 
 	<div id="admin_panel">
 		<form method="post" action="admin_hotnews_edit_ok" onsubmit="return write_check();" enctype="multipart/form-data">
-			핫뉴스 번호 : <input type="hidden" id="hno" name="hno" size="40" value="${hvo.hno }"/> <br> <br>
+			<input type="hidden" name="hno" value="${hvo.hno }" >
 			핫뉴스 제목 : <input type="text" id="htitle" name="htitle" size="40" value="${hvo.htitle }"/> <br> <br>
 			<p>핫뉴스 내용 :&nbsp;</p><textarea rows="10" id="hcont" name="hcont" cols="40" style="resize: none;" >${hvo.hcont }</textarea> <br><br>
 			썸네일(미리보기) : <input type="file" id="hfile" name="hfile" />${hvo.hfile } <br><br>

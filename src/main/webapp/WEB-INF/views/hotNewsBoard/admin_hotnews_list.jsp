@@ -49,7 +49,7 @@
 					<th id="admin_list_writer" >작성자</th>
 					<th id="admin_list_date" >등록날짜</th>
 					<th id="admin_list_viewcnt" >조회수</th>					
-					<th id="admin_list_controller" >조회/수정/삭제</th>
+					<th id="admin_list_controller" >수정/삭제</th>
 				</tr>
 				
 				<c:if test="${!empty hlist }">
@@ -61,7 +61,6 @@
 							<td align="center">${h.regdate }</td>							
 							<td align="center">${h.viewcnt }</td>
 							<td align="center">
-								<input type="button" value="조회" /> 
 								<input type="button" value="수정" onclick="location='/easycook/admin_hotnews_edit?page=${page }&hno=${h.hno}&find_field=${find_field }&find_name=${find_name }';" /> 
 								<input type="button" value="삭제" onclick="location='/easycook/admin_hotnews_del?page=${page }&hno=${h.hno}&find_field=${find_field }&find_name=${find_name }';" />
 							</td>
