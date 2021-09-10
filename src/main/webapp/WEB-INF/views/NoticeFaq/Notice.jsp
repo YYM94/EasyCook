@@ -37,11 +37,10 @@ if (request.getParameter("page") == null) {
     <div class="board_title">공지사항</div>
 	<div class="search-form">
 		<form class="table-form">
-			<fieldset>
+			<fieldset style="margin-top:70px;">
 				<legend class="hidden">검색</legend>
-				<label class="hidden">검색분류</label> <select name="f">
-					<option value="title" <c:if test="${find_field == 'adminnotice_title'}"> ${'selected'}</c:if>>제목</option>
-					<option value="cont" <c:if test="${find_field == 'adminnotice_cont'}"> ${'selected'}</c:if>>내용</option>
+				<label class="hidden">검색분류</label> <select name="find_field">
+					<option value="adminnotice_title" <c:if test="${find_field == 'adminnotice_title'}"> ${'selected'}</c:if>>제목</option>
 				</select> <label class="hidden">검색어</label> 
 				<input type="text" name="find_name" value="${find_name}" placeholder="검색어를 입력해주세요." />
 				<input type="submit" value="검색" />
@@ -84,54 +83,53 @@ if (request.getParameter("page") == null) {
 	</div>
 
 	<div id="bottomPage">
-	<div id="bList_paging">
    <%-- 검색 전 페이징(쪽나누기) --%>
   	 	<c:if test="${(empty find_field) && (empty find_name)}">
     	<c:if test="${page <= 1}">
-     [이전]&nbsp;
+     <span class="pageNum" style="color: #ffffff; font-weight: bold"><<</span>
     </c:if>
     <c:if test="${page >1}">
-     <a href="Notice?page=${page-1}">[이전]</a>&nbsp;
+     <a href="Notice?page=${page-1}"><span class="pageNum" style="color: #ffffff; font-weight: bold"><<</span></a>
     </c:if>
     
     <%-- 쪽번호 출력부분 --%>
     <c:forEach var="a" begin="${startpage}" end="${endpage}" step="1">
-     <c:if test="${a==page}"><${a}></c:if>
+     <c:if test="${a==page}"><span class="pageNum1" style="color: #ffffff; font-weight: bold">${a}</span></c:if>
      
      <c:if test="${a != page}">
-      <a href="Notice?page=${a}">[${a}]</a>&nbsp;
+      <a href="Notice?page=${a}"><span class="pageNum2" style="color: black; font-weight: bold">${a}</span></a>
      </c:if>
     </c:forEach>
     
-    <c:if test="${page >= maxpage}">[다음]</c:if>
+    <c:if test="${page >= maxpage}"><span class="pageNum" style="color: #ffffff; font-weight: bold">>></span></c:if>
     
     <c:if test="${page < maxpage}">
-       <a href="Notice?page=${page+1}">[다음]</a>
+       <a href="Notice?page=${page+1}"><span class="pageNum" style="color: #ffffff; font-weight: bold">>></span></a>
     </c:if>
    </c:if>
    
    <%-- 검색 후 페이징  --%>
     <c:if test="${(!empty find_field) && (!empty find_name)}">
     <c:if test="${page <= 1}">
-     [이전]&nbsp;
+     <span class="pageNum" style="color: #ffffff; font-weight: bold"><<</span>
     </c:if>
     <c:if test="${page >1}">
-     <a href="Notice?page=${page-1}&find_field=${find_field}&find_name=${find_name}">[이전]</a>&nbsp;
+     <a href="Notice?page=${page-1}&find_field=${find_field}&find_name=${find_name}"><span class="pageNum" style="color: #ffffff; font-weight: bold"><<</span></a>
     </c:if>
     
     <%-- 쪽번호 출력부분 --%>
     <c:forEach var="a" begin="${startpage}" end="${endpage}" step="1">
-     <c:if test="${a==page}"><${a}></c:if>
+     <c:if test="${a==page}"><span class="pageNum1" style="color: #ffffff; font-weight: bold">${a}</span></c:if>
      
      <c:if test="${a != page}">
-      <a href="Notice?page=${a}&find_field=${find_field}&find_name=${find_name}">[${a}]</a>&nbsp;
+      <a href="Notice?page=${a}&find_field=${find_field}&find_name=${find_name}"><span class="pageNum2" style="color: black; font-weight: bold">${a}</span></a>
      </c:if>
     </c:forEach>
     
-    <c:if test="${page >= maxpage}">[다음]</c:if>
+    <c:if test="${page >= maxpage}"><span class="pageNum" style="color: #ffffff; font-weight: bold">>></span></c:if>
     
     <c:if test="${page < maxpage}">
-       <a href="Notice?page=${page+1}&find_field=${find_field}&find_name=${find_name}">[다음]</a>
+       <a href="Notice?page=${page+1}&find_field=${find_field}&find_name=${find_name}"><span class="pageNum" style="color: #ffffff; font-weight: bold">>></span></a>
     </c:if>
    </c:if>
   </div>

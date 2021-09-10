@@ -39,7 +39,7 @@ public class AdminFaqController {
 			out.println("</script>");
 		}else {
 			int page=1;
-			int limit=10;
+			int limit=7;
 			if(request.getParameter("page") != null) {
 				page=Integer.parseInt(request.getParameter("page"));
 			}
@@ -52,7 +52,7 @@ public class AdminFaqController {
 
 			int listcount=this.adminfaqService.getListCount(af);
 
-			af.setStartrow((page-1)*10+1);
+			af.setStartrow((page-1)*7+1);
 			af.setEndrow(af.getStartrow()+limit-1);
 
 			List<AdminFaqVO> aflist = this.adminfaqService.getFaqList(af);
@@ -60,10 +60,10 @@ public class AdminFaqController {
 			//총페이지
 			int maxpage=(int)((double)listcount/limit+0.95);
 
-			int startpage=(((int)((double)page/10+0.9))-1)*10+1;
+			int startpage=(((int)((double)page/10+0.9))-1)*7+1;
 
 			int endpage=maxpage;
-			if(endpage > startpage+10-1) endpage=startpage+10-1;
+			if(endpage > startpage+7-1) endpage=startpage+7-1;
 
 			ModelAndView amw=new ModelAndView();
 			amw.addObject("aflist",aflist);//blist키이름에 목록저장

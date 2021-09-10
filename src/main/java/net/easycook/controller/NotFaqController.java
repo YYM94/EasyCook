@@ -22,7 +22,7 @@ public class NotFaqController {
 	@RequestMapping("/Notice")
 	public ModelAndView Notice(HttpServletRequest request, @ModelAttribute AdminNoticeVO an) {
 		int page=1;
-		int limit=10;
+		int limit=7;
 		if(request.getParameter("page") != null) {
 			page=Integer.parseInt(request.getParameter("page"));
 		}
@@ -35,7 +35,7 @@ public class NotFaqController {
 		
 		int listcount=this.adminnotService.getListCount(an);
 		
-		an.setStartrow((page-1)*10+1);
+		an.setStartrow((page-1)*7+1);
 		an.setEndrow(an.getStartrow()+limit-1);
 		
 		List<AdminNoticeVO> anlist = this.adminnotService.getNotList(an);
@@ -43,10 +43,10 @@ public class NotFaqController {
 		//총페이지
 		int maxpage=(int)((double)listcount/limit+0.95);
 		
-		int startpage=(((int)((double)page/10+0.9))-1)*10+1;
+		int startpage=(((int)((double)page/7+0.9))-1)*7+1;
 		
 		int endpage=maxpage;
-		if(endpage > startpage+10-1) endpage=startpage+10-1;
+		if(endpage > startpage+7-1) endpage=startpage+7-1;
 		
 		ModelAndView wm=new ModelAndView();
 		wm.addObject("anlist",anlist);//blist키이름에 목록저장

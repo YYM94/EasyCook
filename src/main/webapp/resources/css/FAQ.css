@@ -165,9 +165,30 @@ input[id*="emptyfaq"]:checked + label em {
 	align-content: center;
 	z-index: 300;
 }
+#bottomPage .pageNum1{
+	border:1px solid #123867;
+	background:#123867;
+	color:#fff;
+	display:inline-block;
+	width:30px;
+	height:30px;
+	text-align:center;
+	line-height:30px;
+	
+}
 #bottomPage .pageNum{
 	border:1px solid #123867;
 	background:#123867;
+	color:#fff;
+	width:30px;
+	height:30px;
+	text-align:center;
+	line-height:30px;
+	
+}
+#bottomPage .pageNum2{
+	border:1px solid #123867;
+	background:#ffffff;
 	color:#fff;
 	display:inline-block;
 	width:30px;

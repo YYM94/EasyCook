@@ -21,7 +21,7 @@ public class FaqController {
 	@RequestMapping("/FAQ")
 	public ModelAndView FAQ(HttpServletRequest request,@ModelAttribute AdminFaqVO af) {
 		int page=1;
-		int limit=10;
+		int limit=7;
 		if(request.getParameter("page") != null) {
 			page=Integer.parseInt(request.getParameter("page"));
 		}
@@ -33,7 +33,7 @@ public class FaqController {
 		
 		int listcount2=this.adminfaqService.getListCount(af);
 		
-		af.setStartrow((page-1)*10+1);
+		af.setStartrow((page-1)*7+1);
 		af.setEndrow(af.getStartrow()+limit-1);
 		
 		List<AdminFaqVO> aflist = this.adminfaqService.getFaqList(af);
@@ -41,10 +41,10 @@ public class FaqController {
 		//총페이지
 		int maxpage=(int)((double)listcount2/limit+0.95);
 		
-		int startpage=(((int)((double)page/10+0.9))-1)*10+1;
+		int startpage=(((int)((double)page/7+0.9))-1)*7+1;
 		
 		int endpage=maxpage;
-		if(endpage > startpage+10-1) endpage=startpage+10-1;
+		if(endpage > startpage+7-1) endpage=startpage+7-1;
 		
 		ModelAndView ma=new ModelAndView();
 		ma.addObject("aflist",aflist);//blist키이름에 목록저장

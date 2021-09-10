@@ -84,7 +84,7 @@ SimpleDateFormat sf = new SimpleDateFormat("yy.MM.dd. a. hh.mm");
 
 			
 
-			<div id="bList_paging" style="text-align: center;">
+			<div id="admin_page_number" style="text-align: center;">
 				<%-- 검색전 페이징 --%>
 				<c:if test="${(empty find_field) && (empty find_name)}">
 					<c:if test="${page<=1}">
