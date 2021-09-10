@@ -104,6 +104,10 @@
 	/// 요리 과정의 전체 개수를 전달한다.
 	function sendData(form){
 		if(confirm("새 글을 등록하시겠습니까?") == true){
+			if(form.title.value == ""){
+				alert("제목을 입력하세요.");
+				return false;
+			}
 			if(contAmount < 1){
 				alert("최소한 하나 이상의 요리 과정을 추가해야 합니다.");
 				return false;
@@ -161,12 +165,13 @@
 
 <%@ include file="../menubar/top_left_menubar.jsp"%>
 
+<div class="board_title">레시피 글쓰기</div>
 <div id="writeFormWrap">
 	<div id="recipeInsertForm">
 		<form name="dataForm" method="post" action="recipeBoard_view" onsubmit="return sendData(this);">
 			<div id="title">
 				게시글 제목<br>
-				<input type="text" name="title"/>
+				<input type="text" id="title" name="title"/>
 			</div>
 			<div id="video">
 				유튜브 링크<br>

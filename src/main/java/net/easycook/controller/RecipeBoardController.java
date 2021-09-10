@@ -117,7 +117,7 @@ public class RecipeBoardController {
 		rb.setTextPack(req.getParameter("textPack"));
 		rb.setImgIndex(imgIndex);
 
-		//for(int i=0; i<=212; i++) { //테스트 데이터 입력을 위한 반복문 *꼭 주석처리 할 것
+		//for(int i=0; i<=90; i++) { //테스트 데이터 입력을 위한 반복문 *꼭 주석처리 할 것
 		//이미지 저장 폴더 지정
 		Calendar c = Calendar.getInstance();
 		int year = c.get(Calendar.YEAR);

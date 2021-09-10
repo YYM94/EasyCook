@@ -116,12 +116,14 @@
 			</div>
 			
 			<div id="PostingVideo">
-				<c:set var="youtubeLink" value="https://www.youtube.com/embed/${ rb.videoLink }"/>
-				<iframe width="880" height="500" src="${ youtubeLink }" 
-					title="YouTube video player" frameborder="0" 
-					allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-					allowfullscreen>
-				</iframe>
+				<c:if test="${not empty rb.videoLink}">
+					<c:set var="youtubeLink" value="https://www.youtube.com/embed/${ rb.videoLink }"/>
+					<iframe width="880" height="500" src="${ youtubeLink }" 
+						title="YouTube video player" frameborder="0" 
+						allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+						allowfullscreen>
+					</iframe>
+				</c:if>
 			</div>
 			
 			<div id="postingRecipe">
@@ -267,7 +269,12 @@
 				</div>
 			</c:if>
 			<c:if test="${ totalComments == 0 }">
-				
+				<div id="commentWrap">
+					<div class="commentBox">
+						<div class="commentWriter"></div>
+						<div class="commentContent">등록된 댓글이 없습니다.</div>
+					</div>
+				</div>
 			</c:if>
 			<c:if test="${not empty id}">
 				<div id="commentWrite">

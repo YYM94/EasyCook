@@ -148,6 +148,10 @@
 	--%>
 	function sendData(form){
 		if(confirm("새 글을 등록하시겠습니까?") == true){
+			if(form.title.value == ""){
+				alert("제목을 입력하세요.");
+				return false;
+			}
 			if(contAmount < 1){
 				alert("최소한 하나 이상의 요리 과정을 추가해야 합니다.");
 				return false;
@@ -215,19 +219,27 @@
 			<input type="hidden" name="editNo" value="${ no }"/>
 			<div id="title">
 				게시글 제목<br>
-				<input type="text" name="title" value="${ title }"/>
+				<input type="text" id="title" name="title" value="${ title }"/>
 			</div>
 			<div id="video">
 				유튜브 링크<br>
-				<input type="text" id="videoLink" 
-					value="https://www.youtube.com/embed/${ videoLink }" onblur="LoadThumbnail();"/><br>
-				<div id="thumbnail">
-					<iframe width='740' height='500' src='https://www.youtube.com/embed/${ videoLink }'
-						title='YouTube video player' frameborder='0'
-						allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture'
-						allowfullscreen>
-					</iframe>
-				</div>
+				<c:if test="${not empty vedeoLink }">
+					<input type="text" id="videoLink" 
+						value="https://www.youtube.com/embed/${ videoLink }" onblur="LoadThumbnail();"/><br>
+					<div id="thumbnail">
+						<iframe width='740' height='500' src='https://www.youtube.com/embed/${ videoLink }'
+							title='YouTube video player' frameborder='0'
+							allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture'
+							allowfullscreen>
+						</iframe>
+					</div>
+				</c:if>
+				<c:if test="${empty vedeoLink }">
+					<input type="text" id="videoLink" onblur="LoadThumbnail();"/><br>
+					<div id="thumbnail">
+						미리보기
+					</div>
+				</c:if>
 			</div>
 			<div id="recipeContWrap">
 				<input type="file" id="imgFileInput" accept="image/*" style="display:none;"/>

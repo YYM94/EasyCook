@@ -3,7 +3,7 @@ create table recipeBoard(
 	no number(38) primary key,
 	writerid varchar2(14) not null,
 	title varchar2(80) not null,
-	videoLink varchar2(200) not null,
+	videoLink varchar2(200),
 	imgIndex varchar2(20) not null,
 	imgFolder varchar2(58) not null,
 	textPack varchar2(4000),
@@ -11,6 +11,8 @@ create table recipeBoard(
 	regdate varchar2(20) not null,
 	moddate varchar2(20) not null
 );
+
+drop table recipeBoard;
 
 select * from recipeboard order by no desc;
 
@@ -44,6 +46,8 @@ create table recipeBoardComment(
 	constraint recipeBoardComment_rno_fk foreign key(rno) references recipeBoard(no)
 )
 
+drop table recipeBoardComment
+
 select * from recipeBoardComment
 
 --recipeBoardComment 시퀀스
@@ -51,6 +55,10 @@ create sequence rbc_seq
 start with 1
 increment by 1
 nocache;
+
+select rbc_seq.nextval from dual
+
+alter sequence rbc_seq increment by 1;
 
 select * 
 from (select rowNum rNum, cwriterid, cont, regdate 
@@ -62,3 +70,6 @@ select *
 from (select rowNum rNum, cwriterid, cont, regdate 
 		from(select * from RECIPEBOARDCOMMENT where rno=500 order by cno desc))
 where rNum >= 1 and rNum <= 10
+
+alter table recipeBoard
+modify(videoLink varchar2(200))
