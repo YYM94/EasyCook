@@ -70,11 +70,14 @@ if (request.getParameter("page") == null) {
 		</c:if>
 			
 		<c:if test="${empty anlist}">
-			<input type="checkbox" id="emptynotice"> <label
-				for="emptynotice">공지사항이 없습니다.<em></em></label>
-			<div>
-				<p>공지사항이 없습니다.</p>
-			</div>
+			<div class="gong">
+					<dl>
+						<dt><p class="title">공지사항이 없습니다!</p><p class="iconDiv"><img src="https://happyjung.diskn.com/data/lecture/icon_jquery_faq2_icon_arrow.png"></p></dt>
+						<dd>
+							<p>공지사항 내용이 없습니다!</p>
+						</dd>
+					</dl>
+				</div>
 		</c:if>
 		<%--<%
 			}

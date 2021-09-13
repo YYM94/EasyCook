@@ -76,11 +76,14 @@ if (request.getParameter("page") == null) {
 		</c:if>
 
 		<c:if test="${empty aflist}">
-			<input type="checkbox" id="emptyfaq">
-			<label for="emptyfaq">FAQ가 등록되지 않았습니다.<em></em></label>
-			<div>
-				<p>FAQ가 없습니다.</p>
-			</div>
+			<div class="FAQ">
+					<dl>
+						<dt><p class="title">질문과 답변이 없습니다!</p><p class="iconDiv"><img src="https://happyjung.diskn.com/data/lecture/icon_jquery_faq2_icon_arrow.png"></p></dt>
+						<dd>
+							<p>질문과 답변내용이 없습니다.</p>
+						</dd>
+					</dl>
+				</div>
 		</c:if>
 		<%--
 		}
