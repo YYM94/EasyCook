@@ -24,6 +24,7 @@ public class HotNewsDAOImpl implements HotNewsDAO {
 		return this.sqlSession.selectOne("count",hvo);
 	}
 
+	//그냥 리스트 불러오기
 	@Override
 	public List<HotNewsBoardVO> getBoardList(HotNewsBoardVO hvo) {
 		return this.sqlSession.selectList("list_hn", hvo);
@@ -40,6 +41,7 @@ public class HotNewsDAOImpl implements HotNewsDAO {
 		this.sqlSession.update("hit_hn", hno);
 	}
 
+	//조회수 순으로 정렬한 리스트 불러오기
 	@Override
 	public List<HotNewsBoardVO> getBoardListView(HotNewsBoardVO hvo) {
 		return this.sqlSession.selectList("list_hnv", hvo);

@@ -29,9 +29,9 @@ public class HotNewsBoardController { //일반게시판 관리자게시판 합�
 	private HotNewsService hotNewsService;
 	
 	@RequestMapping("/hotNewsBoard_view")
-	public String hotNewsBoard_view(Model listM, HttpServletRequest req, @ModelAttribute HotNewsBoardVO hvo) throws Exception{
+	public ModelAndView hotNewsBoard_view(ModelAndView mav, HttpServletRequest req, @ModelAttribute HotNewsBoardVO hvo) throws Exception{
 		int page=1;
-		int limit=10;
+		int limit=9;
 		if(req.getParameter("page") != null) {
 			page=Integer.parseInt(req.getParameter("page"));
 		}
@@ -44,7 +44,7 @@ public class HotNewsBoardController { //일반게시판 관리자게시판 합�
 		
 		int totalCount=this.hotNewsService.getTotalCount(hvo); //검색전은 총레코드 개수, 검색이후에는 검색된 레코드 개수
 
-		hvo.setStartrow((page-1)*10+1); //시작 행번호
+		hvo.setStartrow((page-1)*9+1); //시작 행번호
 		hvo.setEndrow(hvo.getStartrow()+limit-1); //끝행번호
 		
 		List<HotNewsBoardVO> hlistv=this.hotNewsService.getBoardListView(hvo);
@@ -52,31 +52,37 @@ public class HotNewsBoardController { //일반게시판 관리자게시판 합�
 		
 
 		int maxpage=(int)((double)totalCount/limit+0.95); //총페이지수
-		int startpage=(((int)((double)page/10+0.9))-1)*10+1; //현재 페이지에 보여질 시작 페이지
+		int startpage=(((int)((double)page/9+0.9))-1)*9+1; //현재 페이지에 보여질 시작 페이지
 		int endpage=maxpage; //현재 페이지에 보여질 마지막 페이지
 		
-		if(endpage>startpage+10-1) endpage=startpage+10-1;
+		if(endpage>startpage+9-1) endpage=startpage+9-1;
 		
 		
-		listM.addAttribute("hlistv", hlistv);
-		listM.addAttribute("hlist", hlist);
-		listM.addAttribute("page", page);
-		listM.addAttribute("startpage", startpage);
-		listM.addAttribute("endpage", endpage);
-		listM.addAttribute("maxpage", maxpage);
-		listM.addAttribute("totalCount", totalCount);
-		listM.addAttribute("find_field", find_field);
-		listM.addAttribute("find_name", find_name);
+//		listM.addAttribute("hlistv", hlistv);
+//		listM.addAttribute("hlist", hlist);
+//		listM.addAttribute("page", page);
+//		listM.addAttribute("startpage", startpage);
+//		listM.addAttribute("endpage", endpage);
+//		listM.addAttribute("maxpage", maxpage);
+//		listM.addAttribute("totalCount", totalCount);
+//		listM.addAttribute("find_field", find_field);
+//		listM.addAttribute("find_name", find_name);
 
-//		ModelAndView mav=new ModelAndView(); mav.setViewName("hotNewsBoard/admin_hotnews_list");
-//		mav.addObject("totalCount",totalCount);
-//		mav.addObject("hlist", hlist);
-//		mav.addObject("startpage", startpage);
-//		mav.addObject("endpage",endpage);
-//		mav.addObject("maxpage", maxpage);
-//		mav.addObject("page", page);
+		mav.addObject("totalCount",totalCount);
+		mav.addObject("hlistv", hlistv);
+		mav.addObject("hlist", hlist);
+		mav.addObject("page", page);
+		mav.addObject("startpage", startpage);
+		mav.addObject("endpage",endpage);
+		mav.addObject("maxpage", maxpage);
+		mav.addObject("totalCount", totalCount);
+		mav.addObject("find_field", find_field);
+		mav.addObject("find_name", find_name);
+		mav.setViewName("hotNewsBoard/hotNewsBoard_view");
+
 		
-		return "hotNewsBoard/hotNewsBoard_view";
+//		return "hotNewsBoard/hotNewsBoard_view";
+		return mav;
 	}//admin_hotNewsBoard_list()
 	
 	
@@ -87,12 +93,11 @@ public class HotNewsBoardController { //일반게시판 관리자게시판 합�
 		HttpSession session=req.getSession();
 		
 		Integer auth_num=(Integer)session.getAttribute("state");
-		System.out.println("접근권한 번호 : " + auth_num);
 		
 		if(auth_num == null || auth_num != 3) {
 			session.invalidate();
 			out.println("<script>");
-			out.println("alert('잘못된 접근입니다.\\n\\n관리자아이디로 다시 로그인하세요 ^o^')");
+			out.println("alert('잘못된 접근입니다.\\n\\n관리자계정으로 다시 로그인하세요 ^o^')");
 			out.println("location='login';");
 			out.println("</script>");
 		}else {
@@ -116,12 +121,11 @@ public class HotNewsBoardController { //일반게시판 관리자게시판 합�
 		HttpSession session=req.getSession();
 		
 		Integer auth_num=(Integer)session.getAttribute("state");
-		System.out.println("접근권한 번호 : " + auth_num);
 		
 		if(auth_num == null || auth_num != 3) {
 			session.invalidate();
 			out.println("<script>");
-			out.println("alert('잘못된 접근입니다.\\n\\n관리자아이디로 다시 로그인하세요 ^o^')");
+			out.println("alert('잘못된 접근입니다.\\n\\n관리자계정으로 다시 로그인하세요 ^o^')");
 			out.println("location='login';");
 			out.println("</script>");
 		}else {
@@ -178,12 +182,11 @@ public class HotNewsBoardController { //일반게시판 관리자게시판 합�
 		HttpSession session=req.getSession();
 		
 		Integer auth_num=(Integer)session.getAttribute("state");
-		System.out.println("접근권한 번호 : " + auth_num);
 		
 		if(auth_num == null || auth_num != 3) {
 			session.invalidate();
 			out.println("<script>");
-			out.println("alert('잘못된 접근입니다.\\n\\n관리자아이디로 다시 로그인하세요 ^o^')");
+			out.println("alert('잘못된 접근입니다.\\n\\n관리자계정으로 다시 로그인하세요 ^o^')");
 			out.println("location='login';");
 			out.println("</script>");
 		}else {
@@ -264,12 +267,11 @@ public class HotNewsBoardController { //일반게시판 관리자게시판 합�
 		HttpSession session=req.getSession();
 		
 		Integer auth_num=(Integer)session.getAttribute("state");
-		System.out.println("접근권한 번호 : " + auth_num);
 		
 		if(auth_num == null || auth_num != 3) {
 			session.invalidate();
 			out.println("<script>");
-			out.println("alert('잘못된 접근입니다.\\n\\n관리자아이디로 다시 로그인하세요 ^o^')");
+			out.println("alert('잘못된 접근입니다.\\n\\n관리자계정으로 다시 로그인하세요 ^o^')");
 			out.println("location='login';");
 			out.println("</script>");
 		}else {
@@ -305,12 +307,11 @@ public class HotNewsBoardController { //일반게시판 관리자게시판 합�
 		HttpSession session=req.getSession();
 		
 		Integer auth_num=(Integer)session.getAttribute("state");
-		System.out.println("접근권한 번호 : " + auth_num);
 		
 		if(auth_num == null || auth_num != 3) {
 			session.invalidate();
 			out.println("<script>");
-			out.println("alert('잘못된 접근입니다.\\n\\n관리자아이디로 다시 로그인하세요 ^o^')");
+			out.println("alert('잘못된 접근입니다.\\n\\n관리자계정으로 다시 로그인하세요 ^o^')");
 			out.println("location='login';");
 			out.println("</script>");
 		}else {
@@ -341,12 +342,11 @@ public class HotNewsBoardController { //일반게시판 관리자게시판 합�
 		HttpSession session=req.getSession();
 		
 		Integer auth_num=(Integer)session.getAttribute("state");
-		System.out.println("접근권한 번호 : " + auth_num);
 		
 		if(auth_num == null || auth_num != 3) {
 			session.invalidate();
 			out.println("<script>");
-			out.println("alert('잘못된 접근입니다.\\n\\n관리자아이디로 다시 로그인하세요 ^o^')");
+			out.println("alert('잘못된 접근입니다.\\n\\n관리자계정으로 다시 로그인하세요 ^o^')");
 			out.println("location='login';");
 			out.println("</script>");
 		}else {
@@ -404,12 +404,11 @@ public class HotNewsBoardController { //일반게시판 관리자게시판 합�
 		HttpSession session=req.getSession();
 		
 		Integer auth_num=(Integer)session.getAttribute("state");
-		System.out.println("접근권한 번호 : " + auth_num);
 		
 		if(auth_num == null || auth_num != 3) {
 			session.invalidate();
 			out.println("<script>");
-			out.println("alert('잘못된 접근입니다.\\n\\n관리자아이디로 다시 로그인하세요 ^o^')");
+			out.println("alert('잘못된 접근입니다.\\n\\n관리자계정으로 다시 로그인하세요 ^o^')");
 			out.println("location='login';");
 			out.println("</script>");
 		}else {
