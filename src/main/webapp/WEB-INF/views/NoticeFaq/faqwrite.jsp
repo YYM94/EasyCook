@@ -28,6 +28,7 @@
 		<h3 class="hidden2">질문과 답변 관리자페이지</h3>
 	</div>
 <form method="post" action="faqwrite_ok" onsubmit="return faq_check();" >
+<input type="hidden" name="adminfaq_name" value="${id}" />
 	<div class="board_wrap">
 		<div class="board_title">
 			<strong>질문과 답변</strong>

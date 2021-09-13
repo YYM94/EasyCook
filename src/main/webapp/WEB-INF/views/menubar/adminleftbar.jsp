@@ -19,7 +19,7 @@
 	<div id="left_menubar">
 		<div id="left_menu">
 			<div id="left_logo">
-				<a href="/easycook"><img
+				<a href="/controller"><img
 					src="./resources/images/logo.png" /></a>
 			</div>
 			<div id="left_sessionInfo">${id}님 로그인 되었습니다.</div>

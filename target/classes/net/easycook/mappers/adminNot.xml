@@ -52,7 +52,7 @@
 		insert into adminNotice
 		(adminnotice_no,adminnotice_name,adminnotice_title,
 		adminnotice_cont,adminnotice_date)
-		values(adminnotice_no_seq.nextval,#{adminnotice_name,jdbcType=VARCHAR},#{adminnotice_title},
+		values(adminnotice_no_seq.nextval,#{adminnotice_name},#{adminnotice_title},
 		#{adminnotice_cont},sysdate)
 	</insert>
 
