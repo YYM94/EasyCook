@@ -19,11 +19,14 @@
 	<select id="get_total" resultType="int">
 		select count(*) from recipeBoard
 					<where>
-						<if test="searchText==''">
+						<if test="searchType==''">
 						
 						</if>
-						<if test="searchText!=''">
+						<if test='searchType=="t"'>
 							title like #{searchText}
+						</if>
+						<if test='searchType=="w"'>
+							writerid like #{searchText}
 						</if>
 					</where>
 	</select>
@@ -34,11 +37,14 @@
 			from 
 				(select * from RECIPEBOARD 
 					<where>
-						<if test="searchText==''">
+						<if test="searchType==''">
 						
 						</if>
-						<if test="searchText!=''">
+						<if test='searchType=="t"'>
 							title like #{searchText}
+						</if>
+						<if test='searchType=="w"'>
+							writerid like #{searchText}
 						</if>
 					</where>
 				order by no desc))
