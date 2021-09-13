@@ -9,5 +9,11 @@ public interface MemberDAO {
 	MemberVO loginCheck(String login_id_box);
 
 	MemberVO idcheck(String id);
+	
+	void editMember(MemberVO m);
+	
+	MemberVO getMember(String id);
+	
+	void delMem(MemberVO dm);
 
 }

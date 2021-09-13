@@ -10,4 +10,10 @@ public interface MemberService {
 
 	MemberVO idcheck(String id);
 
+	void editMember(MemberVO m);
+	
+	MemberVO getMember(String id);
+	
+	void delMem(MemberVO dm);
+
 }
