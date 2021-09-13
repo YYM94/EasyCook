@@ -69,5 +69,11 @@ public class RecipeBoardDAOImpl implements RecipeBoardDAO {
 	public void deleteComment(int cno) {
 		sqlSession.delete("del_comment", cno);
 	}
+
+	@Override
+	public List<RecipeBoardVO> getTopRecipe() {
+		return sqlSession.selectList("get_top3recipe");
+	}
+
 	
 }

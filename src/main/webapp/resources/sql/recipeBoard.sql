@@ -73,3 +73,7 @@ where rNum >= 1 and rNum <= 10
 
 alter table recipeBoard
 modify(videoLink varchar2(200))
+
+select * from
+(select no, title, imgindex, imgfolder, visiter from recipeBoard order by visiter desc)
+where rownum <= 3;

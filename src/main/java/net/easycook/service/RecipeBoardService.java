@@ -27,4 +27,6 @@ public interface RecipeBoardService {
 
 	void deleteComment(int cno);
 
+	List<RecipeBoardVO> getTopRecipe();
+
 }

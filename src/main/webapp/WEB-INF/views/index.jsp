@@ -1,4 +1,6 @@
 <%@ page contentType="text/html; charset=UTF-8"%> 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -110,36 +112,22 @@
    <div id="top3_cont">
       <div class="gallerylist">
          <ul>
-            <li><a href="">
-                  <div class="screen">
-                     <div class="top">닭봉의 레시피가 궁금하시다면?</div>
-                     <div class="bottom">알려드립니다!</div>
-                     <img src="./resources/images/picture/chicken.jpg">
-                  </div>
-                  <div>
-                     <h3>1위:누구나 좋아하는 닭봉</h3>
-                  </div>
-            </a></li>
-            <li><a href="">
-                  <div class="screen1">
-                     <div class="top">토스트의 레시피가 궁금하시다면?</div>
-                     <div class="bottom">알려드립니다!</div>
-                     <img src="./resources/images/picture/toast.jpg">
-                  </div>
-                  <div>
-                     <h3>2위:마성의 매력 계란토스트</h3>
-                  </div>
-            </a></li>
-            <li><a href="">
-                  <div class="screen3">
-                     <div class="top">계란장조림의 레시피가 궁금하시다면?</div>
-                     <div class="bottom">알려드립니다!</div>
-                     <img src="./resources/images/picture/egg1.jpg">
-                  </div>
-                  <div>
-                     <h3>3위:햄 메추리알조림</h3>
-                  </div>
-            </a></li>
+         	<c:set var="topIndex" value="1"/>
+         	<c:forEach var="rb" items="${ rbList }">
+	            <li><a href="recipeBoard_view?page=1&post=${ rb.no }&cpage=1">
+	                  <div class="screen">
+	                     <div class="top">${ rb.title }의 레시피가 궁금하시다면?</div>
+	                     <div class="bottom">알려드립니다!</div>
+	                     <c:if test="${fn:contains(rb.imgIndex, '1') }">
+	                     	<img src="./upload/${rb.imgFolder}/1.jpg">
+	                     </c:if>
+	                  </div>
+	                  <div>
+	                     <h3>${topIndex}위: ${ rb.title }</h3>
+	                     <c:set var="topIndex" value="${ topIndex+1 }"/>
+	                  </div>
+	            </a></li>
+            </c:forEach>
          </ul>
       </div>
    </div>

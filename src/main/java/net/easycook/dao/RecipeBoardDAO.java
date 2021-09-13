@@ -29,4 +29,7 @@ public interface RecipeBoardDAO {
 
 	void deleteComment(int cno);
 
+	List<RecipeBoardVO> getTopRecipe();
+
+
 }

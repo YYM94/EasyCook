@@ -87,5 +87,11 @@
  	<delete id="del_comment">
  		delete from recipeBoardComment where cno=#{cno}
  	</delete>
+ 	
+ 	<select id="get_top3recipe" resultType="rb">
+	 	select * from
+			(select no, title, imgindex, imgfolder, visiter from recipeBoard order by visiter desc)
+		where rownum &lt;= 3
+ 	</select>
  
 </mapper>
