@@ -51,6 +51,7 @@ function write_check(){
 	<div id="admin_panel">
 	
 		<form method="post" action="admin_hotnews_write_ok" onsubmit="return write_check();" enctype="multipart/form-data">
+			<input type="hidden" name="hwriter" value="${id }" /> <br> <br>
 			핫뉴스 제목 : <input type="text" placeholder="제목을 입력하세요" id="htitle" name="htitle" size="40" /> <br> <br>
 			<p>핫뉴스 내용 :&nbsp;</p><textarea id="hcont" name="hcont" rows="10" cols="40" style="resize: none;"></textarea><br><br> 
 			썸네일(미리보기) : <input type="file" id="hfile" name="hfile" multiple /> <br><br>

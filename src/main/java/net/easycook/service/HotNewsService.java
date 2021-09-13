@@ -16,7 +16,7 @@ public interface HotNewsService {
 
 	HotNewsBoardVO getBoardCont2(int hno);
 
-	List<HotNewsBoardVO> getBoardListView(HotNewsBoardVO hvo);
+	List<HotNewsBoardVO> getBoardListView();
 
 	void editBoard(HotNewsBoardVO hvo);
 

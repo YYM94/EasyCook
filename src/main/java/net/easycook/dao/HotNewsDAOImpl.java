@@ -43,8 +43,8 @@ public class HotNewsDAOImpl implements HotNewsDAO {
 
 	//조회수 순으로 정렬한 리스트 불러오기
 	@Override
-	public List<HotNewsBoardVO> getBoardListView(HotNewsBoardVO hvo) {
-		return this.sqlSession.selectList("list_hnv", hvo);
+	public List<HotNewsBoardVO> getBoardListView() {
+		return this.sqlSession.selectList("list_hnv");
 	}
 
 	@Override
