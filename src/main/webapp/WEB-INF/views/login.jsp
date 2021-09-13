@@ -16,7 +16,6 @@
   			$('#login_find_pwd').hide();
 			$('#login_find_id').fadeToggle();
 			$('.login_find_id_control').val(''); //입력한 값 초기화
- 			$('#find_q').val('').focus(); //선택질문 초기화
  			$('#login_find_id_real').hide(); //하단부 찾은 아이디 영역 사라지기
 		});
 	}
@@ -28,7 +27,6 @@
 			$('#login_find_id').hide();
 			$('#login_find_pwd').fadeToggle();
 			$('.login_find_pwd_control').val('');
-			$('#find_pw_q').val('');
 			$('#login_find_pwd_id_text').focus();
 		});
 	}
