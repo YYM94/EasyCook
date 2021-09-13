@@ -11,7 +11,7 @@ drop table adminFaq;
 
 select * from adminFaq
 --g_no_seq 시퀀스 생성
-create sequence adminnfaq_no_seq
+create sequence adminfaq_no_seq
 start with 1
 increment by 1
 nocache;
