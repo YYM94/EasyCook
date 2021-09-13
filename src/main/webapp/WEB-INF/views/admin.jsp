@@ -9,14 +9,6 @@
 
 <link rel="stylesheet" type="text/css" href="./resources/css/admin.css" />
 <script src="./resources/js/jquery.js"></script>
-<script>
-
-
-
-
-</script>
-
-
 </head>
 <body id="admin_body">
 	<%@ include file="./menubar/adminleftbar.jsp"%>
@@ -25,22 +17,23 @@
 	</div>
 
 	<div id="admin_panel">
-		<form class="table-form" action="admin">
+		<form method="get" class="table-form" action="admin">
 			<div id="admin_search">
 				<fieldset>
 					<legend class="hidden">검색</legend>
 					<label class="hidden">검색분류</label> 
 					<select name="find_field">
-					<option value="search_id" <c:if test="${find_field=='join_id_box'}">${'selected'}</c:if>>회원아이디</option>
-					<option value="search_name" <c:if test="${find_field=='join_name_box'}">${'selected'}</c:if>>회원이름</option>
-					<option value="search_join" <c:if test="${find_field=='join_state'}">${'selected'}</c:if>>회원상태</option>
+					<option value="join_id_box" <c:if test="${find_field=='join_id_box'}">${'selected'}</c:if>>회원아이디</option>
+					<option value="join_name_box" <c:if test="${find_field=='join_name_box'}">${'selected'}</c:if>>회원이름</option>
+					<option value="join_state" <c:if test="${find_field=='join_state'}">${'selected'}</c:if>>회원상태</option>
 					</select> 
 					<label class="hidden">검색어</label> 
 					<input type="text" name="find_name"	id="find_name" value="${find_name}"placeholder="검색어를 입력해주세요." /> 
-					<input class="btn btn-search" type="submit" value="검색" />
+					<input class="btn btn-search" type="submit" value="검색" />&nbsp;
+					<input type="button" value="전체회원목록" onclick="location='admin?page=${page}';" />
 				</fieldset>
-			
 			</div>
+			</form>
 
 			<div class="admintitle">
 				<!-- <b>제목</b> <b>작성자</b> <b>날짜</b> -->
@@ -68,6 +61,9 @@
 					</div>
 					</c:forEach>
 				</c:if>
+				<c:if test="${empty blist}">
+					<b>회원 목록이 없습니다!</b>
+				</c:if>
 				</div>
 					
 					<div id="admin_page" style="text-align: center;">
@@ -76,7 +72,7 @@
 							<c:if test="${(empty find_field) && (empty find_name)}">
 								<c:if test="${page<=1}">[이전]&nbsp;</c:if>
 								<c:if test="${page>1}">
-									<a href="admin_member_list?page=${page-1}">[이전]</a>&nbsp;
+									<a href="admin?page=${page-1}">[이전]</a>&nbsp;
 		    					</c:if>
 		
 								<%--현재 쪽번호 출력--%>
@@ -87,13 +83,13 @@
 		     						</c:if>
 								<c:if test="${a != page}">
 									<%--현재 페이지가 선택되지 않았 다면 --%>
-									<a href="admin_member_list?page=${a}">[${a}]</a>&nbsp;
+									<a href="admin?page=${a}">[${a}]</a>&nbsp;
 		     						</c:if>
 								</c:forEach>
 		
 								<c:if test="${page >= maxpage}">[다음]</c:if>
 								<c:if test="${page<maxpage}">
-									<a href="admin_member_list?page=${page+1}">[다음]</a>
+									<a href="admin?page=${page+1}">[다음]</a>
 								</c:if>
 							</c:if>
 	
@@ -101,7 +97,7 @@
 							<c:if test="${(!empty find_field) || (!empty find_name)}">
 								<c:if test="${page<=1}">[이전]&nbsp;</c:if>
 								<c:if test="${page>1}">
-									<a href="admin_member_list?page=${page-1}&find_field=${find_field}&find_name=${find_name}">[이전]</a>&nbsp;
+									<a href="admin?page=${page-1}&find_field=${find_field}&find_name=${find_name}">[이전]</a>&nbsp;
 	    						</c:if>
 	
 								<%--현재 쪽번호 출력--%>
@@ -112,19 +108,19 @@
 		     					</c:if>
 								<c:if test="${a != page}">
 									<%--현재 페이지가 선택되지 않았 다면 --%>
-									<a href="admin_member_list?page=${a}&find_field=${find_field}&find_name=${find_name}">[${a}]</a>&nbsp;
+									<a href="admin?page=${a}&find_field=${find_field}&find_name=${find_name}">[${a}]</a>&nbsp;
 		     					</c:if>
 								</c:forEach>
 		
 								<c:if test="${page >= maxpage}">[다음]</c:if>
 								<c:if test="${page<maxpage}">
-									<a	href="admin_member_list?page=${page+1}&find_field=${find_field}&find_name=${find_name}">[다음]</a>
+									<a	href="admin?page=${page+1}&find_field=${find_field}&find_name=${find_name}">[다음]</a>
 								</c:if>
 							</c:if>
 						</div>
 					</div>
 				</div>
-			</form>
+			
 		</div>
 </body>
 </html>

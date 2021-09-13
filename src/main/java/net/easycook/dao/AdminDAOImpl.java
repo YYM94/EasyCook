@@ -27,7 +27,17 @@ public class AdminDAOImpl implements AdminDAO {
 	@Override
 	public void editM(MemberVO m) {
 		this.sqlSession.update("admin_edit", m);
-	} //관리자페이지에서 회원정보수정
+	} //관리자페이지에서 회원정보 수정
+
+	@Override
+	public MemberVO getMem(String join_id_box) {
+		return this.sqlSession.selectOne("admin_edit_view", join_id_box);
+	}//관리자페이지에서 회원정보 조회
+
+	@Override
+	public void delM(String join_id_box) {
+		this.sqlSession.delete("am_del", join_id_box);
+	}
 
 
 }

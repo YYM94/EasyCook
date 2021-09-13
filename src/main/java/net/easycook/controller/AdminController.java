@@ -12,10 +12,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 
 import net.easycook.service.AdminService;
 import net.easycook.vo.MemberVO;
-import pwdconv.PwdChange;
 
 @Controller
 public class AdminController {
@@ -33,7 +34,7 @@ public class AdminController {
 		
 		String id=(String)session.getAttribute("id"); //세션 아이디값을 구함
 		Integer state=(Integer)session.getAttribute("state");
-		if(id == null && state == 1 && state == 2) {
+		if(id == null || state == 1 || state == 2) {
 			out.println("<script>");
 			out.println("alert('다시 로그인 하세요!');");
 			out.println("location='login';");
@@ -87,34 +88,67 @@ public class AdminController {
 
 	//관리자 회원관리 
 	@RequestMapping("admin_member_edit")
-	public String admin_member_edit(MemberVO m, HttpServletRequest request, HttpServletResponse response) throws Exception{
+	public String admin_member_edit(@RequestParam("join_id_box") String join_id_box, @RequestParam("state") String state, HttpServletRequest request, HttpServletResponse response, Model am, MemberVO ad) throws Exception{
 		response.setContentType("text/html;charset=UTF-8");
 		PrintWriter out=response.getWriter();
 		HttpSession session=request.getSession();
 		String id=(String)session.getAttribute("id");
-		Integer state=(Integer)session.getAttribute("state");
 		
-		if(id == null && state == 1 && state == 2) {
+		if(id == null) {
 			out.println("<script>");
-			out.println("alert('관리자 계정으로 다시 로그인 하세요!');");
+			out.println("alert('다시 로그인 하세요!');");
 			out.println("location='login';");
 			out.println("</script>");
 		}else {
-			m.setJoin_pw_box(m.getJoin_pw_box());//비번을 암호화
-			this.adminService.editM(m);//회원정보수정
-
+			int page=1;
+			if(request.getParameter("page") != null) {
+				page=Integer.parseInt(request.getParameter("page")); 
+			}
+		
+		MemberVO m=this.adminService.getMem(join_id_box);
+		
+		String[] email= {"주소를 선택하세요.","naver.com", "hanmail.net", "nate.com", "hotmail.com", "gmail.com", "직접입력"};
+		String[] pwdQ= {"질문을 선택하세요.", "어머니의 성함은?", "아버지의 성함은?", "나의 출신 초등학교는?"};
+		am.addAttribute("email", email);
+		am.addAttribute("pwdQ", pwdQ);
+		am.addAttribute("m", m);
+		am.addAttribute("page", page);
+		
+		if(state.equals("edit")) {
+			return "admin_member_edit";
+		}
+		ad.setJoin_pw_box(ad.getJoin_pw_box());
+		this.adminService.editM(ad);
+		
+		out.println("<script>");
+		out.println("alert('정보 수정했습니다!');");
+		out.println("location='admin_member_edit?state=edit"
+				+"&join_id_box="+ad.getJoin_id_box()+"';");
+		out.println("</script>");
+		}
+	return null;
+	}
+	
+	//관리자 회원 탈퇴
+	@RequestMapping("/admin_member_del")
+	public ModelAndView admin_member_del(@RequestParam("join_id_box") String join_id_box, HttpServletResponse response, HttpServletRequest request) throws Exception{
+		response.setContentType("text/html;charset=UTF-8");
+		PrintWriter out=response.getWriter();
+		HttpSession session=request.getSession();
+		String id=(String)session.getAttribute("id");
+		if(id == null) {
 			out.println("<script>");
-			out.println("alert('정보 수정했습니다!');");
-			out.println("location='admin_member_info?state=edit" //info부분 수정해야함
-					+"&join_id_box="+m.getJoin_id_box()+"';");
+			out.println("alert('다시 로그인 하세요!');");
+			out.println("location='login';");
 			out.println("</script>");
+		}else {
+			int page=1;
+			if(request.getParameter("page") != null) {
+				page=Integer.parseInt(request.getParameter("page"));    		
+			}
+			this.adminService.delM(join_id_box);
+			return new ModelAndView("redirect:/admin").addObject("page", page);
 		}
 		return null;
 	}
-	
-	
-
-
-	
-	
 }

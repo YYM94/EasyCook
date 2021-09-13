@@ -12,4 +12,8 @@ public interface AdminDAO {
 
 	void editM(MemberVO m);
 
+	MemberVO getMem(String join_id_box);
+
+	void delM(String join_id_box);
+
 }

@@ -27,10 +27,11 @@ public class MemberController {
 	
 	//사용자 회원관리 로그인 뷰페이지
 	@RequestMapping("/login")
-	public ModelAndView login(Model m) {
-		String[] pwdQ= {"질문을 선택하세요.","어머니의 성함은?", "아버지의 성함은?", "나의 출신 초등학교는?"};
+	public ModelAndView login(Model m){
 		
+		String[] pwdQ = {"질문을 선택하세요.","어머니의 성함은?", "아버지의 성함은?", "나의 출신 초등학교는?"};
 		m.addAttribute("pwdQ", pwdQ);
+		
 		return new ModelAndView("login"); //뷰페이지
 	}
 	
@@ -140,4 +141,5 @@ public class MemberController {
 	
 	//비밀번호재설정
 	
+	//회원 탈퇴 폼
 }
