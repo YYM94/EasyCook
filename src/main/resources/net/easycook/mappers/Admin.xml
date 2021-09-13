@@ -6,16 +6,9 @@
  
  <mapper namespace="Admin">
  
- <!-- 관리자 정보 저장 -->
- 
- <!-- 관리자 로그인 인증 -->
- <select id="admin_login" resultType="admin">
- 	select * from easycook_admin where admin_id=#{admin_id}
- </select>
- 
 <!-- 검색전후 회원수 -->
 <select id="admin_count" parameterType="m" resultType="int">
-	select count(mem_id) from member
+	select count(join_id_box) from easycook_member
 	<where>
 		<if test="find_field == ''"></if><!-- 전체회원수 -->
 		<if test="find_field == 'join_id_box'">
@@ -32,17 +25,16 @@
  
 <!-- 검색 전후 회원목록 -->
 <select id="admin_list" parameterType="m" resultType="m">
-     select * from (select rowNum rNum,join_id_box,join_name_box,
-     join_tel_1_box,join_tel_2_box,join_tel_3_box,join_state,
+     select * from (select rowNum rNum,join_id_box,join_name_box,join_state,
      join_date from 
      (select * from easycook_member
        <where>
         <if test="find_field == ''"></if>
-        <if test="find_field == 'join_name_box'">
-         	mem_id like #{find_name}
+        <if test="find_field == 'join_id_box'">
+         	join_id_box like #{find_name}
         </if>
-        <if test="find_field == 'mem_name'">
-        	 mem_name like #{find_name}
+        <if test="find_field == 'join_name_box'">
+        	join_name_box like #{find_name}
         </if>
         <if test="find_field == 'join_state'">
       		join_state like #{find_name}
@@ -52,20 +44,26 @@
      where rNum &gt;= #{startrow} and rNum &lt;= #{endrow}  
 </select>
 
+<!-- 관리자에서 회원정보 보기 -->
+<select id="admin_edit_view" resultType="m">
+	select * from easycook_member where join_id_box=#{join_id_box}
+</select>
+
 <!-- 관리자에서 회원정보 수정 -->
 <update id="admin_edit">
-     update member set join_name_box=#{join_name_box}
-     ,join_post_box_1=#{join_post_box_1},join_post_box_2=#{join_post_box_2},
-     join_post_box_3=#{join_post_box_3},
-     join_email_1_box=#{join_email_1_box},join_email_2_box=#{join_email_2_box},
+     update easycook_member set 
+     join_name_box=#{join_name_box}, join_nickname_box=#{join_nickname_box},
      join_tel_1_box=#{join_tel_1_box},join_tel_2_box=#{join_tel_2_box},
-     join_tel_3_box=#{join_tel_3_box},join_state=#{join_state}
-     ,join_delcont=#{join_delcont} where join_id_box=#{join_id_box}
+     join_email_1_box=#{join_email_1_box}, join_email_2_box=#{join_email_2_box},
+     join_tel_3_box=#{join_tel_3_box},
+     join_post_box_1=#{join_post_box_1},join_post_box_2=#{join_post_box_2},
+     join_post_box_3=#{join_post_box_3},
+     join_state=#{join_state} where join_id_box=#{join_id_box}
 </update>
 
 <!-- 관리자에서 회원삭제 -->
-<delete id="admin_del">
-     delete from member where join_id_box=#{join_id_box}
+<delete id="am_del">
+     delete from easycook_member where join_id_box=#{join_id_box}
 </delete>
 
 

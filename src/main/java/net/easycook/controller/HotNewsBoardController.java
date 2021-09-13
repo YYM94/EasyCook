@@ -47,7 +47,7 @@ public class HotNewsBoardController { //일반게시판 관리자게시판 합�
 		hvo.setStartrow((page-1)*9+1); //시작 행번호
 		hvo.setEndrow(hvo.getStartrow()+limit-1); //끝행번호
 		
-		List<HotNewsBoardVO> hlistv=this.hotNewsService.getBoardListView(hvo);
+		List<HotNewsBoardVO> hlistv=this.hotNewsService.getBoardListView();
 		List<HotNewsBoardVO> hlist=this.hotNewsService.getBoardList(hvo);
 		
 
@@ -164,7 +164,9 @@ public class HotNewsBoardController { //일반게시판 관리자게시판 합�
 			String htitle=req.getParameter("htitle");
 			String hcont=req.getParameter("hcont");
 			String hlink=req.getParameter("hlink");
+			String hwriter=req.getParameter("hwriter");
 			hvo.setHtitle(htitle); hvo.setHcont(hcont); hvo.setHlink(hlink);
+			hvo.setHwriter(hwriter);
 			
 			this.hotNewsService.insertBoard(hvo);
 			

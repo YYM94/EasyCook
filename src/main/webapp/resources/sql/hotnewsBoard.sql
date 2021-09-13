@@ -4,7 +4,7 @@ create table hotNewsBoard(
 	,htitle varchar2(200) not null
 	,hcont varchar2(4000)
 	,hlink varchar2(200) not null
-	,hfile varchar2(80) 
+	,hfile varchar2(80) not null
 	,viewcnt number(38) default 0
 	,regdate date
 );

@@ -140,7 +140,7 @@
 	width: 40%;
 	margin:0 5% 0 35%;
 	padding: 1%;
-	margin-top: 2%;
+/* 	margin-top: 2%; */
 	border-radius: 20px;
 }
 
@@ -161,9 +161,37 @@
  	padding-left: 50px;
 }
 
+#join_email_1_box{
+	width: 20%;
+}
+
+#join_email_2_box{
+	width: 15%;
+}
+
+#join_email_3_box{
+	width: 20%;
+}
+
+#join_tel_1_box{
+	width: 10%;
+}
+
+#join_tel_2_box{
+	width: 10%;
+}
+
+#join_tel_3_box{
+	width: 10%;
+}
+
+#join_post_box_1{
+	width: 30%;
+}
+
 .member_text{
 	float: left;
-	width: 45%;
+	width: 37%;
 	font-size: 120%;
 }
 

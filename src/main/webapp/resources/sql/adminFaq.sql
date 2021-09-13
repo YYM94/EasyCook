@@ -9,7 +9,7 @@ create table adminFaq(
 select * from adminFaq
 drop table adminFaq;
 
-select * from adminFaq
+select adminnfaq_no_seq.nextval from dual
 --g_no_seq 시퀀스 생성
 create sequence adminfaq_no_seq
 start with 1

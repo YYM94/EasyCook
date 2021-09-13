@@ -30,5 +30,15 @@ public class AdminServiceImpl implements AdminService {
 		this.adminDAO.editM(m);
 	}
 
+	@Override
+	public MemberVO getMem(String join_id_box) {
+		return this.adminDAO.getMem(join_id_box);
+	}
+
+	@Override
+	public void delM(String join_id_box) {
+		this.adminDAO.delM(join_id_box);
+	}
+
 
 }

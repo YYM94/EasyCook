@@ -7,7 +7,7 @@
 <mapper namespace="HotNewsBoard">
 	<insert id="insert_hn" parameterType="hb">
 		insert into hotNewsBoard (hno, hwriter, htitle, hcont, hlink, hfile, regdate) 
-		values(hno_seq.nextval, 'admin', #{htitle}, #{hcont}, #{hlink}, #{hfile}, sysdate)
+		values(hno_seq.nextval, #{hwriter}, #{htitle}, #{hcont}, #{hlink}, #{hfile}, sysdate)
 	</insert>
 	
 	<!-- 검색전 총레코드개수, 검색 이후는 검색한 레코드 개수 -->

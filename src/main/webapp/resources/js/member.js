@@ -495,25 +495,6 @@
 	
 	//member_edit.jsp 유효성 검증
 	function edit_check(){
-		$join_pw_box=$.trim($("#join_pw_box").val());
-		$join_pw_check_box=$.trim($("#join_pw_check_box").val());
-		if($join_pw_box == ""){
-			alert("비번을 입력하세요!");
-			$("#join_pw_box").val("").focus();
-			return false;
-		}
-		if($join_pw_check_box == ""){
-			alert("비번 확인을 입력하세요!");
-			$("#join_pw_check_box").val("").focus();
-			return false;
-		}
-		if($join_pw_box != $join_pw_check_box){
-			alert("비번이 다릅니다!");
-			$("#join_pw_box").val("");
-			$("#join_pw_check_box").val("");
-			$("#join_pw_box").focus();
-			return false;
-		}
 		if($.trim($("#join_email_1_box").val())==""){
 			alert("이메일을 입력하세요!");
 			$("#join_email_1_box").focus();
