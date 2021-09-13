@@ -12,6 +12,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import net.easycook.service.MemberService;
@@ -25,8 +26,11 @@ public class MemberController {
 	private MemberService memberService;
 	
 	//사용자 회원관리 로그인 뷰페이지
-	@GetMapping("/login")
-	public ModelAndView login() {
+	@RequestMapping("/login")
+	public ModelAndView login(Model m) {
+		String[] pwdQ= {"질문을 선택하세요.","어머니의 성함은?", "아버지의 성함은?", "나의 출신 초등학교는?"};
+		
+		m.addAttribute("pwdQ", pwdQ);
 		return new ModelAndView("login"); //뷰페이지
 	}
 	
@@ -52,7 +56,7 @@ public class MemberController {
 				out.println("</script>");
 			}else {
 				session.setAttribute("id", login_id_box);
-				session.setAttribute("state", dm.getJoin_state());
+				session.setAttribute("state", dm.getJoin_state()); //일반사용자 1 / 관리자 3만 로그인 가능
 				return "index"; //로그인 인증 후 메인화면으로 이동
 			}
 		}
@@ -98,8 +102,8 @@ public class MemberController {
 	//사용자 회원가입
 	@RequestMapping("/join")
 	public String join(Model m) {
-		String[] email= {"naver.com", "hanmail.net", "nate.com", "hotmail.com", "gmail.com", "직접입력"};
-		String[] pwdQ= {"어머니의 성함은?", "아버지의 성함은?", "나의 출신 초등학교는?"};
+		String[] email= {"주소를 선택하세요.","naver.com", "hanmail.net", "nate.com", "hotmail.com", "gmail.com", "직접입력"};
+		String[] pwdQ= {"질문을 선택하세요.", "어머니의 성함은?", "아버지의 성함은?", "나의 출신 초등학교는?"};
 		
 		m.addAttribute("email", email);
 		m.addAttribute("pwdQ", pwdQ);
@@ -109,6 +113,20 @@ public class MemberController {
 	
 	
 	//아이디 중복검색
+	@PostMapping("/member_idcheck")
+	public String member_idcheck(@RequestParam("id") String id, HttpServletResponse response) throws Exception{
+		response.setContentType("text/html;charset=UTF-8");
+		PrintWriter out=response.getWriter();
+		
+		MemberVO db_id=this.memberService.idcheck(id); //아이디 중복 검색
+		
+		int re=-1; //중복아이디 없을때 반환값
+		if(db_id != null) { //중복아이디 있을때
+			re=1;
+		}
+		out.println(re); //값이 반환
+		return null;
+	}
 	
 	//회원가입 저장
 	@PostMapping("/join_ok")
@@ -121,6 +139,5 @@ public class MemberController {
 	//아이디찾기
 	
 	//비밀번호재설정
-	
 	
 }

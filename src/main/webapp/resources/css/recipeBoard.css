@@ -370,6 +370,13 @@ body{
 	width: 100%;
 	height: 100%;
 }
+/*검색영역*/
+#table-form{
+    width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+}
 
 /*글쓰기 버튼*/
 #postWriteBtn{

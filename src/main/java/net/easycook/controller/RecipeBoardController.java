@@ -36,7 +36,15 @@ public class RecipeBoardController {
 	public ModelAndView recipeBoard_view(HttpServletRequest req) {
 		ModelAndView m = new ModelAndView();
 		RecipeBoardVO rb = new RecipeBoardVO();
-
+		
+		//검색 타입 지정 : t(제목), w(글쓴이)
+		String searchType = "";
+		if(req.getParameter("searchType") != null) {
+			searchType = req.getParameter("searchType");
+		}
+		rb.setSearchType(searchType);
+		
+		//검색어 지정
 		String searchText = "";
 		if(req.getParameter("searchText") != null) {
 			searchText = req.getParameter("searchText");
@@ -84,6 +92,7 @@ public class RecipeBoardController {
 		}
 		
 		m.addObject("rbList", rbList);
+		m.addObject("searchType", searchType);
 		searchText = searchText.replace("%", "");
 		m.addObject("searchText", searchText);
 		
@@ -166,24 +175,17 @@ public class RecipeBoardController {
 		int post = Integer.parseInt(req.getParameter("post"));
 		RecipeBoardVO rb = recipeBoardService.getPost(post);
 		
-		if(session.getAttribute("id").equals(rb.getWriterid())) {
-			recipeBoardService.deletePost(post);
-			System.out.println("[성공:/recipeBoard_delete] 삭제된 레코드 NO : "+ rb.getNo());
-			String folderPath = req.getRealPath("upload")+"\\"+rb.getImgFolder();
-			File targetFolder = new File(folderPath);
-			if(targetFolder.exists()) {
-				File[] targetFileArr = new File(folderPath).listFiles();
-				for(File f:targetFileArr) {
-					System.out.println("[성공:/recipeBoard_delete] 삭제된 파일명 : "+ folderPath + "\\" + f.getName());
-					f.delete();
-				}
-				targetFolder.delete();
+		recipeBoardService.deletePost(post);
+		System.out.println("[성공:/recipeBoard_delete] 삭제된 레코드 NO : "+ rb.getNo());
+		String folderPath = req.getRealPath("upload")+"\\"+rb.getImgFolder();
+		File targetFolder = new File(folderPath);
+		if(targetFolder.exists()) {
+			File[] targetFileArr = new File(folderPath).listFiles();
+			for(File f:targetFileArr) {
+				System.out.println("[성공:/recipeBoard_delete] 삭제된 파일명 : "+ folderPath + "\\" + f.getName());
+				f.delete();
 			}
-		}else {
-			out.println("<script>");
-			out.println("alert('비정상적인 접근입니다.');");
-			out.println("history.go(-1);");
-			out.println("</script>");
+			targetFolder.delete();
 		}
 		
 		return "redirect:recipeBoard_view?page=1";
@@ -196,27 +198,17 @@ public class RecipeBoardController {
 		
 		int post = Integer.parseInt(req.getParameter("post"));
 		RecipeBoardVO rb = recipeBoardService.getPost(post);
-		
-		if(session.getAttribute("id").equals(rb.getWriterid())) {
 			
-			ModelAndView m = new ModelAndView();
-			m.addObject("title", rb.getTitle());
-			m.addObject("videoLink", rb.getVideoLink());
-			m.addObject("imgIndex", rb.getImgIndex());
-			m.addObject("imgFolder", rb.getImgFolder());
-			m.addObject("textPack", rb.getTextPack());
-			m.addObject("no", rb.getNo());
-			
-			m.setViewName("recipeBoard/recipeBoard_edit");
-			return m;
-		}else {
-			out.println("<script>");
-			out.println("alert('비정상적인 접근입니다.');");
-			out.println("history.go(-1);");
-			out.println("</script>");
-		}
+		ModelAndView m = new ModelAndView();
+		m.addObject("title", rb.getTitle());
+		m.addObject("videoLink", rb.getVideoLink());
+		m.addObject("imgIndex", rb.getImgIndex());
+		m.addObject("imgFolder", rb.getImgFolder());
+		m.addObject("textPack", rb.getTextPack());
+		m.addObject("no", rb.getNo());
 		
-		return null;
+		m.setViewName("recipeBoard/recipeBoard_edit");
+		return m;
 	}
 	
 	@ResponseBody
@@ -249,100 +241,97 @@ public class RecipeBoardController {
 		
 		int post = Integer.parseInt(req.getParameter("editNo"));
 		RecipeBoardVO rb = recipeBoardService.getPost(post);
-		
-		if(session.getAttribute("id").equals(rb.getWriterid())) {
 			
-			//이미지 업로드 코드////
-			String folderPath = req.getRealPath("upload")+"\\"+rb.getImgFolder();
-			File targetFolder = new File(folderPath);
-			if(targetFolder.exists()) {
-				//파일 이름을 a1.jpg, a2.jpg...로 임시 변경
-				File[] targetFileArr = new File(folderPath).listFiles();
-				for(File f:targetFileArr) {
-					File tempFile = new File(folderPath + "/a" + f.getName());
-					f.renameTo(tempFile);
-				}
-				//MultipartFile f = list.get(0);
-				//System.out.println(f.getOriginalFilename());
-				//list.remove(0);
-				//System.out.println(list.size());
-				//System.out.println(list.isEmpty());
-				
-				//상태코드에 따른 이미지 저장 및 수정, index변경
-				String tempIndex = ""; // 변경될 index
-				int tempImgIndex = 1; // 임시 파일을 지정하는 변수
-				int saveImgIndex = 1; // 저장할 파일명을 지정하는 변수
-				MultipartFile f = null; // 전달받은 이미지를 저장할 변수
-				File tempFile = null; // 임시파일
-				File saveFile = null; // 저장될 파일
-				for(int i=0; i<=imgConvIndex.length()-1; i++) {
-					switch (imgConvIndex.charAt(i)) {
-					case '0': //사진이 없고 변경되지 않은 상태
-						tempIndex += '0';
-						break;
-					case '1': //사진이 있고 변경되지 않은 상태
-						tempFile = new File(folderPath + "/a" + tempImgIndex + ".jpg");
-						saveFile = new File(folderPath + "/" + saveImgIndex + ".jpg");
-						tempFile.renameTo(saveFile);
-						tempIndex += '1';
-						tempImgIndex++;
-						saveImgIndex++;
-						break;
-					case '2': //사진이 없고 변경된 상태
-						f = list.get(0);
-						saveFile = new File(folderPath + "/" + saveImgIndex + ".jpg");
-						FileCopyUtils.copy(f.getBytes(), saveFile);
-						list.remove(0);
-						tempIndex += '1';
-						saveImgIndex++;
-						break;
-					case '3': //사진이 있고 변경된 상태
-						f = list.get(0);
-						tempFile = new File(folderPath + "/a" + tempImgIndex + ".jpg");
-						saveFile = new File(folderPath + "/" + saveImgIndex + ".jpg");
-						FileCopyUtils.copy(f.getBytes(), saveFile);
-						tempFile.delete();
-						list.remove(0);
-						tempIndex += '1';
-						tempImgIndex++;
-						saveImgIndex++;
-						break;
-					case '4': //사진이 없고 삭제된 상태
-						System.out.println("아무 행동도 하지 않음");
-						break;
-					case '5': //사진이 있고 삭제된 상태
-						tempFile = new File(folderPath + "/a" + tempImgIndex + ".jpg");
-						tempFile.delete();
-						tempImgIndex++;
-						break;
-					default:
-						break;
-					}
-				}
-				if(!list.isEmpty()) {
-					for(MultipartFile fl:list) {
-						saveFile = new File(folderPath + "/" + saveImgIndex + ".jpg");
-						FileCopyUtils.copy(fl.getBytes(), saveFile);
-						saveImgIndex++;
-					}
-				}
-				//임시 index로 전달받은 index의 앞부분을 치환
-				imgIndex = imgIndex.substring(tempIndex.length(), imgIndex.length());
-				imgIndex = tempIndex + imgIndex;
+		//이미지 업로드 코드////
+		String folderPath = req.getRealPath("upload")+"\\"+rb.getImgFolder();
+		File targetFolder = new File(folderPath);
+		if(targetFolder.exists()) {
+			//파일 이름을 a1.jpg, a2.jpg...로 임시 변경
+			File[] targetFileArr = new File(folderPath).listFiles();
+			for(File f:targetFileArr) {
+				File tempFile = new File(folderPath + "/a" + f.getName());
+				f.renameTo(tempFile);
 			}
-			//이미지 업로드 코드 END////
+			//MultipartFile f = list.get(0);
+			//System.out.println(f.getOriginalFilename());
+			//list.remove(0);
+			//System.out.println(list.size());
+			//System.out.println(list.isEmpty());
 			
-			RecipeBoardVO rbv = new RecipeBoardVO();
-			rbv.setNo(rb.getNo());
-			rbv.setTitle(req.getParameter("title"));
-			rbv.setVideoLink(req.getParameter("link"));
-			rbv.setTextPack(req.getParameter("textPack"));
-			rbv.setImgIndex(imgIndex);
-			
-			recipeBoardService.editPost(rbv);
-			System.out.println("[성공:/recipe_edit_ok] 이미지 INDEX : ["+imgIndex+"]");
-			System.out.println("[성공:/recipe_edit_ok] 수정된 레코드 NO : "+rb.getNo());
+			//상태코드에 따른 이미지 저장 및 수정, index변경
+			String tempIndex = ""; // 변경될 index
+			int tempImgIndex = 1; // 임시 파일을 지정하는 변수
+			int saveImgIndex = 1; // 저장할 파일명을 지정하는 변수
+			MultipartFile f = null; // 전달받은 이미지를 저장할 변수
+			File tempFile = null; // 임시파일
+			File saveFile = null; // 저장될 파일
+			for(int i=0; i<=imgConvIndex.length()-1; i++) {
+				switch (imgConvIndex.charAt(i)) {
+				case '0': //사진이 없고 변경되지 않은 상태
+					tempIndex += '0';
+					break;
+				case '1': //사진이 있고 변경되지 않은 상태
+					tempFile = new File(folderPath + "/a" + tempImgIndex + ".jpg");
+					saveFile = new File(folderPath + "/" + saveImgIndex + ".jpg");
+					tempFile.renameTo(saveFile);
+					tempIndex += '1';
+					tempImgIndex++;
+					saveImgIndex++;
+					break;
+				case '2': //사진이 없고 변경된 상태
+					f = list.get(0);
+					saveFile = new File(folderPath + "/" + saveImgIndex + ".jpg");
+					FileCopyUtils.copy(f.getBytes(), saveFile);
+					list.remove(0);
+					tempIndex += '1';
+					saveImgIndex++;
+					break;
+				case '3': //사진이 있고 변경된 상태
+					f = list.get(0);
+					tempFile = new File(folderPath + "/a" + tempImgIndex + ".jpg");
+					saveFile = new File(folderPath + "/" + saveImgIndex + ".jpg");
+					FileCopyUtils.copy(f.getBytes(), saveFile);
+					tempFile.delete();
+					list.remove(0);
+					tempIndex += '1';
+					tempImgIndex++;
+					saveImgIndex++;
+					break;
+				case '4': //사진이 없고 삭제된 상태
+					System.out.println("아무 행동도 하지 않음");
+					break;
+				case '5': //사진이 있고 삭제된 상태
+					tempFile = new File(folderPath + "/a" + tempImgIndex + ".jpg");
+					tempFile.delete();
+					tempImgIndex++;
+					break;
+				default:
+					break;
+				}
+			}
+			if(!list.isEmpty()) {
+				for(MultipartFile fl:list) {
+					saveFile = new File(folderPath + "/" + saveImgIndex + ".jpg");
+					FileCopyUtils.copy(fl.getBytes(), saveFile);
+					saveImgIndex++;
+				}
+			}
+			//임시 index로 전달받은 index의 앞부분을 치환
+			imgIndex = imgIndex.substring(tempIndex.length(), imgIndex.length());
+			imgIndex = tempIndex + imgIndex;
 		}
+		//이미지 업로드 코드 END////
+		
+		RecipeBoardVO rbv = new RecipeBoardVO();
+		rbv.setNo(rb.getNo());
+		rbv.setTitle(req.getParameter("title"));
+		rbv.setVideoLink(req.getParameter("link"));
+		rbv.setTextPack(req.getParameter("textPack"));
+		rbv.setImgIndex(imgIndex);
+		
+		recipeBoardService.editPost(rbv);
+		System.out.println("[성공:/recipe_edit_ok] 이미지 INDEX : ["+imgIndex+"]");
+		System.out.println("[성공:/recipe_edit_ok] 수정된 레코드 NO : "+rb.getNo());
 		
 		return "OK";
 	}

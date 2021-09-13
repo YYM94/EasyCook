@@ -87,19 +87,18 @@ strong:hover{
 	margin-left: 30%;
 	color: red;
 	font-weight: bold;
-	visibility: hidden;
 }
 
 #join_id_box{
-	width: 28%;
+	width: 25%;
 } /* 아이디 입력박스 */
 
 #join_email_1_box{
-	width: 28%;
+	width: 25%;
 } /* 이메일 입력박스 첫번째 */
 
 #join_email_2_box{
-	width: 15%;	
+	width: 13%;	
 } /* 이메일 입력박스 두번째 */
 
 #join_email_3_box{
@@ -125,11 +124,11 @@ strong:hover{
 } /* 비밀번호 확인 입력박스 */
 
 #join_name_box{
-	width: 28%;
+	width: 25%;
 } /* 이름 입력박스 */
 
 #join_nickname_box{
-	width: 28%;
+	width: 25%;
 } /* 닉네임 입력박스 */
 
 #join_pw_q_box{

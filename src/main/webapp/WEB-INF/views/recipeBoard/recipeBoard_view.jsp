@@ -16,6 +16,9 @@
 <c:if test="${empty searchText}">
 	<c:set var="searchText" value=""/>
 </c:if>
+<c:if test="${empty searchType}">
+	<c:set var="searchType" value=""/>
+</c:if>
 
 <%-- 하단 페이지 번호 생성을 위한 전체 게시글 수 검색 결과 --%>
 <c:if test="${empty totalPostingsObj }">
@@ -216,7 +219,7 @@
 					</c:if>
 					
 					<%-- 페이지 버튼 출력 --%>
-					<a href="recipeBoard_view?page=${ currentPage }&post=${ currentPosting }&cpage=1&searchText=${searchText}#postingEditRmBtn">
+					<a href="recipeBoard_view?page=${ currentPage }&post=${ currentPosting }&cpage=1&searchType=${searchType}&searchText=${searchText}#postingEditRmBtn">
 						<span class="cPageNumber">
 							<img src="./resources/images/PageMoveLeftEnd.png"/>
 						</span>
@@ -227,7 +230,7 @@
 						</span>
 					</c:if>
 					<c:if test="${ cPage != 1 }">
-						<a href="recipeBoard_view?page=${ currentPage }&post=${ currentPosting }&cpage=${ cPage-1 }&searchText=${searchText}#postingEditRmBtn">
+						<a href="recipeBoard_view?page=${ currentPage }&post=${ currentPosting }&cpage=${ cPage-1 }&searchType=${searchType}&searchText=${searchText}#postingEditRmBtn">
 							<span class="cPageNumber">
 								<img src="./resources/images/PageMoveLeft.png"/>
 							</span>
@@ -235,7 +238,7 @@
 					</c:if>
 					
 					<c:forEach var="i" begin="${ startcPage }" end="${ lastcPage }">
-						<a href="recipeBoard_view?page=${ currentPage }&post=${ currentPosting }&cpage=${ i }&searchText=${searchText}#postingEditRmBtn">
+						<a href="recipeBoard_view?page=${ currentPage }&post=${ currentPosting }&cpage=${ i }&searchType=${searchType}&searchText=${searchText}#postingEditRmBtn">
 							<c:if test="${ i == cPage }">
 								<div class="cPageNumber" style="color: #FF6347; font-weight: bold">
 									${ i }
@@ -255,13 +258,13 @@
 						</span>
 					</c:if>
 					<c:if test="${ cPage != cPages }">
-						<a href="recipeBoard_view?page=${ currentPage }&post=${ currentPosting }&cpage=${ cPage+1 }&searchText=${searchText}#postingEditRmBtn">
+						<a href="recipeBoard_view?page=${ currentPage }&post=${ currentPosting }&cpage=${ cPage+1 }&searchType=${searchType}&searchText=${searchText}#postingEditRmBtn">
 							<span class="cPageNumber">
 								<img src="./resources/images/PageMoveRight.png"/>
 							</span>
 						</a>
 					</c:if>
-					<a href="recipeBoard_view?page=${ currentPage }&post=${ currentPosting }&cpage=${ cPages }&searchText=${searchText}#postingEditRmBtn">
+					<a href="recipeBoard_view?page=${ currentPage }&post=${ currentPosting }&cpage=${ cPages }&searchType=${searchType}&searchText=${searchText}#postingEditRmBtn">
 						<span class="cPageNumber">
 							<img src="./resources/images/PageMoveRightEnd.png"/>
 						</span>
@@ -309,7 +312,7 @@
 		<c:if test="${ totalPostings > 0 }">
 			<%-- 현재 페이지를 기준으로 8개의 게시글을 로드 --%>
 			<c:forEach var="rl" items="${ rbList }">
-				<a href="recipeBoard_view?page=${ currentPage }&post=${ rl.no }&cpage=1&searchText=${searchText}">
+				<a href="recipeBoard_view?page=${ currentPage }&post=${ rl.no }&cpage=1&searchType=${searchType}&searchText=${searchText}">
 				
 					<%-- 레시피 과정 중 텍스트가 존재하는 첫번째 내용을 가져옴 --%>
 					<c:set var="recipeContSplit" value="${fn:split(rl.textPack, 'Æ')}"/>
@@ -370,7 +373,7 @@
 			<c:set var="lastPage" value="${ pages }"/>
 		</c:if>
 		
-		<a href="recipeBoard_view?page=1&post=0&cpage=1&searchText=${searchText}">
+		<a href="recipeBoard_view?page=1&post=0&cpage=1&searchType=${searchType}&searchText=${searchText}">
 			<span class="PageNumber">
 				<img src="./resources/images/PageMoveLeftEnd.png"/>
 			</span>
@@ -381,14 +384,14 @@
 			</span>
 		</c:if>
 		<c:if test="${ currentPage != 1 }">
-			<a href="recipeBoard_view?page=${ currentPage-1 }&post=0&cpage=1&searchText=${searchText}">
+			<a href="recipeBoard_view?page=${ currentPage-1 }&post=0&cpage=1&searchType=${searchType}&searchText=${searchText}">
 				<span class="PageNumber">
 					<img src="./resources/images/PageMoveLeft.png"/>
 				</span>
 			</a>
 		</c:if>
 		<c:forEach var="i" begin="${ firstPage }" end="${ lastPage }">
-			<a href="recipeBoard_view?page=${ i }&post=0&cpage=1&searchText=${searchText}">
+			<a href="recipeBoard_view?page=${ i }&post=0&cpage=1&searchType=${searchType}&searchText=${searchText}">
 				<c:if test="${ i == currentPage }">
 					<span class="PageNumber" style="color: #FF6347; font-weight: bold">
 						${ i }
@@ -407,19 +410,33 @@
 			</span>
 		</c:if>
 		<c:if test="${ currentPage != pages }">
-			<a href="recipeBoard_view?page=${ currentPage+1 }&post=0&cpage=1&searchText=${searchText}">
+			<a href="recipeBoard_view?page=${ currentPage+1 }&post=0&cpage=1&searchType=${searchType}&searchText=${searchText}">
 				<span class="PageNumber">
 					<img src="./resources/images/PageMoveRight.png"/>
 				</span>
 			</a>
 		</c:if>
-		<a href="recipeBoard_view?page=${ pages }&post=0&cpage=1&searchText=${searchText}">
+		<a href="recipeBoard_view?page=${ pages }&post=0&cpage=1&searchType=${searchType}&searchText=${searchText}">
 			<span class="PageNumber">
 				<img src="./resources/images/PageMoveRightEnd.png"/>
 			</span>
 		</a>
 	</div>
 </div>
+
+<form id="table-form" onsubmit="return searchBoard(this);">
+	<fieldset style="margin-top:70px;">
+		<legend class="hidden">검색</legend>
+		<label class="hidden">검색분류</label> 
+		<select name="searchType">
+			<option value="t" <c:if test="${searchType == 't'}"> ${'selected'}</c:if>>제목</option>
+			<option value="w" <c:if test="${searchType == 'w'}"> ${'selected'}</c:if>>작성자</option>
+		</select> 
+		<label class="hidden">검색어</label> 
+		<input type="text" name="searchText" value="${searchText}" placeholder="검색어를 입력해주세요." />
+		<input type="submit" value="검색" />
+	</fieldset>
+</form>
 
 <div id="postWriteBtn">
 	<input type="button" value="전체보기" onclick="location.href='recipeBoard_view?page=1&post=0&cpage=1'"/>
