@@ -161,14 +161,6 @@
 			return false;
 		}
 	}
-	
-	function cancelWrite(){
-		if(confirm("게시글 작성을 취소하시겠습니까?")){
-			location.href='recipeBoard_view';
-		}else{
-			return false;
-		}
-	}
 </script>
 
 <%@ include file="../menubar/top_left_menubar.jsp"%>
@@ -207,7 +199,7 @@
 			</div>
 			<div id="SendButtonWrap">
 				<input type="submit" id="writeBtn" value="저장"/>
-				<input type="button" id="cancelBtn" value="취소" onclick="return cancelWrite();"/>
+				<input type="button" id="cancelBtn" value="취소" onclick="location.href='recipeBoard_view'"/>
 			</div>
 		</form>
 	</div>

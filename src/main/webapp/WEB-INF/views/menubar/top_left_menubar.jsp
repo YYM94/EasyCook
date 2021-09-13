@@ -108,9 +108,7 @@
 	$(document).ready(function(){
 		$('#top_search_input').keydown(function(key){
 			if(key.keyCode == 13){
-				if(topSearchFlag == 1){
-					location.href = 'recipeBoard_view?page=1&post=0&cpage=1&searchType=t&searchText='+$('#top_search_input').val();
-				}
+				location.href = 'recipeBoard_view?page=1&post=0&cpage=1&searchText='+$('#top_search_input').val();
 			}
 		});
 	});

@@ -37,14 +37,6 @@ public class RecipeBoardController {
 		ModelAndView m = new ModelAndView();
 		RecipeBoardVO rb = new RecipeBoardVO();
 
-		//검색 타입 지정 : t(제목), w(글쓴이)
-		String searchType = "";
-		if(req.getParameter("searchType") != null) {
-			searchType = req.getParameter("searchType");
-		}
-		rb.setSearchType(searchType);
-		
-		//검색어 지정
 		String searchText = "";
 		if(req.getParameter("searchText") != null) {
 			searchText = req.getParameter("searchText");
@@ -92,7 +84,6 @@ public class RecipeBoardController {
 		}
 		
 		m.addObject("rbList", rbList);
-		m.addObject("searchType", searchType);
 		searchText = searchText.replace("%", "");
 		m.addObject("searchText", searchText);
 		
@@ -175,18 +166,26 @@ public class RecipeBoardController {
 		int post = Integer.parseInt(req.getParameter("post"));
 		RecipeBoardVO rb = recipeBoardService.getPost(post);
 		
-		recipeBoardService.deletePost(post);
-		System.out.println("[성공:/recipeBoard_delete] 삭제된 레코드 NO : "+ rb.getNo());
-		String folderPath = req.getRealPath("upload")+"\\"+rb.getImgFolder();
-		File targetFolder = new File(folderPath);
-		if(targetFolder.exists()) {
-			File[] targetFileArr = new File(folderPath).listFiles();
-			for(File f:targetFileArr) {
-				System.out.println("[성공:/recipeBoard_delete] 삭제된 파일명 : "+ folderPath + "\\" + f.getName());
-				f.delete();
+		if(session.getAttribute("id").equals(rb.getWriterid())) {
+			recipeBoardService.deletePost(post);
+			System.out.println("[성공:/recipeBoard_delete] 삭제된 레코드 NO : "+ rb.getNo());
+			String folderPath = req.getRealPath("upload")+"\\"+rb.getImgFolder();
+			File targetFolder = new File(folderPath);
+			if(targetFolder.exists()) {
+				File[] targetFileArr = new File(folderPath).listFiles();
+				for(File f:targetFileArr) {
+					System.out.println("[성공:/recipeBoard_delete] 삭제된 파일명 : "+ folderPath + "\\" + f.getName());
+					f.delete();
+				}
+				targetFolder.delete();
 			}
-			targetFolder.delete();
+		}else {
+			out.println("<script>");
+			out.println("alert('비정상적인 접근입니다.');");
+			out.println("history.go(-1);");
+			out.println("</script>");
 		}
+		
 		return "redirect:recipeBoard_view?page=1";
 	}
 	
@@ -197,17 +196,27 @@ public class RecipeBoardController {
 		
 		int post = Integer.parseInt(req.getParameter("post"));
 		RecipeBoardVO rb = recipeBoardService.getPost(post);
-			
-		ModelAndView m = new ModelAndView();
-		m.addObject("title", rb.getTitle());
-		m.addObject("videoLink", rb.getVideoLink());
-		m.addObject("imgIndex", rb.getImgIndex());
-		m.addObject("imgFolder", rb.getImgFolder());
-		m.addObject("textPack", rb.getTextPack());
-		m.addObject("no", rb.getNo());
 		
-		m.setViewName("recipeBoard/recipeBoard_edit");
-		return m;
+		if(session.getAttribute("id").equals(rb.getWriterid())) {
+			
+			ModelAndView m = new ModelAndView();
+			m.addObject("title", rb.getTitle());
+			m.addObject("videoLink", rb.getVideoLink());
+			m.addObject("imgIndex", rb.getImgIndex());
+			m.addObject("imgFolder", rb.getImgFolder());
+			m.addObject("textPack", rb.getTextPack());
+			m.addObject("no", rb.getNo());
+			
+			m.setViewName("recipeBoard/recipeBoard_edit");
+			return m;
+		}else {
+			out.println("<script>");
+			out.println("alert('비정상적인 접근입니다.');");
+			out.println("history.go(-1);");
+			out.println("</script>");
+		}
+		
+		return null;
 	}
 	
 	@ResponseBody

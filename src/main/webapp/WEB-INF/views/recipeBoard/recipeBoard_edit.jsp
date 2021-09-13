@@ -208,14 +208,6 @@
 		}else{
 			return false;
 		}
-	}	
-	
-	function cancelWrite(){
-		if(confirm("게시글 수정을 취소하시겠습니까?")){
-			location.href='recipeBoard_view';
-		}else{
-			return false;
-		}
 	}
 </script>
 
@@ -231,7 +223,7 @@
 			</div>
 			<div id="video">
 				유튜브 링크<br>
-				<c:if test="${not empty videoLink }">
+				<c:if test="${not empty vedeoLink }">
 					<input type="text" id="videoLink" 
 						value="https://www.youtube.com/embed/${ videoLink }" onblur="LoadThumbnail();"/><br>
 					<div id="thumbnail">
@@ -242,7 +234,7 @@
 						</iframe>
 					</div>
 				</c:if>
-				<c:if test="${empty videoLink }">
+				<c:if test="${empty vedeoLink }">
 					<input type="text" id="videoLink" onblur="LoadThumbnail();"/><br>
 					<div id="thumbnail">
 						미리보기
@@ -306,7 +298,7 @@
 			</div>
 			<div id="SendButtonWrap">
 				<input type="submit" id="writeBtn" value="저장"/>
-				<input type="button" id="cancelBtn" value="취소" onclick="return cancelWrite();"/>
+				<input type="button" id="cancelBtn" value="취소" onclick="location.href='recipeBoard_view'"/>
 			</div>
 		</form>
 	</div>

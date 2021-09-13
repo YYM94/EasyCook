@@ -18,6 +18,5 @@ public class RecipeBoardVO {
 	
 	private int startNum;
 	private int endNum;
-	private String searchType;
 	private String searchText;
 }
