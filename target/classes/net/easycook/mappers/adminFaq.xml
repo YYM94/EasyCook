@@ -50,7 +50,7 @@
 	<insert id="adfaq_in" parameterType="af">
 		insert into adminFaq (adminfaq_no,adminfaq_name,adminfaq_title,
 		adminfaq_cont,adminfaq_date)
-		values(adminfaq_no_seq.nextval,#{adminfaq_name,jdbcType=VARCHAR},#{adminfaq_title},
+		values(adminfaq_no_seq.nextval,#{adminfaq_name},#{adminfaq_title},
 		#{adminfaq_cont},sysdate)
 	</insert>
 	

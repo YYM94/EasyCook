@@ -28,11 +28,12 @@ public class AdminNoticeController {
 		response.setContentType("text/html;charset=UTF-8");
 		PrintWriter out=response.getWriter();
 		HttpSession session=request.getSession();
-		String easycook_admin =(String)session.getAttribute("easycook_admin");
-		if(easycook_admin!=null) {
+		String id =(String)session.getAttribute("id");
+		Integer state=(Integer)session.getAttribute("state");
+		if(id ==null && state == 1 && state == 2) {
 			out.println("<script>");
 			out.println("alert('다시 로그인하세요');");
-			out.println("location='/'");
+			out.println("location='login'");
 			out.println("</script>");
 		}else {
 			int page=1;
@@ -84,11 +85,12 @@ public class AdminNoticeController {
 		response.setContentType("text/html;charset=UTF-8");
 		PrintWriter out=response.getWriter();
 		HttpSession session=request.getSession();
-		String easycook_admin =(String)session.getAttribute("easycook_admin");
-		if(easycook_admin!=null) {
+		String id =(String)session.getAttribute("id");
+		Integer state=(Integer)session.getAttribute("state");
+		if(id ==null && state == 1 && state == 2) {
 			out.println("<script>");
 			out.println("alert('다시 로그인하세요');");
-			out.println("location='/'");
+			out.println("location='login'");
 			out.println("</script>");
 		}else {
 			int page=1;
@@ -109,8 +111,9 @@ public class AdminNoticeController {
 		response.setContentType("text/html;charset=UTF-8");
 		PrintWriter out=response.getWriter();
 		HttpSession session=request.getSession();
-		String easycook_admin =(String)session.getAttribute("easycook_admin");
-		if(easycook_admin!=null) {
+		String id =(String)session.getAttribute("id");
+		Integer state=(Integer)session.getAttribute("state");
+		if(id ==null && state == 1 && state == 2) {
 			out.println("<script>");
 			out.println("alert('다시 로그인하세요');");
 			out.println("location='/'");
@@ -130,8 +133,9 @@ public class AdminNoticeController {
 		response.setContentType("text/html;charset=UTF-8");
 		PrintWriter out=response.getWriter();
 		HttpSession session=request.getSession();
-		String easycook_member =(String)session.getAttribute("easycook_member");
-		if(easycook_member!=null) {
+		String id =(String)session.getAttribute("id");
+		Integer state=(Integer)session.getAttribute("state");
+		if(id ==null && state == 1 && state == 2) {
 			out.println("<script>");
 			out.println("alert('다시 로그인하세요');");
 			out.println("location='/'");
@@ -158,8 +162,9 @@ public class AdminNoticeController {
 		response.setContentType("text/html;charset=UTF-8");
 		PrintWriter out=response.getWriter();
 		HttpSession session=request.getSession();
-		String easycook_member =(String)session.getAttribute("easycook_member");
-		if(easycook_member!=null) {
+		String id =(String)session.getAttribute("id");
+		Integer state=(Integer)session.getAttribute("state");
+		if(id ==null && state == 1 && state == 2) {
 			out.println("<script>");
 			out.println("alert('다시 로그인하세요');");
 			out.println("location='/'");
@@ -183,8 +188,9 @@ public class AdminNoticeController {
 		PrintWriter out=response.getWriter();
 		HttpSession session=request.getSession();
 
-		String easycook_admin=(String)session.getAttribute("easycook_admin");
-		if(easycook_admin != null) {
+		String id =(String)session.getAttribute("id");
+		Integer state=(Integer)session.getAttribute("state");
+		if(id ==null && state == 1 && state == 2) {
 			out.println("<script>");
 			out.println("alert('다시 관리자로 로그인 하세요!');");
 			out.println("location='admin_index';");

@@ -14,6 +14,8 @@ start with 1
 increment by 1
 nocache;
 
+select * from adminnotice_no_seq
+
 update ADMINNOTICE set adminnotice_title='수정이요' where adminnotice_no=3;
 
 delete from adminNotice where adminnotice_no = '3'

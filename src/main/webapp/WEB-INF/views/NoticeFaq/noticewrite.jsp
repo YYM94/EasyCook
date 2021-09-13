@@ -28,6 +28,7 @@
 		<h3 class="hidden2">공지사항 관리자페이지</h3>
 	</div>
 <form method="post" action="noticewrite_ok" onsubmit="return notice_check();">
+<input type="hidden" name="adminnotice_name" value="${id}" />
 	<div class="board_wrap">
 		<div class="board_title">
 			<strong>공지사항</strong>
