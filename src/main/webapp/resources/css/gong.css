@@ -31,15 +31,19 @@ div dl dt p.title{
 	margin:0;
 	font-size:1.2em;
 }
+div dl dt p.title:hover{
+	color:#0000ff;
+}
 div dl dt:hover{
-	background:lightgray;
+	color:#0000ff;
+	background:#c0c0c0;
 }
 .iconDiv { 
 	margin:0;
 	position:relative; right:-95%; top:50%; 
 -webkit-transform:translateY(-50%); 
 -moz-transform:translateY(-50%); -o-transform:translateY(-50%); -ms-transform:translateY(-50%); 
-transform:translateY(-50%); }
+transform:translateY(-80%); }
 div dl dd{
 	margin:0;
 	padding:10px;
