@@ -5,7 +5,7 @@ a{
 body{
 	background-image:url('../images/picture/food_image.jpg');
 	background-repeat: repeat-y;
-	background-size:100% 100%;
+	background-size:100% 100vh;
 }
 .search-form2{
 	text-align:center;
