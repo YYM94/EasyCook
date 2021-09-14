@@ -6,23 +6,26 @@
 	<div id="top_menubar">
 		<div id="top_login_join_btn">
 			<form method="post" action="member_logout">
-				<a href="login">Login</a>&nbsp;&nbsp; 
-				<a href="join">Join</a> <br> 
-				<a href="/controller/mypage_view">마이페이지</a> <br>
-				<a href="admin">관리자 페이지</a><br>
+				<c:if test="${empty id}">
+					<a href="login">Login</a>&nbsp;&nbsp; 
+					<a href="join">Join</a> <br> 
+				</c:if>
+				<c:if test="${not empty id}">
+					<a href="mypage_view">마이페이지</a> <br>
+					<a href="admin">관리자 페이지</a><br>
+				</c:if>
 				<input type="submit" value="logout" />
 			</form>
 		</div>
-
 	</div>
 
 	<div id="left_menubar">
 		<div id="left_menu">
 			<div id="left_logo">
-				<a href="/controller"><img
+				<a href="/easycook"><img
 					src="./resources/images/logo.png" /></a>
 			</div>
-			<div id="left_sessionInfo">${id}님 로그인 되었습니다.</div>
+			<div id="left_sessionInfo">ADMIN : ${id}</div>
 			<div id="left_menulink">
 				<div id="left_notice">
 					<input type="checkbox" id="answer01"> 

@@ -188,6 +188,11 @@ public class RecipeBoardController {
 			targetFolder.delete();
 		}
 		
+		if(req.getParameter("type") != null) {
+			System.out.println("삭제완료");
+			return "redirect:admin_post_list";
+		}
+		
 		return "redirect:recipeBoard_view?page=1";
 	}
 	
