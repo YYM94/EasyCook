@@ -29,7 +29,7 @@ $("li:eq(3)").css("border","1px solid #ff0000")
    							<a href="/easycook/hotNewsBoard_cont?hno=${hv.hno }&page=${page}" onclick="window.open('${hv.hlink}')">
    							<img class="hn_thumbnail" src="./upload/${hv.hfile }" />
 	   							<div class="hn_rank_title_box">
-											<span class="hn_rank_title">${hv.htitle}</span>
+											<span class="hn_rank_one_title">${hv.htitle}</span>
 								</div>
 							</a>
 						</div>
@@ -41,7 +41,7 @@ $("li:eq(3)").css("border","1px solid #ff0000")
     				<c:forEach var="hv" items="${hlistv}" begin="2" end="10">   						
    						<li style="list-style-type : decimal;">  
    						<div class="hn_rank_two_article">   						 					
-   							<a href="/easycook/hotNewsBoard_cont?hno=${hv.hno }&page=${page}" onclick="window.open('${hv.hlink}')"><span class="hn_title">${hv.htitle}</span></a>   							
+   							<a href="/easycook/hotNewsBoard_cont?hno=${hv.hno }&page=${page}" onclick="window.open('${hv.hlink}')"><span class="hn_rank_two_title">${hv.htitle}</span></a>   							
    						</div>
    						</li>
    					</c:forEach>  
