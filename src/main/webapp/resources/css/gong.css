@@ -178,7 +178,9 @@ input[id*="emptynotice"]:checked + label em {
 	position: relative;
 	width: 520px;
 	height: 25px;
-	margin: 10px 0 20px 47%;
+	margin-top:10px;
+	margin-right:auto;
+	margin-left:40%;
 	align-content: center;
 	z-index: 300;
 }

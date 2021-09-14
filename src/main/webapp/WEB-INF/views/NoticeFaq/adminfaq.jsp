@@ -30,14 +30,15 @@ SimpleDateFormat sf = new SimpleDateFormat("yy.MM.dd. a. hh.mm");
 			<form class="table-form">
 				<fieldset>
 					<legend class="hidden">검색</legend>
-					<label class="hidden">검색분류</label> <select name="f">
-						<option value="titie"
-							<c:if test="${find_field == 'title'}"> ${'selected'}</c:if>>제목</option>
-
-					</select> <label class="hidden">검색어</label> <input type="text"
-						name="find_name" value="${find_name}" placeholder="검색어를 입력해주세요." />
-					<input type="submit" value="검색" /> <input class="write"
-						type="button" value="FAQ등록" onclick="location.href='faqwrite'" />
+					<label class="hidden">검색분류</label> 
+					<select name="find_field">
+						<option value="adminfaq_title"
+						<c:if test="${find_field == 'adminfaq_title'}"> ${'selected'}</c:if>>제목</option>
+					</select> <label class="hidden">검색어</label> 
+				<input name="find_name" id="find_name" value="${find_name}" placeholder="검색어를 입력해주세요." />
+				<input type="submit" value="검색" /> 
+				<input class="write" type="button" value="FAQ등록" 
+						onclick="location.href='faqwrite'" />
 				</fieldset>
 			</form>
 		</div>
@@ -57,7 +58,7 @@ SimpleDateFormat sf = new SimpleDateFormat("yy.MM.dd. a. hh.mm");
 					<div id="faq_cont_list">
 						<div id="con1">${af.adminfaq_no}</div>
 						<div id="con2">
-							<c:if test="${fn:length(af.adminfaq_title)>9}">
+							<c:if test="${fn:length(af.adminfaq_title)>=9}">
  				${fn:substring(af.adminfaq_title,0,16)}...
 				</c:if>
 							<c:if test="${fn:length(af.adminfaq_title)<9}">
