@@ -210,9 +210,27 @@
  	background-color:#f5f5f5;
 }
 
+#admin_member_edit{
+	float: left;
+}
+
 .member_info{
 	width: 50%;
 	font-size: 120%;
+}
+
+#edit_info{
+	margin-left: 43%;
+	background-color:#f5f5f5;
+}
+
+#admin_member_set{
+	margin-left: 5%;
+}
+
+#del_member{
+
+	background-color:#f5f5f5;
 }
 
 #member_button{

@@ -18,8 +18,8 @@
  </insert>
  
  <!-- 가입시선택한질문,핸드폰번호 기준으로 회원정보를검색(아이디찾기 진행시) -->
- <select id="find_id" parameterType="String" resultType="m">
- 	select * from easycook_member where join_pw_q_box=#{join_pw_q_box} and join_tel_1_box=#{join_tel_1_box} and join_tel_2_box=#{join_tel_2_box} and join_tel_3_box=#{join_tel_3_box}
+ <select id="id_find" parameterType="String" resultType="m">
+ 	select join_id_box from easycook_member where join_pw_q_box=#{join_pw_q_box} and join_tel_1_box=#{join_tel_1_box} and join_tel_2_box=#{join_tel_2_box} and join_tel_3_box=#{join_tel_3_box}
  </select>
  
  <!-- 로그인 인증 -->

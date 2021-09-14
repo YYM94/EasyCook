@@ -1,5 +1,7 @@
 package net.easycook.dao;
 
+import java.util.List;
+
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -41,6 +43,15 @@ public class MemberDAOImpl implements MemberDAO {
 	public void delMem(MemberVO dm) {
 		this.sqlSession.update("m_del",dm);		
 	}//회원탈퇴
+
+	@Override
+	public List<MemberVO> id_find(MemberVO m) {
+		return this.sqlSession.selectOne("id_find", m);
+	}
+
+
+
+
 
 	
 }
