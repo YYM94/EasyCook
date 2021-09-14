@@ -36,11 +36,8 @@
         <if test="find_field == 'join_name_box'">
         	join_name_box like #{find_name}
         </if>
-        <if test="find_field == 'join_state'">
-      		join_state like #{find_name}
-      	</if>
        </where>
-     order by join_id_box asc))
+     order by join_date desc))
      where rNum &gt;= #{startrow} and rNum &lt;= #{endrow}  
 </select>
 

@@ -25,7 +25,6 @@
 					<select name="find_field">
 					<option value="join_id_box" <c:if test="${find_field=='join_id_box'}">${'selected'}</c:if>>회원아이디</option>
 					<option value="join_name_box" <c:if test="${find_field=='join_name_box'}">${'selected'}</c:if>>회원이름</option>
-					<option value="join_state" <c:if test="${find_field=='join_state'}">${'selected'}</c:if>>회원상태</option>
 					</select> 
 					<label class="hidden">검색어</label> 
 					<input type="text" name="find_name"	id="find_name" value="${find_name}"placeholder="검색어를 입력해주세요." /> 
@@ -37,7 +36,7 @@
 
 			<div class="admintitle">
 				<!-- <b>제목</b> <b>작성자</b> <b>날짜</b> -->
-				<div id=title1>번호</div>
+				
 				<div id=title2>아이디</div>
 				<div id=title3>회원이름</div>
 				<div id=title4>회원상태</div>
@@ -51,7 +50,7 @@
 				<c:if test="${!empty blist}">
 					<c:forEach var="m" items="${blist}">
 					<div id="admin_member_list">
-						<div id="con1">0</div>
+						
 						<div id="con2">${m.join_id_box}</div>
 						<div id="con3">${m.join_name_box}</div>
 						<div id="con4"><c:if test="${m.join_state == 1}">가입</c:if><c:if test="${m.join_state == 3}">관리자</c:if></div>
