@@ -11,7 +11,7 @@ create table hotNewsBoard(
 
 select * from hotNewsBoard order by hno desc
 drop table hotNewsBoard
-
+delete from hotNewsBoard
 
 create sequence hno_seq
 start with 1
@@ -19,3 +19,4 @@ increment by 1
 nocache;
 
 select hno_seq.nextval from dual;
+drop sequence hno_seq

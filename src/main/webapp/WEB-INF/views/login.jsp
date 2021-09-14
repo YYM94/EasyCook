@@ -65,6 +65,31 @@
 			});
 		});
 	}
+	//아이디찾기
+	function id_find(){
+		var find_id_q = $("#login_find_id_q_a").val();
+		var find_id_tel_1 = $("#login_find_tel_1").val();
+		var find_id_tel_2 = $("#login_find_tel_2").val();
+		var find_id_tel_3 = $("#login_find_tel_3").val();
+		
+		var postData = {'id_q' : $login_find_id_q_a, 'id_tel_1' : $login_find_tel_1, 'id_tel_2' : $login_find_tel_2, 'id_tel_3' : $login_find_tel_3};
+		
+		$.ajax({
+			url : "/id_find",
+			type : "POST",
+			data : postData,
+			dataType : "String",
+			
+			success:function(data){
+				var idfind = data.join_id_box;
+				$("#login_find_id_real").append("<h1>"+"회원님의 아이디는 : "+idfind+"입니다.</h1>")
+			},
+			error:function(){
+				alert('정보를 다시 입력해주시기 바랍니다.');
+			}
+		});
+	}
+	
 </script>
 </head>
 <%@ include file="./menubar/top_left_menubar.jsp"%>
@@ -146,13 +171,11 @@
 					
 				<div id="login_find_button">
 					<div id="login_find_button_id">
-						<button onclick="FindViewID()" id="login_find_button_id_title">아이디 찾기</button>
+						<button onclick="id_find();" id="login_find_button_id_title">아이디 찾기</button>
 					</div>
 				</div>
 				
-					<div id="login_find_id_real">
-						아이디는 ***** 입니다.
-					</div>
+					<div id="login_find_id_real"></div>
 				</div>
 			</div>
 

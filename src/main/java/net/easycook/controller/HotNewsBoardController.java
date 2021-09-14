@@ -129,6 +129,9 @@ public class HotNewsBoardController { //일반게시판 관리자게시판 합�
 			out.println("location='login';");
 			out.println("</script>");
 		}else {
+			
+//			for(int i=1; i<120; i++) { //테스트데이터용 반복문 <<<꼭 주석처리 해야함>>>
+			
 			String saveFolder=req.getRealPath("upload"); //이진파일 업로드 서버 경로 => 톰캣 WAS 서버에 의해서 변경된 실제 톰캣 프로젝트 경로
 //			int fileSize=5*1024*1024; //이진파일 업로드 최대크기(5MB)
 			
@@ -169,6 +172,8 @@ public class HotNewsBoardController { //일반게시판 관리자게시판 합�
 			hvo.setHwriter(hwriter);
 			
 			this.hotNewsService.insertBoard(hvo);
+			
+//			}//테스트데이터용 반복문 <<<꼭 주석처리해야함>>>			
 			
 			return "redirect:/admin_hotnews_list";
 		}

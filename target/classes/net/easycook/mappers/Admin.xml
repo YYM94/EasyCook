@@ -54,8 +54,7 @@
      join_email_1_box=#{join_email_1_box}, join_email_2_box=#{join_email_2_box},
      join_tel_3_box=#{join_tel_3_box},
      join_post_box_1=#{join_post_box_1},join_post_box_2=#{join_post_box_2},
-     join_post_box_3=#{join_post_box_3},
-     join_state=#{join_state} where join_id_box=#{join_id_box}
+     join_post_box_3=#{join_post_box_3} where join_id_box=#{join_id_box}
 </update>
 
 <!-- 관리자에서 회원삭제 -->

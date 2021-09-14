@@ -30,13 +30,12 @@ div dl dt{
 div dl dt p.title{
 	margin:0;
 	font-size:1.2em;
-}
-div dl dt p.title:hover{
-	color:#0000ff;
+	font-weight:bolder;
+	margin-top:10px;
 }
 div dl dt:hover{
-	color:#0000ff;
-	background:#c0c0c0;
+	color:#1a7ae6;
+	background:#d4d4d4;
 }
 .iconDiv { 
 	margin:0;

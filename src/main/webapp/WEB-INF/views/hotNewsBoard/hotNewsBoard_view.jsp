@@ -79,7 +79,7 @@ $("li:eq(3)").css("border","1px solid #ff0000")
 						</c:if>
 				</fieldset>
 			</div>
-<%--
+
 			<div id="hn_article_wrap">
 				<div class="hn_article_container">
 					<c:if test="${!empty hlist }">
@@ -96,8 +96,8 @@ $("li:eq(3)").css("border","1px solid #ff0000")
 					</c:if>	
 				</div>
 			</div>
---%>	
-				
+	
+<%-- 	
 			<table id="admin_hn" style="border-collapse: collapse">
 				<tr id="admin_hn_title">
 					<th id="admin_list_no" >번호</th>
@@ -125,7 +125,7 @@ $("li:eq(3)").css("border","1px solid #ff0000")
 					</tr>
 				</c:if>
 			</table> 
-				
+--%>			
 				
 			<!-- 페이징 쪽나누기 -->
 			<div id="bList_paging" align="center">
