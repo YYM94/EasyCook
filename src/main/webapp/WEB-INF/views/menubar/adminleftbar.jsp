@@ -29,27 +29,27 @@
 			<div id="left_menulink">
 				<div id="left_notice">
 					<input type="checkbox" id="answer01"> 
-					<label for="answer01">레시피 관리</label>
+					<label for="answer01">레시피</label>
 					<div>
 						<p>
-							<a href="admin_post_list">작성한 레시피 관리</a>
+							<a href="admin_post_list">레시피 게시글 관리</a>
 						</p>
 						
 					</div>
 				</div>
 				<div id="left_board">
 					<input type="checkbox" id="answer02"> 
-					<label for="answer02">이용자 관리</label>
+					<label for="answer02">회원</label>
 					<div class="open">
 						<p>
-							<a href="admin">이용자 조회</a>
+							<a href="admin">회원 조회</a>
 						</p>
 					</div>
 				</div>
 				<div id="left_news">
 					<input type="checkbox" id="answer03"> 
-					<label for="answer03">열린마당 관리</label>
-					<div>
+					<label for="answer03">열린마당</label>
+					<div style="margin-top: 15px;">
 							<a href="adminnotice">공지사항 관리</a><br/><br/>
 							<a href="adminfaq">FAQ 관리</a><br/><br/>
 							<a href="admin_hotnews_list">핫뉴스 관리</a>

@@ -68,18 +68,19 @@ body{
 }
 #left_menulink{
 	position: absolute;
-	background-color: #F5F5F5;
+	/*background-color: #F5F5F5;*/
 	margin: 242px 0 0 0;
 	width: 320px;
-	height: 75%;
+	/*height: 75%;*/
 	border-top: 2px solid #000000;
-	border-bottom: 2px solid #000000;
-	padding: 15px 0 0 0;
-	filter: drop-shadow(0 0 1px #505050);
+	/*border-bottom: 2px solid #000000;*/
+	padding: 40px 0 0 0;
+	/*filter: drop-shadow(0 0 1px #505050);*/
 }
 
-#left_notice, #left_board{
+#left_notice, #left_board, #left_news{
 	margin-top:20px;
+	margin-bottom: 20px;
 	width: 100%;
 	height: 20%;
 	text-align: center;
@@ -115,7 +116,6 @@ input[id*="answer"] + label{
 	cursor:pointer;
 	position:relative;
 	font-size:30px;
-	padding:30px;
 }
 
 input[id*="answer"] + label :hover{
