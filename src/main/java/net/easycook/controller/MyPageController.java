@@ -123,7 +123,7 @@ public class MyPageController {
 
 /*------------------정보수정-------------------------------*/
 @GetMapping("/member_edit") //get으로 접근하는 매핑주소를 처리
-public ModelAndView member_edit(String login_id_box,HttpServletResponse response,HttpSession session) throws Exception{
+public ModelAndView member_edit(HttpServletResponse response,HttpSession session) throws Exception{
     response.setContentType("text/html;charset=UTF-8");
     PrintWriter out=response.getWriter();
     
