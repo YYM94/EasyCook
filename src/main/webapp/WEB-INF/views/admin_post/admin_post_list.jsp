@@ -24,8 +24,7 @@ SimpleDateFormat sf = new SimpleDateFormat("yy.MM.dd. a. hh.mm");
 					<legend class="hidden">검색</legend>
 					<label class="hidden">검색어</label> 
 					<input type="text" name="q"	value="" placeholder="검색어를 입력해주세요." /> 
-					<input class="btn btn-search" type="submit" value="검색" />
-					<input type="button" id="ap_input" value="레시피 등록" onclick="location.href='/controller/recipeBoard_write';"/>
+					<input type="submit" value="검색" />
 				</fieldset>				
 			</form>
 			
