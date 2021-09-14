@@ -57,7 +57,7 @@ SimpleDateFormat sf = new SimpleDateFormat("yy.MM.dd. a. hh.mm");
 				<div id="notice_cont_list">
 					<div id="con1">${an.adminnotice_no}</div>
 					<div id="con2">
-					<c:if test="${fn:length(an.adminnotice_title)>9}">
+					<c:if test="${fn:length(an.adminnotice_title)>=9}">
  					${fn:substring(an.adminnotice_title,0,16)}...
 					</c:if>
 					<c:if test="${fn:length(an.adminnotice_title)<9}">

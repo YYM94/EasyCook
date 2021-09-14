@@ -4,7 +4,7 @@ a{
 }
 body{
 	background-image:url('../images/picture/food_image.jpg');
-	background-repeat: no-repeat;
+	background-repeat: repeat-y;
 	background-size:100% 100%;
 }
 .search-form2{
@@ -161,7 +161,9 @@ input[id*="emptyfaq"]:checked + label em {
 	position: relative;
 	width: 520px;
 	height: 25px;
-	margin: 10px 0 0 46.5%;
+	margin-top:10px;
+	margin-right:auto;
+	margin-left:40%;
 	align-content: center;
 	z-index: 300;
 }
