@@ -72,7 +72,7 @@ public class MemberController {
 			}else {
 				session.setAttribute("id", login_id_box);
 				session.setAttribute("state", dm.getJoin_state()); //일반사용자 1 / 관리자 3만 로그인 가능
-				return "redirect:/"; //로그인 인증 후 메인화면으로 이동
+				return "index"; //로그인 인증 후 메인화면으로 이동
 			}
 		}
 		return null;
