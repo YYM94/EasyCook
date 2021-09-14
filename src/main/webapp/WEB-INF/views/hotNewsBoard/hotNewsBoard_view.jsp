@@ -29,7 +29,7 @@ $("li:eq(3)").css("border","1px solid #ff0000")
    							<a href="/easycook/hotNewsBoard_cont?hno=${hv.hno }&page=${page}" onclick="window.open('${hv.hlink}')">
    							<img class="hn_thumbnail" src="./upload/${hv.hfile }" />
 	   							<div class="hn_rank_title_box">
-											<span class="hn_title">${hv.htitle}</span>
+											<span class="hn_rank_title">${hv.htitle}</span>
 								</div>
 							</a>
 						</div>
@@ -95,7 +95,7 @@ $("li:eq(3)").css("border","1px solid #ff0000")
 						</c:forEach>
 					</c:if>	
 				</div>
-			</div>
+			
 	
 <%-- 	
 			<table id="admin_hn" style="border-collapse: collapse">
@@ -176,12 +176,10 @@ $("li:eq(3)").css("border","1px solid #ff0000")
 					</c:if>	
 				</c:if>		
 			</div>
-		</div>	
+			</div> 
+		</div>			
 			
-			
-		</section>   	
-			
- 	
+		</section>    	
 			 	
     	</div>
     </form> 

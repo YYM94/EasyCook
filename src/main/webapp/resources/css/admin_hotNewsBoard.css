@@ -32,31 +32,34 @@ body{ /*list, input, edit 공통 */
 }
 
 table{
-	height: 632px;
 	margin-bottom: -1px
+}
+tr, td, th{
+	padding: 6px;
 }
 #admin_list_hn{
 	width: 100%;
 }
 
 #admin_list_no{
-	width: 5%;
+	min-width: 40px;
 }
 #admin_list_title{
-	width: 35%;
+	width: 100%;
 	letter-spacing: 0.5em;
 }
 #admin_list_writer{
-	width: 2%;
+	min-width: 6px;
 }
 #admin_list_date{
-	width: 9%;
+	min-width: 84px;
 }
 #admin_list_viewcnt{
-	width: 5%
+	width: 4%;
+	min-width: 48px;
 }
 #admin_list_controller{
-	width: 10%;
+	min-width:91px;
 }
 
 
