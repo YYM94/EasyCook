@@ -68,7 +68,7 @@
 					<td>${ rb.writerid }</td>
 					<td>${ rb.regdate }</td>
 					<td>
-						<input type="button" value="조회" onclick="location.href='recipeBoard_view?page=1&post=${ rb.no }&cpage=1';"/>
+						<input type="button" value="조회" onclick="location.href='recipeBoard_view?page=1&post=${ rb.no }&cpage=1&searchType=t&searchText=${ rb.title }';"/>
 						<input type="button" value="수정" onclick="return editCont(${rb.no});"/>
 						<input type="button" value="삭제" onclick="return removeCont(${rb.no});" />
 					</td>
@@ -113,14 +113,14 @@
 			</c:if>
 			
 			<c:if test="${ currentPage > 4 }">
-				<a href="admin_post_list?page=1">[FIRST]</a>
+				<a href="admin_post_list?page=1&searchType=${ searchType }&searchText=${ searchText }">[FIRST]</a>
 			</c:if>
 			<c:if test="${ currentPage > 1 }">
-				<a href="admin_post_list?page=${ currentPage-1 }">[PREV]</a>
+				<a href="admin_post_list?page=${ currentPage-1 }&searchType=${ searchType }&searchText=${ searchText }">[PREV]</a>
 			</c:if>
 			
 			<c:forEach var="iCount" begin="${ startPage }" end="${ endPage }">
-				<a href="admin_post_list?page=${ iCount }" >
+				<a href="admin_post_list?page=${ iCount }&searchType=${ searchType }&searchText=${ searchText }" >
 					<c:if test="${ iCount == currentPage }">
 						<b class="CurrentPageNumber">&nbsp;${ iCount }&nbsp;</b>
 					</c:if>
@@ -131,10 +131,10 @@
 			</c:forEach>
 			
 			<c:if test="${ currentPage < totalPage }">
-				<a href="admin_post_list?page=${ currentPage+1 }">[NEXT]</a>
+				<a href="admin_post_list?page=${ currentPage+1 }&searchType=${ searchType }&searchText=${ searchText }">[NEXT]</a>
 			</c:if>
 			<c:if test="${ endPage < totalPage }">
-				<a href="admin_post_list?page=${ totalPage }">[LAST]</a>
+				<a href="admin_post_list?page=${ totalPage }&searchType=${ searchType }&searchText=${ searchText }">[LAST]</a>
 			</c:if>
 		</div>
 	</div>

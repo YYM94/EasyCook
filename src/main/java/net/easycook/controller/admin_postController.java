@@ -54,6 +54,9 @@ public class admin_postController {
 		
 		m.addObject("page",page);
 		m.addObject("rbList", rbList);
+		m.addObject("searchType", searchType);
+		searchText = searchText.replace("%", "");
+		m.addObject("searchText", searchText);
 		m.setViewName("admin_post/admin_post_list");
 		return m;
 	}

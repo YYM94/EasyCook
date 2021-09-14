@@ -29,7 +29,6 @@ body{
 }
 
 table{
-	height: 632px;
 	margin-bottom: -1px
 }
 #ap_list{
@@ -56,11 +55,15 @@ table{
 #ap_list th{
 	border-bottom-style: solid;
 	border-bottom-width: 2px;	
+	padding-top: 10px;
+	padding-bottom: 10px;
 }
 #ap_list td{
 	text-align: center; 
 	border-bottom-width: 1px;
 	border-bottom-style: dotted;
+	padding-top: 10px;
+	padding-bottom: 10px;
 }
 #contents{
 	text-align: left;

@@ -1,6 +1,7 @@
 package net.easycook.controller;
 
 import java.io.PrintWriter;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -15,7 +16,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import net.easycook.service.MemberService;
+import net.easycook.service.RecipeBoardService;
 import net.easycook.vo.MemberVO;
+import net.easycook.vo.RecipeBoardVO;
 import pwdconv.PwdChange;
 
 @Controller
@@ -23,6 +26,9 @@ public class MyPageController {
 	
 	@Autowired
 	private MemberService memberService;
+	
+	@Autowired
+	private RecipeBoardService recipeBoardService;
 
 	@RequestMapping("/mypage_view")
 	public String mypage_view(HttpServletRequest request,Model m) {
@@ -43,8 +49,37 @@ public class MyPageController {
 	}
 	
 	@RequestMapping("/mp_recipe_list")
-	public ModelAndView mp_recipe_list() {
+	public ModelAndView mp_recipe_list(HttpSession session, HttpServletRequest req) {
 		ModelAndView mp=new ModelAndView();
+		RecipeBoardVO rb = new RecipeBoardVO();
+		
+		String id = (String) session.getAttribute("id");
+		int page = 1;
+		if(req.getParameter("page") != null) {
+			page = Integer.parseInt(req.getParameter("page"));
+		}
+		rb.setWriterid(id);
+		
+		//검색어 지정
+		String searchText = "";
+		if(req.getParameter("searchText") != null) {
+			searchText = req.getParameter("searchText");
+		}
+		searchText = "%"+searchText+"%";
+		rb.setSearchText(searchText);
+
+		int totalPostings = recipeBoardService.getTotalPostingsById(rb);
+		
+		rb.setStartNum(page*10-9);
+		rb.setEndNum(page*10);
+		
+		List<RecipeBoardVO> rbList = recipeBoardService.getPostingListById(rb);
+
+		mp.addObject("totalPostings", totalPostings);
+		mp.addObject("page", page);
+		mp.addObject("rbList", rbList);
+		searchText = searchText.replace("%", "");
+		mp.addObject("searchText", searchText);
 		mp.setViewName("MyPage/mp_recipe_list");
 		return mp;
 	}

@@ -77,3 +77,5 @@ modify(videoLink varchar2(200))
 select * from
 (select no, title, imgindex, imgfolder, visiter from recipeBoard order by visiter desc)
 where rownum <= 3;
+
+select count(*) from recipeBoard where writerid like 'yym' and title like '%백종%';

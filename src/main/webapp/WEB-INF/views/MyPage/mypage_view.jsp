@@ -26,9 +26,9 @@
 	<div id="mp_panel">
 		
 			<div id="mp_title_list">
-				<input type="button" id="mp_btn_recipe" value="나의 레시피" onclick="location.href='mp_recipe_list';"/>			
-				<input type="button" id="mp_btn_home" value="홈으로 돌아가기" onclick="location.href='#';"/>				
-				<input type="button" id="mp_btn_comment" value="나의 댓글" onclick="location.href='mp_comment_list';"/>				
+				<input type="button" id="mp_btn_recipe" value="나의 레시피" onclick="location.href='mp_recipe_list?page=1';"/>			
+				<input type="button" id="mp_btn_home" value="홈으로 돌아가기" onclick="location.href='mypage_view';"/>				
+				<input type="button" id="mp_btn_comment" value="나의 댓글" onclick="location.href='mp_comment_list?page=1';"/>				
 			</div>
 			<div id="mp_contents">		
 			<img id="mp_cont_img" src="./resources/images/logo_B.png" width="250" height="250"/><br/>

@@ -75,5 +75,15 @@ public class RecipeBoardDAOImpl implements RecipeBoardDAO {
 		return sqlSession.selectList("get_top3recipe");
 	}
 
+	@Override
+	public List<RecipeBoardVO> getPostingListById(RecipeBoardVO rb) {
+		return sqlSession.selectList("get_rbList_id", rb);
+	}
+
+	@Override
+	public int getTotalPostingsById(RecipeBoardVO rb) {
+		return sqlSession.selectOne("get_total_id", rb);
+	}
+
 	
 }

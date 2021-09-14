@@ -190,11 +190,15 @@ body{
 #mr_list th{
 	border-bottom-style: solid;
 	border-bottom-width: 2px;	
+	padding-top: 10px;
+	padding-bottom: 10px;
 }
 #mr_list td{
 	text-align: center; 
 	border-bottom-width: 1px;
 	border-bottom-style: dotted;
+	padding-top: 10px;
+	padding-bottom: 10px;
 }
 #mr_contents{
 	text-align: left;

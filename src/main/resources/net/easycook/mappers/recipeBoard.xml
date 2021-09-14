@@ -93,5 +93,18 @@
 			(select no, title, imgindex, imgfolder, visiter from recipeBoard order by visiter desc)
 		where rownum &lt;= 3
  	</select>
+ 	
+ 	<select id="get_rbList_id" resultType="rb">
+		select * from
+			(select rowNum rNum, no, writerid, title, videoLink, imgIndex, imgFolder, textPack, visiter, regdate, moddate 
+			from 
+				(select * from RECIPEBOARD where writerid = #{writerid} AND title like #{searchText}
+				order by no desc))
+		where rNum &gt;= #{startNum} and rNum &lt;= #{endNum}
+ 	</select>
+ 	
+ 	<select id="get_total_id" resultType="int">
+ 		select count(*) from recipeBoard where writerid = #{writerid} AND title like #{searchText}
+ 	</select>
  
 </mapper>

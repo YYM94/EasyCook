@@ -24,7 +24,7 @@
 				<fieldset>
 					<legend class="hidden">검색</legend>
 					<label class="hidden">검색어</label> 
-					<input type="text" name="q"	value="" placeholder="검색어를 입력해주세요." /> 
+					<input type="text" name="searchText"	value="" placeholder="검색어를 입력해주세요." /> 
 					<input class="btn btn-search" type="submit" value="검색" />
 				</fieldset>				
 			</form>
@@ -32,11 +32,10 @@
 		</div>
 		
 			<div id="mp_title_list">
-				<input type="button" id="mp_btn_recipe" value="나의 레시피" onclick="location.href='mp_recipe_list';"/>			
-				<input type="button" id="mp_btn_home" value="마이 페이지" onclick="location.href='mypage_view';"/>	
-				<input type="button" id="btn_recipe" value="레시피 보드" onclick="location.href='recipeBoard_view';"/>			
-				
-				</div>
+				<input type="button" id="mp_btn_recipe" value="나의 레시피" onclick="location.href='mp_recipe_list?page=1';"/>	
+				<input type="button" id="mp_btn_home" value="홈으로 돌아가기" onclick="location.href='mypage_view';"/>				
+				<input type="button" id="mp_btn_comment" value="나의 댓글" onclick="location.href='mp_comment_list?page=1';"/>	
+			</div>
 				
 			<table id="mr_list" style="border-collapse:collapse" >
 			<tr style="	background-color:#cccdd0;">
@@ -50,7 +49,7 @@
 				<td><%=i %></td>
 				<td>2021.01.01</td>
 				<td>123456789</td>
-					<td><input type="button" value="삭제" onclick="location.href='#';"/></td>
+					<td><input type="button" value="이동" onclick="location.href='#';"/></td>
 			</tr>
 			<%} %>			
 		</table>			

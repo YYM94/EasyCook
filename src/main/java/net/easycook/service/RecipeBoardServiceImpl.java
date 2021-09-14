@@ -80,5 +80,14 @@ public class RecipeBoardServiceImpl implements RecipeBoardService {
 		return recipeBoardDao.getTopRecipe();
 	}
 
+	@Override
+	public List<RecipeBoardVO> getPostingListById(RecipeBoardVO rb) {
+		return recipeBoardDao.getPostingListById(rb);
+	}
+
+	@Override
+	public int getTotalPostingsById(RecipeBoardVO rb) {
+		return recipeBoardDao.getTotalPostingsById(rb);
+	}
 	
 }
