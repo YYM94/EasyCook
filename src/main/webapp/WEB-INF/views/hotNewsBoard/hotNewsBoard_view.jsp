@@ -28,7 +28,7 @@ $("li:eq(3)").css("border","1px solid #ff0000")
    						<div class="hn_rank_one_article"> 					
    							<a href="/easycook/hotNewsBoard_cont?hno=${hv.hno }&page=${page}" onclick="window.open('${hv.hlink}')">
    							<img class="hn_thumbnail" src="./upload/${hv.hfile }" />
-	   							<div class="hn_title_box">
+	   							<div class="hn_rank_title_box">
 											<span class="hn_title">${hv.htitle}</span>
 								</div>
 							</a>
