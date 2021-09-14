@@ -13,5 +13,7 @@ public class RecipeBoardCommentVO {
 
 	private int startNum;
 	private int endNum;
+	private String searchText;
 	
+	private String ptitle;
 }

@@ -106,5 +106,27 @@
  	<select id="get_total_id" resultType="int">
  		select count(*) from recipeBoard where writerid = #{writerid} AND title like #{searchText}
  	</select>
+ 	
+ 	<select id="get_totalC_id" resultType="int">
+ 		select count(*) from recipeBoardComment where cwriterid = #{cwriterid} AND cont like #{searchText}
+ 	</select>
+ 	
+ 	<select id="get_rbcList_id" resultType="rbc">
+		select *
+		from(
+			select rowNum rNum, rno, ptitle, cno, regdate, cont
+			from(
+				select r.no rno, r.title ptitle, c.cno, c.regdate, c.cont
+				from(
+					select *
+					from RECIPEBOARDCOMMENT
+					where cwriterid = #{cwriterid} and cont like #{searchText}) c,
+					RECIPEBOARD r
+				where r.no = c.rno
+				order by cno desc
+				)
+			)
+		where rNum &gt;= #{startNum} and rNum &lt;= #{endNum}
+ 	</select>
  
 </mapper>

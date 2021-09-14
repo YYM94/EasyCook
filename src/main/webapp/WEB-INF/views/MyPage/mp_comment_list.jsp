@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -41,77 +43,81 @@
 			<tr style="	background-color:#cccdd0;">
 				<th id="mr_list_no">번호</th>
 				<th id="mr_list_date">등록날짜</th>
+				<th id="mr_list_ptitle">글제목</th>
 				<th id="mr_list_comment">내용</th>
 				<th id="mr_list_management">관리</th>
 			</tr>
-			<%for(int i=10; i>=1; i--){ %>
-			<tr style="background-color:#f5f5f5;">
-				<td><%=i %></td>
-				<td>2021.01.01</td>
-				<td>123456789</td>
-					<td><input type="button" value="이동" onclick="location.href='#';"/></td>
-			</tr>
-			<%} %>			
+			<c:forEach var="rbc" items="${ rbcList }">
+				<tr style="background-color:#f5f5f5;">
+					<td>${ rbc.cno }</td>
+					<td>${ rbc.regdate }</td>
+					<td>${ rbc.ptitle }</td>
+					<td>${ rbc.cont }</td>
+					<td>
+						<input type="button" value="이동" onclick="location.href='recipeBoard_view?page=1&post=${ rbc.rno }&cpage=1&searchType=t&searchText=${ rbc.ptitle }';"/>
+					</td>
+				</tr>
+			</c:forEach>
 		</table>			
-			<div id="mypage_view_number" style="background-color:#f5f5f5;">
-			<%
-			int currentPage;
-			if(request.getParameter("page") == null){
-				currentPage = 1;
-			}else{
-				currentPage = Integer.parseInt(request.getParameter("page"));
-			}
+		<div id="mypage_view_number" style="background-color:#f5f5f5;">
+			<c:if test="${empty page}">
+				<c:set var="currentPage" value="1"/>
+			</c:if>
+			<c:if test="${not empty page}">
+				<c:set var="currentPage" value="${ page }"/>
+			</c:if>
 			
-			int totalCount=200; 
-			int countList = 8; 
-			int countPage = 7; 
-
-			int totalPage = totalCount / countList;
-
-			if (totalCount % countList != 0) {
-				totalPage++;
-			}
-
-			if (totalPage < currentPage) {
-				currentPage = totalPage;
-			}
-
-			int startPage = currentPage - 3; 
-			int endPage = currentPage + 3; 
-			if(currentPage < 4){
-				startPage = 1;
-				endPage = 7;
-			}
-			if(endPage > totalPage){
-				startPage = totalPage-6;
-				endPage = totalPage;
-			}
-
-			if (currentPage > 4) {
-			%>
-				<a href="mp_recipe_list?page=<%=1%>">[FIRST]</a>
-			<%}
-			if (currentPage > 1) {
-			%>			
-				<a href="mp_recipe_list?page=<%=currentPage-1%>">[PREV]</a>
-			<%}
-			for (int iCount = startPage; iCount <= endPage; iCount++) {
-			%> 
-				<a href="mp_recipe_list?page=<%=iCount%>" >
-				<%if (iCount == currentPage) { %>		
-					<b class="CurrentPageNumber">&nbsp;<%= iCount %>&nbsp;</b>
-			<%} else {%>
-					<span class="PageNumber">&nbsp;<%= iCount %>&nbsp;</span>
-			<%}%>
+			<c:set var="totalCount" value="${ totalComments }"/>
+			
+			<fmt:parseNumber var="totalPage" integerOnly="true" value="${ totalCount/10 }"/>
+			<c:if test="${ totalCount % 10 != 0 }">
+				<c:set var="totalPage" value="${ totalPage+1 }"/>
+			</c:if>
+			<c:if test="${ totalPage < currentPage }">
+				<c:set var="currentPage" value="${ totalPage }"/>
+			</c:if>
+			
+			<c:set var="startPage" value="${ currentPage-3 }"/>
+			<c:set var="endPage" value="${ currentPage+3 }"/>
+			<c:if test="${ currentPage < 4 }">
+				<c:set var="startPage" value="1"/>
+				<c:set var="endPage" value="7"/>
+				<c:if test="${ endPage > totalPage }">
+					<c:set var="endPage" value="${ totalPage }"/>
+				</c:if>
+			</c:if>
+			<c:if test="${ currentPage+3 > totalPage }">
+				<c:set var="startPage" value="${ totalPage-6 }"/>
+				<c:if test="${ totalPage-6 < 1 }">
+					<c:set var="startPage" value="1"/>
+				</c:if>
+				<c:set var="endPage" value="${ totalPage }"/>
+			</c:if>
+			
+			<c:if test="${ currentPage > 4 }">
+				<a href="mp_comment_list?page=1&searchText=${ searchText }">[FIRST]</a>
+			</c:if>
+			<c:if test="${ currentPage > 1 }">
+				<a href="mp_comment_list?page=${ currentPage-1 }&searchText=${ searchText }">[PREV]</a>
+			</c:if>
+			
+			<c:forEach var="iCount" begin="${ startPage }" end="${ endPage }">
+				<a href="mp_comment_list?page=${ iCount }&searchText=${ searchText }" >
+					<c:if test="${ iCount == currentPage }">
+						<b class="CurrentPageNumber">&nbsp;${ iCount }&nbsp;</b>
+					</c:if>
+					<c:if test="${ iCount != currentPage }">
+						<span class="PageNumber">&nbsp;${ iCount }&nbsp;</span>
+					</c:if>
 				</a>
-			<%}
-
-			if (currentPage < totalPage) {%>
-				<a href="mp_recipe_list?page=<%=currentPage+1%>">[NEXT]</a>
-			<%}
-			if (endPage < totalPage) {%>
-				<a href="mp_recipe_list?page=<%=totalPage%>">[LAST]</a>
-			<%} %>			
+			</c:forEach>
+			
+			<c:if test="${ currentPage < totalPage }">
+				<a href="mp_comment_list?page=${ currentPage+1 }&searchText=${ searchText }">[NEXT]</a>
+			</c:if>
+			<c:if test="${ endPage < totalPage }">
+				<a href="mp_comment_list?page=${ totalPage }&searchText=${ searchText }">[LAST]</a>
+			</c:if>
 		</div>
 	</div>
 

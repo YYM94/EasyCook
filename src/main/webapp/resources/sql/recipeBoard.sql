@@ -79,3 +79,26 @@ select * from
 where rownum <= 3;
 
 select count(*) from recipeBoard where writerid like 'yym' and title like '%백종%';
+
+select * 
+from (select rowNum rNum, r.no rno, r.title ptitle, c.cno, c.regdate, c.cont 
+		from (select * from RECIPEBOARD r, RECIPEBOARDCOMMENT c
+	where r.no = c.rno and c.cwriterid = 'yym' and c.cont like '%%' order by c.cno desc))
+	
+where rNum >= 1 and rNum <= 10
+
+select *
+from(
+	select rowNum rNum, rno, ptitle, cno, regdate, cont
+	from(
+		select r.no rno, r.title ptitle, c.cno, c.regdate, c.cont
+		from(
+			select *
+			from RECIPEBOARDCOMMENT
+			where cwriterid = 'yym' and cont like '%%') c,
+			RECIPEBOARD r
+		where r.no = c.rno
+		order by cno desc
+		)
+	)
+where rNum >= 1 and rNum <= 10

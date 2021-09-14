@@ -18,6 +18,7 @@ import org.springframework.web.servlet.ModelAndView;
 import net.easycook.service.MemberService;
 import net.easycook.service.RecipeBoardService;
 import net.easycook.vo.MemberVO;
+import net.easycook.vo.RecipeBoardCommentVO;
 import net.easycook.vo.RecipeBoardVO;
 import pwdconv.PwdChange;
 
@@ -85,8 +86,37 @@ public class MyPageController {
 	}
 	
 	@RequestMapping("/mp_comment_list")
-	public ModelAndView mp_comment_list() {
+	public ModelAndView mp_comment_list(HttpSession session, HttpServletRequest req) {
 		ModelAndView mp=new ModelAndView();
+		RecipeBoardCommentVO rbc = new RecipeBoardCommentVO();
+
+		String id = (String) session.getAttribute("id");
+		int page = 1;
+		if(req.getParameter("page") != null) {
+			page = Integer.parseInt(req.getParameter("page"));
+		}
+		rbc.setCwriterid(id);
+		
+		//검색어 지정
+		String searchText = "";
+		if(req.getParameter("searchText") != null) {
+			searchText = req.getParameter("searchText");
+		}
+		searchText = "%"+searchText+"%";
+		rbc.setSearchText(searchText);
+		
+		int totalComments = recipeBoardService.getTotalCommentsById(rbc);
+
+		rbc.setStartNum(page*10-9);
+		rbc.setEndNum(page*10);
+		
+		List<RecipeBoardCommentVO> rbcList = recipeBoardService.getCommentListById(rbc);
+
+		mp.addObject("totalComments", totalComments);
+		mp.addObject("page", page);
+		mp.addObject("rbcList", rbcList);
+		searchText = searchText.replace("%", "");
+		mp.addObject("searchText", searchText);
 		mp.setViewName("MyPage/mp_comment_list");
 		return mp;
 	}
