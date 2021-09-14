@@ -29,7 +29,8 @@
 					<label class="hidden">검색어</label> 
 					<input type="text" name="find_name"	id="find_name" value="${find_name}"placeholder="검색어를 입력해주세요." /> 
 					<input class="btn btn-search" type="submit" value="검색" />&nbsp;
-					<input type="button" value="전체회원목록" onclick="location='admin?page=${page}';" />
+					<input type="button" value="전체회원목록" onclick="location='admin?page=${page}';" />&nbsp;
+					<b>전체 회원수 : ${listcount} 명</b>
 				</fieldset>
 			</div>
 			</form>

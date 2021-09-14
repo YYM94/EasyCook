@@ -93,7 +93,7 @@ public class AdminController {
 		PrintWriter out=response.getWriter();
 		HttpSession session=request.getSession();
 		String id=(String)session.getAttribute("id");
-		
+
 		if(id == null) {
 			out.println("<script>");
 			out.println("alert('다시 로그인 하세요!');");
@@ -104,30 +104,52 @@ public class AdminController {
 			if(request.getParameter("page") != null) {
 				page=Integer.parseInt(request.getParameter("page")); 
 			}
-		
-		MemberVO m=this.adminService.getMem(join_id_box);
-		
-		String[] email= {"주소를 선택하세요.","naver.com", "hanmail.net", "nate.com", "hotmail.com", "gmail.com", "직접입력"};
-		String[] pwdQ= {"질문을 선택하세요.", "어머니의 성함은?", "아버지의 성함은?", "나의 출신 초등학교는?"};
-		am.addAttribute("email", email);
-		am.addAttribute("pwdQ", pwdQ);
-		am.addAttribute("m", m);
-		am.addAttribute("page", page);
-		
-		if(state.equals("edit")) {
-			return "admin_member_edit";
+
+			MemberVO m=this.adminService.getMem(join_id_box);
+
+			String[] email= {"주소를 선택하세요.","naver.com", "hanmail.net", "nate.com", "hotmail.com", "gmail.com", "직접입력"};
+			String[] pwdQ= {"질문을 선택하세요.", "어머니의 성함은?", "아버지의 성함은?", "나의 출신 초등학교는?"};
+			am.addAttribute("email", email);
+			am.addAttribute("pwdQ", pwdQ);
+			am.addAttribute("m", m);
+			am.addAttribute("page", page);
+			
+			if(state.equals("edit")) {
+				return "admin_member_edit";
+			}
 		}
-		ad.setJoin_pw_box(ad.getJoin_pw_box());
-		this.adminService.editM(ad);
-		
-		out.println("<script>");
-		out.println("alert('정보 수정했습니다!');");
-		out.println("location='admin_member_edit?state=edit"
-				+"&join_id_box="+ad.getJoin_id_box()+"';");
-		out.println("</script>");
-		}
-	return null;
+		return null;
 	}
+	
+	//관리자 회원정보 수정 완료
+	@RequestMapping("/admin_member_edit_ok")
+	public String member_edit_ok(HttpServletResponse response,HttpSession session,MemberVO m) throws Exception{
+		response.setContentType("text/html;charset=UTF-8");
+		PrintWriter out=response.getWriter();
+			
+		String id=(String)session.getAttribute("id");
+			
+		if(id == null) {
+			out.println("<script>");
+			out.println("alert('다시 로그인 하세요!');");
+			out.println("location='login';");
+			out.println("</script>");
+		}else {
+			m.setJoin_id_box(id);
+		    m.setJoin_pw_box(m.getJoin_pw_box());//정식 비번을 암호화 해서 저장
+		        	        
+		    this.adminService.editM(m);//정보 수정
+		        
+		    out.println("<script>");
+		    out.println("alert('회원 정보 수정했습니다!');");
+		    out.println("location='admin_member_edit?state=edit"
+		    		+ "&join_id_box="+m.getJoin_id_box()+"';");
+		    out.println("</script>");
+		}
+		return null;
+	}//member_edit_ok()
+	
+	
 	
 	//관리자 회원 탈퇴
 	@RequestMapping("/admin_member_del")
@@ -147,6 +169,11 @@ public class AdminController {
 				page=Integer.parseInt(request.getParameter("page"));    		
 			}
 			this.adminService.delM(join_id_box);
+			
+		    out.println("<script>");
+		    out.println("alert('회원  탈퇴 되었습니다!');");
+		    out.println("location='admin';");
+		    out.println("</script>");
 			return new ModelAndView("redirect:/admin").addObject("page", page);
 		}
 		return null;

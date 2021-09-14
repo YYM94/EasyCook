@@ -1,6 +1,8 @@
 package net.easycook.controller;
 
 import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -10,14 +12,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import net.easycook.service.MemberService;
 import net.easycook.vo.MemberVO;
-import pwdconv.PwdChange;
 
 @Controller
 public class MemberController {
@@ -28,12 +31,23 @@ public class MemberController {
 	//사용자 회원관리 로그인 뷰페이지
 	@RequestMapping("/login")
 	public ModelAndView login(Model m){
-		
 		String[] pwdQ = {"질문을 선택하세요.","어머니의 성함은?", "아버지의 성함은?", "나의 출신 초등학교는?"};
 		m.addAttribute("pwdQ", pwdQ);
 		
 		return new ModelAndView("login"); //뷰페이지
 	}
+	
+	//아이디찾기
+	@RequestMapping("/id_find")
+	public String id_find(@ModelAttribute MemberVO m) throws Exception{
+		ModelAndView mav = new ModelAndView();
+		List<MemberVO> userList = memberService.id_find(m);
+		System.out.println(userList);
+		mav.setViewName("login");
+		mav.addObject("id_find", userList);
+		return "login";
+	}
+	
 	
 	//로그인 인증
 	@PostMapping("/member_login_ok")
@@ -136,10 +150,5 @@ public class MemberController {
 		this.memberService.insertMember(m); //회원저장
 		return "redirect:/login";
 	}
-	
-	//아이디찾기
-	
-	//비밀번호재설정
-	
-	//회원 탈퇴 폼
+
 }

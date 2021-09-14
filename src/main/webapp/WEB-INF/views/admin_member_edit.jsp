@@ -22,7 +22,7 @@
 			<div id="admin_member_header">
 				<span id="info_title">회원 정보 관리</span>
 			</div>
-			<form method="post" name="m" action="admin_member_edit" onsubmit="return edit_check();">
+			<form method="post" name="m" action="admin_member_edit_ok" onsubmit="return edit_check();">
 			<div id="admin_member_cont">
 				<div id="admin_member_id">
 					<strong id="member_id" class="member_text">아이디</strong> 
@@ -54,43 +54,44 @@
 				</div>
 				<div id="admin_member_tel">
 					<strong id="member_tel" class="member_text">핸드폰 번호</strong> 
-					<input type="text" id="join_tel_1_box" class="member_info" value="${m.join_tel_1_box}" />
-					-<input type="text" id="join_tel_2_box" class="member_info" value="${m.join_tel_2_box}" />
-					-<input type="text" id="join_tel_3_box" class="member_info" value="${m.join_tel_3_box}" />
+					<input type="text" name="join_tel_1_box" id="join_tel_1_box" class="member_info" value="${m.join_tel_1_box}" />
+					-<input type="text" name="join_tel_2_box" id="join_tel_2_box" class="member_info" value="${m.join_tel_2_box}" />
+					-<input type="text" name="join_tel_3_box" id="join_tel_3_box" class="member_info" value="${m.join_tel_3_box}" />
 					<br/><br/>
 				</div>
 				<div id="admin_member_pwd_q">
 					<strong id="member_pwd_q" class="member_text">가입시 선택한 질문</strong> 
-					<input type="text" id="join_pw_q_box" class="member_info" value="${m.join_pw_q_box}" readonly />
+					<input type="text" name="join_pw_q_box" id="join_pw_q_box" class="member_info" value="${m.join_pw_q_box}" readonly />
 					<br/><br/>
 					<strong id="member_pwd_q_a" class="member_text">가입시 선택한 질문의 답</strong> 
-					<input type="text" id="join_pw_q_a_box" class="member_info" value="${m.join_pw_q_a_box}" readonly />
+					<input type="text" name="join_pw_q_a_box" id="join_pw_q_a_box" class="member_info" value="${m.join_pw_q_a_box}" readonly />
 					<br/><br/>
 				</div>
 				<div id="admin_member_post">
 					<strong id="member_post" class="member_text">우편번호</strong> 
-					<input type="text" id="join_post_box_1" class="member_info" value="${m.join_post_box_1}" readonly />
-					<input type="button" id="join_post_btn" value="우편번호찾기" onclick="Postcode()" />
+					<input type="text" name="join_post_box_1" id="join_post_box_1" class="member_info" value="${m.join_post_box_1}" readonly />
+					<input type="button" name="join_post_btn" id="join_post_btn" value="우편번호찾기" onclick="Postcode()" />
 					<br/><br/>
 					<strong id="member_addr1" class="member_text">주소</strong> 
-					<input type="text" id="join_post_box_2" class="member_info" value="${m.join_post_box_2}" readonly />
+					<input type="text" name="join_post_box_2" id="join_post_box_2" class="member_info" value="${m.join_post_box_2}" readonly />
 					<br/><br/>
 					<strong id="member_addr2" class="member_text">상세주소</strong> 
-					<input type="text" id="join_post_box_3" class="member_info" value="${m.join_post_box_3}" />
+					<input type="text" name="join_post_box_3" id="join_post_box_3" class="member_info" value="${m.join_post_box_3}" />
 					<br/><br/>
 				</div>
 			</div>
 			
 				<div id="admin_member_pwd">
 					<strong id="member_pwd_reset" class="admin_infoBtn">비밀번호 초기화</strong>
-					<input type="checkbox" id="member_pwd_reset_info" />
+					<input type="checkbox" id="member_pwd_reset_info" /><br/><br/>
 				</div>
-				<div id="member_button">
+				<div id="edit_info">
 					<input type="submit" id="admin_member_edit" class="admin_infoBtn" value="수정" />
-					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-					<button id="admin_member_set" class="admin_infoBtn" onclick="if(confirm('정말로 탈퇴처리 하시겠습니까?') == true){location='admin_member_del?join_id_box=${m.join_id_box}&page=${page}';}else{return ;}">탈퇴</button>
 				</div>
 			</form>
+				<div id="del_member">
+					<button id="admin_member_set" class="admin_infoBtn" onclick="if(confirm('정말로 탈퇴처리 하시겠습니까?') == true){location='admin_member_del?join_id_box=${m.join_id_box}&page=${page}';}else{return ;}">탈퇴</button>
+				</div>
 				<div id="admin_info_close">
 					<button id="close" class="admin_infoBtn" onclick="location='admin?page=${page}';">X</button>
 				</div>	
