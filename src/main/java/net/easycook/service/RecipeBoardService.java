@@ -12,6 +12,8 @@ public interface RecipeBoardService {
 	int getTotalPostings(RecipeBoardVO rb);
 
 	List<RecipeBoardVO> getPostingList(RecipeBoardVO rb, int post);
+	
+	List<RecipeBoardVO> getPostingList(RecipeBoardVO rb);
 
 	RecipeBoardVO getPost(int post);
 

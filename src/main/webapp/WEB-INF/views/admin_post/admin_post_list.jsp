@@ -1,16 +1,34 @@
 <%@page import="java.text.SimpleDateFormat"%>
 <%@page import="java.util.Date"%>
 <%@ page contentType="text/html; charset=UTF-8" %>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
-<%
-Date nowTime = new Date();
-SimpleDateFormat sf = new SimpleDateFormat("yy.MM.dd. a. hh.mm");
-%>
+<script>
+	function removeCont(n){
+		if(confirm("게시글을 삭제하시겠습니까?")){
+			location.href="recipeBoard_delete?post="+n+"&type=a";
+		}else{
+			return false;
+		}
+	}
+	
+	function editCont(n){
+		if(confirm("게시글을 수정하시겠습니까?")){
+			location.href="recipeBoard_edit?post="+n;
+		}else{
+			return false;
+		}
+	}
+</script>
+
 <meta charset="UTF-8">
 <title>레시피 관리자 페이지</title>
 <link rel="stylesheet" type="text/css" href="./resources/css/admin_post.css" />
+</head>
+
 <body >
 	<%@ include file="../menubar/adminleftbar.jsp"%>
 	<div id="ap_header">
@@ -22,8 +40,13 @@ SimpleDateFormat sf = new SimpleDateFormat("yy.MM.dd. a. hh.mm");
 			<form class="table-form">
 				<fieldset>
 					<legend class="hidden">검색</legend>
+					<label class="hidden">검색분류</label> 
+					<select name="searchType">
+						<option value="t" <c:if test="${searchType == 't'}"> ${'selected'}</c:if>>제목</option>
+						<option value="w" <c:if test="${searchType == 'w'}"> ${'selected'}</c:if>>작성자</option>
+					</select> 
 					<label class="hidden">검색어</label> 
-					<input type="text" name="q"	value="" placeholder="검색어를 입력해주세요." /> 
+					<input type="text" name="searchText" value="" placeholder="검색어를 입력해주세요." /> 
 					<input type="submit" value="검색" />
 				</fieldset>				
 			</form>
@@ -38,79 +61,81 @@ SimpleDateFormat sf = new SimpleDateFormat("yy.MM.dd. a. hh.mm");
 				<th id="ap_list_date">등록날짜</th>
 				<th id="ap_list_management">관리</th>
 			</tr>
-			<%for(int i=10; i>=1; i--){ %>
-			<tr style="background-color:#f5f5f5;">
-				<td><%=i %></td>
-				<td><div id="contents">백종원의 만능 간장 소스 조회수 1위!</div></td>
-				<td>관리자</td>
-				<td><%= sf.format(nowTime) %></td>
-				<td><input type="button" value="조회" onclick="location.href='recipeBoard_view';"/>
-					<input type="button" value="수정" onclick="location.href='admin_post_management';"/>
-					<input type="button" value="삭제" /></td>
-			</tr>
-			<%} %>			
+			<c:forEach var="rb" items="${ rbList }">
+				<tr style="background-color:#f5f5f5;">
+					<td>${ rb.no }</td>
+					<td><div id="contents">${ rb.title }</div></td>
+					<td>${ rb.writerid }</td>
+					<td>${ rb.regdate }</td>
+					<td>
+						<input type="button" value="조회" onclick="location.href='recipeBoard_view?page=1&post=${ rb.no }&cpage=1';"/>
+						<input type="button" value="수정" onclick="return editCont(${rb.no});"/>
+						<input type="button" value="삭제" onclick="return removeCont(${rb.no});" />
+					</td>
+				</tr>
+			</c:forEach>
 		</table>
 		
 		
 		<div id="admin_page_number" style="background-color:#f5f5f5;">
-			<%
-			int currentPage;
-			if(request.getParameter("page") == null){
-				currentPage = 1;
-			}else{
-				currentPage = Integer.parseInt(request.getParameter("page"));
-			}
+			<c:if test="${empty page}">
+				<c:set var="currentPage" value="1"/>
+			</c:if>
+			<c:if test="${not empty page}">
+				<c:set var="currentPage" value="${ page }"/>
+			</c:if>
 			
-			int totalCount=200; 
-			int countList = 8; 
-			int countPage = 7; 
-
-			int totalPage = totalCount / countList;
-
-			if (totalCount % countList != 0) {
-				totalPage++;
-			}
-
-			if (totalPage < currentPage) {
-				currentPage = totalPage;
-			}
-
-			int startPage = currentPage - 3; 
-			int endPage = currentPage + 3; 
-			if(currentPage < 4){
-				startPage = 1;
-				endPage = 7;
-			}
-			if(endPage > totalPage){
-				startPage = totalPage-6;
-				endPage = totalPage;
-			}
-
-			if (currentPage > 4) {
-			%>
-				<a href="admin_post_list?page=<%=1%>">[FIRST]</a>
-			<%}
-			if (currentPage > 1) {
-			%>			
-				<a href="admin_post_list?page=<%=currentPage-1%>">[PREV]</a>
-			<%}
-			for (int iCount = startPage; iCount <= endPage; iCount++) {
-			%> 
-				<a href="admin_post_list?page=<%=iCount%>" >
-				<%if (iCount == currentPage) { %>		
-					<b class="CurrentPageNumber">&nbsp;<%= iCount %>&nbsp;</b>
-			<%} else {%>
-					<span class="PageNumber">&nbsp;<%= iCount %>&nbsp;</span>
-			<%}%>
+			<c:set var="totalCount" value="${ totalPostings }"/>
+			
+			<fmt:parseNumber var="totalPage" integerOnly="true" value="${ totalCount/10 }"/>
+			<c:if test="${ totalCount % 10 != 0 }">
+				<c:set var="totalPage" value="${ totalPage+1 }"/>
+			</c:if>
+			<c:if test="${ totalPage < currentPage }">
+				<c:set var="currentPage" value="${ totalPage }"/>
+			</c:if>
+			
+			<c:set var="startPage" value="${ currentPage-3 }"/>
+			<c:set var="endPage" value="${ currentPage+3 }"/>
+			<c:if test="${ currentPage < 4 }">
+				<c:set var="startPage" value="1"/>
+				<c:set var="endPage" value="7"/>
+				<c:if test="${ endPage > totalPage }">
+					<c:set var="endPage" value="${ totalPage }"/>
+				</c:if>
+			</c:if>
+			<c:if test="${ currentPage+3 > totalPage }">
+				<c:set var="startPage" value="${ totalPage-6 }"/>
+				<c:if test="${ totalPage-6 < 1 }">
+					<c:set var="startPage" value="1"/>
+				</c:if>
+				<c:set var="endPage" value="${ totalPage }"/>
+			</c:if>
+			
+			<c:if test="${ currentPage > 4 }">
+				<a href="admin_post_list?page=1">[FIRST]</a>
+			</c:if>
+			<c:if test="${ currentPage > 1 }">
+				<a href="admin_post_list?page=${ currentPage-1 }">[PREV]</a>
+			</c:if>
+			
+			<c:forEach var="iCount" begin="${ startPage }" end="${ endPage }">
+				<a href="admin_post_list?page=${ iCount }" >
+					<c:if test="${ iCount == currentPage }">
+						<b class="CurrentPageNumber">&nbsp;${ iCount }&nbsp;</b>
+					</c:if>
+					<c:if test="${ iCount != currentPage }">
+						<span class="PageNumber">&nbsp;${ iCount }&nbsp;</span>
+					</c:if>
 				</a>
-			<%}
-
-			if (currentPage < totalPage) {%>
-				<a href="admin_post_list?page=<%=currentPage+1%>">[NEXT]</a>
-			<%}
-			if (endPage < totalPage) {%>
-				<a href="admin_post_list?page=<%=totalPage%>">[LAST]</a>
-			<%} %>			
+			</c:forEach>
+			
+			<c:if test="${ currentPage < totalPage }">
+				<a href="admin_post_list?page=${ currentPage+1 }">[NEXT]</a>
+			</c:if>
+			<c:if test="${ endPage < totalPage }">
+				<a href="admin_post_list?page=${ totalPage }">[LAST]</a>
+			</c:if>
 		</div>
 	</div>
 
