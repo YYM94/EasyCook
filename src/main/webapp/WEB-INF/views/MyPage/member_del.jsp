@@ -5,7 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>회원 탈퇴</title>
-<link rel="stylesheet" type="text/css" href="./resources/css/member.css" />
+<link rel="stylesheet" type="text/css" href="./resources/css/member_del.css" />
 <script src="./resources/js/jquery.js"></script>
 <script>
  function del_check(){
@@ -24,8 +24,8 @@
 </script>
 </head>
 <body>
- <div id="mDel_wrap">
-  <h2 class="mDel_title">회원탈퇴</h2>
+<div id="mDel_wrap">
+  <h1 class="mDel_title">회원탈퇴</h1>
   <form method="post" action="member_del_ok" onsubmit="return del_check();">
    <table id="mDel_t">
     <tr>
@@ -44,8 +44,8 @@
    </table>
    
    <div id="mDel_menu">
-     <input type="submit" value="회원탈퇴" />
-     <input type="reset" value="탈퇴취소" onclick="$('#del_pwd').focus();" />
+     <input type="submit" value="회원탈퇴" id="mDel_btn"/>
+     <input type="reset" value="탈퇴취소" id="mDel_reset_btn" onclick="$('#del_pwd').focus();" />
    </div>
   </form>
  </div>
