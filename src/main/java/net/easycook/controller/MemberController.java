@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -30,25 +31,34 @@ public class MemberController {
 	
 	//사용자 회원관리 로그인 뷰페이지
 	@RequestMapping("/login")
-	public ModelAndView login(Model m){
-		String[] pwdQ = {"질문을 선택하세요.","어머니의 성함은?", "아버지의 성함은?", "나의 출신 초등학교는?"};
-		m.addAttribute("pwdQ", pwdQ);
+	public ModelAndView login(){
+		ModelAndView m = new ModelAndView();
 		
-		return new ModelAndView("login"); //뷰페이지
+		m.setViewName("login");
+		return m; //뷰페이지
 	}
 	
 	//아이디찾기
 	@RequestMapping("/id_find")
-	public String id_find(MemberVO m, Model model){
-		MemberVO member = memberService.id_find(m);
+	public ModelAndView id_find(HttpServletRequest req){
+		ModelAndView mv = new ModelAndView();
 		
-		if(member == null) {
-			model.addAttribute("check", 1);
+		MemberVO m = new MemberVO();
+		m.setJoin_pw_q_a_box("%"+req.getParameter("join_pw_q_a_box")+"%");
+		m.setJoin_tel_1_box(req.getParameter("login_find_tel_1"));
+		m.setJoin_tel_2_box(req.getParameter("login_find_tel_2"));
+		m.setJoin_tel_3_box(req.getParameter("login_find_tel_3"));
+		
+		String findID = memberService.id_find(m);
+		
+		if(findID == null) {
+			mv.addObject("check", 1);
 		}else {
-			model.addAttribute("check", 0);
-			model.addAttribute("id", member.getJoin_id_box());
+			mv.addObject("check", 0);
+			mv.addObject("findId", findID);
 		}
-		return "login";
+		mv.setViewName("login");
+		return mv;
 	}
 	
 	
@@ -152,6 +162,28 @@ public class MemberController {
 		m.setJoin_pw_box(m.getJoin_pw_box());
 		this.memberService.insertMember(m); //회원저장
 		return "redirect:/login";
+	}
+	
+	@RequestMapping("pwd_update")
+	public ModelAndView pwd_update(HttpServletRequest req) {
+		ModelAndView m = new ModelAndView();
+		MemberVO mv = new MemberVO();
+		
+		mv.setJoin_id_box(req.getParameter("login_find_pwd_id_text"));
+		mv.setJoin_pw_q_a_box(req.getParameter("login_find_pwd_q_a"));
+		mv.setJoin_pw_box(req.getParameter("login_find_pwd_newpwd_box"));
+		
+		String findId = memberService.getPwdId(mv);
+		
+		if(findId == null) {
+			m.addObject("state", "1");
+		}else {
+			memberService.updatePwd(mv);
+			m.addObject("state", "0");
+		}
+		
+		m.setViewName("login");
+		return m;
 	}
 
 }

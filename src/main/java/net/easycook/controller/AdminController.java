@@ -123,7 +123,7 @@ public class AdminController {
 	
 	//관리자 회원정보 수정 완료
 	@RequestMapping("/admin_member_edit_ok")
-	public String member_edit_ok(HttpServletResponse response,HttpSession session,MemberVO m) throws Exception{
+	public String member_edit_ok(HttpServletResponse response,HttpSession session,MemberVO m, HttpServletRequest req) throws Exception{
 		response.setContentType("text/html;charset=UTF-8");
 		PrintWriter out=response.getWriter();
 			
@@ -135,10 +135,15 @@ public class AdminController {
 			out.println("location='login';");
 			out.println("</script>");
 		}else {
-			m.setJoin_id_box(id);
+			m.setJoin_id_box(m.getJoin_id_box());
 		    m.setJoin_pw_box(m.getJoin_pw_box());//정식 비번을 암호화 해서 저장
+		    
+		    if(req.getParameter("resetPwd") == null) {
+			    this.adminService.editM(m);//정보 수정
+		    }else {
+			    this.adminService.editM_pwd(m);//정보 수정
+		    }
 		        	        
-		    this.adminService.editM(m);//정보 수정
 		        
 		    out.println("<script>");
 		    out.println("alert('회원 정보 수정했습니다!');");

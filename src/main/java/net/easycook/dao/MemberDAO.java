@@ -16,7 +16,11 @@ public interface MemberDAO {
 	
 	void delMem(MemberVO dm);
 
-	MemberVO id_find(MemberVO m);
+	String id_find(MemberVO m);
+
+	String getPwdId(MemberVO mv);
+
+	void updatePwd(MemberVO mv);
 
 
 

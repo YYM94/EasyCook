@@ -40,5 +40,10 @@ public class AdminServiceImpl implements AdminService {
 		this.adminDAO.delM(join_id_box);
 	}
 
+	@Override
+	public void editM_pwd(MemberVO m) {
+		this.adminDAO.editM_pwd(m);
+	}
+
 
 }

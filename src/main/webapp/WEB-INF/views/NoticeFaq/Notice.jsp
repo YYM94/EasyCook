@@ -112,7 +112,7 @@ if (request.getParameter("page") == null) {
    </c:if>
    
    <%-- 검색 후 페이징  --%>
-    <c:if test="${(!empty find_field) && (!empty find_name)}">
+    <c:if test="${!empty find_field}">
     <c:if test="${page <= 1}">
      <span class="pageNum" style="color: #ffffff; font-weight: bold"><<</span>
     </c:if>

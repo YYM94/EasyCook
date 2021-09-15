@@ -18,8 +18,8 @@
  </insert>
  
  <!-- 가입시선택한질문,핸드폰번호 기준으로 회원정보를검색(아이디찾기 진행시) -->
- <select id="id_find" parameterType="String" resultType="m">
- 	select * from easycook_member where join_pw_q_box=#{join_pw_q_box} and join_tel_1_box=#{join_tel_1_box} and join_tel_2_box=#{join_tel_2_box} and join_tel_3_box=#{join_tel_3_box}
+ <select id="id_find" parameterType="m" resultType="String">
+ 	select join_id_box from easycook_member where join_pw_q_a_box like #{join_pw_q_a_box} and join_tel_1_box=#{join_tel_1_box} and join_tel_2_box=#{join_tel_2_box} and join_tel_3_box=#{join_tel_3_box}
  </select>
  
  <!-- 로그인 인증 -->
@@ -42,6 +42,14 @@
    <!-- 회원 탈퇴 -->
    <update id="m_del">
      update easycook_member set join_delcont=#{join_delcont}, join_state=2, join_deldate=sysdate where join_id_box=#{join_id_box}
+   </update>
+   
+   <select id="get_Pwd_id" resultType="String">
+   	select join_id_box from easycook_member where join_id_box = #{join_id_box} and join_pw_q_a_box like #{join_pw_q_a_box}
+   </select>
+   
+   <update id="change_pwd">
+   	update easycook_member set join_pw_box = #{join_pw_box}, join_pw_check_box = #{join_pw_box} where join_id_box = #{join_id_box}
    </update>
  
  </mapper>

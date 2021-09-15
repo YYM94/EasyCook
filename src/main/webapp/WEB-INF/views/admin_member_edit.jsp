@@ -26,7 +26,7 @@
 			<div id="admin_member_cont">
 				<div id="admin_member_id">
 					<strong id="member_id" class="member_text">아이디</strong> 
-					<input type="text" id="join_id_box" class="member_info" value="${m.join_id_box}" readonly />
+					<input type="text" name="join_id_box" id="join_id_box" class="member_info" value="${m.join_id_box}" readonly />
 					<br/><br/>
 				</div>
 				<div id="admin_member_email">
@@ -83,7 +83,7 @@
 			
 				<div id="admin_member_pwd">
 					<strong id="member_pwd_reset" class="admin_infoBtn">비밀번호 초기화</strong>
-					<input type="checkbox" id="member_pwd_reset_info" /><br/><br/>
+					<input type="checkbox" id="member_pwd_reset_info" name="resetPwd" value="1"/><br/><br/>
 				</div>
 				<div id="edit_info">
 					<input type="submit" id="admin_member_edit" class="admin_infoBtn" value="수정" />

@@ -318,7 +318,7 @@
 			src="./resources/images/instagram.jpg" width="45px" height="45px"></a>
 	</div>
 	<div id="footer_logo">
-		<a href="#" target="_blank"><img src="./resources/images/logo.png"></a>
+		<a href="#"><img src="./resources/images/logo.png"></a>
 		<h1>
 			당신의 저녁<br/>우리가 책임질게요!
 		</h1>

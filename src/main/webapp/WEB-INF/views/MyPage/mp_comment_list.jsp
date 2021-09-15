@@ -15,7 +15,7 @@
 	</div>
 	
 	<div id="mp_member_info">
-			<img id="mp_info_img" src="./resources/images/human.png" width="150" height="150"/>
+			<img id="mp_info_img" src="./resources/images/human_icon.png" width="230" height="230"/>
 			<input type="button" id="mp_info_update" value="회원정보 수정" onclick="location.href='info_update';"/>				
 			
 		</div>

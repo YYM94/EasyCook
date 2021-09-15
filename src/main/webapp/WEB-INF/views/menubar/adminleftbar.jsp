@@ -30,20 +30,15 @@
 				<div id="left_notice">
 					<input type="checkbox" id="answer01"> 
 					<label for="answer01">레시피</label>
-					<div>
-						<p>
-							<a href="admin_post_list">레시피 게시글 관리</a>
-						</p>
-						
+					<div style="margin-top: 15px;">
+						<a href="admin_post_list">레시피 게시글 관리</a>
 					</div>
 				</div>
 				<div id="left_board">
 					<input type="checkbox" id="answer02"> 
 					<label for="answer02">회원</label>
-					<div class="open">
-						<p>
-							<a href="admin">회원 조회</a>
-						</p>
+					<div style="margin-top: 15px;" class="open">
+						<a href="admin">회원 조회</a>
 					</div>
 				</div>
 				<div id="left_news">

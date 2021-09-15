@@ -179,11 +179,11 @@ input[id*="emptynotice"]:checked + label em {
 }
 #bottomPage{
 	position: relative;
-	width: 520px;
+	width: fit-content;
 	height: 25px;
 	margin-top:10px;
 	margin-right:auto;
-	margin-left:40%;
+	margin-left:auto;
 	align-content: center;
 	z-index: 300;
 }

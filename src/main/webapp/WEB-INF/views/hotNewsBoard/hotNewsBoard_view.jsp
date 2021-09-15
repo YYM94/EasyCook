@@ -155,7 +155,7 @@ $("li:eq(3)").css("border","1px solid #ff0000")
 				</c:if>		
 				
 				<!-- 검색후 페이징 -->		
-				<c:if test="${!(empty find_field) && !(empty find_name)}">
+				<c:if test="${not empty find_field}">
 					<c:if test="${page>1 }">
 						<a href="hotNewsBoard_view?page=1&find_field=${find_field}&find_name=${find_name}">[FIRST]</a>&nbsp;
 						<a href="hotNewsBoard_view?page=${page-1 }&find_field=${find_field}&find_name=${find_name}">[PREV]</a>&nbsp;

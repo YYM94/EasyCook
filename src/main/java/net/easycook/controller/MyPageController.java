@@ -176,7 +176,7 @@ public String member_edit_ok(HttpServletResponse response,HttpSession session,Me
         out.println("</script>");
         
 	}
-	return null;
+	return "MyPage/mypage_view";
 }//member_edit_ok()
 		
 

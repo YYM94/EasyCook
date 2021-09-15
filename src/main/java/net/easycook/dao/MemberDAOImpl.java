@@ -43,8 +43,18 @@ public class MemberDAOImpl implements MemberDAO {
 	}//회원탈퇴
 
 	@Override
-	public MemberVO id_find(MemberVO m) {
+	public String id_find(MemberVO m) {
 		return this.sqlSession.selectOne("id_find", m);
+	}
+
+	@Override
+	public String getPwdId(MemberVO mv) {
+		return sqlSession.selectOne("get_Pwd_id", mv);
+	}
+
+	@Override
+	public void updatePwd(MemberVO mv) {
+		sqlSession.update("change_pwd", mv);	
 	}
 
 

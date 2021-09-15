@@ -39,5 +39,10 @@ public class AdminDAOImpl implements AdminDAO {
 		this.sqlSession.delete("am_del", join_id_box);
 	}
 
+	@Override
+	public void editM_pwd(MemberVO m) {
+		this.sqlSession.update("admin_edit_pwd", m);
+	}
+
 
 }

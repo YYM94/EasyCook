@@ -16,4 +16,6 @@ public interface AdminDAO {
 
 	void delM(String join_id_box);
 
+	void editM_pwd(MemberVO m);
+
 }
