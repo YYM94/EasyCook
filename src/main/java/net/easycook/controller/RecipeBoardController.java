@@ -174,7 +174,8 @@ public class RecipeBoardController {
 		
 		int post = Integer.parseInt(req.getParameter("post"));
 		RecipeBoardVO rb = recipeBoardService.getPost(post);
-		
+
+		recipeBoardService.deleteCommentByRno(post);
 		recipeBoardService.deletePost(post);
 		System.out.println("[성공:/recipeBoard_delete] 삭제된 레코드 NO : "+ rb.getNo());
 		String folderPath = req.getRealPath("upload")+"\\"+rb.getImgFolder();

@@ -95,5 +95,10 @@ public class RecipeBoardDAOImpl implements RecipeBoardDAO {
 		return sqlSession.selectList("get_rbcList_id", rbc);
 	}
 
+	@Override
+	public void deleteCommentByRno(int post) {
+		sqlSession.delete("del_comment_rno", post);
+	}
+
 	
 }
