@@ -128,5 +128,9 @@
 			)
 		where rNum &gt;= #{startNum} and rNum &lt;= #{endNum}
  	</select>
+ 	
+ 	<delete id="del_comment_rno">
+ 		delete from recipeBoardComment where rno=#{post}
+ 	</delete>
  
 </mapper>

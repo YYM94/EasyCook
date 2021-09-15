@@ -39,4 +39,6 @@ public interface RecipeBoardService {
 
 	List<RecipeBoardCommentVO> getCommentListById(RecipeBoardCommentVO rbc);
 
+	void deleteCommentByRno(int post);
+
 }
