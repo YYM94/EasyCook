@@ -233,7 +233,7 @@ public ModelAndView member_del(HttpServletResponse response,HttpSession session)
 				
 				out.println("<script>");
 				out.println("alert('회원 탈퇴 했습니다!');");
-				out.println("location='member_login';");
+				out.println("location='login';");
 				out.println("</script>");
 			}
 		}		

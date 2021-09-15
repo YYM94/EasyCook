@@ -34,7 +34,7 @@ values('test04', 'test04', 'hanmail.net', 'test', 'test', '관리자', '관리�
 
 delete from easycook_member where join_id_box='admin02';
 
-
+update easycook_member set join_state = 1 where join_id_box='admin111'
 
 
 
