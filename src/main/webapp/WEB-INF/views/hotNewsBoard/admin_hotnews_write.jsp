@@ -51,16 +51,21 @@ function write_check(){
 	<div id="admin_panel">
 	
 		<form method="post" action="admin_hotnews_write_ok" onsubmit="return write_check();" enctype="multipart/form-data">
-			<input type="hidden" name="hwriter" value="${id }" /> <br> <br>
+			<input type="hidden" name="hwriter" value="${id }" /> 
+			<input type="hidden" name="page" value="${page }" /> 
+
+			
 			핫뉴스 제목 : <input type="text" placeholder="제목을 입력하세요" id="htitle" name="htitle" size="40" /> <br> <br>
 			<p>핫뉴스 내용 :&nbsp;</p><textarea id="hcont" name="hcont" rows="10" cols="40" style="resize: none;"></textarea><br><br> 
 			썸네일(미리보기) : <input type="file" id="hfile" name="hfile" multiple /> <br><br>
 <!-- 			썸네일(미리보기) : <input type="file" id="hfile" name="hfile" accept="image/*" onchange="thumbnail(event);" /> -->
 <!-- 			<div id="image_container" ></div><br><br>  -->
 			링크 : <input type="text" id="hlink" name="hlink" size="80" /> <br> <br> 
-			<input type="submit" value="등록" /> 
-			<input type="reset" value="취소" onclick="return $('#htitle').focus();" /> 
-			<input type="button" value="목록보기" onclick="location='/easycook/admin_hotnews_list';">
+			<div id="admin_hn_button_wrap">
+				<input type="submit" id="btn_submit" value="등록" /> 
+				<input type="reset" id="btn_reset" value="취소" onclick="return $('#htitle').focus();" /> 
+				<input type="button" id="btn_list" value="목록보기" onclick="location.href='/easycook/admin_hotnews_list?page=${page}&find_field=${find_field }&find_name=${find_name }';">
+			</div>
 		</form>
 		
 	</div>

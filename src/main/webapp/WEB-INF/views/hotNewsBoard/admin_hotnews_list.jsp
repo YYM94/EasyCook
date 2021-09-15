@@ -56,7 +56,7 @@
 					<c:forEach var="h" items="${hlist }">
 						<tr id="admin_hn_list">
 							<td align="center">${h.hno }</td>
-							<td align="left"><a href="/easycook/admin_hotnews_cont?hno=${h.hno }&page=${page}&find_field=${find_field}&find_name=${find_name}&state=cont" onclick="window.open('${h.hlink}')">${h.htitle}</a></td>
+							<td id="left"><a href="/easycook/admin_hotnews_cont?hno=${h.hno }&page=${page}&find_field=${find_field}&find_name=${find_name}&state=cont" onclick="window.open('${h.hlink}')">${h.htitle}</a></td>
 							<td align="center">${h.hwriter }</td>
 							<td align="center">${h.regdate }</td>							
 							<td align="center">${h.viewcnt }</td>

@@ -19,7 +19,7 @@ body{ /*list, input, edit 공통 */
 #admin_panel { /*list, input, edit 공통 */
 	width: 50%;
 	padding: 1%;
-	margin:0 5% 0 30%;
+	margin:15px 5% 0 30%;
 	min-width: 691px;
 }
 
@@ -35,7 +35,7 @@ table{
 	margin-bottom: -1px
 }
 tr, td, th{
-	padding: 6px;
+	padding: 6px 2px;
 }
 #admin_list_hn{
 	width: 100%;
@@ -49,7 +49,7 @@ tr, td, th{
 	letter-spacing: 0.5em;
 }
 #admin_list_writer{
-	min-width: 6px;
+	min-width: 50px;
 }
 #admin_list_date{
 	min-width: 84px;
@@ -76,9 +76,6 @@ tr, td, th{
 	text-align: left;
 	padding-left: 14px;
 	width: 20em;
-	overflow: hidden; 
-	text-overflow: ellipsis;
-	white-space: nowrap;
 }
 
 
@@ -104,8 +101,15 @@ tr, td, th{
 	text-decoration: none;
 }
 
-/* -------------------------------------------- input, edit 공통 -------------------------------------------- */
+/* -------------------------------------------- 핫뉴스 등록 -------------------------------------------- */
+#admin_hn_button_wrap{
+	text-align: center;
+}
 
+/* -------------------------------------------- 핫뉴스 수정 -------------------------------------------- */
+
+
+/* -------------------------------------------- input, edit 공통 -------------------------------------------- */
 
 p {
 	float: left;

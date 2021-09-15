@@ -70,8 +70,8 @@ li{	margin: 0 0 18px 0;}
 
 .hn_rank_title_box{
     position: absolute;
-    margin: 108px 0 0 -1px;
-    height: 41px;
+    margin: 100px 0 0 -1px;
+    height: 50px;
     background: linear-gradient( to top, black, #00ff0000 );
     /* background-color: #ffffff; */
     /* background-color: rgba( 255, 255, 255, 0.5 ); */
@@ -79,19 +79,18 @@ li{	margin: 0 0 18px 0;}
     padding: 5px;
     border-bottom-left-radius: 1em;
     border-bottom-right-radius: 1em;
-    /* text-overflow: ellipsis; */
-    /* white-space: nowrap; */
-    word-wrap: break-word;
+    color: white;
+}
+.hn_rank_one_title{
+    margin: 10px 0 0 0;
+    color: white;
+    font-weight: bold;
+    font-size: 15px;
+    overflow: hidden;
+    text-overflow: ellipsis;
     display: -webkit-box;
     -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
-    overflow: hidden;  
-   	color: white;
-}
-.hn_rank_one_title{
-	color: white;
-	font-weight: bold;
-	font-size: 15px;	
 }
 .hn_rank_two_title{
 	color: black;
@@ -113,18 +112,13 @@ li{	margin: 0 0 18px 0;}
 	white-space: nowrap;
 	overflow: hidden;
 	color: white;	
-	
-/* 	word-wrap: break-word; */
-/*     display: -webkit-box; */
-/*     -webkit-line-clamp: 1; */
-/*     -webkit-box-orient: vertical; */
-/*     overflow: hidden;     */
 }
 
 .hn_title{
 	color: white;
 	font-weight: bold;
 	font-size: 12px;
+	
 }
 #bList_paging {
 	padding: 10px 0 20px 0;
