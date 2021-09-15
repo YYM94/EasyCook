@@ -39,12 +39,15 @@ public class MemberController {
 	
 	//아이디찾기
 	@RequestMapping("/id_find")
-	public String id_find(@ModelAttribute MemberVO m) throws Exception{
-		ModelAndView mav = new ModelAndView();
-		List<MemberVO> userList = memberService.id_find(m);
-		System.out.println(userList);
-		mav.setViewName("login");
-		mav.addObject("id_find", userList);
+	public String id_find(MemberVO m, Model model){
+		MemberVO member = memberService.id_find(m);
+		
+		if(member == null) {
+			model.addAttribute("check", 1);
+		}else {
+			model.addAttribute("check", 0);
+			model.addAttribute("id", member.getJoin_id_box());
+		}
 		return "login";
 	}
 	
@@ -72,7 +75,7 @@ public class MemberController {
 			}else {
 				session.setAttribute("id", login_id_box);
 				session.setAttribute("state", dm.getJoin_state()); //일반사용자 1 / 관리자 3만 로그인 가능
-				return "index"; //로그인 인증 후 메인화면으로 이동
+				return "redirect:/"; //로그인 인증 후 메인화면으로 이동
 			}
 		}
 		return null;
@@ -93,7 +96,7 @@ public class MemberController {
 			out.println("location='login';");
 			out.println("</script>");			
 		}else {
-			return "login";
+			return "index";
 		}
 		return null;
 	} //index()

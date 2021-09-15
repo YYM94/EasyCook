@@ -1,7 +1,5 @@
 package net.easycook.service;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -45,11 +43,9 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
-	public List<MemberVO> id_find(MemberVO m) {
+	public MemberVO id_find(MemberVO m) {
 		return this.memberDAO.id_find(m);
 	}
-
-
 
 
 

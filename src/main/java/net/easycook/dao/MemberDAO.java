@@ -1,7 +1,5 @@
 package net.easycook.dao;
 
-import java.util.List;
-
 import net.easycook.vo.MemberVO;
 
 public interface MemberDAO {
@@ -18,7 +16,10 @@ public interface MemberDAO {
 	
 	void delMem(MemberVO dm);
 
-	List<MemberVO> id_find(MemberVO m);
+	MemberVO id_find(MemberVO m);
+
+
+
 
 
 

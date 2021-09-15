@@ -65,30 +65,6 @@
 			});
 		});
 	}
-	//아이디찾기
-	function id_find(){
-		var find_id_q = $("#login_find_id_q_a").val();
-		var find_id_tel_1 = $("#login_find_tel_1").val();
-		var find_id_tel_2 = $("#login_find_tel_2").val();
-		var find_id_tel_3 = $("#login_find_tel_3").val();
-		
-		var postData = {'id_q' : $login_find_id_q_a, 'id_tel_1' : $login_find_tel_1, 'id_tel_2' : $login_find_tel_2, 'id_tel_3' : $login_find_tel_3};
-		
-		$.ajax({
-			url : "/id_find",
-			type : "POST",
-			data : postData,
-			dataType : "String",
-			
-			success:function(data){
-				var idfind = data.join_id_box;
-				$("#login_find_id_real").append("<h1>"+"회원님의 아이디는 : "+idfind+"입니다.</h1>")
-			},
-			error:function(){
-				alert('정보를 다시 입력해주시기 바랍니다.');
-			}
-		});
-	}
 	
 </script>
 </head>
@@ -156,7 +132,7 @@
 									<option value="${pwdQ}">${pwdQ}</option>
 								</c:forEach>
 							</select>
-						<input type="text" name="login_find_id_q_a" id="login_find_id_q_a" class="login_find_id_control" />
+						<input type="text" name="join_pw_q_a_box" id="login_find_id_q_a" class="login_find_id_control" />
 					</div>
 					
 					<div id="login_find_id_tel">
@@ -171,11 +147,20 @@
 					
 				<div id="login_find_button">
 					<div id="login_find_button_id">
-						<button onclick="id_find();" id="login_find_button_id_title">아이디 찾기</button>
+						<form method="post" action="id_find" name="idfind">
+							<input type="submit" id="login_find_button_id_title" value="check" />
+						</form>
 					</div>
 				</div>
 				
-					<div id="login_find_id_real"></div>
+					<div id="login_find_id_real">
+						<c:if test="${check==1}">
+							<script>
+								
+								
+							</script>
+						</c:if>
+					</div>
 				</div>
 			</div>
 

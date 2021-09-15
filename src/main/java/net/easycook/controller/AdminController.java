@@ -33,8 +33,8 @@ public class AdminController {
 		session=request.getSession();
 		
 		String id=(String)session.getAttribute("id"); //세션 아이디값을 구함
-		Integer state=(Integer)session.getAttribute("state");
-		if(id == null || state == 1 || state == 2) {
+		
+		if(id == null) {
 			out.println("<script>");
 			out.println("alert('다시 로그인 하세요!');");
 			out.println("location='login';");

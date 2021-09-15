@@ -1,7 +1,5 @@
 package net.easycook.service;
 
-import java.util.List;
-
 import net.easycook.vo.MemberVO;
 
 public interface MemberService {
@@ -18,7 +16,7 @@ public interface MemberService {
 	
 	void delMem(MemberVO dm);
 
-	List<MemberVO> id_find(MemberVO m);
+	MemberVO id_find(MemberVO m);
 
 
 
