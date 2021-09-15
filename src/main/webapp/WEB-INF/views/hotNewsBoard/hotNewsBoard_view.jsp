@@ -48,7 +48,7 @@ $("li:eq(3)").css("border","1px solid #ff0000")
     			</ol>
     		</c:if>
     		<c:if test="${empty hlistv }"> 
-    		<span >자료가 없습니다.</span>
+    			<span style="text-align: center">자료가 없습니다.</span>
     		</c:if>   	
     		</div>
     		
@@ -141,7 +141,7 @@ $("li:eq(3)").css("border","1px solid #ff0000")
 					
 					<!-- 쪽번호 출력 -->
 					<c:forEach var="p" begin="${startpage }" end="${endpage }" step="1">
-						<c:if test="${p == page }">${p }&nbsp;</c:if>
+						<c:if test="${p == page }"><${p }>&nbsp;</c:if>
 						<c:if test="${p != page }"><a href="hotNewsBoard_view?page=${p }">${p }</a>&nbsp;</c:if>				
 					</c:forEach>
 					
@@ -163,7 +163,7 @@ $("li:eq(3)").css("border","1px solid #ff0000")
 					
 					<!-- 쪽번호 출력 -->
 					<c:forEach var="p" begin="${startpage }" end="${endpage }" step="1">
-						<c:if test="${p == page }">${p }&nbsp;</c:if>
+						<c:if test="${p == page }"><${p }>&nbsp;</c:if>
 						<c:if test="${p != page }"><a href="hotNewsBoard_view?page=${p }&find_field=${find_field}&find_name=${find_name}">${p }</a>&nbsp;</c:if>				
 					</c:forEach>
 					

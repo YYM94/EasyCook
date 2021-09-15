@@ -44,10 +44,10 @@ public class HotNewsBoardController {
 		List<HotNewsBoardVO> hlist=this.hotNewsService.getBoardList(hvo);		
 
 		int maxpage=(int)((double)totalCount/limit+0.95); //총페이지수
-		int startpage=(((int)((double)page/9+0.9))-1)*9+1; //현재 페이지에 보여질 시작 페이지
+		int startpage=(((int)((double)page/10+0.9))-1)*9+1; //현재 페이지에 보여질 시작 페이지
 		int endpage=maxpage; //현재 페이지에 보여질 마지막 페이지
 		
-		if(endpage>startpage+9-1) endpage=startpage+9-1;
+		if(endpage>startpage+10-1) endpage=startpage+10-1;
 		
 		mav.addObject("totalCount",totalCount);
 		mav.addObject("hlistv", hlistv);
