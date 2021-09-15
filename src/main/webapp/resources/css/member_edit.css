@@ -21,13 +21,13 @@ body{
 
 #panel{
 	margin: auto;
-	width: 55%;
+	width: 50%;
 }
 
 #panel-body{
 	background-image:url('../images/background_mypage.jpg');
 	border-radius: 20px;
-	width: 70%;
+	width: 85%;
 	margin-left: 15%;
 	margin-top: 10%;
 }
@@ -86,68 +86,47 @@ strong{
 	visibility: hidden;
 }
 
-#update_id_box{
+#join_id_box{
 	width: 25%;
 } /* 아이디 입력박스 */
 
-#update_email_1_box{
+#join_email_1_box{
 	width: 25%;
 } /* 이메일 입력박스 첫번째 */
 
-#update_email_2_box{
-	width: 15%;
-	background:white;
+#join_email_2_box{
+	width: 13%;	
 } /* 이메일 입력박스 두번째 */
 
-#update_email_3_box{
+#join_email_3_box{
 	width: 17.5%;	
 } /* 이메일 선택박스 세번째 */
 
-#update_pw_box{
-	ime-mode: inactive; 
-	width: 45%;
-}
-
-#update_pw_check_box{
-	ime-mode: inactive;
-	width: 45%;
-}
-
-#update_pw_q_box{
-	width: 41%;
-}
-
-#update_pw_q_a_box{
-	width: 40%;
-}
-
-#update_post_box_2, #update_post_box_3{
+#join_post_box_2, #join_post_box_3{
 	margin-left: 30%;
 } /* 도로명,나머지상세주소 입력 박스*/
 
-#update_post_box_1, #update_post_box_2{
+#join_post_box_1, #join_post_box_2{
 	margin-bottom: 3.5%;
 } /*우편번호, 도로명 주소 입력칸 사이 마진*/
 
-#update_name_box{
+#join_name_box{
 	width: 25%;
 } /* 이름 입력박스 */
 
-#update_nickname_box{
+#join_nickname_box{
 	width: 25%;
 } /* 닉네임 입력박스 */
 
-#update_post_box_1{
+#join_post_box_1{
 	width: 15%;
-	background:white;
 } /* 우편번호 박스 */
 
-#update_post_box_2{
+#join_post_box_2{
 	width: 40%;
-	background:white;
 } /* 도로명 주소 박스 */
 
-#update_post_box_3{
+#join_post_box_3{
 	width: 40%;
 } /* 나머지 상세주소 입력박스 */
 
@@ -164,17 +143,18 @@ strong{
 	cursor: pointer;
 } /* 우편번호 찾기 버튼 */
 
-#update_post_btn:hover{
+#join_post_btn:hover{
 	cursor: pointer;
 	color: white;
 }
 
-#update_post_btn:active{
+#join_post_btn:active{
 	color: lightgreen;
 }
 
 #update_footer{
 	text-align: center;
+	margin-top:4%;
 } /* 판 제일 하단 가입,취소 버튼 영역*/
 
 #update_button, #delete_button, #member_del_btn{

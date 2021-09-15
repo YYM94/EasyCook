@@ -35,5 +35,9 @@ public interface RecipeBoardDAO {
 
 	int getTotalPostingsById(RecipeBoardVO rb);
 
+	int getTotalCommentsById(RecipeBoardCommentVO rbc);
+
+	List<RecipeBoardCommentVO> getCommentListById(RecipeBoardCommentVO rbc);
+
 
 }

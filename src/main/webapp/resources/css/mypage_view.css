@@ -183,8 +183,11 @@ body{
 #mr_list_date{
 	width: 18%;
 }
+#mr_list_ptitle{
+	width: 30%;
+}
 #mr_list_management{
-	width: 25%;
+	width: 10%;
 }
 
 #mr_list th{
