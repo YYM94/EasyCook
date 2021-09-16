@@ -348,9 +348,18 @@ public class RecipeBoardController {
 		
 		recipeBoardService.writeComment(rbc);
 		
-		int page = Integer.parseInt(req.getParameter("page"));
-		String searchType = req.getParameter("searchType");
-		String searchText = req.getParameter("searchText");
+		int page = 1;
+		if(req.getParameter("page") != null) {
+			page = Integer.parseInt(req.getParameter("page"));
+		}
+		String searchType = "";
+		if(req.getParameter("searchType") != null) {
+			searchType = req.getParameter("searchType");
+		}
+		String searchText = "";
+		if(req.getParameter("searchText") != null) {
+			searchText = req.getParameter("searchText");
+		}
 		m.addObject("page", page);
 		m.addObject("post", rbc.getRno());
 		m.addObject("cpage", 1);
@@ -367,10 +376,20 @@ public class RecipeBoardController {
 		int cno = Integer.parseInt(req.getParameter("cno"));
 		recipeBoardService.deleteComment(cno);
 
-		int page = Integer.parseInt(req.getParameter("page"));
+		int page = 1;
+		if(req.getParameter("page") != null) {
+			page = Integer.parseInt(req.getParameter("page"));
+		}
 		int post = Integer.parseInt(req.getParameter("post"));
-		String searchType = req.getParameter("searchType");
-		String searchText = req.getParameter("searchText");
+		
+		String searchType = "";
+		if(req.getParameter("searchType") != null) {
+			searchType = req.getParameter("searchType");
+		}
+		String searchText = "";
+		if(req.getParameter("searchText") != null) {
+			searchText = req.getParameter("searchText");
+		}
 		m.addObject("page", page);
 		m.addObject("post", post);
 		m.addObject("cpage", 1);
