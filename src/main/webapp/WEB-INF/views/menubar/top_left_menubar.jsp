@@ -4,7 +4,7 @@
 <script src="./resources/js/jquery.js"></script>
 <script>
 	//상단 검색바 이벤트 생성
-	topSearchbarEvent();
+	//topSearchbarEvent();
 	
 	//상단 검색창, 좌측 메뉴바 팝업 시 스크롤 정지
 	top_search_scrollLock();
@@ -37,30 +37,30 @@
 
 //////////////////////// 상단 메뉴바 검색아이콘 마우스 이벤트 //////////////////////////
 	var topSearchFlag = 0;
-	function topSearchbarEvent(){
-		$(document).ready(function(){
-			$("#top_search_icon").click(function(){
-				if(topSearchFlag == 1){
-					$("#top_search_input").animate({
-						width: "0",
-						opacity: "0"
-					}, 200);
-					$("#top_search_input").val('');
-					windowBlurHide();
-					topSearchFlag = 0;
-				}else if(topSearchFlag == 0){
-					$("#top_search_input").animate({
-						width: "60%",
-						opacity: "1"
-					}, 200);
-					$("#top_search_input").focus();
-					windowBlurByMask();
-					top_search_scrollLock();
-					topSearchFlag = 1;
-				}
-			});
+	//function topSearchbarEvent(){
+	$(document).ready(function(){
+		$("#top_search_icon").click(function(){
+			if(topSearchFlag == 1){
+				$("#top_search_input").animate({
+					width: "0",
+					opacity: "0"
+				}, 200);
+				$("#top_search_input").val('');
+				windowBlurHide();
+				topSearchFlag = 0;
+			}else if(topSearchFlag == 0){
+				$("#top_search_input").animate({
+					width: "60%",
+					opacity: "1"
+				}, 200);
+				$("#top_search_input").focus();
+				windowBlurByMask();
+				top_search_scrollLock();
+				topSearchFlag = 1;
+			}
 		});
-	}
+	});
+	//}
 ////////////////////// 상단 메뉴바 검색아이콘 마우스 이벤트 END ////////////////////////
 
 
@@ -91,7 +91,7 @@
 				opacity: "1"
 			});
 			windowBlurHide();
-			topSearchbarEvent();
+			//topSearchbarEvent();
 		});
 	});
 ////////////////////// 좌측 메뉴바 팝업 & close 이벤트 END /////////////////////////

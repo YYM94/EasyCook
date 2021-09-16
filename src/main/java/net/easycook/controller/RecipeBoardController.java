@@ -349,10 +349,12 @@ public class RecipeBoardController {
 		recipeBoardService.writeComment(rbc);
 		
 		int page = Integer.parseInt(req.getParameter("page"));
+		String searchType = req.getParameter("searchType");
 		String searchText = req.getParameter("searchText");
 		m.addObject("page", page);
 		m.addObject("post", rbc.getRno());
 		m.addObject("cpage", 1);
+		m.addObject("searchType", searchType);
 		m.addObject("searchText", searchText);
 		m.setViewName("redirect:/recipeBoard_view");
 		return m;
@@ -367,10 +369,12 @@ public class RecipeBoardController {
 
 		int page = Integer.parseInt(req.getParameter("page"));
 		int post = Integer.parseInt(req.getParameter("post"));
+		String searchType = req.getParameter("searchType");
 		String searchText = req.getParameter("searchText");
 		m.addObject("page", page);
 		m.addObject("post", post);
 		m.addObject("cpage", 1);
+		m.addObject("searchType", searchType);
 		m.addObject("searchText", searchText);
 		m.setViewName("redirect:/recipeBoard_view");
 		return m;

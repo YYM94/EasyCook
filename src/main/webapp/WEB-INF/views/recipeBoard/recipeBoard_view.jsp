@@ -151,12 +151,12 @@
 				</c:forEach>
 			</div>
 			
-			<c:if test="${ rb.writerid == id || state == 3}">
-				<div id="postingEditRmBtn">
+			<div id="postingEditRmBtn">
+				<c:if test="${ rb.writerid == id || state == 3}">
 					<input type="button" value="수정" onclick="return editCont();"/>
 					<input type="button" value="삭제" onclick="return removeCont();"/>
-				</div>
-			</c:if>
+				</c:if>
+			</div>
 			
 			<c:if test="${ totalComments > 0 }">
 				<div id="commentWrap">
@@ -285,6 +285,7 @@
 						<input type="hidden" name="rno" value="${ rb.no }"/>
 						<input type="hidden" name="cwriterid" value="${ id }"/>
 						<input type="hidden" name="page" value="${ page }"/>
+						<input type="hidden" name="searchText" value="${ searchType }"/>
 						<input type="hidden" name="searchText" value="${ searchText }"/>
 						<div id="commentWrtier">${ id }</div>
 						<div id="commentContWrite">
