@@ -19,12 +19,12 @@
 			<div id="admin_search">
 				<fieldset>
 					<legend class="hidden">검색</legend>
-					<!-- <label class="hidden">검색분류</label> 
+					<%-- <label class="hidden">검색분류</label> 
 					<select name="f">
 					<option value="search_id">회원아이디</option>
 					<option value="search_name">회원이름</option>
 					<option value="search_join">회원상태</option>
-					</select> -->
+					</select> --%>
 					
 					<!-- 검색기능 -->
 						<select name="find_field">
@@ -37,12 +37,12 @@
 						<c:if test="${(!empty find_field) && (!empty find_name)}"> <%-- 검색필드와 검색어가 있는 경우 즉 검색하고 난 이후 실행 --%>
 							<input type="button" value="전체목록" onclick="location='/easycook/admin_hotnews_list?page=${page}';" />
 						</c:if>
-					<input type="button" id="admin_hn_write" value="등록" onclick="location='/easycook/admin_hotnews_write?page=${page}';" />
+					<input type="button" id="admin_hn_write" value="핫뉴스 등록" onclick="location='/easycook/admin_hotnews_write?page=${page}';" />
 					
 				</fieldset>
 			</div>
 
-			<table id="admin_hn" style="border-collapse: collapse">
+			<table id="admin_hn_list_table" style="border-collapse: collapse">
 				<tr id="admin_hn_title">
 					<th id="admin_list_no" >번호</th>
 					<th id="admin_list_title" >제목</th>
@@ -70,7 +70,7 @@
 				
 				<c:if test="${empty hlist }">
 					<tr>
-						<th colspan="6">자료실 목록이 없습니다.</th>
+						<td colspan="6" style="text-align: center"><b>게시판 목록이 없습니다.</b></td>
 					</tr>
 				</c:if>
 			</table>			 
@@ -79,7 +79,7 @@
 
 		<%-- 검색전 페이징(쪽나누기) --%>
 		
-			<c:if test="${(empty find_field) && (empty find_name)}">
+			<c:if test="${(empty find_field)}">
 				<!-- 
 				<c:if test="${page <= 1}">
 					[이전]&nbsp;
@@ -92,7 +92,7 @@
 				
 				<%-- 쪽번호 출력부분 --%>
 				<c:forEach var="a" begin="${startpage }" end="${endpage }" step="1">
-					<c:if test="${a==page }">${a }&nbsp;</c:if>
+					<c:if test="${a==page }"><${a }>&nbsp;</c:if>
 					
 					<c:if test="${a != page }">
 						<a href="admin_hotnews_list?page=${a }">${a }</a>&nbsp;
@@ -109,7 +109,7 @@
 			
 			<%-- 검색이후 페이징 --%>
 			
-			<c:if test="${(!empty find_field) && (!empty find_name)}">
+			<c:if test="${!empty find_field}">
 				<!-- 
 				<c:if test="${page <= 1}">
 					[이전]&nbsp;
@@ -122,7 +122,7 @@
 				
 				<%-- 쪽번호 출력부분 --%>
 				<c:forEach var="p" begin="${startpage }" end="${endpage }" step="1">
-					<c:if test="${p == page }">${p }</c:if>					
+					<c:if test="${p == page }"><${p }></c:if>					
 					<c:if test="${p != page }">
 						<a href="admin_hotnews_list?page=${p }&find_field=${find_field}&find_name=${find_name}">${p }</a>&nbsp;
 					</c:if>
