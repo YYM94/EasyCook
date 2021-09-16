@@ -270,10 +270,12 @@ public class AdminHotNewsController { //일반게시판 관리자게시판 합�
 	
 	@RequestMapping("admin_hotnews_edit_ok")
 	public String admin_hotnews_edit_ok(@RequestParam MultipartFile hfile, @ModelAttribute HotNewsBoardVO hvo, 
-			HttpServletRequest req, HttpServletResponse resp, int page) throws Exception{
+			HttpServletRequest req, HttpServletResponse resp, int page, int hno) throws Exception{
 		resp.setContentType("text/html;charset=UTF-8");
 		PrintWriter out=resp.getWriter();
 		HttpSession session=req.getSession();
+		
+		HotNewsBoardVO delhvo=this.hotNewsService.getBoardCont2(hno);
 		
 		Integer auth_num=(Integer)session.getAttribute("state");
 		
@@ -287,8 +289,12 @@ public class AdminHotNewsController { //일반게시판 관리자게시판 합�
 			String saveFolder=req.getRealPath("upload"); //이진파일 업로드 서버 경로 => 톰캣 WAS 서버에 의해서 변경된 실제 톰캣 프로젝트 경로
 //			int fileSize=5*1024*1024; //이진파일 업로드 최대크기(5MB)
 		
-			if(hfile != null) { //첨부한 이진파일이 있는경우
+			if(!hfile.isEmpty()) { //첨부한 이진파일이 있는경우
 				String fileName=hfile.getOriginalFilename(); //첨부한 이진파일명
+				File delFile=new File(saveFolder+delhvo.getHfile()); //기존 첨부된 삭제할 파일 객체를 생성
+				if(delFile.exists()) { //삭제할 파일이 있다면 삭제
+					delFile.delete(); //기존 이진파일을 삭제
+				}
 				Calendar c=Calendar.getInstance(); //Calendar는 추상클래스여서 new로 객체생성 못함. 년월일 시분초 값을 구할 수 있다.
 				int year=c.get(Calendar.YEAR); //년도값
 				int month=c.get(Calendar.MONTH)+1; //월값. +1한이유 알지?
@@ -311,8 +317,8 @@ public class AdminHotNewsController { //일반게시판 관리자게시판 합�
 				FileCopyUtils.copy(hfile.getBytes(), new File(homedir+"/"+refileName)); //변경된 이진파일로 새롭게 생성된 폴더에 실제 업로드
 				hvo.setHfile(fileDBName); //오라클에 저장될 레코드 값
 			}else {//파일을 첨부하지 않았을때
-				String fileDBName="";
-				hvo.setHfile(fileDBName);
+				hvo = this.hotNewsService.getBoardCont2(hno);				
+				hvo.setHfile(hvo.getHfile());
 			}
 			
 			String hwriter=req.getParameter("hwriter");

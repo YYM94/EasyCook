@@ -42,7 +42,7 @@ function write_check(){
 </script>
 </head>
 
-<body>
+<body id="hn_admin_write_body">
 	<%@ include file="../menubar/adminleftbar.jsp"%>
 	<div id="admin_header">
 		<b style="font-size: 200%;">핫뉴스 등록</b>
@@ -62,7 +62,7 @@ function write_check(){
 					<th>내용</th><td><textarea id="hcont" name="hcont" rows="10" cols="62" style="resize: none;"></textarea></td>
 				</tr>
 				<tr>
-					<th>파일첨부</th><td><input type="file" id="hfile" name="hfile" multiple /></td>
+					<th>파일첨부</th><td><input type="file" id="hfile" name="hfile" /></td>
 					
 				</tr>
 				<tr>

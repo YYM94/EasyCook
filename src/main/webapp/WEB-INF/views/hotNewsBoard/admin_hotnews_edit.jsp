@@ -40,7 +40,7 @@ function write_check(){
 </script>
 </head>
 
-<body>
+<body id="hn_admin_edit_body">
 	<%@ include file="../menubar/adminleftbar.jsp"%>
 	<div id="admin_header">
 		<b style="font-size: 200%;">핫뉴스 수정</b>

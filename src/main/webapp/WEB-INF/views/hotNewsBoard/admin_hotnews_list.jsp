@@ -1,6 +1,8 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -58,7 +60,7 @@
 							<td align="center">${h.hno }</td>
 							<td id="left"><a href="/easycook/admin_hotnews_cont?hno=${h.hno }&page=${page}&find_field=${find_field}&find_name=${find_name}&state=cont" onclick="window.open('${h.hlink}')">${h.htitle}</a></td>
 							<td align="center">${h.hwriter }</td>
-							<td align="center">${h.regdate }</td>							
+							<td align="center">${fn:substring(h.regdate,0,10)}</td>							
 							<td align="center">${h.viewcnt }</td>
 							<td align="center">
 								<input type="button" value="수정" onclick="location='/easycook/admin_hotnews_edit?page=${page }&hno=${h.hno}&find_field=${find_field }&find_name=${find_name }';" /> 
